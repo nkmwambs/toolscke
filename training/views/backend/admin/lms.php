@@ -1,0 +1,1 @@
+<iframe src="https://www.compassionkenya.com/training/login/index.php" frameborder="0" allowfullscreen="allowfullscreen" width="100%" height="600px"></iframe>

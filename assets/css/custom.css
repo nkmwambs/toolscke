@@ -1,0 +1,54 @@
+/**
+ *
+ * Apply Here your Custom CSS
+ *
+*/
+
+
+.form-group.required .control-label:after { 
+	  content:"*";
+	  color:red;
+}
+
+.login-page .login-header {
+  position: relative;
+	background: #1b4282;
+  padding: 100px 0;
+  -webkit-transition: all 550ms ease-in-out;
+  -moz-transition: all 550ms ease-in-out;
+  -o-transition: all 550ms ease-in-out;
+  transition: all 550ms ease-in-out;
+}
+
+.login-page .login-form {
+  background: #183566;
+
+}
+
+.login-page .login-form .form-group .input-group {
+	background: #1b4282;
+}
+.login-page .login-form .form-group .btn-login:hover,
+.login-page .login-form .form-group .btn-login:active {
+  background: #183566;
+}
+.login-page .login-form .form-group .btn-login{
+	background: #1b4282;
+}	
+.login-page .login-header.login-caret:after {
+  position: absolute;
+  content: '';
+  left: 50%;
+  bottom: 0;
+  margin-left: -12.5px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 13px 12.5px 0 12.5px;
+  border-color: #1b4282 transparent transparent transparent;
+  bottom: -13px;
+  -webkit-transition: all 550ms ease-in-out;
+  -moz-transition: all 550ms ease-in-out;
+  -o-transition: all 550ms ease-in-out;
+  transition: all 550ms ease-in-out;
+}

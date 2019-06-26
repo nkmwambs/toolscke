@@ -1,0 +1,7 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2018-09-25 04:15:32 --> Query error: Duplicate entry '7e8e89e45cd721383bf214228416b910fb5a3519' for key 'PRIMARY' - Invalid query: INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES ('7e8e89e45cd721383bf214228416b910fb5a3519', '197.183.138.221', 1537848932, '__ci_last_regenerate|i:1537848932;admin_login|i:1;admin_id|s:4:\"2722\";login_user_id|s:4:\"2722\";name|s:7:\"MOkonde\";logged_user_level|s:1:\"1\";login_type|s:7:\"partner\";center_id|s:5:\"KE289\";cluster|s:12:\"Kilifi-Ganze\";app_name|s:5:\"exams\";')
+ERROR - 2018-09-25 04:15:32 --> Severity: Warning --> session_write_close(): Failed to write session data (user). Please verify that the current setting of session.save_path is correct (ci_sessions) Unknown 0
+ERROR - 2018-09-25 04:15:33 --> Query error: Duplicate entry '7e8e89e45cd721383bf214228416b910fb5a3519' for key 'PRIMARY' - Invalid query: INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES ('7e8e89e45cd721383bf214228416b910fb5a3519', '197.183.138.221', 1537848933, '__ci_last_regenerate|i:1537848933;')
+ERROR - 2018-09-25 04:15:33 --> Severity: Warning --> session_write_close(): Failed to write session data (user). Please verify that the current setting of session.save_path is correct (ci_sessions) Unknown 0
+ERROR - 2018-09-25 04:15:34 --> 404 Page Not Found: Login/index
