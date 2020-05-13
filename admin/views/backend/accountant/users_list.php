@@ -3,7 +3,7 @@
 	<div class="col-sm-12">
 		<?php
 		
-		$users = $this->db->get_where('users',array('auth'=>'1',"cname"=>$this->session->cluster))->result_object();
+		$users = $this->db->get_where('users',array('auth'=>'1',"userlevel"=>1))->result_object();
 		
 		$cond = " pstID ='1' OR pstID='2'";
 		
@@ -11,7 +11,7 @@
 		
 		//print_r($userlevels);
 		
-		echo form_open(base_url() . 'admin.php/admin/switch_user/' , array('id'=>'frm_search','class' => 'form-vertical form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
+		echo form_open(base_url() . 'admin.php/accountant/switch_user/' , array('id'=>'frm_search','class' => 'form-vertical form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
 		
 		?>
 		

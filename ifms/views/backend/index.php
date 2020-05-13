@@ -2,7 +2,8 @@
 	$system_name        =	$this->db->get_where('settings' , array('type'=>'system_name'))->row()->description;
 	$system_title       =	$this->db->get_where('settings' , array('type'=>'system_title'))->row()->description;
 	$text_align         =	$this->db->get_where('settings' , array('type'=>'text_align'))->row()->description;
-	$account_type       =	$this->session->userdata('login_type');
+// 	$account_type       =	$this->session->userdata('login_type');
+    $account_type       =	isset($account_type)?$account_type:$this->session->userdata('login_type');
 	$skin_colour        =   $this->db->get_where('settings' , array('type'=>'skin_colour'))->row()->description;
 	$active_sms_service =   $this->db->get_where('settings' , array('type'=>'active_sms_service'))->row()->description;
 	?>
@@ -22,7 +23,14 @@
 $this->benchmark->mark('code_start');
 ?>	
 
-	<?php include 'includes_top.php';?>
+	<?php 
+		if(file_exists(VIEWPATH.'backend'.DIRECTORY_SEPARATOR.$account_type.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'includes_top.php')){
+			include VIEWPATH.'backend'.DIRECTORY_SEPARATOR.$account_type.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'includes_top.php';
+		}else{
+			include 'includes_top.php';
+		}
+		
+	?>
 	
 </head>
 <body class="page-body <?php if ($skin_colour != '') echo 'skin-' . $skin_colour;?>" >
@@ -48,7 +56,15 @@ $this->benchmark->mark('code_start');
         	
 	</div>
     <?php include 'modal.php';?>
-    <?php include 'includes_bottom.php';?>
+	<?php 
+		if(file_exists(VIEWPATH.'backend'.DIRECTORY_SEPARATOR.$account_type.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'includes_bottom.php')){
+			include VIEWPATH.'backend'.DIRECTORY_SEPARATOR.$account_type.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR.'includes_bottom.php';
+		}else{
+			include 'includes_bottom.php';
+		}
+
+	?>
+	
     
 </body>
 </html>

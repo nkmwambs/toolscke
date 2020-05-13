@@ -92,8 +92,14 @@ class Partner extends CI_Controller
 		}else{
 			$epoch_start_of_year_date = strtotime('first day of january this year');
 		}
+
+		$center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
 		
-		$results = $this->db->get_where('kcse',array('pNo'=>$this->session->center_id,
+		
+		$this->db->join('projectsdetails','projectsdetails.ID = kcse.projectsdetails_id');
+  		$this->db->join('clusters','clusters.clusters_id = projectsdetails.cluster_id');
+		
+		 $results = $this->db->get_where('kcse',array('projectsdetails_id'=>$center_id,
 		'acYr'=>$year))->result_object();			
         
 		$page_data['grades_key'] = array('12'=>'A','11'=>'A-','10'=>'B+','9'=>'B','8'=>'B-','7'=>'C+',
@@ -111,32 +117,39 @@ class Partner extends CI_Controller
 		
 		//Get Exam result
 		$this->db->join('kcse_spread','kcse_spread.rID=kcse.rID');
-		$get_result_rows = $this->db->get_where('kcse',array('kcse.rID'=>$result_id))->num_rows();
+		$get_result = $this->db->get_where('kcse',array('kcse.rID'=>$result_id))->result_array();
 		
-		if($get_result_rows == 0){
-			$get_result = $this->db->get_where('kcse',array('kcse.rID'=>$result_id))->result_array();	
-		}else{
-			$this->db->join('kcse_spread','kcse_spread.rID=kcse.rID');
+		if(!isset($get_result[0])){
 			$get_result = $this->db->get_where('kcse',array('kcse.rID'=>$result_id))->result_array();
 		}
-	
+		
 		$data = $get_result[0];
 		
 		$forms = new Utility_forms();
-			
+		
 		$fields[] = array(
 		  'label'=>get_phrase('cluster'),
 		  'element'=>'input',
-		  'properties' => array('name'=>'cstName','id'=>'cstName',
+		  'properties' => array('id'=>'cstName',
 		  'value'=>$this->session->cluster,'readonly'=>'readonly')
 		 );
 		 
 		 $fields[] = array(
 		  'label'=>get_phrase('project_id'),
 		  'element'=>'input',
-		  'properties' => array('name'=>'pNo','id'=>'pNo',
+		  'properties' => array('id'=>'pNo',
 		  'value'=>$this->session->center_id,'readonly'=>'readonly')
 		 );
+
+		 $center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
+
+
+		 $fields[] = array(
+			'label'=>get_phrase('project_key'),
+			'element'=>'input',
+			'properties' => array('name'=>'projectsdetails_id','id'=>'projectsdetails_id',
+			'value'=>$center_id,'readonly'=>'readonly')
+		   );
 		 
 		 $fields[] = array(
 		  'label'=>get_phrase('beneficiary_number'),
@@ -207,7 +220,7 @@ class Partner extends CI_Controller
 		 
 		 
 		$forms->set_form_fields($fields);
-		$forms->set_use_form_tag(false);
+		$forms->set_form_tag('partial');
 		
 		$page_data['build_bio_form'] = $forms->create_single_column_form();
 		//End of Bio Form
@@ -246,7 +259,7 @@ class Partner extends CI_Controller
 		
 		
 		$page_data['result_id'] = $result_id;
-		$page_data['page_name']  = __FUNCTION__;
+        $page_data['page_name']  = __FUNCTION__;
         $page_data['page_title'] = get_phrase(__FUNCTION__);
 		if($view_only){
 			$page_data['page_name']  = "view_kcse_results";
@@ -342,17 +355,27 @@ class Partner extends CI_Controller
 		$fields[] = array(
 		  'label'=>get_phrase('cluster'),
 		  'element'=>'input',
-		  'properties' => array('name'=>'cstName','id'=>'cstName',
+		  'properties' => array('id'=>'cstName',
 		  'value'=>$this->session->cluster,'readonly'=>'readonly')
 		 );
 		 
+		
 		 $fields[] = array(
 		  'label'=>get_phrase('project_id'),
 		  'element'=>'input',
-		  'properties' => array('name'=>'pNo','id'=>'pNo',
+		  'properties' => array('id'=>'pNo',
 		  'value'=>$this->session->center_id,'readonly'=>'readonly')
 		 );
-		 
+
+		 $center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
+
+		 $fields[] = array(
+			'label'=>get_phrase('project_key'),
+			'element'=>'input',
+			'properties' => array('name'=>'projectsdetails_id','id'=>'projectsdetails_id',
+			'value'=>$center_id,'readonly'=>'readonly')
+		   );
+
 		 $fields[] = array(
 		  'label'=>get_phrase('beneficiary_number'),
 		  'element'=>'input',
@@ -421,7 +444,7 @@ class Partner extends CI_Controller
 		 
 		 
 		$forms->set_form_fields($fields);
-		$forms->set_use_form_tag(false);
+		$forms->set_form_tag('partial');
 		
 		$page_data['build_bio_form'] = $forms->create_single_column_form();
 		//End of Bio Form
@@ -479,8 +502,8 @@ class Partner extends CI_Controller
 		
 		$post = $this->input->post();
 		
-		$header['cstName'] 		= $post['cstName'];
-		$header['pNo'] 			= $post['pNo'];
+		//$header['cstName'] 		= $post['cstName'];
+		$header['projectsdetails_id'] 			= $post['projectsdetails_id'];
 		$header['childNo'] 		= $post['childNo'];
 		$header['childName'] 	= $post['childName'];
 		$header['dob'] 			= $post['dob'];
@@ -512,219 +535,106 @@ class Partner extends CI_Controller
 		
 		echo $msg;
 	}
-    // function kcpe()
-    // {
-        // if ($this->session->userdata('admin_login') != 1)
-            // redirect(base_url().'exams.php','refresh');
-// 			
-        // $crud = new grocery_CRUD();
-		// $crud->set_theme('flexigrid');
-		// $crud->set_table('kcpe');
-// 		
-		// $acYr = date('Y');
-// 		
-		// if(isset($_POST['acYr'])){
-			// $acYr = $this->input->post('acYr');
-		// }
-		// $crud->where(array('pNo'=>$this->session->center_id,'acYr'=>$acYr));
-// 		
-		// $crud->display_as('cstName','Cluster')
-			// ->display_as('pNo','Project')
-			// ->display_as('childNo','Beneficiary Number')
-			// ->display_as('childName','Beneficiary Name')
-			// ->display_as('sex','Gender')
-			// ->display_as('indx','Index Number')
-			// ->display_as('eng','English')
-			// ->display_as('kis','Kiswahili')
-			// ->display_as('sci','Science')
-			// ->display_as('mat','Maths')
-			// ->display_as('totMrk','Total Marks')
-			// ->display_as('acYr','Academic Year')
-			// ->display_as('stmp','Time Stamp')
-			// ->display_as('dob','Date Of Birth')
-			// ->display_as('sstd','Social Studies');	
-// 		
-		// $crud->required_fields('cstName','pNo','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
-// 		
-		// $crud->callback_field('cstName',array($this,'field_callback_cluster'));
-		// $crud->callback_field('pNo',array($this,'field_callback_pNo'));
-// 		
-		// $years = array_combine(range('2012', '2030'), range('2012', '2030'));
-// 		
-		// $crud->field_type('acYr', 'dropdown',$years);
-		// $crud->field_type('dob', 'numeric');
-// 		
-		// $crud->callback_before_insert(array($this,'insert_result_callback'));
-// 		
-		// $crud->unset_fields(array('stmp'));
-		// //$crud->unset_edit();	
-		// //$crud->unset_delete();			
-// 		
-// 		
-		// $output = $crud->render();			
-        // $page_data['page_name']  = __FUNCTION__;
-        // $page_data['page_title'] = get_phrase('KCPE_results');
-		// $output = array_merge($page_data,(array)$output);
-// 
-        // $this->load->view('backend/index', $output);		
-    // }	
+    function kcpe()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url().'exams.php','refresh');
+			
+        $crud = new grocery_CRUD();
+		$crud->set_theme('bootstrap');
+		$crud->set_table('kcpe','projectsdetails');
+		
+		$acYr = date('Y');
+		
+		if(isset($_POST['acYr'])){
+			$acYr = $this->input->post('acYr');
+		}
+
+		$crud->set_model('Exam_join');
+
+		//$crud->set_relation('cluster_id','clusters','clusterName');
+		//$crud->set_relation('projectsdetails_id','projectsdetails','icpNo');
+
+		$center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
+		
+		$crud->where(array('projectsdetails_id'=>$center_id,'acYr'=>$acYr));
+		
+		$crud->display_as('icpNo','Project')
+			->display_as('clusterName','Cluster')
+			->display_as('childNo','Beneficiary Number')
+			->display_as('childName','Beneficiary Name')
+			->display_as('sex','Gender')
+			->display_as('indx','Index Number')
+			->display_as('eng','English')
+			->display_as('kis','Kiswahili')
+			->display_as('sci','Science')
+			->display_as('mat','Maths')
+			->display_as('totMrk','Total Marks')
+			->display_as('acYr','Academic Year')
+			->display_as('stmp','Time Stamp')
+			->display_as('dob','Date Of Birth')
+			->display_as('sstd','Social Studies');	
+		
+		$crud->columns('clusterName','icpNo','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
+
+		$crud->required_fields('clusterName','icpNo','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
 	
-	function kcpe(){
-		$build_list = new Utility_forms2();
-		
-		$selected_columns = array("cstName as Cluster","pNo as 'FCP ID'",
-		"childNo as 'Beneficiary ID'","childName as 'Beneficairy Name'","dob as 'Date Of Birth'",'sex as Gender',
-		"indx as 'Index Number'","eng as English","kis as Kiswahili","sci as Science","mat as Mathematics",
-		"sstd as 'Social Studies/RE'","totMrk as 'Grade'","acYr as 'Examination Year'");
-		
-		
-		$build_list->set_selected_fields($selected_columns);
-		
-		//$build_list->set_where_clause(array('cname'=>'Ishiara','department'=>0));
-				
-		$build_list->set_panel_title("Examination Results");
-		
-		$action = array(
-			'add' 	=> array('href'=>'exams.php/Partner/add_kcpe_result'),
-			'view' 	=> array('href'=>'exams.php/Partner/view_kcpe_result'),
-			'edit' 	=> array('href'=>'exams.php/Partner/edit_kcpe_result'),
-			'delete'=> array('href'=>'exams.php/Partner/delete_kcpe_result'),
-		);
-		
-		$build_list->set_list_action($action);
-		
-		$build_list->set_db_table("kcpe");
-		
-		$build_list->set_add_form();
-		
-		$page_data['page_name'] = 'kcpe';
-		$page_data['page_title'] = 'K.C.P.E Results';
-		$page_data['output'] = $build_list->render_item_list();
-		$this->load->view('backend/index', $page_data);		
-	}
-
-	function add_kcpe_result(){
-		$build_form = new Utility_forms2();
-		
-		$fields[] = array(
-			'element'=>'input',
-			'label'=>'Cluster',
-			'properties'=>array('id'=>'','name'=>'cstName[]','readonly'=>'readonly','value'=>$this->session->cluster)
-		);
-		
-		$fields[] = array(
-			'element'=>'input',
-			'label'=>'FCP ID',
-			'properties'=>array('id'=>'','name'=>'pNo[]','readonly'=>'readonly','value'=>$this->session->center_id)
-		);
-		
-		$fields[] = array(
-			'label'=>"Beneficiary ID",
-			'element'=>'input',
-			'properties'=>array('id'=>'','name'=>'childNo[]')
-		);
-		
-		$fields[] = array(
-			'label'=>"Beneficiary Name",
-			'element'=>'input',
-			'properties'=>array('id'=>'','name'=>'childName[]','readonly'=>'readonly')
-		);
-		
-		$fields[] = array(
-			'label'=>"Date Of Birth",
-			'element'=>'input',
-			'properties'=>array('id'=>'','name'=>'dob[]','readonly'=>'readonly')
-		);
-		
-		$fields[] = array(
-			'label'=>"Gender",
-			'element'=>'input',
-			'properties'=>array('id'=>'','name'=>'sex[]','readonly'=>'readonly')
-		);
-		
-		$fields[] = array(
-			'label'=>"Index Number",
-			'element'=>'input',
-			'properties'=>array('id'=>'','name'=>'indx[]')
-		);
-		
-		
-		// $fields[] = array(
-			// 'label'=>"English",
-			// 'element'=>'input',
-			// 'properties'=>array('id'=>'','name'=>'eng[]')
-		// );
-// 		
-// 		
-		// $fields[] = array(
-			// 'label'=>"Kiswahili",
-			// 'element'=>'input',
-			// 'properties'=>array('id'=>'','name'=>'kis[]')
-		// );
-// 		
-// 		
-		// $fields[] = array(
-			// 'label'=>"Science",
-			// 'element'=>'input',
-			// 'properties'=>array('id'=>'','name'=>'sci[]')
-		// );
-// 		
-// 		
-		// $fields[] = array(
-			// 'label'=>"Maths",
-			// 'element'=>'input',
-			// 'properties'=>array('id'=>'','name'=>'Mat[]')
-		// );
-// 		
-// 		
-		// $fields[] = array(
-			// 'label'=>"Social Studies/ RE",
-			// 'element'=>'input',
-			// 'properties'=>array('id'=>'','name'=>'sstd[]')
-		// );		
-		
-		$fields[] = array(
-			'label'=>"Total",
-			'element'=>'input',
-			'properties'=>array('id'=>'','name'=>'totMrk[]')
-		);	
-		
-		$fields[] = array(
-			'label'=>"Examination Year",
-			'element'=>'input',
-			'properties'=>array('id'=>'','name'=>'acYr[]')
-		);	
-		
-		
-		$build_form->set_form_fields($fields);
-
-		$build_form->set_form_action(base_url().'index.php/welcome/post');
-
-		$build_form->set_go_back_on_post(false);
-		
-		$page_data['page_name'] = "kcpe";
-		$page_data['page_title'] = "Add new result";
-		$page_data['output'] = $build_form->render_form('single_form');
-		$this->load->view('backend/index',$page_data);
-	}
+		//$crud->edit_fields('clusters_id','projectsdetails_id','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
 	
+		$crud->callback_field('clusters_id',array($this,'field_callback_cluster'));
+		$crud->callback_field('projectsdetails_id',array($this,'field_callback_pNo'));
+		
+		$years = array_combine(range('2012', '2030'), range('2012', '2030'));
+		
+		$crud->field_type('acYr', 'dropdown',$years);
+		$crud->field_type('dob', 'numeric');
+		
+		$crud->callback_before_insert(array($this,'insert_result_callback'));
+		$crud->callback_before_update(array($this,'update_result_callback'));
+		
+		$crud->unset_fields(array('stmp'));
+		//$crud->unset_edit();	
+		//$crud->unset_delete();			
+		
+		
+		$output = $crud->render();
+		$page_data['yrs']  = $this->db->select('DISTINCT(acYr)')->get_where('kcpe',array("projectsdetails_id"=>$center_id))->result_object();			
+		$page_data['acYr'] = $acYr;		
+        $page_data['page_name']  = __FUNCTION__;
+        $page_data['page_title'] = get_phrase('KCPE_results');
+		$output = array_merge($page_data,(array)$output);
+
+        $this->load->view('backend/index', $output);		
+    }	
+
 	function insert_result_callback($post_array){
 		
-		$yr = range('2012', '2030');
+		//$yr = range('2012', '2030');
 		
-		$post_array['acYr'] =  $yr[$post_array['acYr']];
+		//$post_array['acYr'] =  $post_array['acYr'];
+		$post_array['clusters_id'] = $this->db->get_where('clusters',array('clusterName'=>$post_array['clusters_id']))->row()->clusters_id;
+		$post_array['projectsdetails_id'] = $this->db->get_where('projectsdetails',array('icpNo'=>$post_array['projectsdetails_id']))->row()->ID;
+
+		return $post_array;
 		
+	}
+
+	function update_result_callback($post_array,$primary_key){
+		
+		$post_array['clusters_id'] = $this->db->get_where('clusters',array('clusterName'=>$post_array['clusters_id']))->row()->clusters_id;
+		$post_array['projectsdetails_id'] = $this->db->get_where('projectsdetails',array('icpNo'=>$post_array['projectsdetails_id']))->row()->ID;
+
 		return $post_array;
 		
 	}
 
 	function field_callback_cluster(){
-		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-cstName' name='cstName' value='".$this->session->cluster."'>";
+		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-clusters_id' name='clusters_id' value='".$this->session->cluster."'>";
 		
 	}
 
 	function field_callback_pNo(){
-		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-pNo' name='pNo' value='".$this->session->center_id."'>";
+		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-projectsdetails_id' name='projectsdetails_id' value='".$this->session->center_id."'>";
 		
 	}
 	
@@ -760,21 +670,20 @@ class Partner extends CI_Controller
 		'6'=>'C','5'=>'C-','4'=>'D+','3'=>'D','2'=>'D-','1'=>'E');
 		
 		$data = array();
+
+		$center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
+
+		$this->db->join('projectsdetails','projectsdetails.ID = kcse.projectsdetails_id');
+  		$this->db->join('clusters','clusters.clusters_id = projectsdetails.cluster_id');
 		
-		$this->db->join('kcse_spread','kcse_spread.rID=kcse.rID','LEFT');	  
+		$this->db->join('kcse_spread','kcse_spread.rID=kcse.rID');	  
 		$results = $this->db->get_where('kcse',array('acYr'=>date("Y",$epoch_date),
-		'pNo'=>$this->session->center_id));
+		'projectsdetails_id'=>$center_id))->result_object();				
 		
-		
-		// if($results->num_rows() == 0){
-			// $results = $this->db->get_where('kcse',array('acYr'=>date("Y",$epoch_date),
-			// 'pNo'=>$this->session->center_id));
-		// }				
-		
-		foreach($results->result_object() as $row){
+		foreach($results as $row){
 						
-			$data[$row->childNo]['Cluster'] = $row->cstName;
-			$data[$row->childNo]['Project'] = $row->pNo;
+			$data[$row->childNo]['Cluster'] = $row->clusterName;
+			$data[$row->childNo]['Project'] = $row->icpNo;
 			$data[$row->childNo]['Beneficiary ID'] = $row->childNo;
 			$data[$row->childNo]['Beneficiary Name'] = $row->childName;
 			$data[$row->childNo]['Gender'] = $row->sex;
@@ -788,17 +697,16 @@ class Partner extends CI_Controller
 		}
 		
 		
-		foreach($results->result_object() as $row){
+		foreach($results as $row){
 			foreach($subjects as $subject){
-				
-					if($row->kcse_subject_id == $subject->kcse_subject_id){
+				if($row->kcse_subject_id == $subject->kcse_subject_id){
+					if(isset($grade_array[$row->grade])){
 						$data[$row->childNo][$subject->name] = $grade_array[$row->grade];
 					}
-
-				
+					
+				}
 			}
 		}
-
 		  
 		$this->export_to_excel($data);
 		  

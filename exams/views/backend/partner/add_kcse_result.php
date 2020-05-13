@@ -84,7 +84,7 @@
 				alert(resp);
 				//$("#overlay").css("display",'none');
 				//remove_all_rows("tbl_subjects");
-				//go_back();
+				go_back();
 			},
 			error:function(){
 				alert('Error Occurred');

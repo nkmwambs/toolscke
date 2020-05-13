@@ -22,18 +22,18 @@
 						<tr>
 							<th><?php echo get_phrase('operating_ratio');?></th>
 							<th><?php echo get_phrase('funds_accumulation_ratio');?></th>
-							<th><?php echo get_phrase('budget_variance');?></th>
+							<th><?php echo get_phrase('budget_variance');?> %</th>
 							<th><?php echo get_phrase('petty_cash');?></th>
-							<th><?php echo get_phrase('survival_ratio');?></th>
+							
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><?php echo number_format($this->finance_model->operating_ratio($param3,$param2,'100'),2)*100;?>%</td>
-							<td>0</td>
-							<td>0%</td>
+							<td><?=number_format($this->finance_model->accumulated_fund_ratio($param3,100,$param2),2);?></td>
+							<td><?=$this->finance_model->total_variance_percent_per_revenue_vote($param3,get_fy($param2,$param3),1,$param2);?></td>
 							<td><?php echo number_format($this->finance_model->petty_cash_balance($param2,$param3),2);?></td>
-							<td>0%</td>
+							
 						</tr>
 					</tbody>
 					

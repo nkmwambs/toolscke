@@ -11,9 +11,41 @@
         <!-- Language Selector -->			
            <li class="dropdown language-selector">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-                        	<i class="entypo-user"></i> <?php echo ucfirst($this->session->userdata('login_type'));?>
+                        	<i class="entypo-user"></i> <?php echo $this->session->userdata('name');?> - <?php echo $this->session->userdata('center_id');?>
                     </a>
 
+				<?php if ($account_type != 'parent'):?>
+				<ul class="dropdown-menu <?php if ($text_align == 'right-to-left') echo 'pull-right'; else echo 'pull-left';?>">
+					<li>
+						<a href="<?php echo base_url();?><?php echo $account_type;?>/manage_profile">
+                        	<i class="entypo-info"></i>
+							<span><?php echo get_phrase('edit_profile');?></span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url();?><?php echo $account_type;?>/manage_profile">
+                        	<i class="entypo-key"></i>
+							<span><?php echo get_phrase('change_password');?></span>
+						</a>
+					</li>
+				</ul>
+				<?php endif;?>
+				<?php if ($account_type == 'parent'):?>
+				<ul class="dropdown-menu <?php if ($text_align == 'right-to-left') echo 'pull-right'; else echo 'pull-left';?>">
+					<li>
+						<a href="<?php echo base_url();?>parents/manage_profile">
+                        	<i class="entypo-info"></i>
+							<span><?php echo get_phrase('edit_profile');?></span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url();?>parents/manage_profile">
+                        	<i class="entypo-key"></i>
+							<span><?php echo get_phrase('change_password');?></span>
+						</a>
+					</li>
+				</ul>
+				<?php endif;?>
 			</li>
         </ul>
         

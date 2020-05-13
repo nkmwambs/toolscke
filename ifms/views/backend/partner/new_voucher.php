@@ -1,7 +1,5 @@
 <hr />
-<?php
- //echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->current_voucher_date;
-?>
+
 <div id="load_voucher">
 
 <div class="row">

@@ -22,137 +22,50 @@ if ( ! function_exists('valid_date'))
 	}
  
 }
-// if ( ! function_exists('get_fy'))
-// {
-		// function get_fy($date = '',$project="") {
-// 		
-		// $CI =& get_instance();
-// 		
-		// $CI->load->database();
-// 		
-		// $fy_start_month = $CI->db->get_where('settings',array('type'=>'fy_start_month'))->row()->description; 
-// 		
-		// $months = range(1,12);
-// 		
-		// $range['first'] = range($fy_start_month,12);
-		// $range['second'] = range(1,$fy_start_month-1);
-// 		
-		// $fy = date('y',strtotime($date));
-// 		
-		// if(in_array(date('n',strtotime($date)), $range['first'])){
-			// $fy = date('y',strtotime($date))+1;
-		// }
-// 
-		// return $fy; 
-	// }
-// }
-
 if ( ! function_exists('get_fy'))
 {
-	function get_fy($date) {
+		function get_fy($date = '',$project="") {
 		
 		$CI =& get_instance();
 		
 		$CI->load->database();
 		
-		$fy = "";
+		$fy_start_month = $CI->db->get_where('settings',array('type'=>'fy_start_month'))->row()->description; 
 		
-		$mark_by = $CI->db->get_where('settings',array('type'=>'mark_fy_by'))->row()->description;
+		$months = range(1,12);
 		
-		$fy_start_month = $CI->db->get_where('settings',array('type'=>'fy_start_month'))->row()->description;
-				
-		$year = date('y',strtotime($date));
+		$range['first'] = range($fy_start_month,12);
+		$range['second'] = range(1,$fy_start_month-1);
 		
-		$month = date('m',strtotime($date));
+		$fy = date('y',strtotime($date));
 		
-		$range_to_december_from_start_of_fy = range($fy_start_month, 12);
-		
-		if($mark_by == 'upper_year'){
-			if(in_array($month, $range_to_december_from_start_of_fy)){
-				$fy = $year + 1;
-			}else{
-				$fy = $year;
-			}
-		}else{
-			if(in_array($month, $range_to_december_from_start_of_fy)){
-				$fy = $year;
-			}else{
-				$fy = $year - 1;
-			}
+		if(in_array(date('n',strtotime($date)), $range['first'])){
+			$fy = date('y',strtotime($date))+1;
 		}
-		
+
 		return $fy; 
 	}
 }
 
 if ( ! function_exists('fy_start_date'))
 {
-	function fy_start_date($date) {
-		
-		$CI =& get_instance();
-		
-		$CI->load->database();
-		
-		$fy_start_month = $CI->db->get_where('settings',array('type'=>'fy_start_month'))->row()->description;
-		
-		$fy_start_month = strlen($fy_start_month) == 1?"0".$fy_start_month:$fy_start_month;
-		
-		$fy = get_fy($date)-1;
+	function fy_start_date($date = '',$project="") {
+				$fy = get_fy($date,$project)-1;
 					
-		$fy_start_date = '20'.$fy."-".$fy_start_month."-01";
-		
-		return $fy_start_date;                                               
-    }
+				$fy_start_date = '20'.$fy."-07-01";
+			    return $fy_start_date;                                               
+        	}
  }
 
 if ( ! function_exists('fy_end_date'))
 {
-	function fy_end_date($date) {
-		$CI =& get_instance();
-		
-		$CI->load->database();
-			
-		$fy_start_month = $CI->db->get_where('settings',array('type'=>'fy_start_month'))->row()->description;
-		
-		$fy_end_month = $fy_start_month -1;
-		
-		$fy_end_month = strlen($fy_end_month) == 1?"0".$fy_end_month:$fy_end_month;
-		
-		$fy = get_fy($date);
+	function fy_end_date($date = '',$project="") {
+				$fy = get_fy($date,$project);
 					
-		$fy_end_date = '20'.$fy."-".$fy_end_month."-".date('t',strtotime('20'.$fy."-".$fy_end_month."-01"));
-		return $fy_end_date;                                               
-    }
+				$fy_end_date = '20'.$fy."-06-30";
+			    return $fy_end_date;                                               
+        	}
  }
-
-
-if( ! function_exists('months_in_year')){
-		function months_in_year($date, $show_year = false){
-		
-		$months = array();
-		
-		$start_month = fy_start_date($date);
-		
-		$month_num_range = range(0, 11);
-		
-		if(!$show_year){
-			foreach($month_num_range as $num){
-				$add_num = $num + 1;
-				if($num == 0) $months['month_'.$add_num.'_amount'] 	= date('M',strtotime($start_month));
-				else $months['month_'.$add_num.'_amount'] 	= date('M',strtotime('+'.$num.' month',strtotime($start_month)));		
-			}		
-		}else{
-			foreach($month_num_range as $num){
-				$add_num = $num + 1;
-				if($num == 0) $months['month_'.$add_num.'_amount'] 	= date('M Y',strtotime($start_month));
-				else $months['month_'.$add_num.'_amount'] 	= date('M Y',strtotime('+'.$num.' month',strtotime($start_month)));		
-			}
-				
-		}
-		
-		return $months;
-	}
-}
 
 
 if( ! function_exists('months_elapsed'))

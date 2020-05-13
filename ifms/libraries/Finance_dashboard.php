@@ -1,32 +1,46 @@
 <?php
 class Finance_dashboard{
+	/**
+	 * A public property to hold a reference to the CI controller
+	 *
+	 * @property object $CI
+	 */
 
-	private $testModels;
-	private $CI;
-	private $table_prefix = '';
-		
+	public $CI;
+
+	/**
+	 * Holds the config item related to the finance dashboard feature
+	 *
+	 * @property string $table_prefix
+	 */
+
+	public $table_prefix = '';
+
+	/**
+	 * This is a class contruct instatiating class properties and loading the finance model
+	 *
+	 * @return void
+	 */
+
 	function __construct() {
 
-		$this->CI =& get_instance();
-		// $this -> load -> config('dev_config');
-		// $this -> get_table_prefix();
-		$this -> CI-> load -> model('finance_model');
-// 
-		// $this -> testModels = new Finance_testData();
-		
+		$this -> CI = &get_instance();
+
+		$this -> CI -> load -> model('dashboard_model');
+
 	}
 
 	//General Methods
 
-	private function get_table_prefix() {
+	public function get_table_prefix() {
 
-		$this -> CI-> table_prefix = $this -> config -> item('table_prefix');
+		$this -> CI -> table_prefix = $this -> config -> item('table_prefix');
 
 		return $this -> table_prefix;
 	}
 
-	private function group_data_by_fcp_id($database_results) {
-
+	public function group_data_by_fcp_id($database_results) {
+		$this->CI->benchmark->mark('group_data_by_fcp_id_start');
 		$group_by_fcp_id_array = array();
 
 		foreach ($database_results as $row) {
@@ -36,190 +50,311 @@ class Finance_dashboard{
 			}
 
 		}
-
+		$this->CI->benchmark->mark('group_data_by_fcp_id_end');
 		return $group_by_fcp_id_array;
 	}
 
 	//Callback Methods
 
-	private function callback_mfr_submitted($fcp, $month_submitted) {
+	/*
+	 This callback method helps check following parameters
+	 * 1) Param 4: 'If MFR has been submitted or not'
+	 * 2) Param 10: 'If the previous/beginning balance agree  with last month ending balance.
 
-		$mfr_submitted_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
+	 */
 
-		$group = $this -> group_data_by_fcp_id($mfr_submitted_data);
+	//public $pc_local_guideline_flags = array();
 
-		$yes_no_flag = 'No';
+	public function callback_pc_local_guideline_compliance($fcp, $month){
+		$pc_per_withdrawal_limit_flag = $this->callback_pc_per_withdrawal_limit($fcp,$month);
+		$per_transaction_pc_limit = $this->callback_pc_per_expense_transaction_limit($fcp,$month);
+		$per_month_pc_expenses = $this->callback_pc_per_month_expense_limit($fcp,$month);
 
-		//Check if the fcp has an Mfr submitted in the $month_submitted
-		if (isset($group[$fcp])) {
-			if ($group[$fcp]['closure_date'] == $month_submitted && $group[$fcp]['submitted'] == 1) {
-				$yes_no_flag = 'Yes';
+		$set_flag = 'Yes';
+
+		if(
+			$pc_per_withdrawal_limit_flag == "No" || $per_transaction_pc_limit == 'No' || $per_month_pc_expenses == "No" ||
+			$pc_per_withdrawal_limit_flag == "Not Set" || $per_transaction_pc_limit == 'Not Set' || $per_month_pc_expenses == "Not Set"
+		){
+					$set_flag = 'No';
+		}
+
+		return $set_flag;
+	}
+
+	public function callback_pc_per_withdrawal_limit($month){
+
+		$flag = "Yes";
+		
+		$pc_per_withdrawal_limit = isset($this->CI->dashboard_model->prod_pc_limit_by_type_model($month)['per_withdrawal'][$fcp])?$this->CI->dashboard_model->prod_pc_limit_by_type_model($month)['per_withdrawal'][$fcp]:"";
+		
+		// if(is_array($pc_per_withdrawal_limit)){
+		// 	$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
+		// }
+		
+		return $pc_per_withdrawal_limit;
+	}
+
+	public function callback_pc_per_expense_transaction_limit($month = ""){
+
+		$flag = "Yes";
+		
+		$pc_per_withdrawal_limit = isset($this->CI->dashboard_model->prod_pc_limit_by_type_model($month)['per_transaction'][$fcp])?$this->CI->dashboard_model->prod_pc_limit_by_type_model($month)['per_transaction'][$fcp]:"";
+		
+		// if(is_array($pc_per_withdrawal_limit)){
+		// 	$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
+		// }
+		
+		return $pc_per_withdrawal_limit;
+	}
+
+	 function callback_pc_per_month_expense_limit($month = ""){
+		$flag = "Yes";
+		
+		$pc_per_withdrawal_limit = isset($this->CI->dashboard_model->prod_pc_limit_by_type_model($month)['per_month'][$fcp])?$this->CI->dashboard_model->prod_pc_limit_by_type_model($month)['per_month'][$fcp]:"";
+		
+		// if(is_array($pc_per_withdrawal_limit)){
+		// 	$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
+		// }
+		
+		return $pc_per_withdrawal_limit;
+	}
+
+	public function callback_mfr_submitted($month_submitted) {
+
+		$mfr_submitted_data = $this -> CI -> dashboard_model -> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
+
+		$final_array = [];
+
+		foreach($mfr_submitted_data as $value){
+			$final_array[$value['fcp_id']] = "Yes (".$value['submission_date'].")";
+		}
+
+		return $final_array;
+	}
+
+	public function callback_total_for_pc($month_submitted) {
+
+		$total_pc_data = $this -> CI -> dashboard_model -> switch_environment($month_submitted, 'test_total_for_pc_data_model', 'prod_total_for_pc_data_model');
+
+		$final_array = [];
+
+		foreach($total_pc_data as $key => $value){
+			$final_array[$key] = $value['cost'];
+		}
+
+		return $final_array;
+	}
+
+	public function callback_total_for_chq($month_submitted) {
+
+		$total_chq_data = $this -> CI -> dashboard_model -> switch_environment($month_submitted, 'test_total_for_pc_data_model', 'prod_total_for_chq_data_model');
+
+		return $total_chq_data;
+	}
+
+	public function callback_uncleared_cash_received($month) {
+
+		$uncleared_cash_recieved_data = $this -> CI -> dashboard_model -> switch_environment($month, 'test_uncleared_cash_recieved_data_model', 'prod_uncleared_cash_recieved_data_model');
+
+		$final_array = [];
+
+		foreach($uncleared_cash_recieved_data as $key => $value){
+			$final_array[$key] = $value>0?"No":"Yes";;
+		}
+
+		return $final_array;
+	}
+
+	public function callback_uncleared_cheques($month) {
+
+		$uncleared_cheques_data = $this -> CI -> dashboard_model -> switch_environment($month, 'test_uncleared_cheques_data_model', 'prod_uncleared_cheques_data_model');
+
+		$final_array = [];
+		
+		foreach($uncleared_cheques_data as $key => $value){
+			$final_array[$key] = $value>0?"No":"Yes";;
+		}
+
+		return $final_array;
+	}
+
+	public function callback_mfr_submitted_date($month_submitted)
+	{
+
+		$mfr_submitted_data = $this -> CI -> dashboard_model -> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
+
+		$final_array = [];
+
+		foreach($mfr_submitted_data as $value){
+			$final_array[$value['fcp_id']] = $value['submission_date'];
+		}
+
+		return $final_array;
+	}
+
+	public function callback_bank_statement_uploaded($month_uploaded) {
+
+		$bank_statement_submitted = $this -> CI -> dashboard_model -> switch_environment($month_uploaded, 'test_bank_statement_uploaded_model', 'prod_bank_statement_uploaded_model');
+
+		return $bank_statement_submitted;
+	}
+
+	public function callback_book_bank_balance($month_computed) {
+
+		$bank_cash_balance_data = $this -> CI -> dashboard_model -> switch_environment($month_computed, 'test_book_bank_cash_balance_data_model', 'prod_book_bank_cash_balance_data_model');
+
+		$final_array = [];
+
+		foreach($bank_cash_balance_data as $value){
+			$final_array[$value['fcp_id']] = $value['balance_amount'];
+		}
+
+		return $final_array;
+	}
+
+	public function callback_statement_bank_balance($month_computed) {
+
+		$statement_bank_balance_data = $this -> CI -> dashboard_model -> switch_environment($month_computed, 'test_statement_bank_balance_data_model', 'prod_statement_bank_balance_data_model');
+
+		$final_array = [];
+
+		foreach($statement_bank_balance_data as $value){
+			$final_array[$value['fcp_id']] = $value['statement_amount'];
+		}
+		
+		return $final_array;
+	}
+
+	public function callback_outstanding_cheques($month) {
+
+		$outstanding_cheques_data = $this -> CI -> dashboard_model -> switch_environment($month, 'test_outstanding_cheques_data_model', 'prod_outstanding_cheques_data_model');
+		
+		$final_array = [];
+
+		foreach($outstanding_cheques_data as $value){
+			$final_array[$value['fcp_id']] = $value['outstanding_cheque_amount'];
+		}
+
+		return $final_array;
+	}
+
+	public function callback_deposit_in_transit($month) {
+
+		$deposit_in_transit_data = $this -> CI -> dashboard_model -> switch_environment($month, 'test_deposit_in_transit_data_model', 'prod_deposit_in_transit_data_model');
+
+		$final_array = [];
+
+		foreach($deposit_in_transit_data as $value){
+			$final_array[$value['fcp_id']] = $value['deposit_in_transit_amount'];
+		}
+
+		return $final_array;
+	}
+
+	public function callback_bank_reconcile_correct($month) {
+
+		//$this->CI->db->cache_on();
+
+		$book_bank_balance = $this -> callback_book_bank_balance($month);
+		$statement_balance = $this -> callback_statement_bank_balance($month);
+		$outstanding_cheques = $this -> callback_outstanding_cheques($month);
+		$deposit_in_transit = $this -> callback_deposit_in_transit($month);
+		
+		//$this->CI->db->cache_off();
+
+		$book_bank_balance_fcps = array_keys($book_bank_balance);
+		$statement_balance_fcps = array_keys($statement_balance);
+		$outstanding_cheques_fcps = array_keys($outstanding_cheques);
+		$deposit_in_transit_fcps = array_keys($deposit_in_transit);
+
+		$fcp_numbers =  array_merge($book_bank_balance_fcps,$statement_balance_fcps,$outstanding_cheques_fcps,$deposit_in_transit_fcps);
+		
+		$final_array = [];
+
+		foreach(array_unique($fcp_numbers) as $fcp_id){
+			$statement_bal = isset($statement_balance[$fcp_id])?$statement_balance[$fcp_id]:0;
+
+			$bank = isset($book_bank_balance[$fcp_id])?$book_bank_balance[$fcp_id]:0;
+			$os_chq = isset($outstanding_cheques[$fcp_id])?$outstanding_cheques[$fcp_id]:0;
+			$dep_trans = isset($deposit_in_transit[$fcp_id])?$deposit_in_transit[$fcp_id]:0;
+
+			$compute_bank_reconcile = round(($bank + $os_chq) - $dep_trans,2);
+			
+			$yes_no_flag = 'No';
+
+			//if (round($compute_bank_reconcile) == round($statement_bal) && isset($this -> callback_mfr_submitted_date($month)[$fcp_id])) {
+			if (round($compute_bank_reconcile) == round($statement_bal) ) {
+				$yes_no_flag = "Yes";
 			}
 
-		}
-		return $yes_no_flag;
-	}
-
-	private function callback_bank_statement_uploaded($fcp, $month_uploaded) {
-
-		$bank_statement_submitted = $this -> CI ->finance_model-> switch_environment($month_uploaded, 'test_bank_statement_uploaded_model', 'prod_bank_statement_uploaded_model');
-
-		$group = $this -> group_data_by_fcp_id($bank_statement_submitted);
-
-		$yes_no_flag = 'No';
-
-		//Check if the fcp has an Mfr submitted in the $month_submitted
-		if (isset($group[$fcp]['closure_date'])) {
-			if ($group[$fcp]['closure_date'] == $month_uploaded) {
-
-				$yes_no_flag = $group[$fcp]['file_exists'] ? 'Yes' : 'No';
-			}
+			$final_array[$fcp_id] = $yes_no_flag;
 		}
 
-		return $yes_no_flag;
+		return $final_array;
 	}
 
-	private function callback_book_bank_balance($fcp, $month_computed) {
+	public function callback_cash_received_in_month($month) {
+		$cash_received_in_month = $this -> CI ->dashboard_model-> switch_environment($month, 'test_cash_received_in_month_model', 'prod_cash_received_in_month_model');
+		
+		$final_array = [];
 
-		$bank_cash_balance_data = $this -> CI ->finance_model-> switch_environment($month_computed, 'test_book_bank_cash_balance_data_model', 'prod_book_bank_cash_balance_data_model');
-
-		$group = $this -> group_data_by_fcp_id($bank_cash_balance_data);
-
-		$balance_amount = 0.00;
-
-		//Check if the fcp has an Mfr submitted in the $month_submitted
-		if (isset($group[$fcp])) {
-			if ($group[$fcp]['closure_date'] == $month_computed && $group[$fcp]['account_type'] == 'BC') {
-
-				$balance_amount = $group[$fcp]['balance_amount'];
-			}
+		foreach($cash_received_in_month as $key => $value){
+			$final_array[$key] = $value['Cost'];
 		}
 
-		return number_format($balance_amount, 2);
-	}
+		return $final_array;
+	}	
 
-	private function callback_statement_bank_balance($fcp, $month_computed) {
-
-		$statement_bank_balance_data = $this -> CI ->finance_model->switch_environment($month_computed, 'test_statement_bank_balance_data_model', 'prod_statement_bank_balance_data_model');
-
-		$statement_bank_balance_amount = 0.00;
-
-		$group = $this -> group_data_by_fcp_id($statement_bank_balance_data);
-
-		//Check if the fcp has an Mfr submitted in the $month_submitted
-		if (isset($group[$fcp])) {
-			if ($group[$fcp]['closure_date'] == $month_computed) {
-
-				$statement_bank_balance_amount = $group[$fcp]['statement_amount'];
-			}
-		}
-
-		return number_format($statement_bank_balance_amount, 2);
-	}
-
-	private function callback_outstanding_cheques($fcp, $month) {
-
-		$outstanding_cheques_data = $this -> CI ->finance_model-> switch_environment($month, 'test_outstanding_cheques_data_model', 'prod_outstanding_cheques_data_model');
-
-		$outstanding_cheques_amount = 0.00;
-
-		//$group = $this -> group_data_by_fcp_id($outstanding_cheques_data);
-
-		//Check if the fcp has an Mfr submitted in the $month_submitted
-		if (isset($outstanding_cheques_data[$fcp])) {
-			if ($outstanding_cheques_data[$fcp]['closure_date'] == $month) {
-
-				$outstanding_cheques_amount = $outstanding_cheques_data[$fcp]['outstanding_cheque_amount'];
-			}
-		}
-
-		return number_format($outstanding_cheques_amount, 2);
-	}
-
-	private function callback_deposit_in_transit($fcp, $month) {
-
-		$deposit_in_transit_data = $this -> CI ->finance_model-> switch_environment($month, 'test_deposit_in_transit_data_model', 'prod_deposit_in_transit_data_model');
-
-		$deposit_in_transit_amount = 0.00;
-
-		//$group = $this -> group_data_by_fcp_id($deposit_in_transit_data);
-
-		//Check if the fcp has an Mfr submitted in the $month_submitted
-		if (isset($deposit_in_transit_data[$fcp])) {
-			if ($deposit_in_transit_data[$fcp]['closure_date'] == $month) {
-
-				$deposit_in_transit_amount = $deposit_in_transit_data[$fcp]['deposit_in_transit_amount'];
-			}
-		}
-
-		return number_format($deposit_in_transit_amount, 2);
-	}
-
-	private function callback_bank_reconcile_correct($fcp, $month) {
-
-		$book_bank_balance = str_replace(',', '', $this -> callback_book_bank_balance($fcp, $month));
-
-		$statement_balance = str_replace(',', '', $this -> callback_statement_bank_balance($fcp, $month));
-
-		$outstanding_cheques = str_replace(',', '', $this -> callback_outstanding_cheques($fcp, $month));
-
-		$deposit_in_transit = str_replace(',', '', $this -> callback_deposit_in_transit($fcp, $month));
-
-		$compute_bank_reconcile = ($book_bank_balance + $outstanding_cheques) - $deposit_in_transit;
-
-		$yes_no_flag = 'No';
-
-		if (round($compute_bank_reconcile, 2) == round($statement_balance, 2) && $this -> callback_mfr_submitted($fcp, $month) == "Yes") {
-			$yes_no_flag = 'Yes';
-		}
-
-		return $yes_no_flag;
-	}
-	
 	//Main render array methods
 
-	public function build_dashboard_array($dashboard_month) {
+	public function build_dashboard_array($dashboard_month,$count_of_fcps,$fcp_in_dashboard){
+		
+		// Checks if a dashboard run for the month exists and update it or creates a new one
+		$dashboard_run_id = $this->CI->dashboard_model->check_dashboard_run_on_initialization($dashboard_month);
 
-		//$test = new Finance_testData();
+		$run_start_date = date('Y-m-d h:i:s');
 
-		$fcps_array_with_risk = '';
+		$fcps_array_with_risk = [];
 
 		if ($this -> CI->config -> item('environment') == 'test') {
-			$fcps_array_with_risk = $this -> CI-> finance_model -> test_fcps_with_risk_model();
+			$fcps_array_with_risk = $this -> CI-> dashboard_model -> test_fcps_with_risk_model();
 		} elseif ($this -> CI-> config -> item('environment') == 'prod') {
-			$fcps_array_with_risk = $this ->CI->finance_model-> prod_fcps_with_risk_model();
+			$fcps_array_with_risk = $this ->CI->dashboard_model-> prod_fcps_with_risk_model($dashboard_month,$count_of_fcps,$fcp_in_dashboard);
+			$this ->CI->dashboard_model-> prod_fcps_numbers_with_risk_model($dashboard_month,$count_of_fcps,$fcp_in_dashboard);
+
 		}
 
-		$parameters_array = $this -> CI ->finance_model-> switch_environment('', 'test_dashboard_parameters_model', 'prod_dashboard_parameters_model');
+		$parameters_array = $this -> CI ->dashboard_model-> switch_environment('', 'test_dashboard_parameters_model', 'prod_dashboard_parameters_model');
 
-		$final_grid_array = array();
+		$final_grid_array = [];
 
-		$final_grid_array['fcps_with_risks'] = array();
+		$fcps_to_update = [];
+		// Adopt a batch functionality to process this piece in the future to build the $final_grid_array and inserting in table
 
-		$final_grid_array['parameters'] = array();
+		foreach($parameters_array as $parameter){
 
-		foreach ($fcps_array_with_risk as $fcp_with_risk) {
+			if(!method_exists($this,$parameter['result_method']) || $parameter['display_on_dashboard'] == 'no') continue;
+			
+			$callback_results  = call_user_func(array($this, $parameter['result_method']), $dashboard_month);
 
-			$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['risk'] = $fcp_with_risk['risk'];
-
-			foreach ($parameters_array as $key => $value) {
-
-				if ($value['display_on_dashboard'] == 'yes') {
-
-					$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month);
-				}
+			foreach($fcps_array_with_risk as $projectsdetails_id => $risk_detail){
+				$final_grid_array[$projectsdetails_id][$parameter['dashboard_parameter_id']] = isset($callback_results[$risk_detail['fcp_id']])?$callback_results[$risk_detail['fcp_id']]:$parameter['parameter_value_when_null'];
+				$fcps_to_update[] = $projectsdetails_id;  
 			}
-
+			
 		}
 
-		foreach ($parameters_array as $key => $value) {
-			if ($value['display_on_dashboard'] == 'yes') {
-				$final_grid_array['parameters'][$value['is_requested']][$key] = $value['dashboard_parameter_name'];
-			}
+		$this->CI->dashboard_model->insert_grid_params($final_grid_array,$dashboard_month);
 
-		}
+		$fcps_to_update = array_unique($fcps_to_update);
+
+		$this->CI->dashboard_model->update_change_and_run_stats_tables($dashboard_month,$fcps_to_update,$dashboard_run_id,$run_start_date);
+
+		// End of batch processing
 
 		return $final_grid_array;
+		
 	}
-
+	
 }

@@ -26,6 +26,10 @@ class Login extends CI_Controller {
 		            $this->session->set_userdata('login_user_id', $row->ID);
 		            $this->session->set_userdata('name', $row->username);
 					$this->session->set_userdata('logged_user_level', $row->userlevel);
+					
+					$this->session->set_userdata('userfirstname', $row->userfirstname);
+
+					$this->session->set_userdata('userlastname', $row->userlastname);
 
 		            $login_type = 'other';
 					if($this->db->get_where('positions',array("pstID"=>$row->userlevel))->row()->short_name!==""){

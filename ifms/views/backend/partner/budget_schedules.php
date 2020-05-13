@@ -1,6 +1,11 @@
+<?php
+//$date  = $this->finance_model->project_fy_start_date($this->session->center_id);
+//echo $this->db->get_where('opfundsbalheader',array('closureDate'=>$date))->row()->totalBal;
+//$this->benchmark->mark('code_start');
+?>
 <div class="row">
 	<div class="col-sm-12">
-		<?php if($has_opening_balances){ ?>
+		<?php if($this->finance_model->check_opening_balances($this->session->center_id)===true){ ?>
 		<div class="row">
 			<div class="col-sm-12">
 				<button onclick="PrintElem('#schedules');" class="btn btn-success btn-icon pull-right"><i class="fa fa-print"></i><?=get_phrase('print');?></button>
@@ -24,25 +29,17 @@
 			<hr />
 		
 			<?php
-								
+				$plan = $this->db->get_where('planheader',array('fy'=>$fyr,'icpNo'=>$this->session->center_id));
+				
 				if($plan->num_rows()>0){
 			?>
 					<div class="pull-left hidden-print">
 						<div class="row">
 							<div class="col-sm-12">
-								
-								<?php 
-									
-									if(!$all_budget_items_submitted) 
-										{
-								?> 
-											<button onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/mass_submit/<?php echo $this->db->get_where('planheader',array('fy'=>$fyr,"icpNo"=>$this->session->center_id))->row()->planHeaderID;?>');" 
-												class="btn btn-info btn-icon">
-												<i class="fa fa-send"></i><?=get_phrase('mass_submit');?>
-											</button> 
-								<?php 
-										}
-								?> 
+								<!-- <button onclick="new_budget_item(this);" class="btn btn-primary btn-icon"><i class="fa fa-plus-square"></i><?=get_phrase('new_budget_item');?></button> -->
+								<!-- <button onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/delete_budget/<?php echo $this->db->get_where('planheader',array('fy'=>$fyr,'icpNo'=>$this->session->center_id))->row()->planHeaderID?>');"  class="btn btn-red btn-icon"><i class="fa fa-trash"></i><?=get_phrase('delete_new_items');?></button>
+								<button onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_set_fy/<?php echo $fyr;?>/<?php echo $fyr+1;?>');" class="btn btn-warning btn-icon"><i class="fa fa-gg"></i><?=get_phrase('clone');?></button>-->
+								<?php if(!empty($this->db->get_where('planheader',array('fy'=>$fyr,"icpNo"=>$this->session->center_id))->row())) {?> <button onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/mass_submit/<?php echo $this->db->get_where('planheader',array('fy'=>$fyr,"icpNo"=>$this->session->center_id))->row()->planHeaderID;?>');" class="btn btn-info btn-icon"><i class="fa fa-send"></i><?=get_phrase('mass_submit');?></button> <?php }?> 
 							</div>
 						</div>
 											
@@ -53,34 +50,8 @@
 				
 				<?php
 					$cnt_months = range(1, 12);
-					
-					/**
-					 * array(
-					 * 	'income_id_1'=>array(
-					 * 							'0' => array('AccText','AccNo'),
-					 * 							'1 => array(
-					 * 												0 => array('AccText','AccNo'),
-					 * 												1 => array('AccText','AccNo'),
-					 * 												2 => array('AccText','AccNo')														
-					 * 											)
-					 * 						),
-					 * 
-					 * 'income_id_2'=>array(
-					 * 							'0' => array('AccText','AccNo'),
-					 * 							'1 => array(
-					 * 												0 => array('AccText','AccNo'),
-					 * 												1 => array('AccText','AccNo'),
-					 * 												2 => array('AccText','AccNo')														
-					 * 											)
-					 * 						)
-					 * )
-					 * 
-					 * 
-					 */
-					 //print_r($expense_accounts_grouped_by_income);
+					$budgeted_revenue_accounts = $this->finance_model->budgeted_revenue_accounts();
 				?>
-				
-				
 				
 				<div class="row">
 					<div class="col-sm-12">
@@ -90,14 +61,15 @@
 								<select id="show_account" class="form-control">
 									<option value=""><?=get_phrase('select');?></option>
 									<?php
-										foreach($expense_accounts_grouped_by_income as $row){
+										foreach($budgeted_revenue_accounts as $row){
 									?>
-										<optgroup label="<?=$row[0]['AccText'];?> - <?=$row[0]['AccName'];?>">
+										<optgroup label="<?=$row->AccText;?> - <?=$row->AccName;?>">
 											<?php
-											
-											foreach($row[1] as $row2){
+											$expense_accounts = $this->finance_model->expense_accounts($row->accID);
+							
+											foreach($expense_accounts as $row2){
 											?>
-													<option value="<?=$row2[0]['accID'];?>"><?=$row2[0]['AccText'].' - '.$row2[0]['AccName'];?></option>
+													<option value="<?=$row2->accID;?>"><?=$row2->AccText.' - '.$row2->AccName;?></option>
 											<?php	
 											}
 											?>
@@ -116,7 +88,6 @@
 						</div>
 					</div>
 				</div>
-								
 				
 				<hr/>
 

@@ -94,7 +94,7 @@ class Accountant extends CI_Controller
 					$this->session->set_userdata('cluster', $row->cname);			
 									
 					
-            redirect(base_url().$app_name.'.php/admin/dashboard', 'refresh');
+            redirect(base_url().$app_name.'.php/accountant/dashboard', 'refresh');
         }
 
        

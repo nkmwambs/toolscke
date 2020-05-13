@@ -88,7 +88,7 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('clone_record','curl','financial','ifms','url','file','form','security','string','inflector','directory','download','multi_language',"fy");
+$autoload['helper'] = array('clone_record','curl','financial','url','file','form','security','string','inflector','directory','download','multi_language',"fy",'utility');
 
 
 /*
@@ -104,7 +104,7 @@ $autoload['helper'] = array('clone_record','curl','financial','ifms','url','file
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('dev_config','general');
 
 
 /*

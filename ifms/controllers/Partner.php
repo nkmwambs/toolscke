@@ -338,10 +338,10 @@ function edit_budget_item($param1="",$param2="",$param3=""){
 			$planHeaderID = $this->db->get_where('plansschedule',array('scheduleID'=>$param1))->row()->planHeaderID;
 			
 						
-			$header['fy'] = $this->input->post('fy');
-			$header['icpNo'] = $param2;
+			//$header['fy'] = $this->input->post('fy');
+			//$header['icpNo'] = $param2;
 			
-			$this->db->where(array('planHeaderID'=>$planHeaderID))->update('planheader',$header);
+			//$this->db->where(array('planHeaderID'=>$planHeaderID))->update('planheader',$header);
 			
 						
 			$body['planHeaderID'] = $planHeaderID;
@@ -428,53 +428,12 @@ function budget_limits(){
 		$this->load->view('backend/index', $page_data);	 	
 }
 
-function budget_schedules_per_revenue_account($revenue_account,$fy){
-	$schedules = array();
-	
-	$parentAccID = $this->db->get_where('accounts',array('AccNo'=>$revenue_account))->row()->parentAccID;
-	
-	$this->db->select('accounts.AccText');
-	$this->db->select_sum('totalCost');
-	
-	for($i=1;$i<13;$i++){
-		$this->db->select_sum('month_'.$i.'_amount');
-	}
-	
-	$this->db->group_by('plansschedule.AccNo');
-	$this->db->group_by('plansschedule.AccNo');
-	
-	$this->db->where(array('planheader.fy'=>$fy,'planheader.icpNo'=>$this->session->center_id,'parentAccID'=>$parentAccID));
-	$this->db->join('planheader','planheader.planHeaderID=plansschedule.planHeaderID');
-	$this->db->join('accounts','accounts.AccNo=plansschedule.AccNo');
-	
-	$raw_schedules = $this->db->get('plansschedule')->result_array();
-	
-	return $schedules = group_array_by_key($raw_schedules,'AccText');
-}
-
-function budget_summary_grid($fy){
-	
-	$revenue_accounts = $this->finance_model->budgeted_revenue_accounts(false);
-	
-	$revenue_accounts_grouped_by_accno = group_array_by_key($revenue_accounts,'AccNo',
-	array('parentID','parentAccID','AccGrp','prg','track','has_choices','budget','Active','is_admin'));
-	
-	foreach($revenue_accounts_grouped_by_accno as $key=>$value){
-		$budget_summary[$key]['revenue_account_details'] = $value[0];
-		$budget_summary[$key]['schedules'] = $this->budget_schedules_per_revenue_account($key,$fy);
-	}
-	
-	return $budget_summary;
-}
-
 function budget_summary(){
 		 if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-		
-		$fy = $this->finance_model->current_fy($this->session->center_id);
 		 
-		$page_data['records'] = $this->budget_summary_grid($fy); 
-		$page_data['fyr'] = $fy;
+		 
+		$page_data['fyr'] = $this->finance_model->current_fy($this->session->center_id);
         $page_data['page_name']  = 'budget_summary';
         $page_data['page_title'] = get_phrase('budget_summary');
 		$this->load->view('backend/index', $page_data);		
@@ -490,24 +449,13 @@ function scroll_budget_summary($fy){
 		$this->load->view('backend/index', $page_data);	 	
 }
 
-
-
-
 function budget_schedules(){
 		 if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
 		 
-		$current_fcp_fy = $this->finance_model->current_fy($this->session->center_id);
 		
-		$page_data['expense_accounts_grouped_by_income'] = $this->finance_model->expense_accounts_grouped_by_income();
-		$page_data['budgeted_revenue_accounts'] = $this->finance_model->budgeted_revenue_accounts();
-		
-		$page_data['all_budget_items_submitted'] = $this->finance_model->all_budget_items_submitted($current_fcp_fy,$this->session->center_id);
-		
-		$page_data['plan'] = $this->db->get_where('planheader',
-		array('fy'=>$current_fcp_fy,'icpNo'=>$this->session->center_id));
-		$page_data['has_opening_balances'] = $this->finance_model->check_opening_balances($this->session->center_id);
-		$page_data['fyr'] = $current_fcp_fy;
+
+		$page_data['fyr'] = $this->finance_model->current_fy($this->session->center_id);
         $page_data['page_name']  = 'budget_schedules';
         $page_data['page_title'] = get_phrase('budget_schedules');
 		$this->load->view('backend/index', $page_data);			
@@ -1261,17 +1209,17 @@ function create_budget_item($project){
 	
 	function submit_mfr($project_id,$date){
 		
-		$proof_of_cash = $this->finance_model->proof_of_cash($project_id,date('Y-m-t',$date));
+		$proof_of_cash = $this->finance_model->proof_of_cash($this->session->center_id,date('Y-m-t',$date));
 		
-		$bank_validation = abs(floor($this->finance_model->bank_reconciled($project_id,date('Y-m-t',$date))));
+		$bank_validation = abs(floor($this->finance_model->bank_reconciled($this->session->center_id,date('Y-m-t',$date))));
 		
-		$bs_check = $this->finance_model->check_bank_statement($project_id,date('Y-m-t',$date)); 
+		$bs_check = $this->finance_model->check_bank_statement($this->session->center_id,date('Y-m-t',$date)); 
 		
-		if($proof_of_cash <> 0 || $bank_validation > 0 || $bs_check === 0 ){
+		if($proof_of_cash <> 0 || $bank_validation <> 0 || $bs_check === 0 ){
 			
 			echo get_phrase('report_not_submitted_due_to_validation_error');
 		
-		}elseif($this->db->get_where('opfundsbalheader',array('icpNo'=>$project_id,'closureDate'=>date('Y-m-t',$date)))->num_rows()>0){
+		}elseif($this->db->get_where('opfundsbalheader',array('icpNo'=>$this->session->center_id,'closureDate'=>date('Y-m-t',$date)))->num_rows()>0){
 		
 			echo get_phrase('report_not_submitted_due_to_an_existing_report');
 		
@@ -1280,11 +1228,12 @@ function create_budget_item($project){
 			
 			//Update Fund Balances
 			
-			$data2['icpNo'] = $project_id;
+			$data2['icpNo'] = $this->session->center_id;
 			$data2['totalBal'] = $this->finance_model->total_months_closing_balance($this->session->center_id,date('Y-m-t',$date));
 			$data2['closureDate'] = date('Y-m-t',$date);
 			$data2['allowEdit'] = '1';
 			$data2['submitted'] = '1';
+			$data2['mfr_submitted_date'] = date('Y-m-d h:i:s');
 			$data2['systemOpening'] = '0';
 			
 			$this->db->insert('opfundsbalheader',$data2);
@@ -1323,14 +1272,39 @@ function create_budget_item($project){
 						
 			endforeach;	
 			
+			$this->register_dashboard_change($this->session->center_id,$date);
 
 			$this->email_model->submit_mfr_notification($this->session->login_user_id,date('Y-m-t',$date));
 			
 			
-			echo $project_id." ".get_phrase('financial_report_for')." ".date('Y-m-t',$date)." ".get_phrase('submitted');
+			echo $this->session->center_id." ".get_phrase('financial_report_for')." ".date('Y-m-t',$date)." ".get_phrase('submitted');
 		}
 		
 		
+	}
+
+	function register_dashboard_change($fcp_id,$date){
+		$dashboard_run = $this->db->get_where('dashboard_run',array('month'=>date('Y-m-t',$date)));
+
+			$projectsdetails = $this->db->get_where('projectsdetails',
+			array('icpNo'=>$fcp_id));
+
+			if($dashboard_run->num_rows() > 0 && $projectsdetails->num_rows() > 0){
+
+				$dashboard_change = $this->db->get_where('dashboard_change',
+				array('projectsdetails_id'=>$projectsdetails->row()->ID,'month'=>date('Y-m-t',$date),'status'=>1));
+				
+				if($dashboard_change->num_rows() == 0){
+					$dashboard_change_data['projectsdetails_id'] = $projectsdetails->row()->ID;
+				
+					$dashboard_change_data['change_date'] = date('Y-m-d H:i:s');
+					$dashboard_change_data['month'] = date('Y-m-t',$date);
+					$dashboard_change_data['status'] = 1;
+
+					$this->db->insert('dashboard_change',$dashboard_change_data);
+				}
+				
+			}
 	}
 
 	public function finance_settings($param1 = '', $param2 = ''){
@@ -1358,64 +1332,7 @@ function create_budget_item($project){
     $this->load->view('backend/index', $page_data);	 	
  } 
  
- function get_budget_to_date_columns($fy, $icpNo="", $month_to = 1){
-		
-	$this->db->join('plansschedule','plansschedule.planHeaderID=planheader.planHeaderID');
-	
-	$common_fields = array('fy','icpNo','AccNo');
-	$condition = array('fy'=>$fy,'icpNo'=>$icpNo);
-	
-	if($icpNo==""){
-		$common_fields = array('fy','AccNo');
-		$condition = array('fy'=>$fy);	
-	}
-	
-	$this->db->select($common_fields);	
-		
-	for($i=1;$i<=$month_to;$i++){
-		$this->db->select_sum('month_'.$i.'_amount');
-	}
-	
-	$this->db->group_by('AccNo');
-	$this->db->where($condition);
-	$year_budget = $this->db->get('planheader')->result_array();
-	
-	for($i=1;$i<=$month_to;$i++){
-		$months_fields[] = 'month_'.$i.'_amount';
-	}
-	
-	$computed_rows = array();
-	
-	
-	$row_lacking_months = array();
-	foreach($year_budget as $row){
-		$total = 0;
-		foreach($row as $keys=>$values){
-			if(in_array($keys, $months_fields)) {
-				$total +=$values;
-			}else{
-				$row_lacking_months[$keys] = $values;
-			}
-		}
-		
-		$computed_rows[] = array_merge($row_lacking_months,array('budget_total_to_date'=>$total));
-	}
-		
-	return $computed_rows;		
-     
+ function assets(){
+ 	
  }
-
- 
- public function test($icpNo = 'KE345', $fy = '18'){
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-		
-		
-		$records = $this->get_budget_to_date_columns($fy,$icpNo,3);
-		
-	 	$page_data['records'] = $records;
-	    $page_data['page_name']  = 'test';
-        $page_data['page_title'] = get_phrase('test');
-        $this->load->view('backend/index', $page_data);		
-	}
 }

@@ -29,11 +29,14 @@ class Crons extends CI_Controller {
 	}
 
 	private function clear_cached_data() {
-		//$this->db->cache_delete_all();
-		//$this->db->cache_delete('accountant', 'dasboard');
-		$dir = "accountant+dashboard";
-		$this -> emptyDir($dir);
-		rmdir($dir);
+
+		$database_cache_dir = "accountant+dashboard";
+		$page_cache_dir = "ifms/cache";
+		
+		$this -> emptyDir($database_cache_dir);
+		$this -> emptyDir($page_cache_dir);
+		
+		rmdir($database_cache_dir);
 	}
 
 	public function minute_jobs() {

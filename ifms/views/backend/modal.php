@@ -171,5 +171,11 @@
 	 $("#modal_ajax").draggable({
 	    handle: ".modal-header"
 	}); 
+	
+
 </script>
+
+<style>
+
+</style>
     

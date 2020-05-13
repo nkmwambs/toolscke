@@ -7,8 +7,8 @@
 
 ?>
 <div class="row">
-	<div class="col-md-8">
-		<div class="row">
+	<div class="col-xs-12">
+		<!--<div class="row">-->
 			<div class="panel panel-primary " data-collapsed="0">
 		       <div class="panel-heading">
 		           <div class="panel-title">
@@ -105,30 +105,30 @@
 				    	?>
 				 </div>	
 			</div>	
-		</div>
+		<!--</div>-->
 	<?php
 		}
 	?>	
 
 </div>
     
-	<div class="col-md-4">
-		<div class="row">
-            <div class="col-md-12">
+	<!--<div class="col-md-4">-->
+	<!--	<div class="row">-->
+ <!--           <div class="col-md-12">-->
             
-				<div class="tile-stats tile-red">
-                    <div class="icon"><i class="fa fa-group"></i></div>
-                    <div class="num" data-start="0" data-end="<?php echo $this->admin_model->online_user_count();?>" 
-                    		data-postfix="" data-duration="1500" data-delay="0">0</div>
+	<!--			<div class="tile-stats tile-red">-->
+ <!--                   <div class="icon"><i class="fa fa-group"></i></div>-->
+ <!--                   <div class="num" data-start="0" data-end="<?php echo $this->admin_model->online_user_count();?>" -->
+ <!--                   		data-postfix="" data-duration="1500" data-delay="0">0</div>-->
                     
-                    <h3><?php echo get_phrase('logged_users');?></h3>
+ <!--                   <h3><?php echo get_phrase('logged_users');?></h3>-->
 
-                </div>
+ <!--               </div>-->
                 
-            </div>
+ <!--           </div>-->
 
-    	</div>
-    </div>
+ <!--   	</div>-->
+ <!--   </div>-->
 	
 
 

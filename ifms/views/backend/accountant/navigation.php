@@ -1,3 +1,6 @@
+<?php
+if (!defined('BASEPATH')) exit('No direct script access allowed');?>
+    
 <div class="sidebar-menu">
     <header class="logo-env" >
 
@@ -36,6 +39,40 @@
                 <i class="entypo-gauge"></i>
                 <span><?php echo get_phrase('dashboard'); ?></span>
             </a>
+        </li>
+        
+        <li class="<?php
+        		if (
+	        			$page_name == 'fund_balance_report' ||
+	                    $page_name == 'expense_report'||
+						$page_name == 'budget_variance_report'
+					)
+                        echo 'opened active';
+        ?> ">
+            <a href="#">
+                <i class="fa fa-money"></i>
+                <span><?php echo get_phrase('financial_reports'); ?></span>
+            </a>
+            <ul>
+                <li class="<?php if ($page_name == 'fund_balance_report') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("ifms.php/readonly/fund_balance_report"); ?>">
+                        <span><i class="fa fa-bell-o"></i> <?php echo get_phrase('fund_balance_report'); ?></span>
+                    </a>
+                </li>
+
+                <!-- <li class="<?php if ($page_name == 'expense_report') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("ifms.php/accountant/expense_report"); ?>">
+                        <span><i class="entypo-briefcase"></i> <?php echo get_phrase('expense_report'); ?></span>
+                    </a>
+                </li> 
+                
+                <li class="<?php if ($page_name == 'budget_variance_report') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("ifms.php/accountant/budget_variance_report"); ?>">
+                        <span><i class="fa fa-adjust"></i> <?php echo get_phrase('budget_variance_report'); ?></span>
+                    </a>
+                </li>  -->
+             
+            </ul>
         </li>
         
         <!-- Switch Board 

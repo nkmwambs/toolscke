@@ -1,150 +1,33 @@
 <?php
-/**
- * 
- * THIS LIBRARY WAS DEVELOPED TO BE USED TO CREATE FORMS IN THE FLY
- * IT IS CAPABLE OF CREATING 2 TYPE OF FORMS THATS IS SINGLE COLUMNED AND
- * MULTI COLUMNED FORM.
- * 
- * IN ORDER TO RUN WELL BOOSTRAP 3 AND JQUERY 2.X SHOULD HAV BEEN INSTALLED
- * IN THE APPLICATION INTENDED TO BE USED.
- * 
- * THIS IS A CODEIGNITER LIBRARY BUILT WITH CODEIGNITER 3.6
- * 
- * 
- * 	@author Nicodemus Karisa Mwambire
- * 	@copyright Compassion Internation Kenya (c) 2019
- *	@package Toolkit
- * 	@version 2019.01.01
- * 	@license https://www.compassion-africa.org/software/license/utility_forms.txt
- * 
- */
- 
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Utility_forms{
 	
 	/**
-	 * Form Fields
-	 * 
-	 * 
-	 * A collection of array elements representing each field in a form group for
-	 * single columned forms on a the first row and headers for multi columed
-	 * form
-	 * 
-	 * @var Array
-	 * 
+	 * Requires select2 plugin and bootstrap 3
 	 */
+	
 	private $fields = array();
-	
-	/**
-	 *
-	 * Form Action
-	 * 
-	 *This is the value of the action property of the form.
-	 * 
-	 * @var String
-	 *  
-	 */
-	 
 	private $form_action = "";
-	
-	/**
-	 *
-	 * Form ID
-	 * 
-	 * This holds the form's id property. If not provided it is defaulted
-	 * to frm
-	 * 
-	 * @var String
-	 *  
-	 */
-	 
 	private $form_id = "frm";
-	
-	/**
-	 * 
-	 * Form Output String
-	 * 
-	 * The whole form is assigned to this variable as plain string.
-	 * When echoed the form gets created.
-	 * 
-	 * @var String
-	 * 
-	 */
-	
 	private $form_output_string = "";
-	
-	/**
-	 * 
-	 * Multi Column Table ID
-	 * 
-	 * This is the id ot the multi columned form. It hold the rows of the form.
-	 * If not prodived it defaults to tbl_multi_column
-	 * 
-	 * @var String
-	 * 
-	 */
-	 
 	private $multi_column_table_id = 'tbl_multi_column';
-	
-	/**
-	 * 
-	 * Initial Row Count
-	 * 
-	 * This property when set atomatically creates rows equal to the value assigned.
-	 * By default it has a value of 1, so only one row will be created.
-	 * 
-	 * @var Integer
-	 * 
-	 */
-	
 	private $initial_row_count = 1;
-	
+	//private $row_values = array();
 	/**
-	 * 
-	 * Form Tag
-	 * 
-	 * The form tag property help in setting whether the fields ought to be encapsulated 
-	 * in a form tag of not. By default it is set to true to mean that the form elements
-	 * are within a form tag otherwise the value should be false to strip off the form
-	 * form elements from the form tag 
-	 * 
-	 * @var Boolean
-	 * 
+	 * full = Has both form opening and closing tags with a create button
+	 * partial = Lack opening and closing tag and create button
 	 */
-	
-	private $use_form_tag = true;
-	
-	private $CI;
+	private $form_tag = 'full';
 	
 	function __construct(){
-		$this->CI =& get_instance();
 		
-		$this->CI->load->helper('url');
-		$this->CI->load->helper('form');
 	}
 	
-	/**
-	 * 
-	 * Set Form Fields
-	 * 
-	 * @param Array form_elements 
-	 * 
-	 * This is public setter that enables to set the value of fields propoerty of this
-	 * class.
-	 * 
-	 * The fields property is of array type. This is a multi dimensional array with 
-	 * numeric outer keys. The inner arrays are associative arrays with the following 
-	 * mandatory keys: label and element. Other fields are properties, a key that hold 
-	 * an associative array of keys being the name of the form field propoerty and its 
-	 * value e.g. name=>'username', options for select elements which holds an 
-	 * associative array of options values as keys and its values an array with 2 keys 
-	 * option equaling to option inner html and properties, an associtive array of option
-	 * tag properties. The key values is a special propperty of fields that holds an array 
-	 * of values which represent dafault values of elements. 
-	 * 
-	 * 
-	 *   $fields[] = array(
+	public function set_form_fields($form_elements=array()){
+		
+		/**
+		 * For One Columned Form
+		 * $fields[] = array(
 		  'label'=>'Username',
 		  'element'=>'input',
 		  'properties' => array('name'=>'username','id'=>'username')
@@ -166,149 +49,63 @@ class Utility_forms{
 		  						'day3'=>array('option'=>'Wednesday')
 							)
 		 );
-	 * 
-	 * 
-	 * @return Void
-	 * 
-	 */
-	
-	public function set_form_fields($form_elements=array()){
+		 * 
+		 * For Multi columned form
+		 * 
+		 * 
+		 * 
+		 */
 		 
 		$this->fields = $form_elements;		
 	}
-	
-	/**
-	 * 
-	 * Get Form Elements
-	 * 
-	 * This returns an array of the form elements
-	 * 
-	 * @return Array
-	 * 
-	 */
 	
 	private function get_form_elements(){
 		return $this->fields;
 	}
 	
-	/**
-	 * 
-	 * Set Form Action
-	 * 
-	 * @param String form_action
-	 * 
-	 * This method set the form' action property.
-	 * 
-	 * @return Void
-	 * 
-	 */
-	
 	public function set_form_action($form_action=""){
 		$this->form_action = $form_action;	
 	}
-	
-	/**
-	 *Get Form Action 
-	 * 
-	 * The method returns the action of the form
-	 * 
-	 * @return String
-	 */
 	
 	private function get_form_action(){
 		return $this->form_action;	
 	}
 	
-	
-	/**
-	 * Set Form ID
-	 * 
-	 * @param String form_id
-	 * 
-	 * Sets the ID of the form
-	 * 
-	 * @return Void
-	 */
-	
 	public function set_form_id($form_id=""){
 		$this->form_id = $form_id;
 	}
-	
-	/**
-	 * Get form ID
-	 * 
-	 * Returns the ID of the form
-	 * 
-	 * @return String
-	 */
 	
 	private function get_form_id(){
 		return $this->form_id;
 	}
 	
-	/**
-	 * Set form tag
-	 * 
-	 * @param String use_form_tag
-	 * 
-	 * Set to true if tag is to be used to false
-	 * 
-	 * @return Void
-	 */
-	
-	public function set_use_form_tag($use_form_tag = ""){
-		$this->use_form_tag = $use_form_tag;
+	public function set_form_tag($form_tag = ""){
+		$this->form_tag = $form_tag;
 	}
 	
-	/**
-	 * Get Form Tag
-	 * 
-	 * Return true if form tags is to be used to false if not
-	 * 
-	 * @return Boolean
-	 */
-	
-	private function get_use_form_tag(){
-		return $this->use_form_tag;
+	private function get_form_tag(){
+		return $this->form_tag;
 	}
-	
-	/**
-	 * Set Initial Row Count
-	 * 
-	 * Set the number of default rows in a multi columned form.
-	 * 
-	 * @return Void
-	 */
 	
 	function set_initial_row_count($row_count = ""){
 		$this->initial_row_count = $row_count;
 	}
 	
-	/**
-	 * Get Initial Row Count
-	 * 
-	 * This method returns the number of default rows in a multi columned
-	 * form. The default value of initial row count is 1.
-	 * 
-	 * @return Integer
-	 */
-	
 	private function get_initial_row_count(){
 		return $this->initial_row_count;
 	}
 	
-	/**
-	 * Form Open Tag
-	 * 
-	 * This method form_output_string to form opening tag. It uses the codeigniter
-	 * form_open tag. The form is set to allow multi form data.
-	 * 
-	 * @return String
-	 */
+	// function set_row_values_array($multi_row_values = array()){
+		// $this->row_values = $multi_row_values;
+	// }
+// 	
+	// private function get_row_values_array(){
+		// return $this->row_values;
+	// }
 	
 	private function form_open_tag(){
 		
-		if($this->use_form_tag == true){
+		if($this->form_tag == 'full'){
 			$this->form_output_string .= form_open($this->form_action, 
 			array('id' => $this->form_id, 'class' => 'form-horizontal 
 			form-groups-bordered validate', 'enctype' => 'multipart/form-data'));
@@ -317,20 +114,9 @@ class Utility_forms{
 		return $this->form_output_string;
 	}
 	
-	/**
-	 * Form Close Tag
-	 * 
-	 * Returns the form close tag
-	 * 
-	 * @return String
-	 */
-	
 	private function form_close_tag(){
 		
-			if($this->use_form_tag == true){
-				
-				$this->form_output_string .= form_close();
-				
+			if($this->form_tag == 'full'){
 				$this->form_output_string .= "<div class='form-group'>
 				<div class='col-xs-12'>
 					<button type='submit' class='btn btn-default' id='btnCreate'>Save</button>
@@ -340,71 +126,33 @@ class Utility_forms{
 			return $this->form_output_string;	
 		}
 	}
-	
-/**
- * Create Select Field
- * 
- * Renders a select form element
- * 
- * @return String
- */	
 
 private function create_select_field($fields = array(),$cnt = 0){
-		
-		/**
-		 * Additonal classes are other classes to the element other 
-		 * than the hard coded form-control class. The are part of the properties element
-		 * of the fields array.
-		 * 
-		 * For example 'properties'=>array('class'=>'resettable mandatory')
-		 * 
-		 * If the properties element has class key in it then it's value will be assigned
-		 * to the additional_classes local variable. This variable is appended to the existing
-		 * class.  	
-		 */
+			
 		$additional_classes = "";
-		
-		if(isset($fields['properties'])){
-			if(array_key_exists('class', $fields['properties'])){
-				$additional_classes = $fields['properties']['class'];
-			}
-		}				
-		
+						
+		if(array_key_exists('class', $fields['properties'])){
+			$additional_classes = $fields['properties']['class'];
+		}
 		
 		$this->form_output_string .= "<select class='form-control ".$additional_classes." '";
-		
-		/**
-		 * This part of the code allows for a non key-value paired elements of the properties element.
-		 * If such elemeents are found inside properties since they have a numeric key the values will
-		 * be used as the key.
-		 */
-		if(isset($fields['properties'])){
-			foreach($fields['properties'] as $property=>$value){
-				if(is_numeric($property)){
-					$this->form_output_string .= " ".$value." = '".$value."' ";
-				}else{
-					$this->form_output_string .= " ".$property." = '".$value."' ";
-				}
+														
+		foreach($fields['properties'] as $property=>$value){
+			if(is_numeric($property)){
+				$this->form_output_string .= " ".$value." = '".$value."' ";
+			}else{
+				$this->form_output_string .= " ".$property." = '".$value."' ";
 			}
-		}											
-		
+		}
 					
 		$this->form_output_string .= ">
 		<option value=''>Select ... </option>";
-			/**
-			 * Builds the options html in a select element
-			 */			
+						
 			if(array_key_exists('options', $fields)){
 				foreach($fields['options'] as $option_value=>$option){
 					
 					$this->form_output_string .="<option value='".$option_value."' ";
-					
-					
-					/**
-					 * Sets the selected option in a select element. It uses the key of the values
-					 * element of the fields array. 
-					 */
-					
+
 					if(isset($fields['values'][0]) && $option_value == $fields['values'][$cnt]){
 						$this->form_output_string .= " selected = 'selected' ";	
 					}
@@ -437,44 +185,34 @@ private function create_select_field($fields = array(),$cnt = 0){
 	private function create_input_field($fields = array(),$cnt = 0){
 				
 		$additional_classes = "";
-		
-		if(isset($fields['properties'])){
-			if(array_key_exists('class', $fields['properties'])){
-				$additional_classes = $fields['properties']['class'];
-			}	
-		}		
-		
+						
+		if(array_key_exists('class', $fields['properties'])){
+			$additional_classes = $fields['properties']['class'];
+		}
 		
 		$this->form_output_string .= "<input class='form-control ".$additional_classes."'";
-		
-		if(isset($fields['properties'])){
-			if(!array_key_exists('type', $fields['properties'])){
-				$this->form_output_string .= "type='text'";
-			}	
-		}else{
+						
+		if(!array_key_exists('type', $fields['properties'])){
 			$this->form_output_string .= "type='text'";
 		}
 						
-		
-		if(isset($fields['properties'])){				
-			foreach($fields['properties'] as $property=>$value){
+		foreach($fields['properties'] as $property=>$value){
+			
+			if(isset($fields['values'])){
 				
-				if(isset($fields['values'])){
-					
-					$this->form_output_string .= " value = '".$fields['values'][$cnt]."' ";
-					
-					if($property == 'value') continue;
-					
-				}
+				$this->form_output_string .= " value = '".$fields['values'][$cnt]."' ";
 				
-				if(is_numeric($property)){
-					$this->form_output_string .= " ".$value." = '".$value."' ";
-				}else{
-					$this->form_output_string .= " ".$property." = '".$value."' ";
-				}
+				if($property == 'value') continue;
 				
-			} 
-		}
+			}
+			
+			if(is_numeric($property)){
+				$this->form_output_string .= " ".$value." = '".$value."' ";
+			}else{
+				$this->form_output_string .= " ".$property." = '".$value."' ";
+			}
+			
+		} 
 						
 		$this->form_output_string .= "' />";
 		
@@ -489,30 +227,21 @@ private function create_select_field($fields = array(),$cnt = 0){
 		
 		
 		foreach($this->fields as $fields){
-			$label = isset($fields['label'])?$fields['label']:'Label Not Provided';
 			$this->form_output_string .= "<div class='form-group'>
-				<label class='control-label col-xs-4'>".$label."</label>
+				<label class='control-label col-xs-4'>".$fields['label']."</label>
 				<div class='col-xs-8'>";
 					
 					$additional_classes = "";
-					
-					if(isset($fields['properties'])){
-						if(array_key_exists('class', $fields['properties'])){
-							$additional_classes = $fields['properties']['class'];
-						}
+						
+					if(array_key_exists('class', $fields['properties'])){
+						$additional_classes = $fields['properties']['class'];
 					}
 					
-					if(!isset($fields['element'])){
+					if($fields['element'] == 'input'){
 						$this->create_input_field($fields);
-					}else{
-						if($fields['element'] == 'input'){
-							$this->create_input_field($fields);
-						}elseif($fields['element'] == 'select'){
-							$this->create_select_field($fields);
-						}
+					}elseif($fields['element'] == 'select'){
+						$this->create_select_field($fields);
 					}
-					
-					
 					
 				$this->form_output_string .= "</div>
 			</div>";
@@ -550,7 +279,7 @@ private function create_select_field($fields = array(),$cnt = 0){
 									</ul><hr />';
 									
 									
-		$this->form_output_string .= "<table class='table table-striped' id='".$this->multi_column_table_id."'>
+		$this->form_output_string .= "<table class='table table-striped' id='tbl_multi_column'>
 			<thead><tr>
 			<th>Action</th>";
 				foreach($this->fields as $headers){

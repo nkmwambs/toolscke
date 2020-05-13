@@ -17,7 +17,7 @@
                     			
                     				<a href="<?=base_url();?>exams.php/partner/add_kcse_result" class="btn btn-default"><?=get_phrase('add_exam_results');?></a>
 		                    		<a href="<?=base_url();?>exams.php/partner/download_kcse_results/<?=$start_of_year_date;?>" id="excel_download" class="btn btn-default"><?=get_phrase('download_results');?></a>									
-		                    		<a href="<?=base_url();?>exams.php/partner/add_subject"  class="btn btn-default"><?=get_phrase('add_subject');?></a>
+		                    		<!-- <a href="<?=base_url();?>exams.php/partner/add_subject"  class="btn btn-default"><?=get_phrase('add_subject');?></a> -->
 								
 								<div class="btn-group">
 		                    		<a href="<?=base_url();?>exams.php/partner/kcse/<?=strtotime('first day of january last year',$start_of_year_date);?>" 
@@ -46,7 +46,7 @@
 		                    				<th><?=get_phrase('date_of_birth');?></th>
 		                    				<th><?=get_phrase('gender');?></th>
 		                    				<th><?=get_phrase('index_number');?></th>
-		                    				<th><?=get_phrase('academic_year');?></th>
+		                    				<th><?=get_phrase('examination_year');?></th>
 		                    				<th><?=get_phrase('mean_grade');?></th>
 		                    				
 		                    			</tr>
@@ -63,9 +63,9 @@
 													</button>
 													
 													<ul class="dropdown-menu dropdown-default pull-left" role="menu">
-
+														
 														<li>
-															<a href="<?=base_url();?>exams.php/partner/edit_kcse_results/<?=$row->rID;?>/<?=true;?>">
+															<a target="__blank" href="<?=base_url();?>exams.php/partner/edit_kcse_results/<?=$row->rID;?>/<?=true;?>">
 																 <i class="fa fa-eye"></i>
 																	<?php echo get_phrase('view');?>
 															 </a>
@@ -95,8 +95,8 @@
 												</div>										
 		                    					
 		                    				</td>
-		                    				<td><?=$row->cstName;?></td>
-		                    				<td><?=$row->pNo;?></td>
+		                    				<td><?=$row->clusterName;?></td>
+		                    				<td><?=$row->icpNo;?></td>
 		                    				<td><?=$row->childNo;?></td>
 		                    				<td><?=$row->childName;?></td>
 		                    				<td><?=$row->dob;?></td>

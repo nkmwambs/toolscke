@@ -21,8 +21,8 @@ class Readonly extends CI_Controller
         $this->load->library('session');
 		
        /*cache control*/
-		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-		$this->output->set_header('Pragma: no-cache');
+// 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+// 		$this->output->set_header('Pragma: no-cache');
 		
     }
     
@@ -347,5 +347,65 @@ public function multiple_vouchers($tym,$project){
     $this->load->view('backend/index', $page_data);	
 
 }	
+
+
+function fund_balance_grid($month){
+	$this->db->select(array('icpNo'));
+	$centers = $this->db->get_where('projectsdetails',array('status'=>1))->result_array();
+
+	$opening = $this->finance_model->months_opening_fund_balances_for_centers($month);
+	$income = $this->finance_model->months_income_per_revenue_account_for_centers($month);
+	$expense = $this->finance_model->months_expense_per_revenue_account_for_centers($month);
+
+	$revenue_accounts = $this->finance_model->ordered_revenue_accounts();
+
+	$return_grid = [];
+
+	foreach($centers as $center){
+		foreach($revenue_accounts as $account){
+			$loop_opening = isset($opening[$center['icpNo']][$account])?$opening[$center['icpNo']][$account]:0;
+			$loop_income = isset($income[$center['icpNo']][$account])?$income[$center['icpNo']][$account]:0;
+			$loop_expense = isset($expense[$center['icpNo']][$account])?$expense[$center['icpNo']][$account]:0;
+			$loop_closing = $loop_opening + $loop_income - $loop_expense;
+
+			if($loop_closing != 0){
+				$return_grid[$center['icpNo']][$account]['revenue_account_opening_balance'] = $loop_opening;
+				$return_grid[$center['icpNo']][$account]['revenue_account_income'] = $loop_income;
+				$return_grid[$center['icpNo']][$account]['revenue_account_expense'] = $loop_expense;
+				$return_grid[$center['icpNo']][$account]['revenue_account_closing_balance'] = $loop_closing;
+			}
+			
+		}
+	}
+
+	return $return_grid;
+}
+
+function fund_balance_report($month = ""){
+	if ($this->session->userdata('admin_login') != 1)
+	   redirect(base_url(), 'refresh');
+
+	$month = $month == ""?strtotime(date('Y-m-t')):$month;
+	
+	$month_date_format = date('Y-m-t',$month);
+	
+	$result = $this->fund_balance_grid($month_date_format);
+
+	$balance_type = "revenue_account_closing_balance";
+
+	if( isset($_POST['balance_type']) ) {
+		$balance_type = $this->input->post('balance_type');
+	}
+	
+	$page_data['account_type'] = 'readonly';   
+	$page_data['result'] = $result;
+	$page_data['month'] = $month;
+	$page_data['balance_type'] = $balance_type;
+	$page_data['revenue_accounts'] = $this->finance_model->ordered_revenue_accounts(); 			   
+	$page_data['page_name']  = 'fund_balance_report';
+   	$page_data['page_title'] = get_phrase('fund_balance_report');
+   	$this->load->view('backend/index', $page_data);	
+}
+
   
 }

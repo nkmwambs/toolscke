@@ -34,12 +34,74 @@ class Health extends CI_Controller
             redirect(base_url() . 'login', 'refresh');
     }
     
+   	function post_announcement(){
+		$post = $this->input->post();
+
+		$data['announcement_title'] = $post['announcement_title'];
+		$data['announcement_detail'] = $post['announcement_detail'];
+		$data['announcement_end_date'] = $post['announcement_end_date'];
+		$data['announcement_created_by'] = $this->session->login_user_id;
+		$data['announcement_created_date'] = date('Y-m-d');
+		$data['announcement_last_modified_by'] = $this->session->login_user_id;
+
+		$this->db->insert('announcement',$data);
+
+		redirect(base_url().'admin.php/admin/announcement', 'refresh');
+	}
+
+	function edit_announcement($announcement_id){
+		$post = $this->input->post();
+
+		$data['announcement_title'] = $post['announcement_title'];
+		$data['announcement_detail'] = $post['announcement_detail'];
+		$data['announcement_end_date'] = $post['announcement_end_date'];
+		$data['announcement_last_modified_by'] = $this->session->login_user_id;
+
+		$this->db->where(array('announcement_id'=>$announcement_id));
+		$this->db->update('announcement',$data);
+
+		redirect(base_url().'admin.php/admin/announcement', 'refresh');
+	}
+
+	function delete_annnouncement($announcement_id){
+
+		$this->db->where(array('announcement_id'=>$announcement_id));
+		$this->db->delete('announcement');
+
+		redirect(base_url().'admin.php/admin/announcement', 'refresh');
+	}
+
+	function announcement(){
+        if ($this->session->userdata('admin_login') != 1)
+			redirect(base_url(), 'refresh');
+			
+
+		$page_data['expired_announcements'] = $this->get_expired_announcements();	
+		$page_data['active_announcements'] = $this->get_active_announcements();	
+        $page_data['page_name']  = 'announcement';
+        $page_data['page_title'] = get_phrase('new_announcement');
+        $this->load->view('backend/index', $page_data);
+	}
+	
+	function get_expired_announcements(){
+		$expired_announcements = $this->db->order_by('announcement_created_date DESC')->get_where('announcement',array('announcement_end_date<='=>date('Y-m-d')))->result_array();
+		
+		return $expired_announcements;
+	}
+	
+	function get_active_announcements(){
+		$active_announcements = $this->db->order_by('announcement_created_date DESC')->get_where('announcement',array('announcement_end_date>='=>date('Y-m-d')))->result_array();
+		
+		return $active_announcements;
+	}
+
     /***ADMIN DASHBOARD***/
     function dashboard()
     {
         if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
+			redirect(base_url(), 'refresh');
 			
+		$page_data['active_announcements'] = $this->get_active_announcements();	
         $page_data['page_name']  = 'dashboard';
         $page_data['page_title'] = get_phrase('apps_login_panel');
         $this->load->view('backend/index', $page_data);
@@ -48,7 +110,8 @@ class Health extends CI_Controller
   	function users_list(){
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-			
+	    
+	    $page_data['active_announcements'] = $this->get_active_announcements();	
         $page_data['page_name']  = 'users_list';
         $page_data['page_title'] = get_phrase('users_list');
         $this->load->view('backend/index', $page_data);  		
@@ -490,6 +553,7 @@ class Health extends CI_Controller
             redirect(base_url() . 'admin.php/health/manage_profile/', 'refresh');
         }
 		
+		$page_data['active_announcements'] = $this->get_active_announcements();	
         $page_data['page_name']  = 'manage_profile';
         $page_data['page_title'] = get_phrase('manage_profile');
         $page_data['edit_data']  = $this->db->get_where('users', array('ID' => $this->session->userdata('login_user_id')))->result_array();

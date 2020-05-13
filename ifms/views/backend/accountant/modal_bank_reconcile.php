@@ -21,7 +21,7 @@ $statement = $this->finance_model->statement_balance($param3,$param2);
 						<div class="form-group">
 							<label class="control-label"><?php echo get_phrase('bank_statement_date');?></label>
 								<div class="input-group">
-										<input <?php if($mfr_submitted==='1'){echo "readonly='readonly'";};?>  type="text" name="bsDate" id="bsDate" value="<?php echo date('Y-m-t');?>" class="form-control datepicker accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" data-format="yyyy-mm-dd" data-start-date="<?php echo date('Y-m-t',strtotime($param2));?>" data-end-date="<?php echo date('Y-m-t',strtotime($param2));?>">
+										<input <?php if($mfr_submitted==='1'){echo "readonly='readonly'";};?>  type="text" name="bsDate" id="bsDate" value="<?php echo $statement->statementDate;?>" class="form-control datepicker accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" data-format="yyyy-mm-dd" data-start-date="<?php echo date('Y-m-t',strtotime($param2));?>" data-end-date="<?php echo date('Y-m-t',strtotime($param2));?>">
 										
 										<div class="input-group-addon">
 											<a href="#"><i class="entypo-calendar"></i></a>

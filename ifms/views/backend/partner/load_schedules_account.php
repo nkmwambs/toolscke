@@ -1,16 +1,6 @@
 <?php
-
-//$budget_revenue_accounts = $this->finance_model->budgeted_revenue_accounts();
-
-$rev_account = 	1;
-
-$expenses_of_the_parent_rev = $this->db->get_where('accounts',array('parentAccID'=>$rev_account))->result_object();
-//print_r($expenses_of_the_parent_rev);
-
-foreach($expenses_of_the_parent_rev as $expense){
-
 $cnt_months = range(1, 12);
-//$expense = $this->db->get_where("accounts",array("accID"=>$account_id))->row();
+$expense = $this->db->get_where("accounts",array("accID"=>$account_id))->row();
 ?>
 
 <div class="row">
@@ -28,7 +18,7 @@ $cnt_months = range(1, 12);
 					<th><?=get_phrase('budget_tag');?></th>
 					<th><?=get_phrase('validation_check');?></th>
 					<?php
-						$months = $this->finance_model->months_in_year($this->finance_model->current_financial_month($this->session->center_id));
+						$months = $this->finance_model->months_in_year($this->session->center_id);
 												
 						foreach($months as $month):
 					?>
@@ -204,10 +194,6 @@ $cnt_months = range(1, 12);
 			</tbody>
 	</div>
 </div>
-
-<?php
-}
-?>
 
 <script>
 	$(document).ready(function(){

@@ -43,7 +43,7 @@ class Login extends CI_Controller {
 		// Google Project API Credentials
 		$clientId = '1073833704230-clfvc3d133a3osqfdck73out6ua1ap7d.apps.googleusercontent.com';
         $clientSecret = '83-EyPukIshDLdn8DclS2GGx';
-        $redirectUrl = base_url();
+        $redirectUrl = 'https://www.compassionkenya.com/tools';
 		
 		// Google Client Configuration
         $gClient = new Google_Client();
@@ -72,7 +72,7 @@ class Login extends CI_Controller {
             $userData['userfirstname'] = $userProfile['given_name'];
             $userData['userlastname'] = $userProfile['family_name'];
             $userData['email'] = $userProfile['email'];
-			//$userData['gender'] = $userProfile['gender'];
+			$userData['gender'] = $userProfile['gender'];
 			$userData['locale'] = $userProfile['locale'];
             $userData['profile_url'] = $userProfile['link'];
             $userData['picture_url'] = $userProfile['picture'];
@@ -109,7 +109,7 @@ class Login extends CI_Controller {
 				            $this->session->set_userdata('name', $row->userfirstname);
 							$this->session->set_userdata('logged_user_level', $row->userlevel);
 							$login_type = 'admin';
-							if($this->db->get_where('positions',array("pstID"=>$row->userlevel))->row()->short_name!==""){
+							if($this->db->get_where('positions',array("pstID"=>$row->userlevel))->num_rows()>0){
 								$login_type = $this->db->get_where('positions',array("pstID"=>$row->userlevel))->row()->short_name;
 							}  
 							

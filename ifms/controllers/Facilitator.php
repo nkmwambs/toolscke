@@ -210,10 +210,12 @@ public function validate_mfr($project,$tym,$code){
 	$msg = get_phrase("report_validated");
 	
 	$data['allowEdit'] = "1";	
+	$data['mfr_validation_date'] = '0000-00-00';
 	$msg = get_phrase("report_unvalidated");
 				 	
 	if($code==="1"){
 		$data['allowEdit'] = "0";
+		$data['mfr_validation_date'] = date('Y-m-d h:i:s');
 		$msg = get_phrase("report_validated");
 	}
 	

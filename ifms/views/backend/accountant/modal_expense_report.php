@@ -1,5 +1,6 @@
 <?php
-//echo get_fy($param2,$this->session->center_id);
+//echo get_fy($param2,$this->session->center_id);]
+//echo $param3;
 ?>
 <div class="row">
 	<div class="col-sm-12">
@@ -31,7 +32,7 @@
 									
 									foreach($rev as $row):
 									
-									if($this->finance_model->total_expense_to_date_per_revenue_vote($this->session->center_id,$row->accID,$param2)>0){
+									if($this->finance_model->total_expense_to_date_per_revenue_vote($param3,$row->accID,$param2)>0){
 								?>
 									<option value="<?=$row->AccNo;?>"><?=$row->AccText;?> - <?=$row->AccName;?></option>
 								<?php
@@ -83,7 +84,7 @@ $('#revenue_id').change(function(ev){
 		//}
 	//});
 	
-	var url = '<?=base_url();?>ifms.php/partner/load_expense_data/<?=$this->session->center_id?>/'+rpt_id+'/<?=$param2?>';
+	var url = '<?=base_url();?>ifms.php/partner/load_expense_data/<?=$param3?>/'+rpt_id+'/<?=$param2?>';
 	
 	jQuery('#expense_data').html('<div style="text-align:center;margin-top:200px;"><img src="<?php echo base_url();?>uploads/preloader.gif" /></div>');
 	
@@ -105,7 +106,7 @@ $('#revenue_id').change(function(ev){
 		    importStyle: true,         
 		    printContainer: false,       
 		    loadCSS: "", 
-		    pageTitle: "<?php echo get_phrase('payment_voucher');?>",             
+		    pageTitle: "<?php echo get_phrase('expense_report');?>",             
 		    removeInline: false,        
 		    printDelay: 333,            
 		    header: null,             

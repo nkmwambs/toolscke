@@ -6,6 +6,23 @@ class Email_model extends CI_Model {
     {
         parent::__construct();
     }
+    
+    function send_dashboard_notification($from_user_id, $to_user_id, $message){
+
+		$sender = $this->db->get_where('users',array("ID"=>$from_user_id))->row();
+		$recipient = $this->db->get_where('users',array("ID"=>$to_user_id))->row();
+
+		$email_msg		=	"Dear  ".$recipient->userfirstname. " ".$recipient->userlastname.",<br />";
+		$email_msg		.=	"Your have received a MFR review notification from the National Office accounts desk with the  following message: <br />";
+		$email_msg		.=	 "</br><div class='well'>".$message. '</div></br>';
+		$email_msg		.=	"Kindly response within ".$this->config->item('mfr_review_notification_response_time')." hours using my work email address ".$sender->email."<br />";
+		
+		$email_sub		=	"National Office FCP MFR Review Notification";
+		$email_to		=	$recipient->email;
+		//$email_from     = 	$sender->email;
+		
+		$this->do_email($email_msg , $email_sub , $email_to);
+	}
 
 	function account_opening_email($account_type = '' , $email = '')
 	{
@@ -152,7 +169,7 @@ class Email_model extends CI_Model {
 			$from		=	$this->db->get_where('settings' , array('type' => 'system_email'))->row()->description;
 		
 		$this->email->from($from, $system_name);
-		$this->email->from($from, $system_name);
+		//$this->email->from($from, $system_name);
 		$this->email->to($to);
 		$this->email->subject($sub);
 		

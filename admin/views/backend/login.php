@@ -40,8 +40,24 @@
 <body class="page-body login-page login-form-fall" data-url="http://neon.dev">
 
 	<!-- BEGIN PHP Live! HTML Code -->
-		<script>(function(d,t,u,s,e){e=d.getElementsByTagName(t)[0];s=d.createElement(t);s.src=u;s.async=1;e.parentNode.insertBefore(s,e);})(document,'script','//localhost/livechat/php/app.php?widget-init.js');</script>
+		<!-- <span 
+			style="color: #0000FF; text-decoration: underline; line-height: 0px !important; cursor: pointer;position: absolute;z-index:10;bottom: 0px;right: 0px;" 
+			id="phplive_btn_1525838850" onclick="phplive_launch_chat_0()">
+		</span>
+		<script data-cfasync="false" type="text/javascript">
 		
+		(function() {
+		var phplive_e_1525838850 = document.createElement("script") ;
+		phplive_e_1525838850.type = "text/javascript" ;
+		phplive_e_1525838850.async = true ;
+		phplive_e_1525838850.src = "https://t2.phplivesupport.com/support/js/phplive_v2.js.php?v=0|1525838850|2|" ;
+		document.getElementById("phplive_btn_1525838850").appendChild( phplive_e_1525838850 ) ;
+		})() ;
+		
+		</script> -->
+		<script>(function(d,t,u,s,e){e=d.getElementsByTagName(t)[0];s=d.createElement(t);s.src=u;s.async=1;e.parentNode.insertBefore(s,e);})(document,'script','//www.compassionkenya.com/livechat/php/app.php?widget-init.js');</script>
+
+
 	<!-- END PHP Live! HTML Code -->
 
 

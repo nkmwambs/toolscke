@@ -127,7 +127,7 @@
 					</a> 
 				<br><hr>
 				
-				<table class="table table-striped datatable" id="table_export">
+				<table class="table table-striped" id="table_export">
 					<thead>
 						<tr>
 							<th><?php echo get_phrase('action');?></th>
@@ -155,11 +155,12 @@
 					</a> 
 				<br><hr>
 				
-				<table class="table table-striped">
+				<table class="table table-striped datatable">
 					<thead>
 						<tr>
 							<th><?=get_phrase('project_number');?></th>
 							<th><?=get_phrase('project_name');?></th>
+							<th><?=get_phrase('email');?></th>
 							<th><?=get_phrase('cluster');?></th>
 							<th><?=get_phrase('action');?></th>
 						</tr>
@@ -173,6 +174,7 @@
 							<tr>
 								<td><?=$row->icpNo;?></td>
 								<td><?=$row->icpName;?></td>
+								<td><?=$row->email;?></td>
 								<td><?=$this->db->get_where('clusters',array('clusters_id'=>$row->cluster_id))->row()->clusterName;?></td>
 								<td>
 									<div class="btn-group">
@@ -274,7 +276,15 @@
 
 <script>
 	$(document).ready(function(){
-		var datatable = $('.table').DataTable();
+		$('.datatable').DataTable({
+			dom: 'Bfrtip',
+		       //sDom:'r',
+		       pagingType: "full_numbers",
+		       buttons: [
+		           'csv', 'excel', 'print'
+		       ],
+		       stateSave: true
+		});
 		
 		
 		    if (location.hash) {

@@ -5,14 +5,84 @@ if (!defined('BASEPATH'))
 
 class Finance_model extends CI_Model {
 	
- 	private $table_prefix = '';
-	   
+    
     function __construct() {
         parent::__construct();
-		
-		$this -> load -> config('dev_config');
-		$this -> get_table_prefix();
     }
+    
+    function months_opening_fund_balances_for_centers($month){
+		$this->db->select(array('icpNo','funds','amount'));
+		$this->db->join('opfundsbalheader','opfundsbalheader.balHdID=opfundsbal.balHdID');
+		$db_result = $this->db->get_where('opfundsbal',
+		array('closureDate'=>date('Y-m-t',strtotime('last day of previous month',strtotime($month))),'submitted'=>1))->result_array();
+
+		$return_array = [];
+
+		foreach($db_result as $fund_account_balance){
+			$return_array[$fund_account_balance['icpNo']][$fund_account_balance['funds']] = $fund_account_balance['amount'];
+		}
+
+		return $return_array;
+	}
+
+	function months_income_per_revenue_account_for_centers($month){
+
+		$first_month_day = date('Y-m-01',strtotime($month));
+		$last_month_day = date('Y-m-t',strtotime($month));
+
+		$this->db->select(array('voucher_header.icpNo as icpNo','AccNo'));
+		$this->db->select_sum('Cost');
+		$this->db->group_by('icpNo, AccNo');
+		$this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
+		$db_result = $this->db->get_where('voucher_body',
+		array('voucher_header.TDate>='=>$first_month_day,'voucher_header.TDate<='=>$last_month_day,'voucher_header.VType'=>'CR'))->result_array();
+
+		$return_array = [];
+
+		foreach($db_result as $account_income){
+			$return_array[$account_income['icpNo']][$account_income['AccNo']] = $account_income['Cost'];
+		}
+
+		return $return_array;
+	}
+
+	function months_expense_per_revenue_account_for_centers($month){
+		$first_month_day = date('Y-m-01',strtotime($month));
+		$last_month_day = date('Y-m-t',strtotime($month));
+
+		$this->db->select(array('voucher_header.icpNo as icpNo','parentAccID'));
+		$this->db->select_sum('Cost');
+		$this->db->group_by('icpNo, parentAccID');
+		$this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
+		$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
+		$db_result = $this->db->get_where('voucher_body',
+		array('voucher_header.TDate>='=>$first_month_day,'voucher_header.TDate<='=>$last_month_day,'AccGrp'=>0))->result_array();
+
+		$order_accounts = $this->ordered_revenue_accounts();
+
+		$return_array = [];
+
+		foreach($db_result as $account_expense){
+			if(isset($order_accounts[$account_expense['parentAccID']])){
+				$return_array[$account_expense['icpNo']][$order_accounts[$account_expense['parentAccID']]] = $account_expense['Cost'];
+			}
+		}
+
+		return $return_array;
+	}
+
+	function ordered_revenue_accounts(){
+		$this->db->select(array('accID','AccNo'));
+		$revenue_accounts = $this->db->get_where('accounts',array('AccGrp'=>1))->result_array();
+
+		$order_accounts = [];
+
+		foreach($revenue_accounts as $revenue_account){
+			$order_accounts[$revenue_account['accID']] = $revenue_account['AccNo'];
+		}
+
+		return $order_accounts;
+	}
 
     function clear_cache() {
         $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -556,18 +626,8 @@ class Finance_model extends CI_Model {
 		return $total_cash;
 	}			
 
-	public function budgeted_revenue_accounts($as_object = true){
-		
-		$rev = "";
-		
-		if($as_object){
-			$rev = $this->db->order_by('AccNo')->get_where('accounts',
-			array('AccGrp'=>'1','budget'=>'1','active'=>'1'))->result_object();			
-		}else{
-			$rev = $this->db->order_by('AccNo')->get_where('accounts',
-			array('AccGrp'=>'1','budget'=>'1','active'=>'1'))->result_array();
-		}
-
+	public function budgeted_revenue_accounts(){
+		$rev = $this->db->order_by('AccNo')->get_where('accounts',array('AccGrp'=>'1','budget'=>'1','active'=>'1'))->result_object();
 		
 		return $rev;
 	}
@@ -588,44 +648,21 @@ class Finance_model extends CI_Model {
 		
 	}
 
-	public function expense_accounts($rev_code="",$as_object = false){
+	public function expense_accounts($rev_code=""){
 		
 		if($rev_code!==""){
-			$query = $this->db->order_by('AccNo')->get_where('accounts',array('parentAccID'=>$rev_code));
+			$query = $this->db->order_by('AccNo')->get_where('accounts',array('parentAccID'=>$rev_code))->result_object();
 		}else{
-			$query = $this->db->order_by('AccNo')->get_where('accounts',array('AccGrp'=>'0'));
+			$query = $this->db->order_by('AccNo')->get_where('accounts',array('AccGrp'=>'0'))->result_object();
 		}
 		
-		if($as_object){
-			return $query->result_object();
-		}else{
-			return $query->result_array();
-		}
-	}
-
-function expense_accounts_grouped_by_income(){
-	
-	$grouped_expenses;
-	
-	$remove_columns = array('parentID','parentAccID','AccGrp','prg','track','has_choices','budget','Active','is_admin');
-	
-	$array_of_income =  group_array_by_key($this->finance_model->budgeted_revenue_accounts(false),'accID',
-	$remove_columns);
-	
-	foreach($array_of_income as $key=>$value){
-		$grouped_expenses[$key] = $value;
-		$grouped_expenses[$key][1] = group_array_by_key($this->finance_model->expense_accounts($key,false),
-		'AccNo',$remove_columns);
-	}
-	
-	return $grouped_expenses;
-}	
+		
+		return $query;
+	}	
 	
 	function current_fy($project){		
 		
 		$fy ="";
-		
-		//The order of the if and elseif and else matters
 		
 		if($this->db->get_where('voucher_header',array('icpNo'=>$project))->num_rows()>0){
 			
@@ -645,41 +682,48 @@ function expense_accounts_grouped_by_income(){
 		return $fy;
 	}
 	
-	public function months_in_year($date, $show_year = false){
+	public function months_in_year($date,$show_year=false){
 		
 		$months = array();
 		
+		//$date = date('Y-m-d');
+		
+		//$start_month = $this->db->get_where('projectsdetails',array('project_id'=>$project))->row()->system_start_date;
+		
+		//$start_month = $this->project_system_start_date($project);
 		$start_month = fy_start_date($date);
 		
-		$month_num_range = range(0, 11);
-		
-		if(!$show_year){
-			foreach($month_num_range as $num){
-				$add_num = $num + 1;
-				if($num == 0) $months['month_'.$add_num.'_amount'] 	= date('M',strtotime($start_month));
-				else $months['month_'.$add_num.'_amount'] 	= date('M',strtotime('+'.$num.' month',strtotime($start_month)));		
-			}		
+		if($show_year===false){
+			$months['month_1_amount'] 	= date('M',strtotime($start_month));
+			$months['month_2_amount'] 	= date('M',strtotime('+1 month',strtotime($start_month)));
+			$months['month_3_amount'] = date('M',strtotime('+2 month',strtotime($start_month)));
+			$months['month_4_amount'] = date('M',strtotime('+3 month',strtotime($start_month)));
+			$months['month_5_amount'] = date('M',strtotime('+4 month',strtotime($start_month)));
+			$months['month_6_amount'] = date('M',strtotime('+5 month',strtotime($start_month)));
+			$months['month_7_amount'] = date('M',strtotime('+6 month',strtotime($start_month)));
+			$months['month_8_amount'] = date('M',strtotime('+7 month',strtotime($start_month)));
+			$months['month_9_amount'] = date('M',strtotime('+8 month',strtotime($start_month)));
+			$months['month_10_amount'] = date('M',strtotime('+9 month',strtotime($start_month)));
+			$months['month_11_amount'] = date('M',strtotime('+10 month',strtotime($start_month)));
+			$months['month_12_amount'] = date('M',strtotime('+11 month',strtotime($start_month)));			
 		}else{
-			foreach($month_num_range as $num){
-				$add_num = $num + 1;
-				if($num == 0) $months['month_'.$add_num.'_amount'] 	= date('M Y',strtotime($start_month));
-				else $months['month_'.$add_num.'_amount'] 	= date('M Y',strtotime('+'.$num.' month',strtotime($start_month)));		
-			}
-				
+			$months['month_1_amount'] 	= date('M Y',strtotime($start_month));
+			$months['month_2_amount'] 	= date('M Y',strtotime('+1 month',strtotime($start_month)));
+			$months['month_3_amount'] = date('M Y',strtotime('+2 month',strtotime($start_month)));
+			$months['month_4_amount'] = date('M Y',strtotime('+3 month',strtotime($start_month)));
+			$months['month_5_amount'] = date('M Y',strtotime('+4 month',strtotime($start_month)));
+			$months['month_6_amount'] = date('M Y',strtotime('+5 month',strtotime($start_month)));
+			$months['month_7_amount'] = date('M Y',strtotime('+6 month',strtotime($start_month)));
+			$months['month_8_amount'] = date('M Y',strtotime('+7 month',strtotime($start_month)));
+			$months['month_9_amount'] = date('M Y',strtotime('+8 month',strtotime($start_month)));
+			$months['month_10_amount'] = date('M Y',strtotime('+9 month',strtotime($start_month)));
+			$months['month_11_amount'] = date('M Y',strtotime('+10 month',strtotime($start_month)));
+			$months['month_12_amount'] = date('M Y',strtotime('+11 month',strtotime($start_month)));				
 		}
+
 		
 		return $months;
 	}	
-	
-	function all_budget_items_submitted($fyr,$fcp){
-		$result = true;
-		
-		$this->db->where(array('approved'=>0));
-		$this->db->join('plansschedule','plansschedule.planHeaderID=planheader.planHeaderID');
-		$result = $this->db->get_where('planheader', array('fy'=>$fyr,"icpNo"=>$fcp))->num_rows()>0?false:true;
-		
-		return $result;
-}
 
 	function system_opening_fund_balances($date,$project){
 		
@@ -1032,11 +1076,11 @@ function expense_accounts_grouped_by_income(){
 		if($this->db->get_where('planheader',array('icpNo'=>$project,'fy'=>$fy))->num_rows()>0){
 			$planHeaderID =  $this->db->get_where('planheader',array('icpNo'=>$project,'fy'=>$fy))->row()->planHeaderID;
 				
-				if($this->db->select_sum('totalCost')->get_where('plansschedule',array('planHeaderID'=>$planHeaderID,'approved<>'=>'2'))->num_rows()>0){
+				if($this->db->select_sum('totalCost')->get_where('plansschedule',array('planHeaderID'=>$planHeaderID,'approved<>'=>'2','AccNo<>'=>0))->num_rows()>0){
 					if($statusCode===""){
-						$items =  $this->db->select_sum('totalCost')->get_where('plansschedule',array('planHeaderID'=>$planHeaderID,'approved<>'=>'2'))->row()->totalCost;
+						$items =  $this->db->select_sum('totalCost')->get_where('plansschedule',array('planHeaderID'=>$planHeaderID,'approved<>'=>'2','AccNo<>'=>0))->row()->totalCost;
 					}else{
-						$items =  $this->db->select_sum('totalCost')->get_where('plansschedule',array('planHeaderID'=>$planHeaderID,'approved'=>$statusCode))->row()->totalCost;
+						$items =  $this->db->select_sum('totalCost')->get_where('plansschedule',array('planHeaderID'=>$planHeaderID,'approved'=>$statusCode,'AccNo<>'=>0))->row()->totalCost;
 					}
 				
 				}
@@ -1096,16 +1140,15 @@ function expense_accounts_grouped_by_income(){
 	function total_variance_percent_per_revenue_vote($project_id,$fy,$rev_id,$month){
 		$budget_to_date = $this->total_budget_to_date_per_revenue_vote($project_id,$fy,$rev_id,$month);
 		
-		$exp_to_date = $this->total_expense_to_date_per_revenue_vote($project_id,$rev_id,$month);
+// 		$exp_to_date = $this->total_expense_to_date_per_revenue_vote($project_id,$rev_id,$month);
 		
-		$variance =  $budget_to_date - $exp_to_date;
+		$variance_amount_per_revenue_vote = $this->total_variance_per_revenue_vote($project_id,$fy,$rev_id,$month);
 		
-		//if($variance>0 || $variance===0){
-			return 	$exp_to_date;//@($variance/$budget_to_date)*100;
-		//}elseif($variance<0){
-			//return -100;
-		//}		
-		//return $budget_to_date;
+		$percentage_variance = number_format(($variance_amount_per_revenue_vote / $budget_to_date) * 100,1);
+		
+		
+		
+		return $percentage_variance;
 	}
 	
 	function budget_exists($project_id,$fy){
@@ -1278,13 +1321,18 @@ function expense_accounts_grouped_by_income(){
 		return @($this->finance_model->months_incomes_per_revenue_vote($project_id,$rev_acc,$month)/$this->finance_model->months_closing_fund_balance_per_revenue_vote($project_id,$rev_acc,$month));
 	}
 	
-	/**
-	 * Beginning of finance dashboard model code
-	 */
-	 
-	 
+/** Finance Dashbaord Model Methods - Begin **/
+	
 	//General Methods
-
+	
+	private function db_cache_on(){
+		return $this->config->item('db_cache_on') == true?$this->db->cache_on():null;	
+	}
+	
+	private function db_cache_off(){
+		return $this->config->item('db_cache_on') == true?$this->db->cache_off():null;
+	}
+	
 	private function get_table_prefix() {
 
 		$this -> table_prefix = $this -> config -> item('table_prefix');
@@ -1320,6 +1368,10 @@ function expense_accounts_grouped_by_income(){
 
 		return $group_by_fcp_id_array;
 	}
+
+	//Prod data arrays
+	
+	
 
 	//Test Models Methods
 
@@ -1387,6 +1439,13 @@ function expense_accounts_grouped_by_income(){
 		$dashboard_params[7]['result_method'] = 'callback_bank_reconcile_correct';
 		$dashboard_params[7]['is_requested'] = 'no';
 		$dashboard_params[7]['display_on_dashboard'] = 'yes';
+
+		$dashboard_params[8]['dashboard_parameter_name'] = 'Cash Received';
+		$dashboard_params[8]['result_method'] = 'test_cash_received_in_month_model';
+		$dashboard_params[8]['is_requested'] = 'no';
+		$dashboard_params[8]['display_on_dashboard'] = 'yes';
+
+
 
 		return $dashboard_params;
 	}
@@ -1565,6 +1624,34 @@ function expense_accounts_grouped_by_income(){
 
 	}
 
+	// private function test_fcp_local_pc_guideline_data_model() {
+// 
+		// $fcp_local_pc_guideline_data = array();
+// 
+		// //KE0200 array
+		// $fcp_local_pc_guideline_data[1]['fcp_id'] = 'KE0200';
+		// $fcp_local_pc_guideline_data[1]['pc_local_month_expense_limit'] = 0.89;
+// 
+		// //KE0215 array
+		// $fcp_local_pc_guideline_data[2]['fcp_id'] = 'KE0215';
+		// $fcp_local_pc_guideline_data[2]['pc_local_month_expense_limit'] = 0.89;
+// 
+		// //KE0300 array
+		// $fcp_local_pc_guideline_data[3]['fcp_id'] = 'KE0300';
+		// $fcp_local_pc_guideline_data[3]['pc_local_month_expense_limit'] = 98.09;
+// 
+		// //KE0320 array
+		// $fcp_local_pc_guideline_data[4]['fcp_id'] = 'KE0320';
+		// $fcp_local_pc_guideline_data[4]['pc_local_month_expense_limit'] = 17.1;
+// 
+		// //KE0540 array
+		// $fcp_local_pc_guideline_data[5]['fcp_id'] = 'KE0540';
+		// $fcp_local_pc_guideline_data[5]['pc_local_month_expense_limit'] = 12.9;
+// 
+		// return $fcp_local_pc_guideline_data;
+// 
+	// }
+
 	private function test_statement_bank_balance_data_model() {
 
 		$statement_bank_balance_data = array();
@@ -1598,13 +1685,374 @@ function expense_accounts_grouped_by_income(){
 
 	}
 
+
+	function test_total_for_pc_data_model($month) {
+
+		$total_pc_data = array();
+
+		//KE0200 array
+		$total_pc_data[1]['fcp_id'] = 'KE0200';
+		$total_pc_data[1]['total'] = 23998.90;
+		$total_pc_data[1]['voucher_type'] = 'PC';
+		$total_pc_data[1]['transaction_date'] = '2019-03-31';
+
+		//KE0215 array
+		$total_pc_data[2]['fcp_id'] = 'KE0215';
+		$total_pc_data[2]['total'] = 23998.90;
+		$total_pc_data[2]['voucher_type'] = 'PC';
+		$total_pc_data[2]['transaction_date'] = '2019-03-31';
+
+		//KE0300 array
+		$total_pc_data[3]['fcp_id'] = 'KE0300';
+		$total_pc_data[3]['total'] = 23998.90;
+		$total_pc_data[3]['voucher_type'] = 'PC';
+		$total_pc_data[3]['transaction_date'] = '2019-03-31';
+
+		//KE0320 array
+		$total_pc_data[4]['fcp_id'] = 'KE0320';
+		$total_pc_data[4]['total'] = 23998.90;
+		$total_pc_data[4]['voucher_type'] = 'PC';
+		$total_pc_data[4]['transaction_date'] = '2019-03-31';
+
+		//KE0540 array
+		$total_pc_data[5]['fcp_id'] = 'KE0540';
+		$total_pc_data[5]['total'] = 23998.90;
+		$total_pc_data[5]['voucher_type'] = 'PC';
+		$total_pc_data[5]['transaction_date'] = '2019-03-31';
+
+		return $transaction_arrays;
+	}
+
+    function test_uncleared_cash_recieved_data_model($month) {
+
+		$uncleared_cash_recieved_data = array();
+
+		//KE0200 array
+		$uncleared_cash_recieved_data[1]['fcp_id'] = 'KE0200';
+		$uncleared_cash_recieved_data[1]['totals'] = 23998.90;
+
+		//KE0215 array
+		$uncleared_cash_recieved_data[2]['fcp_id'] = 'KE0215';
+		$uncleared_cash_recieved_data[2]['totals'] = 23998.90;
+
+		//KE0300 array
+		$uncleared_cash_recieved_data[3]['fcp_id'] = 'KE0300';
+		$uncleared_cash_recieved_data[3]['totals'] = 23998.90;
+
+		//KE0320 array
+		$uncleared_cash_recieved_data[4]['fcp_id'] = 'KE0320';
+		$uncleared_cash_recieved_data[4]['totals'] = 23998.90;
+
+		//KE0540 array
+		$uncleared_cash_recieved_data[5]['fcp_id'] = 'KE0540';
+		$uncleared_cash_recieved_data[5]['totals'] = 23998.90;
+
+		return $uncleared_cash_recieved_data;
+	}
+
+	function test_uncleared_cheques_data_model($month) {
+
+		$uncleared_cheques_data = array();
+
+		//KE0200 array
+		$uncleared_cheques_data[1]['fcp_id'] = 'KE0200';
+		$uncleared_cheques_data[1]['totals'] = 23998.90;
+
+		//KE0215 array
+		$uncleared_cheques_data[2]['fcp_id'] = 'KE0215';
+		$uncleared_cheques_data[2]['totals'] = 23998.90;
+
+		//KE0300 array
+		$uncleared_cheques_data[3]['fcp_id'] = 'KE0300';
+		$uncleared_cheques_data[3]['totals'] = 23998.90;
+
+		//KE0320 array
+		$uncleared_cheques_data[4]['fcp_id'] = 'KE0320';
+		$uncleared_cheques_data[4]['totals'] = 23998.90;
+
+		//KE0540 array
+		$uncleared_cheques_data[5]['fcp_id'] = 'KE0540';
+		$uncleared_cheques_data[5]['totals'] = 23998.90;
+
+		return $uncleared_cheques_data;
+	}
+
+
+	 function test_cash_received_in_month_model() {
+		$cash_received_in_month_data = array();
+
+		//KE0200 array
+		$cash_received_in_month_data[1]['KE0200']['fcp_id'] = 'KE0200';
+		$cash_received_in_month_data[1]['KE0200']['cash_received_in_month_amount'] = 23998.90;
+		$cash_received_in_month_data[1]['KE0200']['closure_date'] = '2019-03-31';
+
+		//KE0215 array
+		$cash_received_in_month_data[2]['KE0215']['fcp_id'] = 'KE0215';
+		$cash_received_in_month_data[2]['KE0215']['cash_received_in_month_amount'] = 100298.60;
+		$cash_received_in_month_data[2]['KE0215']['closure_date'] = '2019-03-31';
+
+		//KE0300 array
+		$cash_received_in_month_data[3]['KE0300']['fcp_id'] = 'KE0300';
+		$cash_received_in_month_data[3]['KE0300']['cash_received_in_month_amount'] = 1619643.16;
+		$statement_bank_balance_data[3]['KE0300']['closure_date'] = '2019-03-31';
+
+		//KE0320 array
+		$cash_received_in_month_data[4]['KE0300']['fcp_id'] = 'KE0320';
+		$cash_received_in_month_data[4]['KE0300']['cash_received_in_month_amount'] = 238989.71;
+		$cash_received_in_month_data[4]['KE0300']['closure_date'] = '2019-03-31';
+
+		//KE0540 array
+		$cash_received_in_month_data[5]['KE0540']['fcp_id'] = 'KE0540';
+		$cash_received_in_month_data[5]['KE0540']['cash_received_in_month_amount'] = 97600.81;
+		$cash_received_in_month_data[5]['KE0540']['closure_date'] = '2019-03-31';
+
+		return $cash_received_in_month_data;
+	}
+
+	public function  test_pc_limit_per_transaction_by_type_model(){
+		$pc_per_withdrawal_limit_data = array();
+
+		//KE0200 array
+		$pc_per_withdrawal_limit_data[1]['KE0200']['fcp_id'] = 'KE0200';
+		$pc_per_withdrawal_limit_data[1]['KE0200']['limit_compliance_flag'] = 'yes';
+
+		//KE0215 array
+		$pc_per_withdrawal_limit_data[2]['KE0215']['fcp_id'] = 'KE0215';
+		$pc_per_withdrawal_limit_data[2]['KE0215']['limit_compliance_flag'] = 'no';
+
+		//KE0300 array
+		$pc_per_withdrawal_limit_data[3]['KE0300']['fcp_id'] = 'KE0300';
+		$pc_per_withdrawal_limit_data[3]['KE0300']['limit_compliance_flag'] = 'no';
+
+		//KE0320 array
+		$pc_per_withdrawal_limit_data[4]['KE0320']['fcp_id'] = 'KE0320';
+		$pc_per_withdrawal_limit_data[4]['KE0320']['limit_compliance_flag'] = 'yes';
+
+		//KE0540 array
+		$pc_per_withdrawal_limit_data[5]['KE0540']['fcp_id'] = 'KE0540';
+		$pc_per_withdrawal_limit_data[5]['KE0540']['limit_compliance_flag'] = 'yes';
+
+		return $pc_per_withdrawal_limit_data;
+	}
+
+	private function  test_project_with_pc_guideline_limits_model(){
+		$project_with_pc_guideline_limit_data = array();
+
+		//KE0200 array
+		$project_with_pc_guideline_limit['KE0200']['pc_local_withdrawal_limit'] = 15000;
+		$project_with_pc_guideline_limit['KE0200']['pc_local_expense_transaction_limit'] = 5000;
+		$project_with_pc_guideline_limit['KE0200']['pc_local_month_expense_limit'] = 150000;
+
+		//KE0215 array
+		$project_with_pc_guideline_limit['KE0215']['pc_local_withdrawal_limit'] = 16000;
+		$project_with_pc_guideline_limit['KE0215']['pc_local_expense_transaction_limit'] = 4000;
+		$project_with_pc_guideline_limit['KE0215']['pc_local_month_expense_limit'] = 200000;
+
+		//KE0300 array
+		$project_with_pc_guideline_limit['KE0300']['pc_local_withdrawal_limit'] = 10000;
+		$project_with_pc_guideline_limit['KE0300']['pc_local_expense_transaction_limit'] = 8000;
+		$project_with_pc_guideline_limit['KE0300']['pc_local_month_expense_limit'] = 250000;
+
+		//KE0320 array
+		$project_with_pc_guideline_limit['KE0320']['pc_local_withdrawal_limit'] = 15000;
+		$project_with_pc_guideline_limit['KE0320']['pc_local_expense_transaction_limit'] = 10000;
+		$project_with_pc_guideline_limit['KE0320']['pc_local_month_expense_limit'] = 180000;
+
+		//KE0540 array
+		$project_with_pc_guideline_limit['KE0540']['pc_local_withdrawal_limit'] = 20000;
+		$project_with_pc_guideline_limit['KE0540']['pc_local_expense_transaction_limit'] = 10000;
+		$project_with_pc_guideline_limit['KE0540']['pc_local_month_expense_limit'] = 250000;
+
+		return $project_with_pc_guideline_limit;
+	}
+
 	//Prod Models Methods
 
-	public function prod_fcps_with_risk_model() {
+	private function prod_project_with_pc_guideline_limits_model(){
+		$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_start');
+		$this->db->select('icpNo as fcp_id');
+		$this->db->select(array('pc_local_withdrawal_limit','pc_local_expense_transaction_limit','pc_local_month_expense_limit'));
+		$project_with_pc_guideline_limits = $this->db->get_where('projectsdetails',array('status'=>1))->result_array();
 
+		$grouped_by_fcp_id = $this->group_data_by_fcp_id($project_with_pc_guideline_limits);
+		
+		$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_end');
+		
+		return $grouped_by_fcp_id;
+	}
+	
+	// function get_pc_local_guide_line_data(){
+// 		
+		// $month = "2019-03-01";
+// 		
+		// $types_array = array('per_withdrawal','per_transaction','per_month');
+// 		
+		// $results = array();
+// 			
+		// foreach($types_array as $type){
+			// $call_statement = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$type.'")';
+// 		
+			// $stmt = $this->db->conn_id->prepare($call_statement);
+			// $result = $stmt->execute();
+			// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// 			
+			// $results[$type] = $result;
+		// }
+// 		
+		// return $results;
+	// }
+	
+	// public function prod_pc_limit_per_month_model($month){
+		// $project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
+		// $limit_type = "per_month";	
+		// $db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+// 
+		// $pc_withdrawal_result = $this->db->query($db_call)->result_array();
+// 
+		// $pc_per_withdrawal_limit = array();
+// 
+		// foreach($pc_withdrawal_result as $pc_withdrawal){
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
+// 
+			// if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
+			// }elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+// 
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
+// 
+			// }
+		// }
+// 
+		// return $pc_withdrawal_result;
+	// }
+	
+	// public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
+// 			
+		// $this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_start');
+// 		
+		// $pc_guideline_column_name = 'pc_local_withdrawal_limit';
+// 
+		// if($limit_type == 'per_transaction'){
+			// $pc_guideline_column_name = 'pc_local_expense_transaction_limit';
+		// }elseif($limit_type == 'per_month'){
+			// $pc_guideline_column_name = 'pc_local_month_expense_limit';
+		// }
+// 
+		// $project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
+// 
+		// $db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+// 
+		// $pc_withdrawal_result = $this->db->query($db_call)->result_array();
+		// //$pc_withdrawal_result = $this->pc_local_guide_line_data['per_month'];
+// 
+		// $pc_per_withdrawal_limit = array();
+// 
+		// foreach($pc_withdrawal_result as $pc_withdrawal){
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
+// 
+			// if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
+			// }elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+// 
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
+// 
+			// }
+		// }
+// 
+		// $this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_end');
+// 
+		// return $pc_per_withdrawal_limit;
+	// }
+	
+	function test_guideline(){
+		return $this->prod_project_with_pc_guideline_limits_model();
+	}
+	
+	function test_pc_guideline_call(){
+		$month = "2018-04-01";
+		$limit_type = 'per_withdrawal';
+		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+
+		$pc_withdrawal_result = $this->db->query($db_call)->result_array();
+		
+		return $pc_withdrawal_result;
+	}
+	
+	public function prod_pc_limit_by_type_model($month){
+			
+		$this->benchmark->mark('prod_pc_limit_by_type_model_start');
+		
+		
+		$project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
+		
+		$type_array = array('per_withdrawal'=>'pc_local_withdrawal_limit','per_month'=>'pc_local_month_expense_limit','per_transaction'=>'pc_local_expense_transaction_limit');
+		
+		$pc_per_withdrawal_limit = array();
+		
+		foreach($type_array as $limit_type=>$pc_guideline_column_name){
+			$this->db_cache_on();
+			$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+
+			$pc_withdrawal_result = $this->db->query($db_call)->result_array();
+			$this->db_cache_off();
+	
+			foreach($pc_withdrawal_result as $pc_withdrawal){
+				$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
+				$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
+	
+				if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
+					$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
+				}elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+					
+					$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
+	
+				}
+			}	
+		}
+
+		$this->benchmark->mark('prod_pc_limit_by_type_model_end');
+		
+		return $pc_per_withdrawal_limit;
+	}
+
+	public function prod_cash_received_in_month_model($month){
+		$this->benchmark->mark('prod_cash_received_in_month_model_start');
+		$this->db_cache_on();
+		$query_conditon = "voucher_header.TDate BETWEEN '".date('Y-m-01',strtotime($month))."' AND '".date("Y-m-t",strtotime($month))."' AND voucher_header.VType='CR'";
+
+		$this->db->select_sum('voucher_body.Cost');
+		$this->db->select(array('voucher_header.icpNo'));
+		$this->db->where($query_conditon);
+		$this->db->where(array('ci_income='=>1));
+		$this->db->group_by(array('voucher_header.icpNo'));
+		$this->db->join('voucher_body','voucher_body.hID=voucher_header.hID');
+		$this->db->join('accounts','accounts.AccNo = voucher_body.AccNo');
+		$cash_received_in_month = $this->db->get('voucher_header')->result_object();
+		$this->db_cache_off();
+
+		$cr_array = array();
+
+		$cnt = 0;
+		foreach($cash_received_in_month as $row){
+			$cr_array[$row->icpNo]['fcp_id'] = $row->Cost;
+			$cr_array[$row->icpNo]['closure_date'] = $row->Cost;
+			$cr_array[$row->icpNo]['cash_received_in_month_amount'] = $row->Cost;
+
+			$cnt++;
+		}
+		
+		$this->benchmark->mark('prod_cash_received_in_month_model_end');
+		
+		return $cr_array;
+	}
+
+	public function prod_fcps_with_risk_model() {
+		$this->benchmark->mark('prod_fcps_with_risk_model_start');
 		$fcp_array = array();
 
-		$data = $this -> db -> get($this -> table_prefix . 'projectsdetails') -> result_array();
+		$data = $this -> db -> get_where($this -> table_prefix . 'projectsdetails', array('status='=>1)) -> result_array();
 
 		foreach ($data as $fcp) {
 
@@ -1613,10 +2061,11 @@ function expense_accounts_grouped_by_income(){
 		}
 
 		return $fcp_array;
+		$this->benchmark->mark('prod_fcps_with_risk_model_end');
 	}
 
 	private function prod_bank_statement_uploaded_model($month_bank_statement_uploaded) {
-
+		$this->benchmark->mark('prod_bank_statement_uploaded_model_start');
 		$files = array();
 		try {
 			$dir_path = 'uploads/bank_statements';
@@ -1649,42 +2098,41 @@ function expense_accounts_grouped_by_income(){
 		} catch(Exception $e) {
 
 		}
-
+		$this->benchmark->mark('prod_bank_statement_uploaded_model_end');
 		return $files;
 
 	}
 
 	private function prod_statement_bank_balance_data_model($month) {
-		
-		$this->db->cache_on();
+		$this->benchmark->mark('prod_statement_bank_balance_data_model_start');
+		$this->db_cache_on();
 		$statement_bank_balance = $this -> db -> get_where($this -> table_prefix . 'view_funds_statement_balance', array('closure_date' => $month)) -> result_array();
-		$this->db->cache_on();
-
+		$this->db_cache_off();
+		$this->benchmark->mark('prod_statement_bank_balance_data_model_end');
 		return $statement_bank_balance;
 	}
 
 	private function prod_book_bank_cash_balance_data_model($month) {
-
-	
-		$this->db->cache_on();
+		$this->benchmark->mark('prod_book_bank_cash_balance_data_model_start');
+		$this->db_cache_on();
 		$bank_cash_balance_data = $this -> db -> get_where($this -> table_prefix . 'view_book_bank_balance', array('closure_date' => $month)) -> result_array();
-		$this->db->cache_off();
-
-		return $bank_cash_balance_data;
+		$this->db_cache_off();
+		$this->benchmark->mark('prod_book_bank_cash_balance_data_model_end');
+		return $bank_cash_balance_data;	
 	}
 
 	//We will have to pass month aurgumet in prod models
 	private function prod_mfr_submission_data_model($month) {
-
-		$this->db->cache_on();
-			$mfr_submission_data = $this -> db -> get_where($this -> table_prefix . 'view_opening_funds_balance', array('closure_date' => $month)) -> result_array();
-		$this->db->cache_off();	
-
-
+		$this->benchmark->mark('prod_mfr_submission_data_model_start');
+		$this->db_cache_on();
+		$mfr_submission_data = $this -> db -> get_where($this -> table_prefix . 'view_opening_funds_balance', array('closure_date' => $month)) -> result_array();
+		$this->db_cache_off();
+		$this->benchmark->mark('prod_mfr_submission_data_model_end');
 		return $mfr_submission_data;
 	}
 
 	private function prod_dashboard_parameters_model() {
+		$this->benchmark->mark('prod_dashboard_parameters_model_start');	
 		$dashboard_params = array();
 
 		$data = $this -> db -> get($this -> table_prefix . 'dashboard_parameter') -> result_array();
@@ -1696,105 +2144,296 @@ function expense_accounts_grouped_by_income(){
 			$dashboard_params[$parameter['dashboard_parameter_id']]['is_requested'] = $parameter['is_requested'];
 			$dashboard_params[$parameter['dashboard_parameter_id']]['display_on_dashboard'] = $parameter['display_on_dashboard'];
 		}
-
+		$this->benchmark->mark('prod_mfr_submission_data_model_end');
 		return $dashboard_params;
+		
 	}
 
 	//Switch Environment method for model (prod/test) called in callback methods and build_dashboard_array method
 
-	public function switch_environment($month, $test_method, $prod_method) {
+	public function switch_environment(...$args) {
+
+		$this->benchmark->mark('switch_environment_start');	
+
+		$month = array_shift($args);
+		$test_method = array_shift($args);
+		$prod_method = array_shift($args);
+		$extra_args =  !empty($args)?implode(',', $args):"";
 
 		if ($this -> config -> item('environment') == 'test') {
+			$this->benchmark->mark('switch_environment_end');
 			return $this -> $test_method();
 		} elseif ($this -> config -> item('environment') == 'prod') {
-
-			return $this -> $prod_method($month);
+			$this->benchmark->mark('switch_environment_end');
+			return $this -> $prod_method($month,$extra_args);
 		}
+
 	}
 
 	//Transaction methods
+	
 
-	function get_uncleared_transactions($vtype, $month) {
-
-		$amount_key = "";
-		$table = "";
-
-		if ($vtype == 'CHQ') {
-			$amount_key = "outstanding_cheque_amount";
-			$table = 'view_voucher_with_oustanding_cheques';
-		} elseif ('CR') {
-			$amount_key = "deposit_in_transit_amount";
-			$table = 'view_voucher_with_deposit_deposit_in_transit';
-		}
-
-		$first_day_of_month = date('Y-m-01', strtotime($month));
-		$last_day_of_month = date('Y-m-t', strtotime($month));
+	function get_uncleared_transactions($month) {
+		$this->benchmark->mark('get_uncleared_transactions_start');	
 		
-		$this->db->cache_on();
+		$vtype_array = array('CHQ','CR');
 		
-		$this -> db -> select_sum($amount_key);
-		$this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
-		$this -> db -> group_by(array('voucher_type', 'fcp_id'));
-
-		$condition_array = array();
+		$transaction_array = array();
 		
-		//Query string conditions
-		$where_string = "(";
-		//transactions_raised_in_month_not_cleared
-		$where_string .= "(voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
-		//transactions_raised_in_month_cleared_in_future
-		$where_string .= " OR (voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
-		//transactions_raised_in_past_cleared_in_future
-		$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
-		//transactions_raised_in_past_not_cleared
-		$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
-
-		$where_string .= ")";
-
-		$this -> db -> where($where_string);
-
-		$transaction_array = $this -> db -> get($this -> table_prefix . $table) -> result_array();
+		foreach($vtype_array as $vtype){
+			$amount_key = "";
+				$table = "";
 		
-		$this->db->cache_off();
-
+				if ($vtype == 'CHQ') {
+					$amount_key = "outstanding_cheque_amount";
+					$table = 'view_voucher_with_oustanding_cheques';
+				} elseif ('CR') {
+					$amount_key = "deposit_in_transit_amount";
+					$table = 'view_voucher_with_deposit_deposit_in_transit';
+				}
+		
+				$first_day_of_month = date('Y-m-01', strtotime($month));
+				$last_day_of_month = date('Y-m-t', strtotime($month));
+		
+				$this->db_cache_on();
+		
+				$this -> db -> select_sum($amount_key);
+				$this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
+				$this -> db -> group_by(array('voucher_type', 'fcp_id'));
+		
+				$condition_array = array();
+		
+				//Query string conditions
+				$where_string = "(";
+				//transactions_raised_in_month_not_cleared
+				$where_string .= "(voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+				//transactions_raised_in_month_cleared_in_future
+				$where_string .= " OR (voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+				//transactions_raised_in_past_cleared_in_future
+				$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+				//transactions_raised_in_past_not_cleared
+				$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+		
+				$where_string .= ")";
+		
+				$this -> db -> where($where_string);
+		
+				$transaction_array[$vtype] = $this -> db -> get($this -> table_prefix . $table) -> result_array();
+		
+				$this->db_cache_off();
+			}
+		
+		
+		
+		$this->benchmark->mark('get_uncleared_transactions_end');	
+		
 		return $transaction_array;
 
 	}
+	
+	// function get_uncleared_transactions($vtype, $month) {
+		// $this->benchmark->mark('get_uncleared_transactions_start');	
+		// $amount_key = "";
+		// $table = "";
+// 
+		// if ($vtype == 'CHQ') {
+			// $amount_key = "outstanding_cheque_amount";
+			// $table = 'view_voucher_with_oustanding_cheques';
+		// } elseif ('CR') {
+			// $amount_key = "deposit_in_transit_amount";
+			// $table = 'view_voucher_with_deposit_deposit_in_transit';
+		// }
+// 
+		// $first_day_of_month = date('Y-m-01', strtotime($month));
+		// $last_day_of_month = date('Y-m-t', strtotime($month));
+// 
+		// $this -> db -> cache_on();
+// 
+		// $this -> db -> select_sum($amount_key);
+		// $this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
+		// $this -> db -> group_by(array('voucher_type', 'fcp_id'));
+// 
+		// $condition_array = array();
+// 
+		// //Query string conditions
+		// $where_string = "(";
+		// //transactions_raised_in_month_not_cleared
+		// $where_string .= "(voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+		// //transactions_raised_in_month_cleared_in_future
+		// $where_string .= " OR (voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+		// //transactions_raised_in_past_cleared_in_future
+		// $where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+		// //transactions_raised_in_past_not_cleared
+		// $where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+// 
+		// $where_string .= ")";
+// 
+		// $this -> db -> where($where_string);
+// 
+		// $transaction_array = $this -> db -> get($this -> table_prefix . $table) -> result_array();
+// 
+		// $this -> db -> cache_off();
+// 		
+		// $this->benchmark->mark('get_uncleared_transactions_end');	
+// 		
+		// return $transaction_array;
+// 
+	// }
 
 	function prod_deposit_in_transit_data_model($month) {
-
+		
+		$this->benchmark->mark('prod_deposit_in_transit_data_model_start');
+		
 		$transaction_arrays = array();
 
-		$get_uncleared_transactions = $this -> get_uncleared_transactions('CR', $month);
-		
-		foreach ($get_uncleared_transactions as $hid=>$transaction) {
+		$get_uncleared_transactions = $this -> uncleared_transactions['CR'];
+
+		foreach ($get_uncleared_transactions as $hid => $transaction) {
 			$transaction_arrays[$transaction['fcp_id']]['fcp_id'] = $transaction['fcp_id'];
 			$transaction_arrays[$transaction['fcp_id']]['closure_date'] = $month;
 			$transaction_arrays[$transaction['fcp_id']]['deposit_in_transit_amount'] = $transaction['deposit_in_transit_amount'];
 		}
-
+		
+		$this->benchmark->mark('prod_deposit_in_transit_data_model_end');
+		
 		return $transaction_arrays;
 	}
 
-	 function prod_outstanding_cheques_data_model($month) {
-
+	function prod_outstanding_cheques_data_model($month) {
+		$this->benchmark->mark('prod_outstanding_cheques_data_model_start');
 		$transaction_arrays = array();
-		
-		$get_uncleared_transactions = $this -> get_uncleared_transactions('CHQ', $month);
+
+		$get_uncleared_transactions = $this -> uncleared_transactions['CHQ'];
 
 		$fcps_array = array_column($get_uncleared_transactions, 'fcp_id');
 
-		foreach ($get_uncleared_transactions as $row_key=>$transaction) {
+		foreach ($get_uncleared_transactions as $row_key => $transaction) {
 
 			$transaction_arrays[$transaction['fcp_id']]['fcp_id'] = $transaction['fcp_id'];
 			$transaction_arrays[$transaction['fcp_id']]['closure_date'] = $month;
 			$transaction_arrays[$transaction['fcp_id']]['outstanding_cheque_amount'] = $transaction['outstanding_cheque_amount'];
 		}
-
+		$this->benchmark->mark('prod_outstanding_cheques_data_model_end');
 		return $transaction_arrays;
 	}
-	 
-	 /*
-	  * End of of finance model code
-	  */
+
+	function prod_total_for_pc_data_model($month) {
+		$this->benchmark->mark('prod_total_for_pc_data_model_start');
+		//Construct the array to dsipla the total transactions from PC
+		$total_pc_amount_in_amonth = array();
+
+		$total_pcs = $this -> calculate_pc_chqs_totals('PC', $month);
+
+		foreach ($total_pcs as $row_key => $total_pc) {
+
+			$total_pc_amount_in_amonth[$total_pc['icpNo']]['fcp_id'] = $total_pc['icpNo'];
+			$total_pc_amount_in_amonth[$total_pc['icpNo']]['cost'] = $total_pc['cost'];
+		}
+		$this->benchmark->mark('prod_total_for_pc_data_model_end');
+		return $total_pc_amount_in_amonth;
+	}
+
+	function prod_total_for_chq_data_model($month) {
+		$this->benchmark->mark('prod_total_for_chq_data_model_start');
+		$total_chq_amount_in_amonth = array();
+
+		$total_chqs = $this -> calculate_pc_chqs_totals('CHQ', $month);
+
+		foreach ($total_chqs as $row_key => $total_chq) {
+
+			$total_chq_amount_in_amonth[$total_chq['icpNo']]['fcp_id'] = $total_chq['icpNo'];
+			$total_chq_amount_in_amonth[$total_chq['icpNo']]['cost'] = $total_chq['cost'];
+		}
+		$this->benchmark->mark('prod_total_for_chq_data_model_end');
+		return $total_chq_amount_in_amonth;
+	}
+
+    function prod_uncleared_cash_recieved_data_model($month) {
+		$this->benchmark->mark('prod_uncleared_cash_recieved_data_model_start');
+		$uncleared_cash_recieved_in_amonth = array();
+
+		$total_uncleared_cash_recieved= $this -> calculate_uncleared_cash_recieved_and_chqs('CR', $month);
+
+		foreach ($total_uncleared_cash_recieved as $row_key => $total_uncleared_cr) {
+
+			$uncleared_cash_recieved_in_amonth[$total_uncleared_cr['icpNo']]['fcp_id'] = $total_uncleared_cr['icpNo'];
+			$uncleared_cash_recieved_in_amonth[$total_uncleared_cr['icpNo']]['totals'] = $total_uncleared_cr['totals'];
+		}
+		$this->benchmark->mark('prod_uncleared_cash_recieved_data_model_end');
+		return $uncleared_cash_recieved_in_amonth;
+	}
+
+	 function prod_uncleared_cheques_data_model($month) {
+		$this->benchmark->mark('prod_uncleared_cheques_data_model_start');
+		$uncleared_cheques_in_amonth = array();
+
+		$total_uncleared_cheques= $this -> calculate_uncleared_cash_recieved_and_chqs('CHQ', $month);
+
+		foreach ($total_uncleared_cheques as $row_key => $total_uncleared_chqs) {
+
+			$uncleared_cheques_in_amonth[$total_uncleared_chqs['icpNo']]['fcp_id'] = $total_uncleared_chqs['icpNo'];
+			$uncleared_cheques_in_amonth[$total_uncleared_chqs['icpNo']]['totals'] = $total_uncleared_chqs['totals'];
+		}
+		$this->benchmark->mark('prod_uncleared_cheques_data_model_end');
+		return $uncleared_cheques_in_amonth;
+	}
+
+
+	private function calculate_pc_chqs_totals($vtype, $month) {
+		$this->benchmark->mark('calculate_pc_chqs_totals_start');
+		$total_pc_or_chqs = array();
+
+		//Get the first and last of the month
+		$first_day_of_month = date('Y-m-01', strtotime($month));
+		$last_day_of_month = date('Y-m-t', strtotime($month));
+
+		$this->db_cache_on();
+
+		$this -> db -> select_sum('voucher_body.cost');
+		$this -> db -> select(array('voucher_header.icpNo', 'voucher_header.vtype'));
+		$this -> db -> join("voucher_body", "voucher_body.hid=voucher_header.hid");
+		$this -> db -> group_by(array('voucher_header.icpNo', 'voucher_header.vtype'));
+		$this -> db -> where('voucher_header.vtype', $vtype);
+		$this -> db -> where('voucher_header.tdate >= ', $first_day_of_month);
+		$this -> db -> where('voucher_header.tdate <= ', $last_day_of_month);
+
+		$total_pc_or_chqs = $this -> db -> get("voucher_header") -> result_array();
+
+		$this->db_cache_off();
+		$this->benchmark->mark('calculate_pc_chqs_totals_end');
+		return $total_pc_or_chqs;
+
+	}
+
+	private function calculate_uncleared_cash_recieved_and_chqs($vtype, $month) {
+		$this->benchmark->mark('calculate_uncleared_cash_recieved_and_chqs_start');
+		$count_of_cr_and_chq = array();
+
+		//Get the first and last of the month
+		$first_day_of_month = date('Y-m-01', strtotime($month));
+		$last_day_of_month = date('Y-m-t', strtotime($month));
+
+		//select icpNo, tdate,chqstate,clrmonth from voucher_header where chqstate=0 limit 10
+
+		$this->db_cache_on();
+
+		$this->db->select(array('icpNo'));
+		$this->db->select_sum('totals');
+		$this -> db -> group_by(array('icpNo','vtype'));
+		$this -> db -> where('TDate >= ', $first_day_of_month);
+		$this -> db -> where('TDate <= ', $last_day_of_month);
+		$this -> db -> where('VType',$vtype);
+		$this->db->where('chqState =',0);
+		$this->db->where('DATEDIFF(NOW(), TDate) >',$this->config->item('allowed_uncleared_days'));
+		
+		$count_of_cr_and_chq = $this -> db -> get("voucher_header") -> result_array();
+
+       $this->db_cache_off();
+		$this->benchmark->mark('calculate_uncleared_cash_recieved_and_chqs_end');
+		return $count_of_cr_and_chq;
+
+	}
+	
+	
+	/** Finance Dashbaord Model Methods - End **/
 }

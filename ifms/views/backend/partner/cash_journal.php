@@ -575,6 +575,7 @@ function format ( d ) {
 			pageLength: 25,
 			dom: '<"row"l><Bf><"col-sm-12"rt><ip>',
 		    pagingType: "full_numbers",
+		    ordering:false,
 		    buttons: [
 		         'csv', 'excel', 'print'
 		    ],	      
