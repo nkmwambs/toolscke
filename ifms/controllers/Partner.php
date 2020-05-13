@@ -728,14 +728,14 @@ function reverse_cheque($param1=''){
 function voucher_accounts($param1=''){
 		//Return as JSON object
 		$rst_rw ="";
-		if($param1==='CHQ'){
+		if($param1==='CHQ' ||$param1==='DCT-B' ){
 			//Bank Expenses Accounts
 			$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$expenses = $this->db->where($exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
 			$rst_rw = $expenses;
 		}
 		
-		if($param1==='PC'|| $param1 === 'BCHG'){
+		if($param1==='PC'|| $param1 === 'BCHG' || $param1==='DCT-C'){
 			//PC and BC Expenses Accounts
 			$pc_exp_cond = "accounts.AccGrp = 0 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$pc_expenses = $this->db->where($pc_exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
