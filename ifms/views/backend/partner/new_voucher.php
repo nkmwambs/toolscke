@@ -159,7 +159,14 @@
 										<div class="make-switch switch-small" data-on-label="Yes" data-off-label="No">
 												<input type="checkbox" id="reversal" name="reversal"/>
 										</div>
-									</div>		
+									</div>	
+									
+									<!-- Upload Files Area -->
+									<div id="uploads_dct_support_docs" for="fileupload" class="col-sm-6"><span style="font-weight: bold;"><?php echo get_phrase('upload_support_documents');?></span> 
+										<div class="">
+										   <input type="file" name="fileToUpload" id="fileToUpload">
+										</div>
+									</div>
 			                    </td>
 			                    
 			                </tr>
