@@ -127,7 +127,9 @@
 			                    		<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type');?>:</span></label>
 					                        <select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
 					                            <option value="#"><?php echo get_phrase('select_voucher_type');?></option>
-					                            <option value="PC"><?php echo get_phrase('payment_by_cash');?></option>
+												<option value="PC"><?php echo get_phrase('payment_by_cash');?></option>
+												<option value="DCT-B"><?php echo get_phrase('bank_direct_cash_transfer');?></option>
+												<option value="DCT-C"><?php echo get_phrase('petty_cash_direct_cash_transfer');?></option>
 					                            <option value="CHQ"><?php echo get_phrase('payment_by_cheque');?></option>
 					                            <option value="BCHG"><?php echo get_phrase('bank_adjustments');?></option>
 					                            <option value="CR"><?php echo get_phrase('cash_received');?></option>					                            
@@ -138,14 +140,14 @@
 			                    
 			                    
 			                    <td colspan="2">
-			                    	<div class="col-sm-10 form-group">
+			                    	<div class="col-sm-10 form-group hidden" id='ChqDiv'>
 			                    		<label for="ChqNo" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('cheque_number');?>:</span></label>
 			                    			<input class="form-control" type="text" id="ChqNo" name="ChqNo" data-validate="number,minlength[2]"  readonly="readonly"/>
 			                    	</div>
 			                    </td>
 			                    
 			                 	<td colspan="2">
-			                    	<div id="label-toggle-switch" for="reversal" class="col-sm-6"><span style="font-weight: bold;"><?php echo get_phrase('cheque_reversal');?></span> 
+			                    	<div id="label-toggle-switch" for="reversal" class="col-sm-6 hidden"><span style="font-weight: bold;"><?php echo get_phrase('cheque_reversal');?></span> 
 										<div class="make-switch switch-small" data-on-label="Yes" data-off-label="No">
 												<input type="checkbox" id="reversal" name="reversal"/>
 										</div>
@@ -377,11 +379,18 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 								{
 									//alert(response);
 									obj = jQuery.parseJSON(response);// Global Accounts Variable
+									//alert(jQuery.parseJSON(response));
 								}
 						});
 		
 		if(val==='CHQ'){
 			$('#ChqNo').removeAttr('readonly');
+			//Modified by Onduso on 13/5/2020
+			$('#ChqDiv').removeClass('hidden');
+			$('#label-toggle-switch').removeClass('hidden');
+
+			
+			
 		}
 	});
 	
