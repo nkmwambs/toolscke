@@ -162,11 +162,19 @@
 									</div>	
 									
 									<!-- Upload Files Area -->
-									<div id="uploads_dct_support_docs" for="fileupload" class="col-sm-6"><span style="font-weight: bold;"><?php echo get_phrase('upload_support_documents');?></span> 
+									<div class="form-group">
+									<div id="uploads_dct_support_docs" for="fileupload" class="col-sm-6"><span style="font-weight: bold;"><?php echo get_phrase('support_documents');?></span> 
 										<div class="">
-										   <input type="file" name="fileToUpload" id="fileToUpload">
+										<input type="file" class="form-control file2 inline btn btn-primary" multiple="1" name="fileToUpload" id="fileToUpload" data-label="<i class='glyphicon glyphicon-circle-arrow-up'></i> &nbsp;Upload Files" />
+										   <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
 										</div>
 									</div>
+								
+							</div>
+
+
+
+								
 			                    </td>
 			                    
 			                </tr>
@@ -409,7 +417,6 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 			$('#DCTReference').removeAttr('readonly');
 			//Modified by Onduso on 13/5/2020
 			$('#DCTDiv').removeClass('hidden');
-			//$('#label-toggle-switch').removeClass('hidden');
 		}
 	});
 	
