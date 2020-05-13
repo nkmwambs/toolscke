@@ -128,6 +128,7 @@
 					                        <select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
 					                            <option value="#"><?php echo get_phrase('select_voucher_type');?></option>
 												<option value="PC"><?php echo get_phrase('payment_by_cash');?></option>
+												<!-- Added the DCT option Onduso 5/13/2020 -->
 												<option value="DCT-B"><?php echo get_phrase('bank_direct_cash_transfer');?></option>
 												<option value="DCT-C"><?php echo get_phrase('petty_cash_direct_cash_transfer');?></option>
 					                            <option value="CHQ"><?php echo get_phrase('payment_by_cheque');?></option>
@@ -140,9 +141,16 @@
 			                    
 			                    
 			                    <td colspan="2">
+									<!-- CHEQUE Number -->
 			                    	<div class="col-sm-10 form-group hidden" id='ChqDiv'>
 			                    		<label for="ChqNo" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('cheque_number');?>:</span></label>
 			                    			<input class="form-control" type="text" id="ChqNo" name="ChqNo" data-validate="number,minlength[2]"  readonly="readonly"/>
+									</div>
+									
+									<!-- MPESA REFERENCE NO -->
+									<div class="col-sm-10 form-group hidden" id='DCTDiv'>
+			                    		<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('mpesa_reference_no.');?>:</span></label>
+			                    			<input class="form-control" type="text" id="DCTReference" name="DCTReference" data-validate="number,minlength[2]"  readonly="readonly"/>
 			                    	</div>
 			                    </td>
 			                    
@@ -388,9 +396,13 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 			//Modified by Onduso on 13/5/2020
 			$('#ChqDiv').removeClass('hidden');
 			$('#label-toggle-switch').removeClass('hidden');
-
 			
-			
+		}
+		if(val=='DCT-B'){
+			$('#DCTReference').removeAttr('readonly');
+			//Modified by Onduso on 13/5/2020
+			$('#DCTDiv').removeClass('hidden');
+			//$('#label-toggle-switch').removeClass('hidden');
 		}
 	});
 	
