@@ -886,7 +886,22 @@ public function multiple_vouchers($tym){
 						$bank_code = $bank_code."-0";
 					}
 					
-					$data['ChqNo'] = $this->input->post('ChqNo')."-".$bank_code;
+					//Onduso modification 14/5/2020 START
+
+					if($data['VType']=='CHQ'){
+
+					   $data['ChqNo'] = $this->input->post('ChqNo')."-".$bank_code;
+					}else if($data['VType']=='DCTB'){
+
+						$data['ChqNo'] = 'Ref-'.$this->input->post('DCTReference')."-".$bank_code;
+					}
+					else{
+						$data['ChqNo'] = $this->input->post('ChqNo')."-".$bank_code;
+					}
+
+				  //Onduso modification 14/5/2020 START
+
+					//$data['ChqNo'] = $this->input->post('ChqNo')."-".$bank_code;
 					$data['TDescription'] = $this->input->post('TDescription');
 					$data['totals'] = array_sum($this->input->post('cost'));
 					$data['unixStmp'] = time();
