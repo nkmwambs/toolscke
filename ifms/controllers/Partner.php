@@ -725,51 +725,57 @@ function reverse_cheque($param1=''){
 		$this->output->set_output(json_encode($rst));	
 }**/
 
+
+/*
+  This fuction authored by Onduso 14/5/2020
+
+*/
+
+private function get_accounts(String $condition):Array{
+
+	$expenses_or_income_accs = $this->db->where($condition)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
+	
+	return $expenses_or_income_accs;
+}
 function voucher_accounts($param1=''){
 		//Return as JSON object
 		$rst_rw ="";
 		if($param1==='CHQ'){
 			//Bank Expenses Accounts
 			$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$expenses = $this->db->where($exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $expenses;
+			$rst_rw=$this->get_accounts($exp_cond);
 		}
 		
 		if($param1==='PC'|| $param1 === 'BCHG'){
-			//PC and BC Expenses Accounts
+			//PC and BC Expenses Accounts	
 			$pc_exp_cond = "accounts.AccGrp = 0 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$pc_expenses = $this->db->where($pc_exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $pc_expenses;			
+			$rst_rw=$this->get_accounts($pc_exp_cond);
 		}
 		
 		if($param1==='CR'){
 			//Revenue accounts
 			$revenues_cond = "accounts.AccGrp = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$revenues = $this->db->where($revenues_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $revenues;			
+			$rst_rw=$this->get_accounts($revenues_cond);		
 		}
 		
 		if($param1==='PCR'){
-			//Petty Cash rebanking account
+			//Petty Cash rebanking account	
 			$rebank_cond = "accounts.AccGrp = 4 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$rebank = $this->db->where($rebank_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $rebank;	
+			$rst_rw=$this->get_accounts($rebank_cond);
 		}
 
 		//Onduso 14/5/2020 START
 		if($param1=='DCTB'){
 			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
 			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$expenses = $this->db->where($exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $expenses;
+			$rst_rw=$this->get_accounts($exp_cond);
 		}
 
 			
 		if($param1=='DCTC'){
 			//DCTC expenses accounts [PC implementation plus is_direct_cash_transfer flag]
 			$pc_exp_cond = "accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$pc_expenses = $this->db->where($pc_exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $pc_expenses;	
+			$rst_rw=$this->get_accounts($pc_exp_cond);
 		}
 		//Onduso 14/5/2020 END
 	
