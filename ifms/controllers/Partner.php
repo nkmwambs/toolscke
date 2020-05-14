@@ -728,14 +728,14 @@ function reverse_cheque($param1=''){
 function voucher_accounts($param1=''){
 		//Return as JSON object
 		$rst_rw ="";
-		if($param1==='CHQ' ||$param1==='DCT-B' ){
+		if($param1==='CHQ'){
 			//Bank Expenses Accounts
 			$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$expenses = $this->db->where($exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
 			$rst_rw = $expenses;
 		}
 		
-		if($param1==='PC'|| $param1 === 'BCHG' || $param1==='DCT-C'){
+		if($param1==='PC'|| $param1 === 'BCHG' || $param1==='DCTC'){
 			//PC and BC Expenses Accounts
 			$pc_exp_cond = "accounts.AccGrp = 0 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$pc_expenses = $this->db->where($pc_exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
@@ -754,6 +754,14 @@ function voucher_accounts($param1=''){
 			$rebank_cond = "accounts.AccGrp = 4 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$rebank = $this->db->where($rebank_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
 			$rst_rw = $rebank;	
+		}
+
+		//Onduso 14/5/2020
+		if($param1=='DCTB'){
+			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
+			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$expenses = $this->db->where($exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
+			$rst_rw = $expenses;
 		}
 	
 		$rst=array();
