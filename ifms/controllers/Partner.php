@@ -18,7 +18,8 @@ class Partner extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
-        $this->load->library('session');
+		$this->load->library('session');
+		$this->load->library('zip');
 		
        /*cache control*/
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -1335,4 +1336,37 @@ function create_budget_item($project){
  function assets(){
  	
  }
+
+
+ function dct_documents_download($fcp_number,$tym,$vnumber){
+				
+		if(file_exists('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/')){
+			$map = directory_map('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/', FALSE, TRUE);
+					
+				foreach($map as $row): 
+
+				$path = 'uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.'/'.$vnumber.'/'.$row;
+			
+				$data = file_get_contents($path);
+		
+				$this->zip->add_data($row, $data);
+			endforeach;
+
+
+	// Write the zip file to a folder on your server. Name it "my_backup.zip"
+	$this->zip->archive('downloads/my_backup.zip');
+
+	// Download the file to your desktop. Name it "my_backup.zip"
+
+	$backup_file = 'downloads_'.$this->session->login_user_id.date("Y_m_d_H_i_s").'.zip'; 
+
+	$this->zip->download($backup_file);
+
+	unlink('downloads/'.$backup_file);
+
+			
+	}
+	}	
+
+
 }
