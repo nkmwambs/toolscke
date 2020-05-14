@@ -129,8 +129,8 @@
 					                            <option value="#"><?php echo get_phrase('select_voucher_type');?></option>
 												<option value="PC"><?php echo get_phrase('payment_by_cash');?></option>
 												<!-- Added the DCT option Onduso 5/13/2020 -->
-												<option value="DCT-B"><?php echo get_phrase('bank_direct_cash_transfer');?></option>
-												<option value="DCT-C"><?php echo get_phrase('petty_cash_direct_cash_transfer');?></option>
+												<option value="DCTB"><?php echo get_phrase('direct_cash_transfer_via_bank');?></option>
+												<option value="DCTC"><?php echo get_phrase('direct_cash_transfer_via_petty_cash');?></option>
 					                            <option value="CHQ"><?php echo get_phrase('payment_by_cheque');?></option>
 					                            <option value="BCHG"><?php echo get_phrase('bank_adjustments');?></option>
 					                            <option value="CR"><?php echo get_phrase('cash_received');?></option>					                            
@@ -148,9 +148,9 @@
 									</div>
 									
 									<!-- MPESA REFERENCE NO -->
-									<div class="col-sm-10 form-group hidden" id='DCTDiv'>
+									<div class="col-sm-10 form-group hidden" id='DCT_div'>
 			                    		<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('mpesa_reference_no.');?>:</span></label>
-			                    			<input class="form-control" type="text" id="DCTReference" name="DCTReference" data-validate="number,minlength[2]"  readonly="readonly"/>
+			                    			<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required"  readonly="readonly"/>
 			                    	</div>
 			                    </td>
 			                    
@@ -162,13 +162,12 @@
 									</div>	
 									
 									<!-- Upload Files Area -->
-									<div class="form-group">
-									<div id="uploads_dct_support_docs" for="fileupload" class="col-sm-6"><span style="font-weight: bold;"><?php echo get_phrase('support_documents');?></span> 
+									<div id="uploads_dct_support_docs" for="fileupload" class="col-sm-6 hidden"><span style="font-weight: bold;"><?php echo get_phrase('support_documents');?></span> 
 										<div class="">
-										<input type="file" class="form-control file2 inline btn btn-primary" multiple="1" name="fileToUpload" id="fileToUpload" data-label="<i class='glyphicon glyphicon-circle-arrow-up'></i> &nbsp;Upload Files" />
+										<input type="file" class="form-control file2 inline btn btn-primary"   multiple="1" name="fileToUpload" id="fileToUpload" data-label="<i class='glyphicon glyphicon-circle-arrow-up'></i> &nbsp;Upload Files" />
 										   <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
 										</div>
-									</div>
+									
 								
 							</div>
 
@@ -273,8 +272,10 @@ $(document).ready(function(){
 	
 
 $('#btnPostVch,#btnPostVch_footer').click(function(e){
+
+	    var val=$('#VTypeMain').val();
 		
-		if($('#ChqNo').val()<1  &&  $("#totals").val()!=="0.00 Kes." && $('#VTypeMain').val()==='CHQ' && $('#reversal').prop('checked') === false){
+		if($('#ChqNo').val()<1  &&  $("#totals").val()!=="0.00 Kes." && val==='CHQ' && $('#reversal').prop('checked') === false){
 			//alert("Here 1");
 			$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number');?>');
 			e.preventDefault();
@@ -287,7 +288,11 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 			//alert("Here 3");
 			$('#error_msg').html('<?php echo get_phrase("cheque_numbers_cannot_be_re-used");?>');
 			e.preventDefault();		
-		}else if($('.accNos').length>0){
+		}else if($('#fileToUpload').val()=='' && (val=='DCTB' ||  val=='DCTC')){
+			
+			$('#error_msg').html('<?php echo get_phrase("Upload supporting document");?>');
+		}
+		else if($('.accNos').length>0){
 			//alert("Here 4");
 			var cnt_empty = 0;
 			$('.accNos').each(function(i){
@@ -377,7 +382,10 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 
 				           //$('#modal_ajax').modal('toggle');
 				            $('#load_voucher').html(data);
-				            //$('#voucher_count').html(parseInt($('#voucher_count').html())+1);
+
+							//added by onduso 5/13/20
+
+							location.reload(true);
 				            
 				        },
 				        error: function(jqXHR, textStatus, errorThrown) 
@@ -411,13 +419,25 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 			//Modified by Onduso on 13/5/2020
 			$('#ChqDiv').removeClass('hidden');
 			$('#label-toggle-switch').removeClass('hidden');
+			$('#DCTReference').removeClass('accNos');
+
 			
 		}
-		if(val=='DCT-B'){
+		//Modified by Onduso on 13/5/2020 start
+		if(val=='DCTB'){
 			$('#DCTReference').removeAttr('readonly');
-			//Modified by Onduso on 13/5/2020
-			$('#DCTDiv').removeClass('hidden');
+			$('#DCT_div').removeClass('hidden');
+
 		}
+		if(val=="DCTB" || val=="DCTC"){
+			$('#uploads_dct_support_docs').removeClass('hidden');
+
+		}
+		if(val=="DCTC" || val=='BCHG'|| val=='CR' || val=='PC' || val=='PCR'){
+			$('#DCTReference').removeClass('accNos');
+		}
+		//Modified by Onduso on 13/5/2020 End
+
 	});
 	
 	
