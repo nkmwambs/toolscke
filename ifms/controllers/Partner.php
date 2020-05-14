@@ -735,7 +735,7 @@ function voucher_accounts($param1=''){
 			$rst_rw = $expenses;
 		}
 		
-		if($param1==='PC'|| $param1 === 'BCHG' || $param1==='DCTC'){
+		if($param1==='PC'|| $param1 === 'BCHG'){
 			//PC and BC Expenses Accounts
 			$pc_exp_cond = "accounts.AccGrp = 0 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$pc_expenses = $this->db->where($pc_exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
@@ -756,13 +756,22 @@ function voucher_accounts($param1=''){
 			$rst_rw = $rebank;	
 		}
 
-		//Onduso 14/5/2020
+		//Onduso 14/5/2020 START
 		if($param1=='DCTB'){
 			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
 			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$expenses = $this->db->where($exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
 			$rst_rw = $expenses;
 		}
+
+			
+		if($param1=='DCTC'){
+			//DCTC expenses accounts [PC implementation plus is_direct_cash_transfer flag]
+			$pc_exp_cond = "accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$pc_expenses = $this->db->where($pc_exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
+			$rst_rw = $pc_expenses;	
+		}
+		//Onduso 14/5/2020 END
 	
 		$rst=array();
         foreach($rst_rw as $civaAcc):
