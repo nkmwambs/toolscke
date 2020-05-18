@@ -2,6 +2,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+define('DS',DIRECTORY_SEPARATOR);    
+
 class Api extends CI_Controller
 {
     private $month = '2016-06-30';
@@ -360,5 +362,51 @@ class Api extends CI_Controller
        
         $result  = $this->dashboard_model->calculate_uncleared_cash_recieved_and_chqs('CR',$dashboard_month);
         echo json_encode($result);
+    }
+
+    function move_temp_files_to_dct_document()
+	{
+        $temp_dir_name = 'uploads'.DS.'temps'.DS."17500c2244ef69d92329b2ac587351b2";
+        $voucher_date = "2018-08-01";
+        $voucher_number = "180806";
+
+		//$month_folder=substr($voucher_number,0,4);
+
+		$month_folder=date('Y-m',strtotime($voucher_date));
+
+
+		if (!file_exists('uploads'.DS.'DCT_documents'.DS . $this->session->center_id))
+			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id); 
+		
+		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder))
+			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id . DS . $month_folder);
+		
+		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
+			mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
+			
+	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
+		 
+		//$temp_file=$this->session->upload_session;
+		
+		$this->session->unset_userdata('upload_session');
+
+        foreach (new DirectoryIterator($temp_dir_name) as $fileInfo) {
+            if($fileInfo->isDot()) continue;
+            $this->rename_win($temp_dir_name.DS.$fileInfo->getFilename(),$final_file_path.DS.$fileInfo->getFilename());
+        }
+
+        // Temp folders do not unlink
+        //unlink($temp_dir_name);
+    }
+    
+    function rename_win($oldfile,$newfile) {
+        if (!rename($oldfile,$newfile)) {
+            if (copy ($oldfile,$newfile)) {
+                unlink($oldfile);
+                return TRUE;
+            }
+            return FALSE;
+        }
+        return TRUE;
     }
 }    

@@ -925,13 +925,13 @@ class Partner extends CI_Controller
 
 
 		if (!file_exists('uploads'.DS.'DCT_documents'.DS . $this->session->center_id))
-			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id, 0755); 
+			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id); 
 		
 		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder))
-			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id . DS . $month_folder, 0755,true);
+			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id . DS . $month_folder);
 		
 		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
-			mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number.DS, 0755); 
+			mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
 			
 	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
 		 
@@ -942,6 +942,7 @@ class Partner extends CI_Controller
 		return rename($temp_dir_name, $final_file_path);
 		
 	}
+	
 
 	function create_uploads_temp()
 	{
