@@ -396,7 +396,7 @@ class Api extends CI_Controller
         }
 
         // Temp folders do not unlink
-        //unlink($temp_dir_name);
+        unlink($temp_dir_name);
     }
     
     function rename_win($oldfile,$newfile) {
