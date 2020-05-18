@@ -1,6 +1,10 @@
 <!--<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css">
 <script src="<?php echo base_url();?>assets/js/jquery-1.11.0.min.js"></script>-->
 
+        <!--Dropzone CDN for CSS  -->
+
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/js/dropzone/dist/min/dropzone.min.css">
+ 
 		<!-- Bootstrap CDN -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		
@@ -25,7 +29,10 @@
 		<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
 		<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
 		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
-		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+        <script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+        
+        <!-- JS CDN for dropzone -->
+        <script src="<?php echo base_url();?>assets/js/dropzone/dist/min/dropzone.min.js" type="text/javascript"></script>
 
 
 
