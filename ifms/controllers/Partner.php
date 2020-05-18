@@ -919,8 +919,6 @@ class Partner extends CI_Controller
 	function move_temp_files_to_dct_document($temp_dir_name,$voucher_date, $voucher_number)
 	{
 
-		//$month_folder=substr($voucher_number,0,4);
-
 		$month_folder=date('Y-m',strtotime($voucher_date));
 
 
@@ -930,16 +928,12 @@ class Partner extends CI_Controller
 		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder))
 			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id . DS . $month_folder);
 		
-		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
-			mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
-			
-	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
-		 
-		//$temp_file=$this->session->upload_session;
+		// Do not create the $voucher_number directory otherwise an access denied error will occur
+	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder.DS.$voucher_number;
 		
 		$this->session->unset_userdata('upload_session');
 
-		return rename($temp_dir_name, $final_file_path);
+        return rename($temp_dir_name,$final_file_path);
 		
 	}
 	

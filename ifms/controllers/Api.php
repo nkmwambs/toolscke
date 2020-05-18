@@ -366,11 +366,9 @@ class Api extends CI_Controller
 
     function move_temp_files_to_dct_document()
 	{
-        $temp_dir_name = 'uploads'.DS.'temps'.DS."17500c2244ef69d92329b2ac587351b2";
+        $temp_dir_name = 'uploads'.DS.'temps'.DS."1abc0f5c22409b0e92a8c1b81377cea2";
         $voucher_date = "2018-08-01";
-        $voucher_number = "180806";
-
-		//$month_folder=substr($voucher_number,0,4);
+        $voucher_number = "180807";
 
 		$month_folder=date('Y-m',strtotime($voucher_date));
 
@@ -381,22 +379,13 @@ class Api extends CI_Controller
 		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder))
 			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id . DS . $month_folder);
 		
-		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
-			mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
-			
-	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
-		 
-		//$temp_file=$this->session->upload_session;
+		
+	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder;
 		
 		$this->session->unset_userdata('upload_session');
 
-        foreach (new DirectoryIterator($temp_dir_name) as $fileInfo) {
-            if($fileInfo->isDot()) continue;
-            $this->rename_win($temp_dir_name.DS.$fileInfo->getFilename(),$final_file_path.DS.$fileInfo->getFilename());
-        }
-
-        // Temp folders do not unlink
-        unlink($temp_dir_name);
+        return rename($temp_dir_name,$final_file_path.DS.$voucher_number);
+        
     }
     
     function rename_win($oldfile,$newfile) {
