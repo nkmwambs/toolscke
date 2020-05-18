@@ -661,7 +661,7 @@ public function multiple_vouchers($tym,$project){
 		
 		$dct_records[$fcp_no]['total_dct_expense'] = array_sum($dct_records[$fcp_no]['spread']);
 		
-		if(array_search($account_expense_for_fcp['AccText'],$dct_accounts) >= 0){
+		if(array_search($account_expense_for_fcp['AccText'],$dct_accounts) !== 0 && !array_search($account_expense_for_fcp['AccText'],$dct_accounts)){
 			$dct_accounts[] = $account_expense_for_fcp['AccText'];
 		}
 		
