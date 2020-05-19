@@ -1,5 +1,9 @@
 <?php
-//print_r($fcps);
+//print_r($direct_cash_transfers);
+
+// $arr = [34,55,65];
+
+// echo array_search(70, $arr);
 ?>
 <div class='row'>
     <div class='col-xs-12'>
