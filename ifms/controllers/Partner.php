@@ -955,37 +955,17 @@ class Partner extends CI_Controller
 		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder))
 			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id . DS . $month_folder);
 		
-		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
-			mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
+		// if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
+		// 	mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
 			
 	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
 		 
-		//$temp_file=$this->session->upload_session;
-		
 		$this->session->unset_userdata('upload_session');
 
-		//return rename($temp_dir_name, $final_file_path);
-
-		foreach (new DirectoryIterator($temp_dir_name) as $fileInfo) {
-            if($fileInfo->isDot()) continue;
-            $this->rename_files($temp_dir_name.DS.$fileInfo->getFilename(),$final_file_path.DS.$fileInfo->getFilename());
-        }
-
-		//unlink($temp_dir_name);
+		return rename($temp_dir_name, $final_file_path);
 		
 	}
-
-	function rename_files($oldfile,$newfile) {
-        if (!rename($oldfile,$newfile)) {
-            if (copy ($oldfile,$newfile)) {
-                unlink($oldfile);
-                return TRUE;
-            }
-            return FALSE;
-        }
-        return TRUE;
-    }
-
+	
 	function post_voucher($param1 = '')
 	{
 		if ($this->session->userdata('admin_login') != 1)
