@@ -256,7 +256,7 @@ tr.shown td.details-control {
 														$cond_inc = "(AccNo='2000' OR AccNo='2001')  AND hID=".$rw['hID'];
 														$sum_pc_income+=$this->db->select_sum('Cost')->where($cond_inc)->get('voucher_body')->row()->Cost;
 														
-														$cond_pay = "(VType='PC' OR VType='PCR') AND hID=".$rw['hID'];
+														$cond_pay = "(VType='PC' OR VType='PCR' OR VType='DCTC') AND hID=".$rw['hID'];
 														$sum_pc_payment+=$this->db->select_sum('Cost')->where($cond_pay)->get('voucher_body')->row()->Cost;
 														
 													endforeach;
@@ -348,7 +348,7 @@ tr.shown td.details-control {
 													<td id="<?=$row['hID'];?>"></td>									
 													<?php
 														
-														if($row['VType']==='CHQ' || $row['VType']==='BCHG' || $row['VType']==='CR'){
+														if($row['VType']==='CHQ' || $row['VType']==='BCHG' || $row['VType']==='CR' || $row['VType'] === 'DCTB'){
 															$chk = 'checked';
 																if($row['ChqState']==='1'){
 																	$chk = "";
@@ -385,7 +385,18 @@ tr.shown td.details-control {
 													?>
 		
 													<td class="tdate"><?php echo $row['TDate'];?></td>
-													<td><?=$row['VType'];?></td>												
+													<td>
+													
+														<?php 
+															$path = 'uploads/dct_documents/'.$this->session->center_id.'/'.date('Y-m',$tym).'/'.$row['VNumber'].'/';
+
+															if(file_exists($path) && (new \FilesystemIterator($path))->valid() ){?>
+															
+																<a href='<?php echo base_url();?>ifms.php/partner/dct_documents_download/<?= $this->session->center_id;?>/<?=$tym;?>/<?=$row['VNumber'];?>' ><?=$row['VType'];?></a>
+															<?php }else{?>
+																<span><?=$row['VType'];?></span>
+														<?php }?>
+													</td>												
 													
 													<td><?php echo $row['Payee'];?></td>
 													<td>
@@ -415,7 +426,7 @@ tr.shown td.details-control {
 														//if($row['VType']==='CR'||$row['VType']==='PCR') $cr = $row['totals'];
 														//if($row['VType']==='CHQ' || $row['VType'] ==='BCHG') $chq = $row['totals'];
 														if($row['VType']==='CR'||$row['VType']==='PCR') $cr = $this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost;
-														if($row['VType']==='CHQ' || $row['VType'] ==='BCHG') $chq = $this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost;;
+														if($row['VType']==='CHQ' || $row['VType'] ==='BCHG' || $row['VType'] === 'DCTB') $chq = $this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost;;
 														
 														$bank_balance += $cr-$chq; 
 														
@@ -435,7 +446,7 @@ tr.shown td.details-control {
 														foreach($get_body as $rows):
 															
 															if($rows['AccNo']==='2000' || $rows['AccNo']==='2001') $pcr = $rows['Cost'];
-															if($rows['VType']==='PC' || $rows['VType']==='PCR') $pc = $rows['Cost'];
+															if($rows['VType']==='PC' || $rows['VType']==='PCR' || $rows['VType'] === 'DCTC') $pc = $rows['Cost'];
 															$pc_balance += $pcr-$pc; 
 													?>
 														<td><?php echo number_format($pcr,2);?></td>
