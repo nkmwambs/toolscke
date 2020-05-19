@@ -1,5 +1,4 @@
 <hr />
-<?php echo FCPATH ?>
 <div id="load_voucher">
 
 	<div class="row">

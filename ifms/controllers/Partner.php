@@ -1499,10 +1499,6 @@ class Partner extends CI_Controller
 		//$page_data['page_name']  = 'civ_report';
 		$page_data['page_title'] = get_phrase('interventions_report');
 		$this->load->view('backend/index', $page_data);
-	}
-	//$page_data['page_name']  = 'civ_report';
-    $page_data['page_title'] = get_phrase('interventions_report');
-    $this->load->view('backend/index', $page_data);	 	
  } 
  
  function assets(){
