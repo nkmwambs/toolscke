@@ -1532,6 +1532,8 @@ class Partner extends CI_Controller
 
 	unlink('downloads/'.$backup_file);
 
+	unlink('downloads/my_backup_'.$this->session->login_user_id.'.zip');	
+
 			
 	}
 	}	
