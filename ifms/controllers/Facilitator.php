@@ -314,7 +314,7 @@ function ziparchive($param1="",$param2=""){
 
 			
 			// Write the zip file to a folder on your server. Name it "my_backup.zip"
-			$this->zip->archive('downloads/my_backup.zip');
+			$this->zip->archive('downloads/my_backup_'.$this->session->login_user_id.'.zip');
 			
 			// Download the file to your desktop. Name it "my_backup.zip"
 			
