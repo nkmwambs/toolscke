@@ -43,7 +43,7 @@ class Login extends CI_Controller {
 		// Google Project API Credentials
 		$clientId = '1073833704230-clfvc3d133a3osqfdck73out6ua1ap7d.apps.googleusercontent.com';
         $clientSecret = '83-EyPukIshDLdn8DclS2GGx';
-        $redirectUrl = 'https://www.compassionkenya.com/tools';
+        $redirectUrl = 'https://www.compassionkenya.com/toolscke';
 		
 		// Google Client Configuration
         $gClient = new Google_Client();
