@@ -915,6 +915,31 @@ class Partner extends CI_Controller
 			
 		}
 	}
+	function create_uploads_temp()
+	{
+
+		$string = $this->session->login_user_id . date('Y-m-d');//.random_int(10,1000000);
+
+		$hash = md5($string);
+
+		$storeFolder = 'uploads'.DS.'temps'.DS . $hash;
+
+		if (
+			is_array($this->upload_files($storeFolder)) &&
+			count($this->upload_files($storeFolder)) > 0
+		) {
+			$info = ['temp_id' => $hash];
+
+			$files_array = array_merge($this->upload_files($storeFolder), $info);
+
+			if (!$this->session->has_userdata('upload_session')) {
+				$this->session->set_userdata('upload_session', $hash);
+			}
+			echo json_encode($files_array);
+		} else {
+			echo 0;
+		}
+	}
 
 	function move_temp_files_to_dct_document($temp_dir_name,$voucher_date, $voucher_number)
 	{
@@ -939,36 +964,27 @@ class Partner extends CI_Controller
 		
 		$this->session->unset_userdata('upload_session');
 
-		return rename($temp_dir_name, $final_file_path);
+		//return rename($temp_dir_name, $final_file_path);
+
+		foreach (new DirectoryIterator($temp_dir_name) as $fileInfo) {
+            if($fileInfo->isDot()) continue;
+            $this->rename_files($temp_dir_name.DS.$fileInfo->getFilename(),$final_file_path.DS.$fileInfo->getFilename());
+        }
+
+		//unlink($temp_dir_name);
 		
 	}
-	
 
-	function create_uploads_temp()
-	{
-
-		$string = $this->session->login_user_id . date('Y-m-d').random_int(10,1000000);
-
-		$hash = md5($string);
-
-		$storeFolder = 'uploads'.DS.'temps'.DS . $hash;
-
-		if (
-			is_array($this->upload_files($storeFolder)) &&
-			count($this->upload_files($storeFolder)) > 0
-		) {
-			$info = ['temp_id' => $hash];
-
-			$files_array = array_merge($this->upload_files($storeFolder), $info);
-
-			if (!$this->session->has_userdata('upload_session')) {
-				$this->session->set_userdata('upload_session', $hash);
-			}
-			echo json_encode($files_array);
-		} else {
-			echo 0;
-		}
-	}
+	function rename_files($oldfile,$newfile) {
+        if (!rename($oldfile,$newfile)) {
+            if (copy ($oldfile,$newfile)) {
+                unlink($oldfile);
+                return TRUE;
+            }
+            return FALSE;
+        }
+        return TRUE;
+    }
 
 	function post_voucher($param1 = '')
 	{

@@ -246,52 +246,6 @@
 					</div>
 					<INPUT type="hidden" id="hidden" value="" />
 
-
-
-					<!-- </form>
-
-					<div class="row">
-						<div class="col-sm-12">
-							<form id="myDropzone" action="<?= base_url() ?>ifms.php?/partner/create_uploads_temp" class="dropzone" method='post'>
-								
-							    <div class="dropzone-previews"></div>
-								<div class="fallback"> -->
-					<!-- this is the fallback if JS isn't working -->
-					<!-- <input name="fileToUpload" type="file" multiple />
-								</div>
-
-							</form> -->
-
-					<!-- <script>
-						$(document).ready(function() {
-
-
-							var myDropzone = new Dropzone("#myDropzone", {
-								url: "<?= base_url() ?>ifms.php?/partner/create_uploads_temp",
-								paramName: "fileToUpload", // The name that will be used to transfer the file
-								maxFilesize: 5, // MB
-								uploadMultiple: true,
-								acceptedFiles: 'image/*,application/pdf',
-							});
-							myDropzone.on("complete", function(file) {
-								//myDropzone.removeFile(file);
-								//myDropzone.removeAllFiles();
-								//alert(myDropzone.getAcceptedFiles());
-							});
-
-							myDropzone.on("success", function(file, response) {
-									if (response == 0) {
-										alert('Error in uploading files');
-										return false;
-									}
-
-								}
-
-							);
-
-						}); -->
-					</script>
-
 				</div>
 			</div>
 
@@ -318,7 +272,7 @@
 </div>
 
 <script type="text/javascript">
-	
+	//Added by Onduso on 15/3/2020
 
 	$(document).ready(function() {
 
@@ -327,6 +281,7 @@
 			paramName: "fileToUpload", // The name that will be used to transfer the file
 			maxFilesize: 5, // MB
 			uploadMultiple: true,
+			
 			acceptedFiles: 'image/*,application/pdf',
 		});
 
@@ -341,7 +296,7 @@
 			}
 
 		);
-
+       //Go button
 		$("#go_btn").click(function() {
 			var VNum = $("#VNumber").val();
 
