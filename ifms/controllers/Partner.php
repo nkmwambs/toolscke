@@ -950,16 +950,16 @@ class Partner extends CI_Controller
 		$month_folder=date('Y-m',strtotime($voucher_date));
 
 
-		if (!file_exists('uploads'.DS.'DCT_documents'.DS . $this->session->center_id))
-			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id); 
+		if (!file_exists('uploads'.DS.'dct_documents'.DS . $this->session->center_id))
+			mkdir('uploads'.DS.'dct_documents'.DS . $this->session->center_id); 
 		
-		if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder))
-			mkdir('uploads'.DS.'DCT_documents'.DS . $this->session->center_id . DS . $month_folder);
+		if (!file_exists('uploads'.DS.'dct_documents'.DS. $this->session->center_id . DS .$month_folder))
+			mkdir('uploads'.DS.'dct_documents'.DS . $this->session->center_id . DS . $month_folder);
 		
 		// if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
 		// 	mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
 			
-	    $final_file_path='uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
+	    $final_file_path='uploads'.DS.'dct_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
 		 
 		$this->session->unset_userdata('upload_session');
 
