@@ -916,6 +916,53 @@ class Partner extends CI_Controller
 			
 		}
 	}
+
+	private function get_bank_code(){
+
+		if ($this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->num_rows() > 0) {
+
+			return $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->row()->bankID;
+		} else {
+		
+			return $bank_code = 0;
+		}
+	}
+
+	function is_reference_number_exist($ref_number_from_post){
+
+		$bank_code=$this->get_bank_code();
+		//	Ref-678909-1
+		$reference_number_in_db=trim($ref_number_from_post).'-'.$bank_code;	
+
+		$result=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
+		
+		if(!empty($result)){
+			echo '1';
+		}
+		else{
+			echo '0';
+		}
+	
+	}
+	function remove_dct_files_in_temp($file){
+
+		$string = $this->session->login_user_id . date('Y-m-d');//.random_int(10,1000000);
+		$hash = md5($string);
+
+		$storeFolder = 'uploads'.DS.'temps'.DS . $hash;
+
+		foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+			if($fileInfo->isDot()) continue;
+			if($file==$fileInfo){
+				unlink($file);
+
+			}
+            //$this->rename_win($temp_dir_name.DS.$fileInfo->getFilename(),$final_file_path.DS.$fileInfo->getFilename());
+        }
+
+		
+
+	}
 	function create_uploads_temp()
 	{
 
@@ -1010,7 +1057,7 @@ class Partner extends CI_Controller
 			$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
 		} else if ($data['VType'] == 'DCTB') {
 
-			$data['ChqNo'] = 'Ref-' . $this->input->post('DCTReference') . "-" . $bank_code;
+			$data['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
 		} else {
 			$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
 		}
