@@ -2,30 +2,55 @@
 <?php
   // $result=$this->db->get_where('voucher_header', array('ChqNo'=>647487))->result_array();
 
-  if ($this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->num_rows() > 0) {
+//   if ($this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->num_rows() > 0) {
 
-	$bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->row()->bankID;
-} else {
+// 	$bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->row()->bankID;
+// } else {
 
-	$rmk = get_phrase('bank_details_missing');
+// 	$rmk = get_phrase('bank_details_missing');
 
-	$bank_code = 0;
-}
+// 	$bank_code = 0;
+// }
 
-  $reference_no_from_post='y678qT';
+//   $reference_no_from_post='y678qT';
 
-  $reference_no_in_db=$reference_no_from_post.'-'.$bank_code;
+//   $reference_no_in_db=$reference_no_from_post.'-'.$bank_code;
 
 
 
-   $result=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_no_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
-   print_r($result);
-   if(!empty($result)){
-	echo '1';
-}
-else{
-	echo '0';
-}
+//    $result=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_no_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
+//    print_r($result);
+//    if(!empty($result)){
+// 	echo '1';
+// }
+// else{
+// 	echo '0';
+// }
+
+//$bank_code=$this->get_bank_code();
+		//	Ref-678909-1
+		$reference_number_in_db='y678qT-1';	
+
+		$voucher_number_in_db=1906187;	
+
+		$result_reference_no=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
+		
+		$result_voucher_no=$this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber'=>$voucher_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('VNumber');
+
+		print_r($result_reference_no);
+		print_r($result_voucher_no);
+		if((!empty($result_reference_no)) && (!empty($result_voucher_no))){
+			echo '1';//both reference and voucher number exist
+		}
+		else if(!empty($result_reference_no) && empty($result_voucher_no)){
+			echo '2';//reference number exist
+		}
+		else if(empty($result_voucher_no) && !empty($result_reference_no)){
+			echo '3';//voucher number exist
+		}
+		else{
+			echo '0';
+		}
 ?>
 <div id="load_voucher">
 
@@ -399,6 +424,7 @@ else{
 			/** check if the reference number exists*/
 
 			var reference_number = $('#DCTReference').val();
+			var voucher_number = $('#Generated_VNumber').val();
 
 			// var is_reference_no_exist = function() {
 			// 	var tmp = null;
@@ -451,7 +477,7 @@ else{
 				} else {
                     //Added by Onduso on 20/5/ 2020 start
 					/**Post Voucher only when no duplicate number exists */
-					var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number;
+					var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number+'/'+voucher_number;
 					$.ajax({
 						async: false,
 						type: "GET",
@@ -460,12 +486,35 @@ else{
 							$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
 						},
 						success: function(data) {
-							tmp = data;
+                            /*
+							1) if 1 returned: both Reference and voucher number exist
 
+							2) if 2 returned:reference number exist
+
+							3) if 3 returned: voucher number exist
+
+							4) if 0 returned: No duplicate voucher and reference numbers exist
+							
+							*/
+							alert(data);
 							if (data == 1) {
+								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and'+voucher_number+' <?php echo get_phrase('already_exist'); ?>');
+								$('#DCTReference').css({'border': '3px solid red'});
+								return;
+							}
+							else if(data==2){
+
 								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
 								$('#DCTReference').css({'border': '3px solid red'});
 								return;
+
+							}
+							else if(data==3){
+								
+								$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+								$('#Generated_VNumber').css({'border': '3px solid red'});
+								return;
+
 							}
 							$('#error_msg').html('');
 
@@ -478,7 +527,8 @@ else{
 			} else {
 				//alert("Here 5");
 				//Added by Onduso on 20/5/ 2020 start
-				var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number;
+					/**Post Voucher only when no duplicate number exists */
+					var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number+'/'+voucher_number;
 					$.ajax({
 						async: false,
 						type: "GET",
@@ -487,18 +537,42 @@ else{
 							$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
 						},
 						success: function(data) {
+                            /*
+							1) if data==1 returned: both Reference and voucher number exist
 
+							2) if data==2 returned:reference number exist
+
+							3) if data==3 returned: voucher number exist
+
+							4) if data==0 returned: No duplicate voucher and reference numbers exist
+							
+							*/
+							alert(data);
 							if (data == 1) {
-								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('has_already_exist'); ?>');
+								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and'+voucher_number+' <?php echo get_phrase('already_exist'); ?>');
+								$('#DCTReference').css({'border': '3px solid red'});
 								return;
 							}
-							//Post voucher
+							else if(data==2){
+
+								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
+								$('#DCTReference').css({'border': '3px solid red'});
+								return;
+
+							}
+							else if(data==3){
+								
+								$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+								$('#Generated_VNumber').css({'border': '3px solid red'});
+								return;
+
+							}
 							$('#error_msg').html('');
+
 							post_using_ajax();
 						
 					  }
 					});
-
 					//Added by Onduso on 20/5/ 2020 End
 				
 

@@ -928,22 +928,33 @@ class Partner extends CI_Controller
 		}
 	}
 
-	function is_reference_number_exist($ref_number_from_post){
+	function is_reference_number_exist($ref_number_from_post, $voucher_number_from_post){
 
 		$bank_code=$this->get_bank_code();
 		//	Ref-678909-1
 		$reference_number_in_db=trim($ref_number_from_post).'-'.$bank_code;	
 
-		$result=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
+		$voucher_number_in_db=trim($voucher_number_from_post);	
+
+		$result_reference_no=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
 		
-		if(!empty($result)){
-			echo '1';
+		$result_voucher_no=$this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber'=>$voucher_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('VNumber');
+
+		if((!empty($result_reference_no)) && (!empty($result_voucher_no))){
+			echo '1';//both reference and voucher number exist
+		}
+		else if(!empty($result_reference_no) && empty($result_voucher_no)){
+			echo '2';//reference number exist
+		}
+		else if(!empty($result_voucher_no) && empty($result_reference_no)){
+			echo '3';//voucher number exist
 		}
 		else{
 			echo '0';
 		}
 	
 	}
+	
 	function remove_dct_files_in_temp($file){
 
 		$string = $this->session->login_user_id . date('Y-m-d');//.random_int(10,1000000);
