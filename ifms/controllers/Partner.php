@@ -13,7 +13,7 @@ DEFINE('DS', DIRECTORY_SEPARATOR);
 
 class Partner extends CI_Controller
 {
-   
+
 
 	function __construct()
 	{
@@ -21,8 +21,8 @@ class Partner extends CI_Controller
 		$this->load->database();
 		$this->load->library('session');
 		$this->load->library('zip');
-		
-	     
+
+
 
 		/*cache control*/
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -893,7 +893,7 @@ class Partner extends CI_Controller
 			$modified_path = implode(DS, $path);
 
 			if (!file_exists($modified_path)) {
-				mkdir($modified_path,0777);
+				mkdir($modified_path, 0777);
 			}
 		}
 
@@ -902,86 +902,102 @@ class Partner extends CI_Controller
 			for ($i = 0; $i < count($_FILES['fileToUpload']['name']); $i++) {
 				$tempFile = $_FILES['fileToUpload']['tmp_name'][$i];
 
-				 $targetPath = BASEPATH . DS . '..' . DS . $storeFolder . DS;
-
-				//$targetPath = FCPATH . $storeFolder . DS;
-
+				$targetPath = BASEPATH . DS . '..' . DS . $storeFolder . DS;
 				$targetFile =  $targetPath . $_FILES['fileToUpload']['name'][$i];
 
 				move_uploaded_file($tempFile, $targetFile);
 			}
 
 			return $_FILES;
-
-			
 		}
 	}
-
-	private function get_bank_code(){
+	/** 
+	 * @author: Onduso
+	 * @date: 16/5/2020
+	 */
+	private function get_bank_code()
+	{
 
 		if ($this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->num_rows() > 0) {
 
 			return $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->row()->bankID;
 		} else {
-		
+
 			return $bank_code = 0;
 		}
 	}
+	/** 
+	 * @author: Onduso
+	 * @date: 16/5/2020
+	 */
+	function is_reference_number_exist($ref_number_from_post, $voucher_number_from_post)
+	{
 
-	function is_reference_number_exist($ref_number_from_post, $voucher_number_from_post){
+		$bank_code = $this->get_bank_code();
+		$reference_number_in_db = trim($ref_number_from_post) . '-' . $bank_code;
+		$voucher_number_in_db = trim($voucher_number_from_post);
 
-		$bank_code=$this->get_bank_code();
-		//	Ref-678909-1
-		$reference_number_in_db=trim($ref_number_from_post).'-'.$bank_code;	
+		/*
+		   Get the reference number and voucher numbers and then:
+		   -Return 1 if ref_no and voucher_number exist
+		   -Return 2 if ref_no exists and voucher_number does not exist
+		   -Return 3 if ref_no does not exist and voucher number exists
+		   -Return 0 if ref_no and voucher_number do not exist
+		*/
+		$result_reference_no = $this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo' => $reference_number_in_db, 'icpNo' => $this->session->center_id))->row_array('ChqNo');
+		$result_voucher_no = $this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber' => $voucher_number_in_db, 'icpNo' => $this->session->center_id))->row_array('VNumber');
 
-		$voucher_number_in_db=trim($voucher_number_from_post);	
-
-		$result_reference_no=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
-		
-		$result_voucher_no=$this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber'=>$voucher_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('VNumber');
-
-		if((!empty($result_reference_no)) && (!empty($result_voucher_no))){
-			echo '1';//both reference and voucher number exist
-		}
-		else if(!empty($result_reference_no) && empty($result_voucher_no)){
-			echo '2';//reference number exist
-		}
-		else if(!empty($result_voucher_no) && empty($result_reference_no)){
-			echo '3';//voucher number exist
-		}
-		else{
+		if ((!empty($result_reference_no)) && (!empty($result_voucher_no))) {
+			echo '1';
+		} else if (!empty($result_reference_no) && empty($result_voucher_no)) {
+			echo '2';
+		} else if (!empty($result_voucher_no) && empty($result_reference_no)) {
+			echo '3';
+		} else {
 			echo '0';
 		}
-	
 	}
-	
-	function remove_dct_files_in_temp($file){
+	/** 
+	 * @author: Onduso
+	 * @date: 16/5/2020
+	 */
+	function remove_dct_files_in_temp($file)
+	{
 
-		$string = $this->session->login_user_id . date('Y-m-d');//.random_int(10,1000000);
-		$hash = md5($string);
+		//Hash the folder to make user depended
+		$hash_folder_name = $this->session->login_user_id . date('Y-m-d'); //.random_int(10,1000000);
+		$hash = md5($hash_folder_name);
 
-		$storeFolder = 'uploads'.DS.'temps'.DS . $hash;
+		//Folder path
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash;
 
+		//Loop the $hash directory and delete the selected file
+		$data = urldecode($file);
 		foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
-			if($fileInfo->isDot()) continue;
-			if($file==$fileInfo){
-				unlink($file);
+			if ($fileInfo->isDot()) continue;
+			
+			//$fileInfo->getFilename();
 
+			if ($fileInfo == $data) {
+
+				unlink($storeFolder . DS . $fileInfo);
+				echo $fileInfo; //for ajax use
 			}
-            //$this->rename_win($temp_dir_name.DS.$fileInfo->getFilename(),$final_file_path.DS.$fileInfo->getFilename());
-        }
-
-		
-
+		}
 	}
+	/** 
+	 * @author: Onduso
+	 * @date: 16/5/2020
+	 */
 	function create_uploads_temp()
 	{
 
-		$string = $this->session->login_user_id . date('Y-m-d');//.random_int(10,1000000);
+		//Hash the folder to make user depended
+		$hash_folder_name = $this->session->login_user_id . date('Y-m-d'); //.random_int(10,1000000);
+		$hash = md5($hash_folder_name);
 
-		$hash = md5($string);
-
-		$storeFolder = 'uploads'.DS.'temps'.DS . $hash;
+		//Folder for temp and call the upload_files method to temperarily hold files on server
+		$storeFolder = 'uploads' . DS . 'temps' . DS . $hash;
 
 		if (
 			is_array($this->upload_files($storeFolder)) &&
@@ -999,32 +1015,34 @@ class Partner extends CI_Controller
 			echo 0;
 		}
 	}
-
-	function move_temp_files_to_dct_document($temp_dir_name,$voucher_date, $voucher_number)
+	/** 
+	 * @author: Onduso
+	 * @date: 16/5/2020
+	 */
+	function move_temp_files_to_dct_document($temp_dir_name, $voucher_date, $voucher_number)
 	{
 
 		//$month_folder=substr($voucher_number,0,4);
 
-		$month_folder=date('Y-m',strtotime($voucher_date));
+		$month_folder = date('Y-m', strtotime($voucher_date));
 
 
-		if (!file_exists('uploads'.DS.'dct_documents'.DS . $this->session->center_id))
-			mkdir('uploads'.DS.'dct_documents'.DS . $this->session->center_id); 
-		
-		if (!file_exists('uploads'.DS.'dct_documents'.DS. $this->session->center_id . DS .$month_folder))
-			mkdir('uploads'.DS.'dct_documents'.DS . $this->session->center_id . DS . $month_folder);
-		
+		if (!file_exists('uploads' . DS . 'dct_documents' . DS . $this->session->center_id))
+			mkdir('uploads' . DS . 'dct_documents' . DS . $this->session->center_id);
+
+		if (!file_exists('uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder))
+			mkdir('uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder);
+
 		// if (!file_exists('uploads'.DS.'DCT_documents'.DS. $this->session->center_id . DS .$month_folder . DS. $voucher_number))
 		// 	mkdir('uploads'.DS.'DCT_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number); 
-			
-	    $final_file_path='uploads'.DS.'dct_documents'.DS. $this->session->center_id .DS. $month_folder .DS. $voucher_number;
-		 
+
+		$final_file_path = 'uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder . DS . $voucher_number;
+
 		$this->session->unset_userdata('upload_session');
 
 		return rename($temp_dir_name, $final_file_path);
-		
 	}
-	
+
 	function post_voucher($param1 = '')
 	{
 		if ($this->session->userdata('admin_login') != 1)
@@ -1085,6 +1103,8 @@ class Partner extends CI_Controller
 
 		if ($chk_obj->num_rows() == 0) {
 
+			$this->db->trans_start();
+
 			$this->db->insert('voucher_header', $data);
 
 			//Last id
@@ -1125,13 +1145,22 @@ class Partner extends CI_Controller
 			//$this->session->set_flashdata('flash_message',get_phrase('voucher_posted_successfully'));
 			$data['msg'] = get_phrase('voucher_posted_successfully');
 
-			//Move file to dct_document folder
-			$hashed_folder=$this->session->upload_session;
-			$temp_dir_name='uploads'.DS.'temps'.DS.$hashed_folder;
-			$voucher_number=$this->input->post('VNumber');
-			$voucher_date=$this->input->post('TDate');
-			
-			$this->move_temp_files_to_dct_document($temp_dir_name,$voucher_date, $voucher_number);
+			$this->db->trans_complete();
+
+			//Move file to dct_document folder only when database insert is completed successful
+			if ($this->db->trans_status() === TRUE) {
+				
+				$hashed_folder = $this->session->upload_session;
+				$temp_dir_name = 'uploads' . DS . 'temps' . DS . $hashed_folder;
+				$voucher_number = $this->input->post('VNumber');
+				$voucher_date = $this->input->post('TDate');
+
+				$this->move_temp_files_to_dct_document($temp_dir_name, $voucher_date, $voucher_number);
+			}
+			else{
+				//input error to log file
+
+			}
 		}
 
 
@@ -1557,41 +1586,39 @@ class Partner extends CI_Controller
 		//$page_data['page_name']  = 'civ_report';
 		$page_data['page_title'] = get_phrase('interventions_report');
 		$this->load->view('backend/index', $page_data);
- } 
- 
- function assets(){
- 	
- }
+	}
+
+	function assets()
+	{
+	}
 
 
- function dct_documents_download($fcp_number,$tym,$vnumber){
-				
-		if(file_exists('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/')){
-			$map = directory_map('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/', FALSE, TRUE);
-					
-				foreach($map as $row): 
+	function dct_documents_download($fcp_number, $tym, $vnumber)
+	{
 
-				$path = 'uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.'/'.$vnumber.'/'.$row;
-			
+		if (file_exists('uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . $vnumber . '/')) {
+			$map = directory_map('uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . $vnumber . '/', FALSE, TRUE);
+
+			foreach ($map as $row) :
+
+				$path = 'uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . '/' . $vnumber . '/' . $row;
+
 				$data = file_get_contents($path);
-		
+
 				$this->zip->add_data($row, $data);
 			endforeach;
 
 
-	// Write the zip file to a folder on your server. Name it "my_backup.zip"
-	$this->zip->archive('downloads/my_backup_'.$this->session->login_user_id.'.zip');
+			// Write the zip file to a folder on your server. Name it "my_backup.zip"
+			$this->zip->archive('downloads/my_backup_' . $this->session->login_user_id . '.zip');
 
-	// Download the file to your desktop. Name it "my_backup.zip"
+			// Download the file to your desktop. Name it "my_backup.zip"
 
-	$backup_file = 'downloads_'.$this->session->login_user_id.date("Y_m_d_H_i_s").'.zip'; 
+			$backup_file = 'downloads_' . $this->session->login_user_id . date("Y_m_d_H_i_s") . '.zip';
 
-	$this->zip->download($backup_file);
+			$this->zip->download($backup_file);
 
-	unlink('downloads/'.$backup_file);
-			
+			unlink('downloads/' . $backup_file);
+		}
 	}
-	}	
-
-
 }

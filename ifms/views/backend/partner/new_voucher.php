@@ -1,56 +1,25 @@
 <hr />
 <?php
-  // $result=$this->db->get_where('voucher_header', array('ChqNo'=>647487))->result_array();
 
-//   if ($this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->num_rows() > 0) {
+$reference_number_in_db = 'y678qT-1';
 
-// 	$bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->center_id))->row()->bankID;
-// } else {
+$voucher_number_in_db = 1906187;
 
-// 	$rmk = get_phrase('bank_details_missing');
+$result_reference_no = $this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo' => $reference_number_in_db, 'icpNo' => $this->session->center_id))->row_array('ChqNo');
 
-// 	$bank_code = 0;
-// }
+$result_voucher_no = $this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber' => $voucher_number_in_db, 'icpNo' => $this->session->center_id))->row_array('VNumber');
 
-//   $reference_no_from_post='y678qT';
-
-//   $reference_no_in_db=$reference_no_from_post.'-'.$bank_code;
-
-
-
-//    $result=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_no_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
-//    print_r($result);
-//    if(!empty($result)){
-// 	echo '1';
-// }
-// else{
-// 	echo '0';
-// }
-
-//$bank_code=$this->get_bank_code();
-		//	Ref-678909-1
-		$reference_number_in_db='y678qT-1';	
-
-		$voucher_number_in_db=1906187;	
-
-		$result_reference_no=$this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo'=>$reference_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('ChqNo');
-		
-		$result_voucher_no=$this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber'=>$voucher_number_in_db, 'icpNo'=>$this->session->center_id))->row_array('VNumber');
-
-		print_r($result_reference_no);
-		print_r($result_voucher_no);
-		if((!empty($result_reference_no)) && (!empty($result_voucher_no))){
-			echo '1';//both reference and voucher number exist
-		}
-		else if(!empty($result_reference_no) && empty($result_voucher_no)){
-			echo '2';//reference number exist
-		}
-		else if(empty($result_voucher_no) && !empty($result_reference_no)){
-			echo '3';//voucher number exist
-		}
-		else{
-			echo '0';
-		}
+print_r($result_reference_no);
+print_r($result_voucher_no);
+if ((!empty($result_reference_no)) && (!empty($result_voucher_no))) {
+	echo '1'; //both reference and voucher number exist
+} else if (!empty($result_reference_no) && empty($result_voucher_no)) {
+	echo '2'; //reference number exist
+} else if (!empty($result_voucher_no) && empty($result_reference_no)) {
+	echo '3'; //voucher number exist
+} else {
+	echo '0';
+}
 ?>
 <div id="load_voucher">
 
@@ -361,7 +330,7 @@
 			maxFilesize: 5, // MB
 			uploadMultiple: true,
 			addRemoveLinks: true,
-			acceptedFiles: 'image/*,application/pdf',
+			acceptedFiles: 'image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv',
 		});
 
 		myDropzone.on("success", function(file, response) {
@@ -379,28 +348,23 @@
 		);
 		myDropzone.on('removedfile', function(file) {
 
-			alert(file);
+				/* here do AJAX call to the server ... */
+				var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/" + file.name;
+                alert(file.name);
+				$.ajax({
+					//async: false,
+					type: "POST",
+					url: url,
+					data: file.name,
+					// beforeSend: function() {
+					// 	$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
+					// },
+					success: function(data) {
+						alert('This file'+data+' has been removed');
 
+					},
 
-			/* here do AJAX call to your server ... */
-
-			// $.ajax({
-			// 	url: "<?= base_url() ?>ifms.php?/partner/remove_dct_files_in_temp/",
-			// 	type: "POST",
-			// 	data:file.name,
-			// 	beforeSend: function() {
-			// 		$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
-			// 	},
-			// 	success: function(data, textStatus, jqXHR) {
-
-			// 		alert('Success');
-
-
-			// 	},
-			// 	error: function(jqXHR, textStatus, errorThrown) {
-			// 		alert('Error')
-			// 	}
-			// });
+				});
 
 		});
 		//Go button
@@ -426,21 +390,6 @@
 			var reference_number = $('#DCTReference').val();
 			var voucher_number = $('#Generated_VNumber').val();
 
-			// var is_reference_no_exist = function() {
-			// 	var tmp = null;
-			// 	var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number;
-			// 	$.ajax({
-			// 		async: false,
-			// 		type: "GET",
-			// 		url: url,
-			// 		success: function(data) {
-			// 			tmp = data;
-			// 		}
-			// 	});
-			// 	return tmp;
-			// }();
-			// added by onduso on 19/5/2020 END
-
 			var val = $('#VTypeMain').val();
 
 			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {
@@ -459,10 +408,11 @@
 			} else if (myDropzone.files.length == 0 && (val == 'DCTB' || val == 'DCTC')) {
 
 				$('#error_msg').html('<?php echo get_phrase("Upload supporting document"); ?>');
-				$('#myDropzone').css({'border': '3px solid red'});
+				$('#myDropzone').css({
+					'border': '3px solid red'
+				});
 				e.preventDefault();
-			}
-			else if ($('.accNos').length > 0) {
+			} else if ($('.accNos').length > 0) {
 				//alert("Here 4");
 				var cnt_empty = 0;
 				$('.accNos').each(function(i) {
@@ -475,9 +425,9 @@
 					$('#error_msg').html(cnt_empty + ' <?php echo get_phrase("empty_fields"); ?>');
 					e.preventDefault();
 				} else {
-                    //Added by Onduso on 20/5/ 2020 start
+					//Added by Onduso on 20/5/ 2020 start
 					/**Post Voucher only when no duplicate number exists */
-					var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number+'/'+voucher_number;
+					var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number + '/' + voucher_number;
 					$.ajax({
 						async: false,
 						type: "GET",
@@ -486,7 +436,7 @@
 							$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
 						},
 						success: function(data) {
-                            /*
+							/*
 							1) if 1 returned: both Reference and voucher number exist
 
 							2) if 2 returned:reference number exist
@@ -496,48 +446,52 @@
 							4) if 0 returned: No duplicate voucher and reference numbers exist
 							
 							*/
-							alert(data);
+							//alert(data);
 							if (data == 1) {
-								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and'+voucher_number+' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({'border': '3px solid red'});
+								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+								$('#DCTReference').css({
+									'border': '3px solid red'
+								});
 								return;
-							}
-							else if(data==2){
+							} else if (data == 2) {
 
 								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({'border': '3px solid red'});
+								$('#DCTReference').css({
+									'border': '3px solid red'
+								});
 								return;
 
-							}
-							else if(data==3){
-								
+							} else if (data == 3) {
+
 								$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#Generated_VNumber').css({'border': '3px solid red'});
+								$('#Generated_VNumber').css({
+									'border': '3px solid red'
+								});
 								return;
 
 							}
 							$('#error_msg').html('');
 
 							post_using_ajax();
-						
-					  }
+
+						}
 					});
 					//Added by Onduso on 20/5/ 2020 End
 				}
 			} else {
 				//alert("Here 5");
 				//Added by Onduso on 20/5/ 2020 start
-					/**Post Voucher only when no duplicate number exists */
-					var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number+'/'+voucher_number;
-					$.ajax({
-						async: false,
-						type: "GET",
-						url: url,
-						beforeSend: function() {
-							$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
-						},
-						success: function(data) {
-                            /*
+				/**Post Voucher only when no duplicate number exists */
+				var url = "<?= base_url() ?>ifms.php/partner/is_reference_number_exist/" + reference_number + '/' + voucher_number;
+				$.ajax({
+					async: false,
+					type: "GET",
+					url: url,
+					beforeSend: function() {
+						$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
+					},
+					success: function(data) {
+						/*
 							1) if data==1 returned: both Reference and voucher number exist
 
 							2) if data==2 returned:reference number exist
@@ -547,34 +501,38 @@
 							4) if data==0 returned: No duplicate voucher and reference numbers exist
 							
 							*/
-							alert(data);
-							if (data == 1) {
-								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and'+voucher_number+' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({'border': '3px solid red'});
-								return;
-							}
-							else if(data==2){
+						//alert(data);
+						if (data == 1) {
+							$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+							$('#DCTReference').css({
+								'border': '3px solid red'
+							});
+							return;
+						} else if (data == 2) {
 
-								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({'border': '3px solid red'});
-								return;
+							$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
+							$('#DCTReference').css({
+								'border': '3px solid red'
+							});
+							return;
 
-							}
-							else if(data==3){
-								
-								$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#Generated_VNumber').css({'border': '3px solid red'});
-								return;
+						} else if (data == 3) {
 
-							}
-							$('#error_msg').html('');
+							$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+							$('#Generated_VNumber').css({
+								'border': '3px solid red'
+							});
+							return;
 
-							post_using_ajax();
-						
-					  }
-					});
-					//Added by Onduso on 20/5/ 2020 End
-				
+						}
+						$('#error_msg').html('');
+
+						post_using_ajax();
+
+					}
+				});
+				//Added by Onduso on 20/5/ 2020 End
+
 
 			}
 
