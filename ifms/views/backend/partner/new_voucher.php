@@ -1,25 +1,25 @@
 <hr />
 <?php
 
-$reference_number_in_db = 'y678qT-1';
+// $reference_number_in_db = 'y678qT-1';
 
-$voucher_number_in_db = 1906187;
+// $voucher_number_in_db = 1906187;
 
-$result_reference_no = $this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo' => $reference_number_in_db, 'icpNo' => $this->session->center_id))->row_array('ChqNo');
+// $result_reference_no = $this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo' => $reference_number_in_db, 'icpNo' => $this->session->center_id))->row_array('ChqNo');
 
-$result_voucher_no = $this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber' => $voucher_number_in_db, 'icpNo' => $this->session->center_id))->row_array('VNumber');
+// $result_voucher_no = $this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber' => $voucher_number_in_db, 'icpNo' => $this->session->center_id))->row_array('VNumber');
 
-print_r($result_reference_no);
-print_r($result_voucher_no);
-if ((!empty($result_reference_no)) && (!empty($result_voucher_no))) {
-	echo '1'; //both reference and voucher number exist
-} else if (!empty($result_reference_no) && empty($result_voucher_no)) {
-	echo '2'; //reference number exist
-} else if (!empty($result_voucher_no) && empty($result_reference_no)) {
-	echo '3'; //voucher number exist
-} else {
-	echo '0';
-}
+// print_r($result_reference_no);
+// print_r($result_voucher_no);
+// if ((!empty($result_reference_no)) && (!empty($result_voucher_no))) {
+// 	echo '1'; //both reference and voucher number exist
+// } else if (!empty($result_reference_no) && empty($result_voucher_no)) {
+// 	echo '2'; //reference number exist
+// } else if (!empty($result_voucher_no) && empty($result_reference_no)) {
+// 	echo '3'; //voucher number exist
+// } else {
+// 	echo '0';
+// }
 ?>
 <div id="load_voucher">
 
