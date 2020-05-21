@@ -322,7 +322,18 @@ if ((!empty($result_reference_no)) && (!empty($result_voucher_no))) {
 
 	}
 
+	function check_if_temp_session_is_empty(){
+		// Check if temps session is not empty
+		var url = "<?= base_url() ?>ifms.php?/partner/check_if_temp_session_is_empty";
+		
+		$.get(url,function(response){
+			//alert(response);
+		});
+	}
+
 	$(document).ready(function() {
+
+		check_if_temp_session_is_empty();
 
 		var myDropzone = new Dropzone("#myDropzone", {
 			url: "<?= base_url() ?>ifms.php?/partner/create_uploads_temp",

@@ -984,7 +984,39 @@ class Partner extends CI_Controller
 				echo $fileInfo->getFilename(); //for ajax use
 			}
 		}
+
+		$this->delete_empty_folder($storeFolder);
+		
 	}
+
+	function delete_empty_folder($storeFolder){
+		$iterator = new \FilesystemIterator($storeFolder);
+		
+		if(!$iterator->valid()){
+			rmdir($storeFolder);
+		}else{
+			foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+				if ($fileInfo->isDot()) continue;
+	
+				if ($fileInfo->isFile()) {
+					unlink($storeFolder . DS . $fileInfo);
+				}
+			}
+
+			rmdir($storeFolder);
+		}
+	}
+
+	function check_if_temp_session_is_empty(){
+
+		if($this->session->upload_session){
+			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session;
+			$this->delete_empty_folder($storeFolder);
+		}
+
+		//echo "Complete";
+	}
+
 	/** 
 	 * @author: Onduso
 	 * @date: 16/5/2020
