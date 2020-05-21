@@ -961,7 +961,7 @@ class Partner extends CI_Controller
 	 * @author: Onduso
 	 * @date: 16/5/2020
 	 */
-	function remove_dct_files_in_temp($file)
+	function remove_dct_files_in_temp()
 	{
 
 		//Hash the folder to make user depended
@@ -972,16 +972,16 @@ class Partner extends CI_Controller
 		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash;
 
 		//Loop the $hash directory and delete the selected file
-		$data = urldecode($file);
+		//$data = urldecode($file);
+		$data = $this->input->post('file_name');
+
 		foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
 			if ($fileInfo->isDot()) continue;
-			
-			//$fileInfo->getFilename();
 
-			if ($fileInfo == $data) {
+			if ($fileInfo->getFilename() == $data) {
 
 				unlink($storeFolder . DS . $fileInfo);
-				echo $fileInfo; //for ajax use
+				echo $fileInfo->getFilename(); //for ajax use
 			}
 		}
 	}

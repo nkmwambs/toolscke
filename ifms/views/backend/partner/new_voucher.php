@@ -349,20 +349,20 @@ if ((!empty($result_reference_no)) && (!empty($result_voucher_no))) {
 		myDropzone.on('removedfile', function(file) {
 
 				/* here do AJAX call to the server ... */
-				var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/" + file.name;
-                alert(file.name);
+				var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/";
+                var file_name  = file.name;
 				$.ajax({
 					//async: false,
 					type: "POST",
 					url: url,
-					data: file.name,
+					data: {'file_name':file_name},
 					// beforeSend: function() {
 					// 	$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
 					// },
 					success: function(data) {
-						alert('This file'+data+' has been removed');
-
-					},
+						//alert('This file'+data+' has been removed');
+						alert(data);
+					},	
 
 				});
 
