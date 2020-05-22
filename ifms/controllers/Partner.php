@@ -798,14 +798,14 @@ class Partner extends CI_Controller
 		}
 
 		//Onduso 14/5/2020 START
-		if ($param1 == 'DCTB') {
+		if ($param1 == 'UDCTB') {
 			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
 			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$rst_rw = $this->get_accounts($exp_cond);
 		}
 
 
-		if ($param1 == 'DCTC') {
+		if ($param1 == 'UDCTC') {
 			//DCTC expenses accounts [PC implementation plus is_direct_cash_transfer flag]
 			$pc_exp_cond = "accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$rst_rw = $this->get_accounts($pc_exp_cond);
@@ -1127,7 +1127,7 @@ class Partner extends CI_Controller
 		if ($data['VType'] == 'CHQ') {
 
 			$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
-		} else if ($data['VType'] == 'DCTB') {
+		} else if ($data['VType'] == 'UDCTB' || $data['VType'] == 'UDCTC') {
 
 			$data['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
 		} else {

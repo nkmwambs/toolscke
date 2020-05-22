@@ -1,22 +1,22 @@
 <hr />
 <?php
 
-$bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->userdata('center_id')))->row()->bankID;
-		if (!isset($bank_code)) {
-			$bank_code = 0;
-		}
-		//Check if Cheque No exists
-		$param1 ='166';
-		$chqNo = $param1 . "-" . $bank_code;
-         echo $chqNo;
-		$chk = $this->db->get_where('voucher_body', array('ChqNo' => $chqNo, "icpNo" => $this->session->userdata('center_id')))->result_object();
+// $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->userdata('center_id')))->row()->bankID;
+// 		if (!isset($bank_code)) {
+// 			$bank_code = 0;
+// 		}
+// 		//Check if Cheque No exists
+// 		$param1 ='166';
+// 		$chqNo = $param1 . "-" . $bank_code;
+//          echo $chqNo;
+// 		$chk = $this->db->get_where('voucher_body', array('ChqNo' => $chqNo, "icpNo" => $this->session->userdata('center_id')))->result_object();
 
-		if(count($chk)>0){
-			echo json_encode($chk);
-		}
-		else{
-			echo 0;
-		}
+// 		if(count($chk)>0){
+// 			echo json_encode($chk);
+// 		}
+// 		else{
+// 			echo 0;
+// 		}
 		
 ?>
 <div id="load_voucher">
@@ -146,8 +146,8 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 													<option value="#"><?php echo get_phrase('select_voucher_type'); ?></option>
 													<option value="PC"><?php echo get_phrase('payment_by_cash'); ?></option>
 													<!-- Added the DCT option Onduso 5/13/2020 -->
-													<option value="DCTB"><?php echo get_phrase('direct_cash_transfer_via_bank'); ?></option>
-													<option value="DCTC"><?php echo get_phrase('direct_cash_transfer_via_petty_cash'); ?></option>
+													<option value="UDCTB"><?php echo get_phrase('unconditional_direct_cash_transfer_via_bank'); ?></option>
+													<option value="UDCTC"><?php echo get_phrase('unconditional_direct_cash_transfer_via_petty_cash'); ?></option>
 													<option value="CHQ"><?php echo get_phrase('payment_by_cheque'); ?></option>
 													<option value="BCHG"><?php echo get_phrase('bank_adjustments'); ?></option>
 													<option value="CR"><?php echo get_phrase('cash_received'); ?></option>
@@ -423,7 +423,7 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 				//alert("Here 3");
 				$('#error_msg').html('<?php echo get_phrase("cheque_numbers_cannot_be_re-used"); ?>');
 				e.preventDefault();
-			} else if (myDropzone.files.length == 0 && (val == 'DCTB' || val == 'DCTC')) {
+			} else if (myDropzone.files.length == 0 && (val == 'UDCTB' || val == 'UDCTC')) {
 
 				$('#error_msg').html('<?php echo get_phrase("Upload supporting document"); ?>');
 				$('#myDropzone').css({'border': '2px solid red'});
@@ -604,17 +604,19 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 
 			}
 			//Modified by Onduso on 13/5/2020 start
-			if (val == 'DCTB') {
-				$('#DCTReference').removeAttr('readonly');
+			// if (val == 'UDCTB') {
+			// 	$('#DCTReference').removeAttr('readonly');
+			// 	$('#DCT_div').removeClass('hidden');
+
+
+			// }
+			if (val == "UDCTB" || val == "UDCTC") {
+				//$('#DCTReference').removeAttr('readonly');
+				$('#myDropzone').removeClass('hidden');
 				$('#DCT_div').removeClass('hidden');
 
-
 			}
-			if (val == "DCTB" || val == "DCTC") {
-				$('#myDropzone').removeClass('hidden');
-
-			}
-			if (val == "DCTC" || val == 'BCHG' || val == 'CR' || val == 'PC' || val == 'PCR') {
+			if (val == 'BCHG' || val == 'CR' || val == 'PC' || val == 'PCR') {
 				$('#DCTReference').removeClass('accNos');
 			}
 			//Modified by Onduso on 13/5/2020 End
