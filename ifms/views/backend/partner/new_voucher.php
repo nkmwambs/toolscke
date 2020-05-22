@@ -233,7 +233,7 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 							<table id="bodyTable" class="table table-bordered">
 								<thead>
 									<tr style="font-weight: bold;">
-										<th><?php echo get_phrase('check'); ?></th>
+										<th><?php echo get_phrase('delete_row'); ?></th>
 										<th><?php echo get_phrase('quantity'); ?></th>
 										<th><?php echo get_phrase('items_purchased_/_services_received'); ?></th>
 										<th><?php echo get_phrase('unit_cost'); ?></th>
@@ -343,12 +343,12 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 		});
 
 		myDropzone.on("success", function(file, response) {
-				//alert(myDropzone.files.length);
 				if (response == 0) {
-
 					alert('Error in uploading files');
 					return false;
 				}
+				$('#myDropzone').css({'border': '2px solid gray'});
+				$('#error_msg').html('');
 
 			}
 
@@ -372,7 +372,7 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 				// },
 				success: function(data) {
 					//alert('This file'+data+' has been removed');
-					alert(data);
+					alert('This file '+data+' has been removed');
 				},
 
 			});
@@ -390,6 +390,13 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 			format: 'yyyy-mm-dd',
 			startDate: '<?php echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->current_voucher_date; ?>',
 			endDate: '<?php echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->end_month_date; ?>'
+		});
+
+		$('#DCTReference').keyup(function(e){
+
+			$(this).css({'border':'1px solid gray'});
+			$('#error_msg').html('');
+
 		});
 
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
@@ -419,9 +426,7 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 			} else if (myDropzone.files.length == 0 && (val == 'DCTB' || val == 'DCTC')) {
 
 				$('#error_msg').html('<?php echo get_phrase("Upload supporting document"); ?>');
-				$('#myDropzone').css({
-					'border': '3px solid red'
-				});
+				$('#myDropzone').css({'border': '2px solid red'});
 				e.preventDefault();
 			} else if ($('.accNos').length > 0) {
 				//alert("Here 4");
@@ -460,24 +465,18 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 							//alert(data);
 							if (data == 1) {
 								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({
-									'border': '3px solid red'
-								});
+								$('#DCTReference').css({'border': '3px solid red'});
 								return;
 							} else if (data == 2) {
 
 								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({
-									'border': '3px solid red'
-								});
+								$('#DCTReference').css({'border': '2px solid red'});
 								return;
 
 							} else if (data == 3) {
 
 								$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#Generated_VNumber').css({
-									'border': '3px solid red'
-								});
+								$('#Generated_VNumber').css({'border': '3px solid red'});
 								return;
 
 							}
@@ -622,8 +621,6 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 
 		});
 
-
-
 		$('#reversal').click(function() {
 			if ($(this).prop('checked') === false) {
 				$('#ChqNo').val('');
@@ -685,9 +682,12 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 					} else if (response === '1' && reversal === 'yes') {
 						$('#hidden').val('');
 						$('#error_msg').html('<?php echo get_phrase("you_are_reversing_cheque_number"); ?> ' + chqno);
+						$('#ChqNo').css({'border':'1px solid gray'});
+						
 					} else if (response === '2' && reversal === 'no') {
 						$('#hidden').val(1);
 						$('#error_msg').html('<?php echo get_phrase("cheque_has_already_been_reversed"); ?>');
+						$('#ChqNo').css({'border':'1px solid red'});
 					} else {
 						$('#hidden').val('');
 						$('#error_msg').html('');
@@ -704,7 +704,7 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 		});
 
        /** Add a row */
-		$('#addrow,#addrow_footer').click(function() {
+		$('#addrow,#addrow_footer').click(function(e) {
 
 			var vtype = $('#VTypeMain').val();
 			var reverse = $('#reversal').prop('checked');
@@ -727,16 +727,17 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 				}
 
 				var chqno = $('#ChqNo').val();
-
+				
 				url2 = '<?php echo base_url(); ?>ifms.php/partner/reverse_cheque/' + chqno;
 
-				alert(url2);
 				$.ajax({
 					url: url2,
 					success: function(response) {
 						//Onduso modified 5/22/2020 start
 						if(response==0){
 							$('#error_msg').html('<?php echo get_phrase('error:_cheque_number_for_reversal_action_does_exist'); ?>');
+							$('#ChqNo').val(chqno);
+							$('#ChqNo').css({'border' : '2px solid red'});
 							return;
 						}
 						//Onduso modified End
@@ -747,7 +748,7 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 						$('#Payee').val('<?php echo $this->session->userdata('center_id'); ?>');
 						$('#Address').val('<?php echo $this->session->userdata('center_id'); ?>');
 						$('#TDescription').val('<?php echo get_phrase("reversal_of_cheque_number"); ?> ' + chqno + ' (<?php echo get_phrase('voucher_number'); ?>: ' + obj_2['0'].VNumber + ')');
-
+                        
 						//Readonly all inputs 
 						$('input').each(function() {
 							$(this).attr('readonly', 'readonly');
@@ -876,12 +877,15 @@ $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->ses
 						// element0.className = "chkbx form-control";
 						// cell0.appendChild(element0);
 
-						//Delete row cell
+						//Delete row cell added by onduso on 5/22/2020
 
 						var cell0 = row.insertCell(0);
 						var element0 = document.createElement("a");
 						element0.type = "a";
-						element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
+						if(rowCount!=0){//only provide delete btn if only rows >1
+							element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
+						}
+						//element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 						cell0.appendChild(element0);
 
 						//Quantity Column
