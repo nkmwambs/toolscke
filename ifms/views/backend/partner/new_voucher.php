@@ -1,25 +1,23 @@
 <hr />
 <?php
 
-// $reference_number_in_db = 'y678qT-1';
+$bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->userdata('center_id')))->row()->bankID;
+		if (!isset($bank_code)) {
+			$bank_code = 0;
+		}
+		//Check if Cheque No exists
+		$param1 ='166';
+		$chqNo = $param1 . "-" . $bank_code;
+         echo $chqNo;
+		$chk = $this->db->get_where('voucher_body', array('ChqNo' => $chqNo, "icpNo" => $this->session->userdata('center_id')))->result_object();
 
-// $voucher_number_in_db = 1906187;
-
-// $result_reference_no = $this->db->select(array('ChqNo'))->get_where('voucher_header', array('ChqNo' => $reference_number_in_db, 'icpNo' => $this->session->center_id))->row_array('ChqNo');
-
-// $result_voucher_no = $this->db->select(array('VNumber'))->get_where('voucher_header', array('VNumber' => $voucher_number_in_db, 'icpNo' => $this->session->center_id))->row_array('VNumber');
-
-// print_r($result_reference_no);
-// print_r($result_voucher_no);
-// if ((!empty($result_reference_no)) && (!empty($result_voucher_no))) {
-// 	echo '1'; //both reference and voucher number exist
-// } else if (!empty($result_reference_no) && empty($result_voucher_no)) {
-// 	echo '2'; //reference number exist
-// } else if (!empty($result_voucher_no) && empty($result_reference_no)) {
-// 	echo '3'; //voucher number exist
-// } else {
-// 	echo '0';
-// }
+		if(count($chk)>0){
+			echo json_encode($chk);
+		}
+		else{
+			echo 0;
+		}
+		
 ?>
 <div id="load_voucher">
 
@@ -322,11 +320,11 @@
 
 	}
 
-	function check_if_temp_session_is_empty(){
+	function check_if_temp_session_is_empty() {
 		// Check if temps session is not empty
 		var url = "<?= base_url() ?>ifms.php?/partner/check_if_temp_session_is_empty";
-		
-		$.get(url,function(response){
+
+		$.get(url, function(response) {
 			//alert(response);
 		});
 	}
@@ -359,23 +357,25 @@
 		);
 		myDropzone.on('removedfile', function(file) {
 
-				/* here do AJAX call to the server ... */
-				var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/";
-                var file_name  = file.name;
-				$.ajax({
-					//async: false,
-					type: "POST",
-					url: url,
-					data: {'file_name':file_name},
-					// beforeSend: function() {
-					// 	$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
-					// },
-					success: function(data) {
-						//alert('This file'+data+' has been removed');
-						alert(data);
-					},	
+			/* here do AJAX call to the server ... */
+			var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/";
+			var file_name = file.name;
+			$.ajax({
+				//async: false,
+				type: "POST",
+				url: url,
+				data: {
+					'file_name': file_name
+				},
+				// beforeSend: function() {
+				// 	$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
+				// },
+				success: function(data) {
+					//alert('This file'+data+' has been removed');
+					alert(data);
+				},
 
-				});
+			});
 
 		});
 		//Go button
@@ -697,7 +697,13 @@
 			});
 		});
 
+        //Added by Onduso 22/5/2020
+	    /** Remove rows */
+		$('#bodyTable').on('click', 'a', function() {
+			$(this).closest('tr').remove();
+		});
 
+       /** Add a row */
 		$('#addrow,#addrow_footer').click(function() {
 
 			var vtype = $('#VTypeMain').val();
@@ -723,11 +729,19 @@
 				var chqno = $('#ChqNo').val();
 
 				url2 = '<?php echo base_url(); ?>ifms.php/partner/reverse_cheque/' + chqno;
+
+				alert(url2);
 				$.ajax({
 					url: url2,
 					success: function(response) {
+						//Onduso modified 5/22/2020 start
+						if(response==0){
+							$('#error_msg').html('<?php echo get_phrase('error:_cheque_number_for_reversal_action_does_exist'); ?>');
+							return;
+						}
+						//Onduso modified End
 						var obj_2 = JSON.parse(response);
-						//alert(obj_2['0'].TDate);
+						alert(obj_2['0'].TDate);
 
 						//Header
 						$('#Payee').val('<?php echo $this->session->userdata('center_id'); ?>');
@@ -750,12 +764,12 @@
 							var rowCount = table.rows.length;
 							var row = table.insertRow(rowCount);
 							var rw = rowCount + 1;
-							//Check box Column
+							//Delete button cell
 							var cell0 = row.insertCell(0);
-							var element0 = document.createElement("input");
-							element0.type = "checkbox";
+							var element0 = document.createElement("a");
+							element0.type = "a";
 							element0.setAttribute('disabled', "disabled");
-							element0.className = "chkbx form-control";
+							element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 							cell0.appendChild(element0);
 
 							//Quantity Column
@@ -854,11 +868,20 @@
 						var rowCount = table.rows.length;
 						var row = table.insertRow(rowCount);
 
-						//Check box Column
+
+						// //Check box Column
+						// var cell0 = row.insertCell(0);
+						// var element0 = document.createElement("input");
+						// element0.type = "checkbox";
+						// element0.className = "chkbx form-control";
+						// cell0.appendChild(element0);
+
+						//Delete row cell
+
 						var cell0 = row.insertCell(0);
-						var element0 = document.createElement("input");
-						element0.type = "checkbox";
-						element0.className = "chkbx form-control";
+						var element0 = document.createElement("a");
+						element0.type = "a";
+						element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 						cell0.appendChild(element0);
 
 						//Quantity Column

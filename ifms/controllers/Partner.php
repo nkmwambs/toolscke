@@ -711,8 +711,19 @@ class Partner extends CI_Controller
 		$chqNo = $param1 . "-" . $bank_code;
 
 		$chk = $this->db->get_where('voucher_body', array('ChqNo' => $chqNo, "icpNo" => $this->session->userdata('center_id')))->result_object();
+	   
+		//echo json_encode($chk);
+		
+      //Onduso modified here: 5/22/2020 start
 
-		echo json_encode($chk);
+		if(count($chk)>0){
+			echo json_encode($chk);
+		}
+		else{
+			echo 0;
+		}
+
+		//Onduso modfied End
 	}
 	/**function voucher_accounts($param1=''){
 		//Return as JSON object
