@@ -711,15 +711,14 @@ class Partner extends CI_Controller
 		$chqNo = $param1 . "-" . $bank_code;
 
 		$chk = $this->db->get_where('voucher_body', array('ChqNo' => $chqNo, "icpNo" => $this->session->userdata('center_id')))->result_object();
-	   
-		//echo json_encode($chk);
-		
-      //Onduso modified here: 5/22/2020 start
 
-		if(count($chk)>0){
+		//echo json_encode($chk);
+
+		//Onduso modified here: 5/22/2020 start
+
+		if (count($chk) > 0) {
 			echo json_encode($chk);
-		}
-		else{
+		} else {
 			echo 0;
 		}
 
@@ -997,18 +996,18 @@ class Partner extends CI_Controller
 		}
 
 		$this->delete_empty_folder($storeFolder);
-		
 	}
 
-	function delete_empty_folder($storeFolder){
+	function delete_empty_folder($storeFolder)
+	{
 		$iterator = new \FilesystemIterator($storeFolder);
-		
-		if(!$iterator->valid()){
+
+		if (!$iterator->valid()) {
 			rmdir($storeFolder);
-		}else{
+		} else {
 			foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
 				if ($fileInfo->isDot()) continue;
-	
+
 				if ($fileInfo->isFile()) {
 					unlink($storeFolder . DS . $fileInfo);
 				}
@@ -1018,9 +1017,10 @@ class Partner extends CI_Controller
 		}
 	}
 
-	function check_if_temp_session_is_empty(){
+	function check_if_temp_session_is_empty()
+	{
 
-		if($this->session->upload_session){
+		if ($this->session->upload_session) {
 			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session;
 			$this->delete_empty_folder($storeFolder);
 		}
@@ -1130,9 +1130,10 @@ class Partner extends CI_Controller
 		} else if ($data['VType'] == 'UDCTB' || $data['VType'] == 'UDCTC') {
 
 			$data['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
-		} else {
-			$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
 		}
+		// else {
+		// 	$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
+		// }
 
 		//Onduso modification 14/5/2020 START
 
@@ -1167,7 +1168,19 @@ class Partner extends CI_Controller
 				$data2['VNumber'] = $this->input->post('VNumber');
 				$data2['TDate'] = $this->input->post('TDate');
 				$data2['VType'] = $this->input->post('VTypeMain');
-				$data2['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
+				//$data2['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
+
+				//Added by Onduso 23/5/2020
+
+				if ($data2['VType'] == 'CHQ') {
+
+					$data2['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
+				} else if ($data2['VType'] == 'UDCTB' || $data['VType'] == 'UDCTC') {
+		
+					$data2['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
+				} 
+
+				//Onduso code ended
 				$data2['unixStmp'] = time();
 				$data2['Qty'] = $qty[$i];
 				$data2['Details'] = $details[$i];
@@ -1192,15 +1205,14 @@ class Partner extends CI_Controller
 
 			//Move file to dct_document folder only when database insert is completed successful
 			if ($this->db->trans_status() === TRUE) {
-				
+
 				$hashed_folder = $this->session->upload_session;
 				$temp_dir_name = 'uploads' . DS . 'temps' . DS . $hashed_folder;
 				$voucher_number = $this->input->post('VNumber');
 				$voucher_date = $this->input->post('TDate');
 
 				$this->move_temp_files_to_dct_document($temp_dir_name, $voucher_date, $voucher_number);
-			}
-			else{
+			} else {
 				//input error to log file
 
 			}
