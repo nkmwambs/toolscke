@@ -1,8 +1,16 @@
 <hr />
 <?php
 
-$dct_short_code=$this->db->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array('dct_short_code');
-print_r($dct_short_code['dct_short_code']);		
+// $dct_short_code=$this->db->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array('dct_short_code');
+// print_r($dct_short_code['dct_short_code']);
+$cluster = $this->session->cluster;
+
+	$this->db->select(array('icpNo'));
+	$this->db->where(array('clusterName'=>$cluster,'projectsdetails.status'=>1));
+	$this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
+	$result = $this->db->get('projectsdetails')->result_array();
+
+	print_r(array_column($result,'icpNo'));		
 ?>
 <div id="load_voucher">
 

@@ -306,7 +306,7 @@ tr.shown td.details-control {
 											<th><?php echo get_phrase('payee_/_source');?></th>
 											<th><?php echo get_phrase('voucher_no');?></th>
 											<th><?php echo get_phrase('description_/_details');?></th>
-											<th><?php echo get_phrase('chq_no');?></th>
+											<th><?php echo get_phrase('chq_/_ref_no');?></th>
 											<th><?php echo get_phrase('bank_deposits');?></th>
 											<th><?php echo get_phrase('bank_payments');?></th>
 											<th><?php echo get_phrase('bank_balance');?></th>
@@ -348,7 +348,7 @@ tr.shown td.details-control {
 													<td id="<?=$row['hID'];?>"></td>									
 													<?php
 														
-														if($row['VType']==='CHQ' || $row['VType']==='BCHG' || $row['VType']==='CR' || $row['VType'] === 'DCTB'){
+														if($row['VType']==='CHQ' || $row['VType']==='BCHG' || $row['VType']==='CR' || $row['VType'] === 'UDCTB'){
 															$chk = 'checked';
 																if($row['ChqState']==='1'){
 																	$chk = "";
@@ -413,9 +413,18 @@ tr.shown td.details-control {
 													</td>
 													<td><?php echo $row['TDescription'];?></td>
 													<?php
+													    
 														$mixed_chq = explode("-", $row['ChqNo']);
 													?>
-													<td><?php echo $mixed_chq[0];?></td>
+													<td><?php 
+													      //Modified by Onduso 23/5/2020 start
+														   //echo $mixed_chq[0];
+														   if($row['VType']=='UDCTB') echo $mixed_chq[1].'-'.$mixed_chq[2];
+														   else $mixed_chq[0];//for non UDTCB
+
+														   //Modified by Onduso 23/5/2020 end
+														   
+													    ?></td>
 													
 													<!-- Bank Income and Expenses -->
 													
@@ -426,7 +435,7 @@ tr.shown td.details-control {
 														//if($row['VType']==='CR'||$row['VType']==='PCR') $cr = $row['totals'];
 														//if($row['VType']==='CHQ' || $row['VType'] ==='BCHG') $chq = $row['totals'];
 														if($row['VType']==='CR'||$row['VType']==='PCR') $cr = $this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost;
-														if($row['VType']==='CHQ' || $row['VType'] ==='BCHG' || $row['VType'] === 'DCTB') $chq = $this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost;;
+														if($row['VType']==='CHQ' || $row['VType'] ==='BCHG' || $row['VType'] === 'UDCTB') $chq = $this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost;
 														
 														$bank_balance += $cr-$chq; 
 														
@@ -446,7 +455,7 @@ tr.shown td.details-control {
 														foreach($get_body as $rows):
 															
 															if($rows['AccNo']==='2000' || $rows['AccNo']==='2001') $pcr = $rows['Cost'];
-															if($rows['VType']==='PC' || $rows['VType']==='PCR' || $rows['VType'] === 'DCTC') $pc = $rows['Cost'];
+															if($rows['VType']==='PC' || $rows['VType']==='PCR' || $rows['VType'] === 'UDCTC') $pc = $rows['Cost'];
 															$pc_balance += $pcr-$pc; 
 													?>
 														<td><?php echo number_format($pcr,2);?></td>

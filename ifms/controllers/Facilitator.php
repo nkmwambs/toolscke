@@ -615,7 +615,7 @@ public function multiple_vouchers($tym,$project){
 
 	$this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
 	$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
-	$this->db->where_in('voucher_header.VType',array('DCTB','DCTC'));
+	$this->db->where_in('voucher_header.VType',array('UDCTB','UDCTC'));
 	$this->db->where_in('voucher_header.icpNo',$list_of_fcps);
 	$this->db->where(array('voucher_header.TDate>='=>$month_start_date));
 	$this->db->where(array('voucher_header.TDate<='=>$month_end_date));
