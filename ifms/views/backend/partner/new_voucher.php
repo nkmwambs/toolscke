@@ -1,23 +1,8 @@
 <hr />
 <?php
 
-// $bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->userdata('center_id')))->row()->bankID;
-// 		if (!isset($bank_code)) {
-// 			$bank_code = 0;
-// 		}
-// 		//Check if Cheque No exists
-// 		$param1 ='166';
-// 		$chqNo = $param1 . "-" . $bank_code;
-//          echo $chqNo;
-// 		$chk = $this->db->get_where('voucher_body', array('ChqNo' => $chqNo, "icpNo" => $this->session->userdata('center_id')))->result_object();
-
-// 		if(count($chk)>0){
-// 			echo json_encode($chk);
-// 		}
-// 		else{
-// 			echo 0;
-// 		}
-		
+$dct_short_code=$this->db->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array('dct_short_code');
+print_r($dct_short_code['dct_short_code']);		
 ?>
 <div id="load_voucher">
 
@@ -167,7 +152,7 @@
 											<!-- MPESA REFERENCE NO -->
 											<div class="col-sm-10 form-group hidden" id='DCT_div'>
 												<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('reference_no.'); ?>:</span></label>
-												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" readonly="readonly" />
+												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" value="<?php echo $this->finance_model->generate_dct_reference_number(); ?>" readonly="readonly" />
 
 											</div>
 										</td>

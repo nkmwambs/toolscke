@@ -153,7 +153,32 @@ class Finance_model extends CI_Model {
 				$next_serial = '0'.$next_serial;
 			}
 	 		
-	 		return $yr.$month.$next_serial;		
+		 
+			return $yr.$month.$next_serial;		
+	}
+	/**
+	 * @author Onduso
+	 * @dated: 5/22/2020
+	 */
+	function generate_dct_reference_number(){
+
+	 //Get the fcp short code
+	  $mpesa_short_code=0;
+
+	   $dct_short_code=$this->db->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array('dct_short_code');
+	   
+	   if(count($dct_short_code)>0){
+		 $mpesa_short_code=$dct_short_code['dct_short_code'];
+
+	   }
+
+	   //get the voucher genearated number for fcp
+	   $next_voucher_number=$this->next_voucher($this->session->center_id)->vnum;
+
+	   $reference_number_substring=$mpesa_short_code.'-'.substr($next_voucher_number,0,4).'-'.substr($next_voucher_number,4);
+
+	   return $reference_number_substring;
+		
 	}
 	
 	function next_voucher($project_id){
