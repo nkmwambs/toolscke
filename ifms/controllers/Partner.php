@@ -1058,6 +1058,11 @@ class Partner extends CI_Controller
 			echo 0;
 		}
 	}
+	function generate_dct_reference_number($voucher_date){
+		//$date=$this->input->post('TDate');
+		//$v_date=str_replace(',','',$date);
+		echo $this->finance_model->generate_dct_reference_number($voucher_date);
+	}
 	/** 
 	 * @author: Onduso
 	 * @date: 16/5/2020

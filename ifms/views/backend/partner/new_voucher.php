@@ -1,16 +1,35 @@
 <hr />
 <?php
+$date = '2019-06-24';
+echo date('Y-m', strtotime($date));
+//shortcode-yrmonththreerandomserial
+//305305-1906-8301
 
-// $dct_short_code=$this->db->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array('dct_short_code');
-// print_r($dct_short_code['dct_short_code']);
-$cluster = $this->session->cluster;
+//Get the reference number or chqno of fcp for UDCTB
+// $max_reference_no=$this->db->select('chqno')->get_where('voucher_header',array('VType'=>'UDCTB','icpno'=>$this->session->center_id))->result_array('chqno');
+// $array_column_of_chqno=array_column($max_reference_no,'chqno');
 
-	$this->db->select(array('icpNo'));
-	$this->db->where(array('clusterName'=>$cluster,'projectsdetails.status'=>1));
-	$this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
-	$result = $this->db->get('projectsdetails')->result_array();
+// $serial=[];
 
-	print_r(array_column($result,'icpNo'));		
+// foreach($array_column_of_chqno as $serial_no){
+//   //get year and month piece
+//   $str_pos=strpos($serial_no,'-');
+//   $pick_yr_month_and_serial=substr($serial_no,$str_pos+1);
+
+//   //Explode to get the serial
+//   $explode_yrmonth_serial=explode('-',$pick_yr_month_and_serial);
+
+//   array_push($serial,$explode_yrmonth_serial[1]);
+
+// }
+// echo(max($serial));
+
+//$code=$this->finance_model->get_fcp_direct_cash_transfer_short_code();
+
+//$ref_no=$this->finance_model->generate_dct_reference_number();
+
+//$concatenate=$code.'-'.$ref_no;
+
 ?>
 <div id="load_voucher">
 
@@ -133,7 +152,7 @@ $cluster = $this->session->cluster;
 									<tr>
 
 										<td colspan="4">
-											<div class="col-sm-10 form-group" id='VType'>
+											<div class="col-sm-10 form-group hidden" id='VType'>
 												<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type'); ?>:</span></label>
 												<select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
 													<option value="#"><?php echo get_phrase('select_voucher_type'); ?></option>
@@ -160,7 +179,7 @@ $cluster = $this->session->cluster;
 											<!-- MPESA REFERENCE NO -->
 											<div class="col-sm-10 form-group hidden" id='DCT_div'>
 												<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('reference_no.'); ?>:</span></label>
-												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" value="<?php echo $this->finance_model->generate_dct_reference_number(); ?>" readonly="readonly" />
+												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" value="" readonly="readonly" />
 
 											</div>
 										</td>
@@ -326,6 +345,11 @@ $cluster = $this->session->cluster;
 
 		check_if_temp_session_is_empty();
 
+		$('#TDate').change(function(e) {
+			$('#VType').removeClass('hidden');
+		});
+
+
 		var myDropzone = new Dropzone("#myDropzone", {
 			url: "<?= base_url() ?>ifms.php?/partner/create_uploads_temp",
 			paramName: "fileToUpload", // The name that will be used to transfer the file
@@ -340,7 +364,9 @@ $cluster = $this->session->cluster;
 					alert('Error in uploading files');
 					return false;
 				}
-				$('#myDropzone').css({'border': '2px solid gray'});
+				$('#myDropzone').css({
+					'border': '2px solid gray'
+				});
 				$('#error_msg').html('');
 
 			}
@@ -365,7 +391,7 @@ $cluster = $this->session->cluster;
 				// },
 				success: function(data) {
 					//alert('This file'+data+' has been removed');
-					alert('This file '+data+' has been removed');
+					alert('This file ' + data + ' has been removed');
 				},
 
 			});
@@ -385,9 +411,11 @@ $cluster = $this->session->cluster;
 			endDate: '<?php echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->end_month_date; ?>'
 		});
 
-		$('#DCTReference').keyup(function(e){
+		$('#DCTReference').keyup(function(e) {
 
-			$(this).css({'border':'1px solid gray'});
+			$(this).css({
+				'border': '1px solid gray'
+			});
 			$('#error_msg').html('');
 
 		});
@@ -419,7 +447,9 @@ $cluster = $this->session->cluster;
 			} else if (myDropzone.files.length == 0 && (val == 'UDCTB' || val == 'UDCTC')) {
 
 				$('#error_msg').html('<?php echo get_phrase("Upload supporting document"); ?>');
-				$('#myDropzone').css({'border': '2px solid red'});
+				$('#myDropzone').css({
+					'border': '2px solid red'
+				});
 				e.preventDefault();
 			} else if ($('.accNos').length > 0) {
 				//alert("Here 4");
@@ -458,18 +488,24 @@ $cluster = $this->session->cluster;
 							//alert(data);
 							if (data == 1) {
 								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({'border': '3px solid red'});
+								$('#DCTReference').css({
+									'border': '3px solid red'
+								});
 								return;
 							} else if (data == 2) {
 
 								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#DCTReference').css({'border': '2px solid red'});
+								$('#DCTReference').css({
+									'border': '2px solid red'
+								});
 								return;
 
 							} else if (data == 3) {
 
 								$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
-								$('#Generated_VNumber').css({'border': '3px solid red'});
+								$('#Generated_VNumber').css({
+									'border': '3px solid red'
+								});
 								return;
 
 							}
@@ -596,17 +632,32 @@ $cluster = $this->session->cluster;
 
 
 			}
+			
 			//Modified by Onduso on 13/5/2020 start
-			// if (val == 'UDCTB') {
-			// 	$('#DCTReference').removeAttr('readonly');
-			// 	$('#DCT_div').removeClass('hidden');
-
-
-			// }
+			
 			if (val == "UDCTB" || val == "UDCTC") {
 				//$('#DCTReference').removeAttr('readonly');
 				$('#myDropzone').removeClass('hidden');
 				$('#DCT_div').removeClass('hidden');
+
+				//get the transaction date
+				var date_val = ($('#TDate').val());
+
+				var url="<?=base_url();?>ifms.php/partner/generate_dct_reference_number/" + date_val;
+
+                //Make the ajax call
+				$.get(
+					url,
+					date_val,
+					function(responseText) {
+						if (responseText.status === 'error') {
+							$('#error_msg').html('<p> Error:'+responseText.message +'</p>');
+						}
+						else{
+							$('#DCTReference').attr('value', responseText);
+						}
+					}
+				);
 
 			}
 			if (val == 'BCHG' || val == 'CR' || val == 'PC' || val == 'PCR') {
@@ -677,12 +728,16 @@ $cluster = $this->session->cluster;
 					} else if (response === '1' && reversal === 'yes') {
 						$('#hidden').val('');
 						$('#error_msg').html('<?php echo get_phrase("you_are_reversing_cheque_number"); ?> ' + chqno);
-						$('#ChqNo').css({'border':'1px solid gray'});
-						
+						$('#ChqNo').css({
+							'border': '1px solid gray'
+						});
+
 					} else if (response === '2' && reversal === 'no') {
 						$('#hidden').val(1);
 						$('#error_msg').html('<?php echo get_phrase("cheque_has_already_been_reversed"); ?>');
-						$('#ChqNo').css({'border':'1px solid red'});
+						$('#ChqNo').css({
+							'border': '1px solid red'
+						});
 					} else {
 						$('#hidden').val('');
 						$('#error_msg').html('');
@@ -692,13 +747,13 @@ $cluster = $this->session->cluster;
 			});
 		});
 
-        //Added by Onduso 22/5/2020
-	    /** Remove rows */
+		//Added by Onduso 22/5/2020
+		/** Remove rows */
 		$('#bodyTable').on('click', 'a', function() {
 			$(this).closest('tr').remove();
 		});
 
-       /** Add a row */
+		/** Add a row */
 		$('#addrow,#addrow_footer').click(function(e) {
 
 			var vtype = $('#VTypeMain').val();
@@ -722,17 +777,19 @@ $cluster = $this->session->cluster;
 				}
 
 				var chqno = $('#ChqNo').val();
-				
+
 				url2 = '<?php echo base_url(); ?>ifms.php/partner/reverse_cheque/' + chqno;
 
 				$.ajax({
 					url: url2,
 					success: function(response) {
 						//Onduso modified 5/22/2020 start
-						if(response==0){
+						if (response == 0) {
 							$('#error_msg').html('<?php echo get_phrase('error:_cheque_number_for_reversal_action_does_exist'); ?>');
 							$('#ChqNo').val(chqno);
-							$('#ChqNo').css({'border' : '2px solid red'});
+							$('#ChqNo').css({
+								'border': '2px solid red'
+							});
 							return;
 						}
 						//Onduso modified End
@@ -743,7 +800,7 @@ $cluster = $this->session->cluster;
 						$('#Payee').val('<?php echo $this->session->userdata('center_id'); ?>');
 						$('#Address').val('<?php echo $this->session->userdata('center_id'); ?>');
 						$('#TDescription').val('<?php echo get_phrase("reversal_of_cheque_number"); ?> ' + chqno + ' (<?php echo get_phrase('voucher_number'); ?>: ' + obj_2['0'].VNumber + ')');
-                        
+
 						//Readonly all inputs 
 						$('input').each(function() {
 							$(this).attr('readonly', 'readonly');
@@ -877,7 +934,7 @@ $cluster = $this->session->cluster;
 						var cell0 = row.insertCell(0);
 						var element0 = document.createElement("a");
 						element0.type = "a";
-						if(rowCount!=0){//only provide delete btn if only rows >1
+						if (rowCount != 0) { //only provide delete btn if only rows >1
 							element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 						}
 						//element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
