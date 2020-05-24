@@ -43,6 +43,14 @@
                                     <input type="text" class="form-control" name="email" value="<?php echo $row['email'];?>"/>
                                 </div>
                             </div>
+                            <!-- added by Onduso on 5/24/2020 Start-->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('fcp_mpesa_short_code');?></label>
+                                <div class="col-sm-5">
+                                    <input type="text"  class="form-control" name="fcp_mpesa_short_code" value=""/>
+                                </div>
+                            </div>
+                            <!-- added by Onduso on 5/24/2020  End-->
 
                             <div class="form-group">
                               <div class="col-sm-offset-3 col-sm-5">
