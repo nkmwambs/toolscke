@@ -1,3 +1,17 @@
+<?php 
+ $mpesa_short_code_exists=$this->db->select('dct_mpesa_short_code')->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array();
+
+ if($mpesa_short_code_exists>0){
+     //if not zero then fcp already provided an dct mpesa short code 
+    if($mpesa_short_code_exists['dct_mpesa_short_code']!=0){
+      echo 1;
+    }
+    else{
+        echo 0;
+    }
+ }
+ 
+?>
 <div class="row">
 	<div class="col-md-12">
     
@@ -45,9 +59,9 @@
                             </div>
                             <!-- added by Onduso on 5/24/2020 Start-->
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><?php echo get_phrase('fcp_mpesa_short_code');?></label>
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('dct_mpesa_short_code');?></label>
                                 <div class="col-sm-5">
-                                    <input type="text"  class="form-control" name="fcp_mpesa_short_code" value=""/>
+                                    <input id='dct_mpesa_short_code' type="text"  class="form-control" name="dct_mpesa_short_code" value=""/>
                                 </div>
                             </div>
                             <!-- added by Onduso on 5/24/2020  End-->
@@ -125,6 +139,31 @@
 			$(window).on("popstate", function() {
 			    var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
 			    $("a[href='" + anchor + "']").tab("show");
+
+            
 		
 	});
+    //Added by Onduso on 25/5/2020 start
+    $(document).ready(function(){
+
+        //make ajax call and on success assign dct_mpesa_short_code field the short code
+        //Then change the field to readonly
+
+        var url="<?=base_url();?>admin.php/partner/check_mpesa_short_code_exists";
+
+        $.get(
+            url,
+            function(response){
+                if(response !=0){
+                    $('#dct_mpesa_short_code').attr('value',response);
+                    $('#dct_mpesa_short_code').attr('readonly',true);
+                }
+
+            }
+
+        );
+
+    });
+   //Added by Onduso on 25/5/2020 End
+    
 </script>
