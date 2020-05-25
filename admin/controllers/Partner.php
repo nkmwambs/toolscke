@@ -529,6 +529,7 @@ class Partner extends CI_Controller
 
 		$page_data['page_name']  = 'manage_profile';
 		$page_data['page_title'] = get_phrase('manage_profile');
+		$page_data['active_announcements'] = $this->get_active_announcements();
 		$page_data['edit_data']  = $this->db->get_where('users', array('ID' => $this->session->userdata('login_user_id')))->result_array();
 		$page_data['all_users'] = $this->db->get_where('users', array('ID!=' => $this->session->login_user_id))->result_object();
 		$this->load->view('backend/index', $page_data);

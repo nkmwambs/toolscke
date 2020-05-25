@@ -107,7 +107,7 @@
 	<?php 
 		
 		//print_r($announcements);
-		if(count($active_announcements) > 0){
+		if(sizeof($active_announcements) > 0){
 	?>
 		<div class="panel panel-info" data-collapsed="1">
 					
