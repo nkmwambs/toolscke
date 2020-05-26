@@ -1,7 +1,7 @@
 <hr />
 <?php
-$date = '2019-06-24';
-echo date('Y-m', strtotime($date));
+//$date = '2019-06-24';
+//echo date('Y-m', strtotime($date));
 //shortcode-yrmonththreerandomserial
 //305305-1906-8301
 
