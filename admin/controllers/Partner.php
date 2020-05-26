@@ -476,40 +476,43 @@ class Partner extends CI_Controller
 			$this->session->set_flashdata('flash_message', get_phrase('user_updated'));
 			redirect(base_url() . 'admin.php/admin/manage_profile/', 'refresh');
 		}
-		if ($param1 == 'update_profile_info') {
-			//$data['name']  = $this->input->post('name');
-			//$data['email'] = $this->input->post('email');
-			$data['username'] = $this->input->post('username');
+		// if ($param1 == 'update_profile_info') {
+		// 	//$data['name']  = $this->input->post('name');
+		// 	//$data['email'] = $this->input->post('email');
 
-			$this->db->where('email', $this->input->post('email'));
+		// 	$message = [];
 
-			//get email from project details
-			$dct_mpesa_short_code['dct_mpesa_short_code'] = $this->input->post('dct_mpesa_short_code');
+		// 	$data['username'] = $this->input->post('username');
 
-			if ($this->db->get("users")->num_rows() > 1) {
-				$this->session->set_flashdata('flash_message', get_phrase('your_new_email_already_exists'));
-			} else {
-				$this->db->where('ID', $this->session->userdata('login_user_id'));
-				$this->db->update('users', $data);
+		// 	$this->db->where('email', $this->input->post('email'));
 
+		// 	//get email from project details
+		// 	$dct_mpesa_short_code['dct_mpesa_short_code'] = $this->input->post('dct_mpesa_short_code');
 
+		// 	if ($this->db->get("users")->num_rows() > 1) {
+		// 		//$this->session->set_flashdata('flash_message', get_phrase('your_new_email_already_exists'));
+		// 		$message['error'] = get_phrase('your_new_email_already_exists');
+		// 	} else {
+		// 		$this->db->where('ID', $this->session->userdata('login_user_id'));
+		// 		$this->db->update('users', $data);
+		// 		//$this->session->set_flashdata('flash_message', get_phrase('account_updated'));
+		// 		$message['success'] = get_phrase('account_updated');
+		// 	}
+		// 	//update projectdetails
+		// 	//get short code if exists before update
+		// 	$mpesa_short_code_exists = $this->db->get_where('projectsdetails', array('dct_mpesa_short_code' => $this->input->post('dct_mpesa_short_code')))->num_rows();
+		// 	if ($mpesa_short_code_exists > 0) {
+		// 		//$this->session->set_flashdata('flash_message', get_phrase('mpesa_short_code_already_exists'));
+		// 		//return false;
+		// 		$message['error'] = get_phrase('mpesa_short_code_already_exists');
+		// 	} else {
+		// 		$this->db->where('email', $this->input->post('email'));
+		// 		$this->db->update('projectsdetails', $dct_mpesa_short_code);
+		// 	}
 
-
-				$this->session->set_flashdata('flash_message', get_phrase('account_updated'));
-			}
-			//update projectdetails
-			//get short code if exists before update
-			$mpesa_short_code_exists = $this->db->get_where('projectsdetails', array('dct_mpesa_short_code' => $this->input->post('dct_mpesa_short_code')))->num_rows();
-			if ($mpesa_short_code_exists > 0) {
-				$this->session->set_flashdata('flash_message', get_phrase('mpesa_short_code_already_exists'));
-				//return false;
-			} else {
-				$this->db->where('email', $this->input->post('email'));
-				$this->db->update('projectsdetails', $dct_mpesa_short_code);
-			}
-
-			redirect(base_url() . 'admin.php/partner/manage_profile/', 'refresh');
-		}
+		// 	echo json_encode($message);
+		// 	//redirect(base_url() . 'admin.php/partner/manage_profile/', 'refresh');
+		// }
 
 		if ($param1 == 'change_password') {
 			$data['password']             = $this->input->post('password');
@@ -534,6 +537,56 @@ class Partner extends CI_Controller
 		$page_data['all_users'] = $this->db->get_where('users', array('ID!=' => $this->session->login_user_id))->result_object();
 		$this->load->view('backend/index', $page_data);
 	}
+
+	/**
+	 * @author Nicodemus Karisa
+	 * @version 2020-05-26
+	 */
+
+	function update_profile_info() {
+		//$data['name']  = $this->input->post('name');
+		//$data['email'] = $this->input->post('email');
+
+		$message = [];
+
+		//$data['username'] = $this->input->post('username');
+
+		$this->db->where('email', $this->input->post('email'));
+
+		//get email from project details
+		$dct_mpesa_short_code['dct_mpesa_short_code'] = $this->input->post('dct_mpesa_short_code');
+
+		if ($this->db->get("users")->num_rows() > 1) {
+			//$this->session->set_flashdata('flash_message', get_phrase('your_new_email_already_exists'));
+			$message['error'] = get_phrase('your_new_email_already_exists');
+		} 
+		
+		// else {
+		// 	$this->db->where('ID', $this->session->userdata('login_user_id'));
+		// 	$this->db->update('users', $data);
+		// 	//$this->session->set_flashdata('flash_message', get_phrase('account_updated'));
+		// 	$message['success'] = get_phrase('account_updated');
+		// }
+		//update projectdetails
+		//get short code if exists before update
+		$mpesa_short_code_exists = $this->db->get_where('projectsdetails', array('dct_mpesa_short_code' => $this->input->post('dct_mpesa_short_code')))->num_rows();
+		if ($mpesa_short_code_exists > 0) {
+			//$this->session->set_flashdata('flash_message', get_phrase('mpesa_short_code_already_exists'));
+			//return false;
+			$message['error'] = get_phrase('mpesa_short_code_already_exists');
+		} elseif($this->input->post('dct_mpesa_short_code')) {
+			$this->db->where('email', $this->input->post('email'));
+			$this->db->update('projectsdetails', $dct_mpesa_short_code);
+
+			$message['success'] = get_phrase('account_updated');
+		}else{
+			$message['error'] = get_phrase('provide_valid_mpesa_short_code_code');
+		}
+
+		echo json_encode($message);
+		//redirect(base_url() . 'admin.php/partner/manage_profile/', 'refresh');
+	}
+
 	/**
 	 * @author Onduso
 	 * @Dated: 25/5/2020
