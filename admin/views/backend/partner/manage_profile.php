@@ -106,7 +106,7 @@
                             </div>
                             <div class="form-group">
                               <div class="col-sm-offset-3 col-sm-5">
-                                  <button type="submit" class="btn btn-info"><?php echo get_phrase('update_profile');?></button>
+                                  <button type="submit" id='btn_update_profile' class="btn btn-info"><?php echo get_phrase('update_profile');?></button>
                               </div>
 								</div>
                         </form>
@@ -125,6 +125,13 @@
 </div>
 
 <script>
+
+    $('#btn_update_profile').on('click',function(){
+        if(document.referrer.includes("new_voucher")){
+            window.location.href = document.referrer;
+        }
+    });
+
 	$(document).ready(function(){
 		var datatable = $('.table').DataTable();
 		
@@ -157,6 +164,7 @@
                 if(response !=0){
                     $('#dct_mpesa_short_code').attr('value',response);
                     $('#dct_mpesa_short_code').attr('readonly',true);
+
                 }
 
             }
