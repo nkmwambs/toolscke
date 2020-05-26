@@ -34,7 +34,9 @@
 		</ul>
     	<!------CONTROL TABS END------>
         
-	
+        <?php 
+            //print_r($edit_data);
+        ?>
 		<div class="tab-content">
 			
 			<div class="tab-pane box active" id="list" style="padding: 5px">
@@ -42,7 +44,7 @@
 					<?php 
                     foreach($edit_data as $row):
                         ?>
-                        <?php echo form_open(base_url() . 'admin.php/partner/manage_profile/update_profile_info' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
+                        <?php echo form_open(base_url() . 'admin.php/partner/update_profile_info' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('full_name');?></label>
@@ -68,7 +70,7 @@
 
                             <div class="form-group">
                               <div class="col-sm-offset-3 col-sm-5">
-                                  <button type="submit" class="btn btn-info"><?php echo get_phrase('update_profile');?></button>
+                                  <button type="submit"  id='btn_update_profile' class="btn btn-info"><?php echo get_phrase('update_profile');?></button>
                               </div>
 								</div>
                         </form>
@@ -106,7 +108,7 @@
                             </div>
                             <div class="form-group">
                               <div class="col-sm-offset-3 col-sm-5">
-                                  <button type="submit" id='btn_update_profile' class="btn btn-info"><?php echo get_phrase('update_profile');?></button>
+                                  <button type="submit" class="btn btn-info"><?php echo get_phrase('update_profile');?></button>
                               </div>
 								</div>
                         </form>
@@ -126,13 +128,31 @@
 
 <script>
 
-    $('#btn_update_profile').on('click',function(){
-        if(document.referrer.includes("new_voucher")){
-            window.location.href = document.referrer;
-        }
-    });
-
 	$(document).ready(function(){
+
+        $('#btn_update_profile').click(function(ev){
+
+            var referrer =  document.referrer;
+
+            var url = $(this).closest('form').attr('action');
+
+            var data = $(this).closest('form').serializeArray();
+
+            $.post(url,data,function(response){
+                var message_obj = JSON.parse(response);
+
+                if(message_obj.success){
+                    alert(message_obj.success);
+                    window.location.href = referrer;
+                }else{
+                    alert(message_obj.error);
+                }
+                
+            });
+
+            ev.preventDefault();
+        });
+
 		var datatable = $('.table').DataTable();
 		
 		
