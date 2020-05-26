@@ -576,7 +576,7 @@ public function multiple_vouchers($tym,$project){
 		  redirect(base_url(), 'refresh');
 	
 	$page_data['tym']  = $tym;
-	//$page_data['fcps']  = $this->cluster_fcps();
+	//$page_data['fcps']  = $this->direct_cash_transfers($this->cluster_fcps(),$tym,'fcp_number');
 	$page_data['direct_cash_transfers'] = $this->fcp_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
 	$page_data['page_name']  = 'direct_cash_transfers_report';
 	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);

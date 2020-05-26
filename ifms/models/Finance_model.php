@@ -178,7 +178,7 @@ class Finance_model extends CI_Model
 	private function get_fcp_direct_cash_transfer_short_code()
 	{
 		//Get the fcp short code
-		$dct_mpesa_short_code=0;
+		$dct_mpesa_short_code = 0;
 
 		$dct_mpesa_short_code = $this->db->get_where('projectsdetails', array('icpno' => $this->session->center_id))->row_array('dct_mpesa_short_code');
 
@@ -195,12 +195,12 @@ class Finance_model extends CI_Model
 	function generate_dct_reference_number($voucher_date)
 	{
 		//Explode then implode the yr_month and then get the yy-mm piece
-		$yr_month=date('Y-m',strtotime($voucher_date));
-		$join_yr_month=implode(explode('-',$yr_month));
-		$substring_yymm=substr($join_yr_month,2);
+		$yr_month = date('Y-m', strtotime($voucher_date));
+		$join_yr_month = implode(explode('-', $yr_month));
+		$substring_yymm = substr($join_yr_month, 2);
 
 		//Get the FCP mpesa short code
-		$fcp_mpesa_short_code=$this->get_fcp_direct_cash_transfer_short_code();
+		$fcp_mpesa_short_code = $this->get_fcp_direct_cash_transfer_short_code();
 
 		//Get the all reference numbers which recorded in the field chqno for fcp for UDCTB
 		$max_reference_no = $this->db->select('chqno')->get_where('voucher_header', array('VType' => 'UDCTB', 'icpno' => $this->session->center_id))->result_array('chqno');
@@ -221,19 +221,23 @@ class Finance_model extends CI_Model
 				array_push($serial, $explode_yrmonth_serial[1]);
 			}
 		}
-       //Get maximam reference number is serial array
-		if (count($serial) > 0) {
-           
-			$max_ref_no = max($serial);
+		//Get maximam reference number is serial array
+		if ($fcp_mpesa_short_code == 0) {
+			echo 0;
+		} else {
+			if (count($serial) > 0) {
 
-			if ($max_ref_no < 10)
-				echo $fcp_mpesa_short_code.'-'.$substring_yymm.'-0'.strval(max($serial)+1);
-			else
-				echo $fcp_mpesa_short_code.'-'.$substring_yymm.'-'. strval(max($serial)+1);
-		} 
-		else {
-			echo $fcp_mpesa_short_code.'-'.$substring_yymm.'-0'.strval(1);
+				$max_ref_no = max($serial);
+
+				if ($max_ref_no < 10)
+					echo $fcp_mpesa_short_code . '-' . $substring_yymm . '-0' . strval(max($serial) + 1);
+				else
+					echo $fcp_mpesa_short_code . '-' . $substring_yymm . '-' . strval(max($serial) + 1);
+			} else {
+				echo $fcp_mpesa_short_code . '-' . $substring_yymm . '-0' . strval(1);
+			}
 		}
+
 
 		//  //Get the fcp short code
 		//   $mpesa_short_code=0;

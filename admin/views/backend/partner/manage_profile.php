@@ -1,15 +1,15 @@
 <?php 
- $mpesa_short_code_exists=$this->db->select('dct_mpesa_short_code')->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array();
+//  $mpesa_short_code_exists=$this->db->select('dct_mpesa_short_code')->get_where('projectsdetails',array('icpno'=>$this->session->center_id))->row_array();
 
- if($mpesa_short_code_exists>0){
-     //if not zero then fcp already provided an dct mpesa short code 
-    if($mpesa_short_code_exists['dct_mpesa_short_code']!=0){
-      echo 1;
-    }
-    else{
-        echo 0;
-    }
- }
+//  if($mpesa_short_code_exists>0){
+//      //if not zero then fcp already provided an dct mpesa short code 
+//     if($mpesa_short_code_exists['dct_mpesa_short_code']!=0){
+//       echo 1;
+//     }
+//     else{
+//         echo 0;
+//     }
+//  }
  
 ?>
 <div class="row">

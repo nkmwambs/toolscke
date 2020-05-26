@@ -650,11 +650,26 @@ echo date('Y-m', strtotime($date));
 					url,
 					date_val,
 					function(responseText) {
+						
 						if (responseText.status === 'error') {
 							$('#error_msg').html('<p> Error:'+responseText.message +'</p>');
 						}
+						
 						else{
-							$('#DCTReference').attr('value', responseText);
+							if(responseText==0){
+								//$('#error_msg').html('<p> Error: You have not defined your short code</p>');
+								alert('You have not defined your Mpesa short code. Go enter ');
+
+								var url="<?=base_url()?>admin.php/partner/manage_profile";
+
+								window.location.href = url;
+
+								
+							}
+							else{
+								$('#DCTReference').attr('value', responseText);
+							}
+							
 						}
 					}
 				);
