@@ -60,7 +60,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
-$autoload['libraries'] = array('pagination', 'xmlrpc' , 'form_validation', 'email','upload','image_lib','pagination');
+$autoload['libraries'] = array('pagination', 'xmlrpc' , 'form_validation', 'email','upload','image_lib','pagination','dct_library');
 
 
 /*
@@ -137,4 +137,4 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array('email_model' , 'sms_model','finance_model','settings_model','crud_model');
+$autoload['model'] = array('email_model' , 'sms_model','finance_model','settings_model','crud_model','dct_model');

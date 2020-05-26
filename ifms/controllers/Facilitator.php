@@ -19,7 +19,7 @@ class Facilitator extends CI_Controller
 		parent::__construct();
 		$this->load->database();
         $this->load->library('session');
-		$this->load->library('zip');
+		
 		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 		
        /*cache control*/
@@ -577,7 +577,7 @@ public function multiple_vouchers($tym,$project){
 	
 	$page_data['tym']  = $tym;
 	//$page_data['fcps']  = $this->cluster_fcps();
-	$page_data['direct_cash_transfers'] = $this->fcp_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
+	$page_data['direct_cash_transfers'] = $this->dct_model->fcp_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
 	$page_data['page_name']  = 'direct_cash_transfers_report';
 	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);
     $this->load->view('backend/index', $page_data);	
@@ -589,118 +589,14 @@ public function multiple_vouchers($tym,$project){
 	
 	$page_data['fcp'] = $fcp;
 	$page_data['tym'] = $tym;
-	$page_data['direct_cash_transfer_vouchers'] = $this->direct_cash_transfers_by_fcp($fcp,$tym);
+	$page_data['direct_cash_transfer_vouchers'] = $this->dct_model->direct_cash_transfers_by_fcp($fcp,$tym);
 	$page_data['page_name']  = 'direct_cash_transfer_vouchers';
 	$page_data['page_title'] = date('F Y',$tym).' '.get_phrase('direct_cash_transfer_vouchers_for').' '.$fcp;
     $this->load->view('backend/index', $page_data);		 
  }
 
- private function direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp,$aggregate_by = 'account_number'){
-
-	//aggregate_by = account_number or fcp_number
-
-	$month_start_date = date('Y-m-01',$reporting_month_stamp);
-	$month_end_date = date('Y-m-t',$reporting_month_stamp);
-	
-
-	if($aggregate_by == 'fcp_number'){
-		$this->db->select(array('voucher_body.icpNo as icpNo','AccText'));
-		$this->db->group_by('voucher_body.AccNo','voucher_body.icpNo');
-	}else{
-		$this->db->select(array('AccText'));
-		$this->db->group_by('voucher_body.AccNo');
-	}
-
-	$this->db->select_sum('Cost');
-
-	$this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
-	$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
-	$this->db->where_in('voucher_header.VType',array('DCTB','DCTC'));
-	$this->db->where_in('voucher_header.icpNo',$list_of_fcps);
-	$this->db->where(array('voucher_header.TDate>='=>$month_start_date));
-	$this->db->where(array('voucher_header.TDate<='=>$month_end_date));
-	$result = $this->db->get('voucher_body')->result_array();
-
-	return $result;
- }
-
- private function direct_cash_transfers_by_fcp($fcp_number,$reporting_month_stamp){
-
-	$month_start_date = date('Y-m-01',$reporting_month_stamp);
-	$month_end_date = date('Y-m-t',$reporting_month_stamp);
-	
-	$this->db->select(array('voucher_header.hID as hID','voucher_header.VNumber as VNumber','voucher_header.VType as VType'));
-	$this->db->group_by('voucher_body.VNumber','voucher_body.icpNo');
-
-	$this->db->select_sum('Cost');
-
-	$this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
-	$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
-	$this->db->where_in('voucher_header.VType',array('DCTB','DCTC'));
-	$this->db->where('voucher_header.icpNo',$fcp_number);
-	$this->db->where(array('voucher_header.TDate>='=>$month_start_date));
-	$this->db->where(array('voucher_header.TDate<='=>$month_end_date));
-	$result = $this->db->get('voucher_body')->result_array();
-
-	return $result;
- }
-
- private function fcp_grouped_direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp){
-	$raw_data = $this->direct_cash_transfers($list_of_fcps,$reporting_month_stamp,'fcp_number');
-
-	$dct_records = [];
-
-	$dct_accounts = [];
-
-	foreach($raw_data as $account_expense_for_fcp){
-		$fcp_no = $account_expense_for_fcp['icpNo'];
-		
-		unset($account_expense_for_fcp['icpNo']);
-
-		$dct_records[$fcp_no]['spread'][$account_expense_for_fcp['AccText']] = $account_expense_for_fcp['Cost'];
-		
-		$dct_records[$fcp_no]['total_dct_expense'] = array_sum($dct_records[$fcp_no]['spread']);
-		
-		if(array_search($account_expense_for_fcp['AccText'],$dct_accounts) !== 0 && !array_search($account_expense_for_fcp['AccText'],$dct_accounts)){
-			$dct_accounts[] = $account_expense_for_fcp['AccText'];
-		}
-		
-	}
-
-	return ['dct_records'=>$dct_records,'dct_accounts'=>$dct_accounts];
- }
-
-// public function dct_documents_download($fcp_number,$tym,$vnumber){
-// 	force_download('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber,NULL);
-// }
-
 function dct_documents_download($fcp_number,$tym,$vnumber){
-			
-		if(file_exists('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/')){
-			$map = directory_map('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/', FALSE, TRUE);
-					
-				foreach($map as $row): 
-
-				$path = 'uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.'/'.$vnumber.'/'.$row;
-			
-				$data = file_get_contents($path);
-		
-				$this->zip->add_data($row, $data);
-			endforeach;
-
-	
-	// Write the zip file to a folder on your server. Name it "my_backup.zip"
-	$this->zip->archive('downloads/my_backup_'.$this->session->login_user_id.'.zip');
-	
-	// Download the file to your desktop. Name it "my_backup.zip"
-	
-	$backup_file = 'downloads_'.$this->session->login_user_id.date("Y_m_d_H_i_s").'.zip'; 
-	
-	$this->zip->download($backup_file);
-	
-	unlink('downloads/'.$backup_file);
-		
-	}
+	$this->dct_library->dct_documents_download($fcp_number,$tym,$vnumber);
 }	
  
 }	
