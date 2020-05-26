@@ -624,6 +624,10 @@ public function multiple_vouchers($tym,$project){
 	return $result;
  }
 
+ /**
+  * 
+  */
+
  private function direct_cash_transfers_by_fcp($fcp_number,$reporting_month_stamp){
 
 	$month_start_date = date('Y-m-01',$reporting_month_stamp);
