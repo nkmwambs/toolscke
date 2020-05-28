@@ -168,9 +168,9 @@
     </div>
     
 <script>
-	 $("#modal_ajax").draggable({
-	    handle: ".modal-header"
-	}); 
+	//  $("#modal_ajax").draggable({
+	//     handle: ".modal-header"
+	// }); 
 	
 
 </script>

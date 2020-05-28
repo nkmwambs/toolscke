@@ -50,7 +50,7 @@
 
 <script src="<?php echo base_url();?>assets/js/accounting.min.js"></script>
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/css/columns.css">
+<!-- <link rel="stylesheet" href="<?php echo base_url();?>assets/css/columns.css"> -->
 
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
 
