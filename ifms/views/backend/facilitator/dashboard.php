@@ -1,3 +1,9 @@
+<?php
+//  echo $tym;
+//  echo '<br>';
+//  echo strtotime(date('Y-m-d'));
+//print_r($fcps);
+?>
 <div class="row">
 	<div class="col-md-12">
     	<div class="row">

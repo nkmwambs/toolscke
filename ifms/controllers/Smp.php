@@ -18,7 +18,8 @@ class Smp extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
-        $this->load->library('session');
+		$this->load->library('session');
+		$this->load->model('dct_model');
 		
        /*cache control*/
 // 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -57,10 +58,72 @@ class Smp extends CI_Controller
 		}
 		
         $page_data['page_name']  = 'dashboard';
-        $page_data['page_title'] = get_phrase('finance_dashboard');
+		$page_data['page_title'] = get_phrase('finance_dashboard');
+		//$page_data['fcps']=$this->cluster_fcps();
+		$page_data['regions']=$this->get_regions();
+		$page_data['clusters']=$this->get_fcps_in_cluster_in_region();
+		//$page_data['direct_cash_transfers'] = $this->dct_model->region_grouped_direct_cash_transfers($this->cluster_fcps(),strtotime(date('Y-m-d')));
+		$page_data['total_dct_expense']=1000;
+		$page_data['total_dct_beneficiaries']=54747;
         $this->load->view('backend/index', $page_data);
-    }
+	}
+
+	//Clusters in a region method
+	//FCPS method
+	//Region method
+	function get_regions(){
+		return $this->db->select(array('region_id','region_name'))->get('region')->result_array();
+	}
+	function get_fcps_in_cluster_in_region(){
+
+
+		$this->db->select(array('region.region_id', 'clusters.clusters_id','clusters.clusterName', 'region.region_name AS region'));
+		
+		$this->db->join('region','region.region_id=clusters.region_id');
+		$this->db->group_by('region');
+		return $this->db->get('clusters')->result_array();
+
+
+	}
+	function cluster_fcps(){
+		$cluster = $this->session->cluster;
+	 
+		$this->db->select(array('icpNo'));
+		if($cluster =='KE'){
+			$this->db->where(array('projectsdetails.status'=>1));
+
+		}
+		else{
+			$this->db->where(array('clusterName'=>$cluster,'projectsdetails.status'=>1));
+		}
+		$this->db->where(array('clusterName'=>$cluster,'projectsdetails.status'=>1));
+		$this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
+		$result = $this->db->get('projectsdetails')->result_array();
+	 
+		return array_column($result,'icpNo');
+	 }
+	function direct_cash_transfers_report($tym){
+		if ($this->session->userdata('admin_login') != 1)
+			  redirect(base_url(), 'refresh');
+		
+		$page_data['tym']  = $tym;
+		//$page_data['fcps']  = $this->cluster_fcps();
+		$page_data['direct_cash_transfers'] = $this->dct_model->region_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
+		$page_data['page_name']  = 'direct_cash_transfers_report';
+		$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);
+		$this->load->view('backend/index', $page_data); 
+	 }
+	function per_region_dct_report($report_month){
+		
+		if ($this->session->userdata('admin_login') != 1)
+		redirect(base_url().'admin.php/login', 'refresh');
+
 	
+        $page_data['page_name']  = 'per_region_dct_report';
+		$page_data['page_title'] = get_phrase('per_region_dct_report');
+
+		$this->load->view('backend/index', $page_data);
+	}
 	
 	
 	function cash_journal($param1 = '', $param2 = '', $param3 = ''){
