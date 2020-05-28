@@ -811,7 +811,7 @@
 						}
 						//Onduso modified End
 						var obj_2 = JSON.parse(response);
-						alert(obj_2['0'].TDate);
+						//alert(obj_2['0'].TDate);
 
 						//Header
 						$('#Payee').val('<?php echo $this->session->userdata('center_id'); ?>');
@@ -1048,7 +1048,7 @@
 								option.text = obj[i].AccNoCIVA;
 								option.value = obj[i].AccNo;
 							} else {
-								option.text = obj[i].AccText;
+								option.text = obj[i].AccText + ' - ' + obj[i].AccName;
 								option.value = obj[i].AccNo;
 							}
 
