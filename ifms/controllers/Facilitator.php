@@ -605,10 +605,10 @@ public function multiple_vouchers($tym,$project){
 
 	if($aggregate_by == 'fcp_number'){
 		$this->db->select(array('voucher_body.icpNo as icpNo','AccText'));
-		$this->db->group_by('voucher_body.AccNo','voucher_body.icpNo');
+		$this->db->group_by(array('voucher_body.AccNo','voucher_body.icpNo'));
 	}else{
 		$this->db->select(array('AccText'));
-		$this->db->group_by('voucher_body.AccNo');
+		$this->db->group_by(array('voucher_body.AccNo'));
 	}
 
 	$this->db->select_sum('Cost');
@@ -651,11 +651,13 @@ public function multiple_vouchers($tym,$project){
 
  private function fcp_grouped_direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp){
 	$raw_data = $this->direct_cash_transfers($list_of_fcps,$reporting_month_stamp,'fcp_number');
-
+	// print_r($raw_data);
+	// exit;
 	$dct_records = [];
 
 	$dct_accounts = [];
 
+	$cnt = 0;
 	foreach($raw_data as $account_expense_for_fcp){
 		$fcp_no = $account_expense_for_fcp['icpNo'];
 		
@@ -665,13 +667,13 @@ public function multiple_vouchers($tym,$project){
 		
 		$dct_records[$fcp_no]['total_dct_expense'] = array_sum($dct_records[$fcp_no]['spread']);
 		
-		if(array_search($account_expense_for_fcp['AccText'],$dct_accounts) !== 0 && !array_search($account_expense_for_fcp['AccText'],$dct_accounts)){
-			$dct_accounts[] = $account_expense_for_fcp['AccText'];
-		}
-		
 	}
 
-	return ['dct_records'=>$dct_records,'dct_accounts'=>$dct_accounts];
+	foreach($dct_records as $spread){
+		$dct_accounts = array_merge($dct_accounts,array_keys($spread['spread']));
+	}
+
+	return ['dct_records'=>$dct_records,'dct_accounts'=>array_unique($dct_accounts)];
  }
 
 // public function dct_documents_download($fcp_number,$tym,$vnumber){
