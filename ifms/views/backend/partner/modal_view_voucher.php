@@ -54,8 +54,21 @@ $icpNo = $record->icpNo;
 								
 								<tr>
 									<td colspan="3"><span style="font-weight: bold;">Vendor/Payee: </span> <?php echo $record->Payee;?></td>
-									<?php $chqNo = explode("-",$record->ChqNo);?>
-									<td  colspan="3"><span style="font-weight: bold;">Cheque Number: </span> <?php echo $chqNo[0];?></td>
+									<?php 
+									
+										$chqNo = explode("-",$record->ChqNo);
+
+										if($record->VType !== 'UDCTB'){
+											$chqNo = explode('-',$record->ChqNo)[0];
+										}else{
+											$arr = explode('-',$record->ChqNo);
+											array_pop($arr);
+
+											$chqNo = implode('-',$arr);
+										}
+									?>
+									<td  colspan="3"><span style="font-weight: bold;"><?=$record->VType == 'CHQ'?get_phrase('cheque_number'):get_phrase('reference_number');?>: </span> <?php echo $chqNo;?></td>
+								
 								</tr>
 								
 								<tr>

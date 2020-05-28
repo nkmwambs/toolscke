@@ -46,7 +46,8 @@ $dep = $this->finance_model->deposit_transit($param2,$this->session->center_id,F
 									<th><?php echo get_phrase('action');?></th>
 									<th><?php echo get_phrase('date');?></th>
 									<th><?php echo get_phrase('cleared_date');?></th>
-									<th><?php echo get_phrase('cheque_number');?></th>
+									<th><?php echo get_phrase('voucher_type');?></th>
+									<th><?php echo get_phrase('cheque/_reference_number');?></th>
 									<th><?php echo get_phrase('details');?></th>
 									<th><?php echo get_phrase('amount');?></th>
 								</tr>
@@ -61,7 +62,8 @@ $dep = $this->finance_model->deposit_transit($param2,$this->session->center_id,F
 										<td><div <?php if($mfr_submitted==='1'){echo "style='display:none;'";};?> class="btn btn-danger chqClr"  id='oc-unclear_<?php echo $row['hID'];?>'><?php echo get_phrase('unclear');?></div></td>
 										<td><?php echo $row['TDate']?></td>
 										<td><?php echo $row['clrMonth']?></td>
-										<td><?php  echo $chq[0];?></td>
+										<td><?php echo $row['VType'];?></td>
+										<td><?php echo $chq[0];?></td>
 										<td><?php echo $row['TDescription']?></td>
 										<td><?php echo $row['totals']?></td>
 									</tr>
@@ -69,7 +71,7 @@ $dep = $this->finance_model->deposit_transit($param2,$this->session->center_id,F
 									$oc_total+=$row['totals'];
 									endforeach;
 								?>
-								<tr><td><?php echo get_phrase('total');?></td><td id="ocTotal" colspan="4" style="text-align: right;"><?php echo number_format($oc_total,2);?></td></tr>
+								<tr><td><?php echo get_phrase('total');?></td><td id="ocTotal" colspan="6" style="text-align: right;"><?php echo number_format($oc_total,2);?></td></tr>
 							</body>
 						</table>										
 			

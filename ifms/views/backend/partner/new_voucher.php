@@ -1,5 +1,7 @@
 <hr />
 <?php
+
+//print_r($this->finance_model->generate_dct_reference_number('2018-07-10'));
 //$date = '2019-06-24';
 //echo date('Y-m', strtotime($date));
 //shortcode-yrmonththreerandomserial
@@ -425,10 +427,10 @@
 
 			// added by onduso on 19/5/2020 start
 			/** check if the reference number exists*/
-
-			var reference_number = $('#DCTReference').val();
+			
+			var reference_number = ($('#DCTReference') && $('#DCTReference').val() !== "")?$('#DCTReference').val():0;
 			var voucher_number = $('#Generated_VNumber').val();
-
+			//alert(reference_number);
 			var val = $('#VTypeMain').val();
 
 			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {

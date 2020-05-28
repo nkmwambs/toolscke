@@ -31,7 +31,8 @@ $oc=$this->finance_model->outstanding_cheques($param2,$this->session->center_id)
 								<tr>
 									<th><?php echo get_phrase('action');?></th>
 									<th><?php echo get_phrase('date');?></th>
-									<th><?php echo get_phrase('cheque_number');?></th>
+									<th><?php echo get_phrase('voucher_type');?></th>
+									<th><?php echo get_phrase('cheque/_reference_number');?></th>
 									<th><?php echo get_phrase('details');?></th>
 									<th><?php echo get_phrase('amount');?></th>
 								</tr>
@@ -40,12 +41,22 @@ $oc=$this->finance_model->outstanding_cheques($param2,$this->session->center_id)
 								<?php
 									$oc_total = 0;
 									foreach($oc as$row):
-										$chq=explode('-',$row['ChqNo']);
+										$chq= "";
+
+										if($row['VType'] !== 'UDCTB'){
+											$chq = explode('-',$row['ChqNo'])[0];
+										}else{
+											$arr = explode('-',$row['ChqNo']);
+											array_pop($arr);
+
+											$chq = implode('-',$arr);
+										}
 								?>
 									<tr>
 										<td><div <?php if($mfr_submitted==='1'){echo "style='display:none;'";};?> class="btn btn-danger chqClr"  id='oc_<?php echo $row['hID'];?>'><?php echo get_phrase('clear');?></div></td>
 										<td><?php echo $row['TDate']?></td>
-										<td><?php  echo $chq[0];?></td>
+										<td><?php  echo $chq;?></td>
+										<td><?php echo $row['VType']?></td>
 										<td><?php echo $row['TDescription']?></td>
 										<td><?php echo $this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost?></td>
 									</tr>
@@ -53,7 +64,7 @@ $oc=$this->finance_model->outstanding_cheques($param2,$this->session->center_id)
 									$oc_total+=$this->db->select_sum('Cost')->get_where('voucher_body',array('hID'=>$row['hID']))->row()->Cost;
 									endforeach;
 								?>
-								<tr><td><?php echo get_phrase('total');?></td><td id="ocTotal" colspan="4" style="text-align: right;"><?php echo number_format($oc_total,2);?></td></tr>
+								<tr><td><?php echo get_phrase('total');?></td><td id="ocTotal" colspan="5" style="text-align: right;"><?php echo number_format($oc_total,2);?></td></tr>
 							</body>
 						</table>										
 			

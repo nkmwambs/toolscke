@@ -1216,7 +1216,8 @@ class Partner extends CI_Controller
 				$voucher_number = $this->input->post('VNumber');
 				$voucher_date = $this->input->post('TDate');
 
-				$this->move_temp_files_to_dct_document($temp_dir_name, $voucher_date, $voucher_number);
+				if($this->input->post('VTypeMain') == 'UDCTB')
+					$this->move_temp_files_to_dct_document($temp_dir_name, $voucher_date, $voucher_number);
 			} else {
 				//input error to log file
 

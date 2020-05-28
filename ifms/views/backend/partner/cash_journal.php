@@ -414,15 +414,28 @@ tr.shown td.details-control {
 													<td><?php echo $row['TDescription'];?></td>
 													<?php
 													    
-														$mixed_chq = explode("-", $row['ChqNo']);
+														//$mixed_chq = explode("-", $row['ChqNo']);
 													?>
 													<td><?php 
-													      //Modified by Onduso 23/5/2020 start
+													      //Modified by Onduso/karisa 28/5/2020 start
 														   //echo $mixed_chq[0];
-														   if($row['VType']=='UDCTB') echo $mixed_chq[1].'-'.$mixed_chq[2];
-														   else $mixed_chq[0];//for non UDTCB
+														//    if($row['VType']=='UDCTB') echo $mixed_chq[1].'-'.$mixed_chq[2];
+														//    else $mixed_chq[0];//for non UDTCB
 
-														   //Modified by Onduso 23/5/2020 end
+														   $mixed_chq= "";
+
+															if($row['VType'] !== 'UDCTB'){
+																$mixed_chq = explode('-',$row['ChqNo'])[0];
+															}else{
+																$arr = explode('-',$row['ChqNo']);
+																array_pop($arr);
+
+																$mixed_chq = implode('-',$arr);
+															}
+
+															echo $mixed_chq;
+
+														   //Modified by Onduso/karisa 28/5/2020 end
 														   
 													    ?></td>
 													

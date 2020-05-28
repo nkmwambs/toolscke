@@ -211,6 +211,7 @@ class Finance_model extends CI_Model
 			$array_column_of_chqno = array_column($max_reference_no, 'chqno');
 
 			foreach ($array_column_of_chqno as $serial_no) {
+				if(count(explode('-',$serial_no)) !== 4) continue;
 				//get year and month piece
 				$str_pos = strpos($serial_no, '-');
 				$pick_yr_month_and_serial = substr($serial_no, $str_pos + 1);
@@ -387,22 +388,22 @@ class Finance_model extends CI_Model
 
 	function opening_pc_balance($date, $project)
 	{
-		/**
+		// /**
 		
-		$pc_balance = 0;	
+		// $pc_balance = 0;	
 		
-		$start_date = strtotime($this->project_system_start_date($project));
+		// $start_date = strtotime($this->project_system_start_date($project));
 		
-		$cur_date = strtotime($date);
+		// $cur_date = strtotime($date);
 		
-		if($this->db->get_where('cashbal',array('icpNo'=>$project,'accNo'=>"PC"))->num_rows()>0 && $start_date<$cur_date){
-			$pc_balance = $this->db->get_where('cashbal',array('icpNo'=>$project,'accNo'=>"PC","month"=>date("Y-m-t",strtotime("last day of previous month",$cur_date))))->row()->amount;
+		// if($this->db->get_where('cashbal',array('icpNo'=>$project,'accNo'=>"PC"))->num_rows()>0 && $start_date<$cur_date){
+		// 	$pc_balance = $this->db->get_where('cashbal',array('icpNo'=>$project,'accNo'=>"PC","month"=>date("Y-m-t",strtotime("last day of previous month",$cur_date))))->row()->amount;
 			
-		}
+		// }
 		 
 		 
-		return $pc_balance;
-		 * */
+		// return $pc_balance;
+		//  * */
 
 		$pc_balance = 0;
 
@@ -465,13 +466,13 @@ class Finance_model extends CI_Model
 
 		return $rmk;
 	}
-	/**
-	function expense_accounts_tags(){
+	// /**
+	// function expense_accounts_tags(){
 		
-		$tags = $this->db->get('expense_tag')->result_object();
+	// 	$tags = $this->db->get('expense_tag')->result_object();
 		
-		return $tags;
-	}**/
+	// 	return $tags;
+	// }**/
 
 	/**public function mfr_submit_state($TDate){
 		
