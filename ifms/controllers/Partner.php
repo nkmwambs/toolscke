@@ -991,11 +991,18 @@ class Partner extends CI_Controller
 			if ($fileInfo->getFilename() == $data) {
 
 				unlink($storeFolder . DS . $fileInfo);
+
+				// $cnt = iterator_count(
+				// 	new \RecursiveIteratorIterator(
+				// 		new \RecursiveDirectoryIterator($storeFolder, \FilesystemIterator::SKIP_DOTS)
+				// 	)
+				// 	);
+
 				echo $fileInfo->getFilename(); //for ajax use
 			}
 		}
 
-		$this->delete_empty_folder($storeFolder);
+		//$this->delete_empty_folder($storeFolder);
 	}
 
 	function delete_empty_folder($storeFolder)

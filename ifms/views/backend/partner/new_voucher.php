@@ -391,9 +391,9 @@
 				// beforeSend: function() {
 				// 	$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
 				// },
-				success: function(data) {
+				success: function(response) {
 					//alert('This file'+data+' has been removed');
-					alert('This file ' + data + ' has been removed');
+					alert('This file ' + response + ' has been removed');
 				},
 
 			});
