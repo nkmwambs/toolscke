@@ -1,32 +1,45 @@
 <?php
-//$tym = strtotime('last day of last month',$tym); 
 
-// $tot_icps = $this->db->get_where('users',array('userlevel'=>'1','department'=>'0','cname!='=>'Kenya'))->num_rows();
+//print_r($total_dct_expense);
+// //print_r($regions);
+// echo('<br>');
 
-// $tot_mfr = $this->finance_model->count_mfr_submitted(date('Y-m-t',$tym));
-
-// $per = ($tot_mfr/$tot_icps)*100;
-
-// $tot_validated = $this->finance_model->count_validated_mfr(date('Y-m-t',$tym));
-
-// $per_validated = ($tot_validated/$tot_mfr)*100;
-
-print_r($regions);
-echo('<br>');
-
-echo('<br>');
+// echo('<br>');
 
 print_r($clusters);
+echo '<br>';
+echo '<br>';
+$array=[];
+$last_arr=[];
+//$test_arr=[];
+foreach($clusters as $cluster){
+	
 
-echo $this->session->cluster;
+	$array[$cluster['region']][$cluster['AccText']]=$cluster['Cost'];
+	//$test_arr[$cluster['region']][]=$cluster;
+	//$cluster['region'][$cluster['AccText]']]=$cluster['Cost'];
+
+
+	//$array=$cluster['region'][$cluster['AccText]']];
+}
+foreach($array as $key=>$arr){
+	$last_arr[$key]=array_sum($arr);
+	
+
+}
+print_r($array);
+echo '<br>';
+echo '<br>';
+print_r($last_arr);
+// echo '<br>';
+// echo '<br>';
+// print_r($test_arr);
+
+
+//echo $this->session->cluster;
 
 ?>
 
-<style>
-.remove_decoration{
-	text-decoration: none;
-}
-</style>
 <div class="row">
    <div class="col-sm-6">
    		<h3>
@@ -49,18 +62,18 @@ echo $this->session->cluster;
      	<div class="row">
             <div class="col-md-3">
      			<div class="tile-stats tile-red">
-     				<div class="icon"><i class="fa fa-book"></i></div>
-					<div class="num" data-start="0" data-end="<?=$total_dct_expense;?>" 
+					 <div class="icon"><i class="fa fa-book"></i></div>
+					 <div class="num" data-start="0" data-end="<?=$total_dct_expense;?>" 
 					
                     		data-postfix="" data-duration="1500" data-delay="0">0</div>
                     
-                    <h3>% <?=get_phrase('total_dct_expense');?></h3>
+                    <h3><?=get_phrase('total_dct_expense');?></h3>
                    
         		</div>
         	</div>
         	
         	 <div class="col-md-3">
-				 <a href="#" class="remove_decoration">
+				 <a href="#"  style="text-decoration: none;">
      			<div class="tile-stats tile-red">
      				<div class="icon"><i class="fa fa-book"></i></div>
                     <div class="num" data-start="0" data-end="<?=$total_dct_beneficiaries;?>" 
