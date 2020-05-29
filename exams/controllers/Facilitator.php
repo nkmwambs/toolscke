@@ -60,12 +60,7 @@ class Facilitator extends CI_Controller
 		if(isset($_POST['acYr'])){
 			$acYr = $this->input->post('acYr');
 		}
-
-		$crud->set_model('Exam_join');
-		
-		//$crud->where(array('acYr'=>$acYr));
-		
-
+		$crud->where(array('acYr'=>$acYr,'cstName'=>$this->session->cluster));
 		$crud->display_as('cstName','Cluster')
 			->display_as('pNo','Project')
 			->display_as('childNo','Beneficiary Number')
@@ -89,9 +84,9 @@ class Facilitator extends CI_Controller
 			$clusters[] = $row->cname;
 		}
 		
-		//$crud->field_type('cstName', 'dropdown',$clusters);
+		$crud->field_type('cstName', 'dropdown',$clusters);
 		
-		//$crud->callback_field('pNo',array($this,'field_callback_pNo'));
+		$crud->callback_field('pNo',array($this,'field_callback_pNo'));
 		
 		$crud->unset_delete();
 		$crud->unset_add();

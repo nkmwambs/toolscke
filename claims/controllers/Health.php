@@ -73,23 +73,15 @@ class Health extends CI_Controller
 			
 			$rct = "<a href='".base_url()."claims.php/health/add_claim_rct/".$claims->rec."' class='btn btn-green btn-icon'><i class='fa fa-cloud-download'></i>".get_phrase('download')."</a>";
 			
-			$receipt_obj = $this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"receipt"));
-			if(
-				count($receipt_obj->result_object())=== 0 ||
-				!file_exists('uploads/document/medical/claims/'.$claims->rec)
-			)
-			{		
+			if(count($this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"receipt"))->result_object())=== 0){
 				$rct =  "<a href='".base_url()."claims.php/health/add_claim_rct/".$claims->rec."' class='btn btn-orange btn-icon'><i class='fa fa-cloud-upload'></i>".get_phrase('attach_receipt')."</a>";
 			}
 			
 			$row[] = $rct;//17-view
 			
 			$refNo = "<a href='".base_url()."claims.php/health/add_claim_docs/".$claims->rec."' class='btn btn-green btn-icon'><i class='fa fa-cloud-download'></i>".get_phrase('download')."</a>";
-			$ref_obj = $this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"approval"));
-			if(count($ref_obj->result_object())=== 0 ||
-				!file_exists('uploads/document/medical/supportdocs/'.$claims->rec)
-			)
-			{
+			
+			if(count($this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"approval"))->result_object())=== 0){
 				$refNo =  "<a href='".base_url()."claims.php/health/add_claim_docs/".$claims->rec."' class='btn btn-orange btn-icon'><i class='fa fa-cloud-upload'></i>".get_phrase('attach_approval')."</a>";
 			}						
 			
@@ -167,156 +159,6 @@ class Health extends CI_Controller
 	/**
 	 * Medical Claim Functions
 	 */
-	 
-	 function process_claim_no_redirect($rec_id){
-	 	$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;
-		
-		$reinstatedate = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->reinstatementdate;
-		
-		$reinstated = "no";
-	
-		if($reinstatedate!== NULL){
-			$reinstated = "yes";
-		}
-		
-		$updated_count = 0;
-		
-		$statusMsg = "";
-		
-		if($chk==="2" || $chk === "0"){
-			
-			$this->db->where(array('rec'=>$rec_id));
-			$data=array("rmks"=>4);
-			$this->db->update('claims',$data);
-			$updated_count = $this->db->affected_rows();
-			$statusMsg = "Claim processed successfully";
-			
-		}elseif($chk==="8" || $chk === "9" ){
-			
-			$this->db->where(array('rec'=>$rec_id));
-			$data=array("rmks"=>4,"reinstatementdate"=>NULL);
-			$this->db->update('claims',$data);
-			$updated_count = $this->db->affected_rows();
-			$statusMsg = "Reinstated claim processed successfully";							
-						
-						
-		}elseif($chk==="4"){
-				
-			$this->db->where(array('rec'=>$rec_id));
-			$data=array("rmks"=>7);
-			$this->db->update('claims',$data);
-			$updated_count = $this->db->affected_rows();
-			$statusMsg = "Claim paid successfully";
-		}	
-			
-		if($updated_count===0){
-			$statusMsg = "Claim could not be processed";
-		}
-		
-		echo $updated_count;
-	 }
-
-	function count_claims_by_status($status_code = array()){
-		$this->db->where_in('rmks',$status_code);
-		return $this->db->get('claims')->num_rows();
-	}
-	
-	function get_claim_documents($claim_ids = array()){
-				
-		 $this->db->select(array('rec','file_name','upload_type'));
-		 $this->db->where_in('claims.rec',$claim_ids);
-		 
-		 $this->db->join('apps_files','apps_files.file_group=claims.rec');	
-		 $this->db->group_by(array('rec','upload_type'));	 
-		 $claim_documents = $this->db->get('claims')->result_object();
-		 
-		 $grouped = array();
-		 		 
-		 foreach($claim_documents as $row){
-		 	$grouped[$row->rec][$row->upload_type] = $row->file_name;
-		 }
-		 
-		 return $grouped;
-	}
-	
-	function get_claim_notes($claim_ids = array(),$app_name = 'claims'){
-		 $this->db->select(array('rec','userid','rson','stamp','userfirstname','userlastname'));
-		 $this->db->where_in('claims.rec',$claim_ids);
-		 $this->db->where(array('app_name'=>$app_name));
-		 
-		 $this->db->join('detail','detail.recid=claims.rec');	
-		 $this->db->join('users','users.ID=detail.userid');
-		 
-		 $this->db->group_by(array('rec'));
-		 
-		 $claim_notes = $this->db->get('claims')->result_object();
-		 
-		 $grouped = array();
-		 
-		 foreach($claim_notes as $row){
-		 	$grouped[$row->rec] = $row;
-		 }
-		 
-		 return $grouped;
-		
-	}
-	 
-	 function get_claims_to_process(){
-	 	
-		 $query_string = "claims.rmks IN (0,2,8,9) AND (locked = 0 OR locked_by = ".$this->session->login_user_id.")";
-		 $this->db->select(array('rec','incidentID','claimCnt','proNo','cluster','childNo','childName',
-		 'treatDate','diagnosis','totAmt','careContr','nhif','amtReim','facName','facClass','type','date as claimDate',
-		 'vnum','rct','claims.rmks','claim_status.name as status','locked'));
-		 $this->db->where($query_string);
-		 $this->db->order_by("rec");
-		 $this->db->limit($this->config->item('count_of_processing_claims_loaded'),0);
-		 
-		$this->db->join('claim_status','claim_status.rmks=claims.rmks');
-		
-		$claims_to_process_by_hs_raw = $this->db->get('claims')->result_object();
-		
-		$array_of_claim_ids = array_column($claims_to_process_by_hs_raw, 'rec');
-		 
-		$notes = $this->get_claim_notes($array_of_claim_ids);
-		$docs = $this->get_claim_documents($array_of_claim_ids); 		 
-		
-		$claims_to_process_by_hs = array();
-		 
-		 foreach($claims_to_process_by_hs_raw as $row){
-		 	
-		 	$data['locked'] = 1;
-			$data['locked_by'] = $this->session->login_user_id;
-			$this->db->where(array('rec'=>$row->rec));
-		 	$this->db->update('claims',$data);
-		 	
-		 	$claims_to_process_by_hs[$row->rec]['details'] = $row;
-			$claims_to_process_by_hs[$row->rec]['docs'] = isset($docs[$row->rec])?$docs[$row->rec]:array($row->rec=>"");
-			$claims_to_process_by_hs[$row->rec]['notes'] = isset($notes[$row->rec])?$notes[$row->rec]:array($row->rec=>"");
-		 }
-		 
-		 return $claims_to_process_by_hs;
-	 }
-	 
-	 function update_processing(){
-	 	$data['queued'] = $this->count_claims_by_status(array(0,2,8,9));
-	 	$data['processed'] = $this->count_claims_by_status(array(4));
-		$data['submitted'] = $this->count_claims_by_status(array(0,2));
-		$data['reinstated'] = $this->count_claims_by_status(array(8,9));
-	 	$data['claims'] = $this->get_claims_to_process();
-		$data['json_claims'] = json_encode($this->get_claims_to_process());
-	 	echo $this->load->view('backend/health/processing_panel',$data,true);
-	 }
-	 
-	 function process_medical_claims(){
-		 if ($this->session->userdata('admin_login') != 1)
-	            redirect(base_url(), 'refresh');
-                                  
-		
-        $page_data['page_name']  = 'process_medical_claims';
-        $page_data['page_title'] = get_phrase('process_claims');
-        $this->load->view('backend/index', $page_data);     	
-	 }
-	 
 	 function medical_claims($param1="",$param2="")
     {
         if ($this->session->userdata('admin_login') != 1)
@@ -586,20 +428,19 @@ class Health extends CI_Controller
 
 	function ziparchive($param1="",$param2="",$param3=""){
 		
-			try{
-				$dir_path = 'uploads/document/medical/'.$param1.'/'.$param2;
-				$dir = new DirectoryIterator($dir_path);
-					foreach ($dir as $fileinfo) {
-					    if (!$fileinfo->isDot()) 
-					    {
-					    	$file_path = $dir_path.'/'.$fileinfo->getFilename();
-							$data = file_get_contents($file_path);
+			$files = $this->db->get_where('apps_files',array('file_group'=>$param2,'upload_type'=>$param3))->result_object();
+			
+			
+			foreach ($files as $file) {
+
+				//if (is_file($filename)) {
+					$path = 'uploads/document/medical/'.$param1.'/'.$param2.'/'.$file->file_name;
+					
+					$data = file_get_contents($path);
 				
-							$this->zip->add_data($fileinfo->getFilename(), $data); 
-						}
-					}
-			}catch(Exception $e){
-									
+					$this->zip->add_data($file->file_name, $data);
+				//}				    
+								    
 			}
 			
 			// Write the zip file to a folder on your server. Name it "my_backup.zip"

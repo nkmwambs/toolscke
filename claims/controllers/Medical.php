@@ -145,7 +145,7 @@ class Medical extends CI_Controller
 			
 			//Compute claim count
 			
-			$current_count = $this->db->get_where('claims',array('childNo'=>$this->input->post('childNo')))->num_rows();
+			$current_count = $this->db->get_where('app_medical_claims',array('childNo'=>$this->input->post('childNo')))->num_rows();
 			
 			$data['connect_incident_id'] = $this->input->post('connect_incident_id');
 			$data['claimCnt'] = $current_count+1;
@@ -169,7 +169,7 @@ class Medical extends CI_Controller
 			$data['rmks'] = -1;
 			$data['randomID'] = rand(10000, 99000);
 			
-			$this->db->insert('claims',$data);
+			$this->db->insert('app_medical_claims',$data);
 			
 			$rec= $this->db->insert_id();
 			
@@ -199,7 +199,7 @@ class Medical extends CI_Controller
 			
 			$this->db->where(array('rec'=>$param2));
 			
-			$this->db->update("claims",$data);
+			$this->db->update("app_medical_claims",$data);
 			
 			//if($this->db->affected_rows()>0){
 				
@@ -224,7 +224,7 @@ class Medical extends CI_Controller
 		endswitch;
 		
 		 
-		$claims = $this->db->get('claims')->result_object(); 
+		$claims = $this->db->get('app_medical_claims')->result_object(); 
 		
 		$page_data['center'] = $icp_id;
 		$page_data['cluster'] = $cluster;
@@ -238,7 +238,7 @@ class Medical extends CI_Controller
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
             
-		$claim = $this->db->get_where('claims',array('rec'=>$param1))->row();                         
+		$claim = $this->db->get_where('app_medical_claims',array('rec'=>$param1))->row();                         
 
 		$page_data['files'] = $this->file->getRows($param1,'approval');  
 		$page_data['claim'] = $claim;
@@ -251,9 +251,9 @@ class Medical extends CI_Controller
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
 
-       	//$claim = $this->db->get_where('claims',array('rec'=>$param1))->row();                         
+       	//$claim = $this->db->get_where('app_medical_claims',array('rec'=>$param1))->row();                         
 			  
-		$claim = $this->db->get_where('claims',array('rec'=>$param1))->row();                         
+		$claim = $this->db->get_where('app_medical_claims',array('rec'=>$param1))->row();                         
 			
 		$page_data['files'] = $this->file->getRows($param1,'receipt');  			
 		$page_data['claim'] = $claim;
@@ -346,7 +346,7 @@ class Medical extends CI_Controller
 			
 			if($param1==='claims'){
 
-				$claims_arr = $this->db->get_where('claims',array('rec'=>$this->input->post('claim_id')))->row();
+				$claims_arr = $this->db->get_where('app_medical_claims',array('rec'=>$this->input->post('claim_id')))->row();
 				
 				//Check if Facility is not Public
 				$facClass = $claims_arr->facClass;
@@ -362,7 +362,7 @@ class Medical extends CI_Controller
 				}
 				
 				//Check amount to be spent
-				$totAmt = $this->db->get_where('claims',array('rec'=>$this->input->post('claim_id')))->row()->totAmt;
+				$totAmt = $this->db->get_where('app_medical_claims',array('rec'=>$this->input->post('claim_id')))->row()->totAmt;
 				
 				
 				if($public === "no" && $supportdocs ==="no" && $totAmt>=10000){
@@ -381,12 +381,14 @@ class Medical extends CI_Controller
 	}
 
 
-	function download($param1="",$param2="",$param3=""){
+	function download($param1="",$param2=""){
 		
-		force_download('uploads/document/medical/'.$param1.'/'.$param2.'/'.$param3, NULL);
+		$path_arr = $this->db->get_where('apps_files',array('id'=>$param2))->row();
+		
+		force_download('uploads/document/medical/'.$param1.'/'.$path_arr->file_group.'/'.$path_arr->file_name, NULL);
 		
 		if($param1==='claims'){
-			$this->add_claim_rct($param2);//
+			$this->add_claim_rct($param2);
 		}else{
 			$this->add_claim_docs($param2);
 		}
@@ -438,7 +440,7 @@ class Medical extends CI_Controller
 	}
 
 	function check_public_facility_type($rec_id=""){
-		$claim_arr = $this->db->get_where('claims',array('rec'=>$rec_id))->row();
+		$claim_arr = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row();
 			
 			$public = "yes";
 			
@@ -459,7 +461,7 @@ class Medical extends CI_Controller
 	}
 	
 	function check_total_amount($rec_id=""){
-		$totAmt = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->totAmt;
+		$totAmt = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->totAmt;
 		
 		return $totAmt;
 	}
@@ -468,7 +470,7 @@ class Medical extends CI_Controller
 		
 		$status = "yes";
 		
-		$submited = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;
+		$submited = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;
 		
 		if($submited==='-1'){
 			$status = "no";	
@@ -506,7 +508,7 @@ class Medical extends CI_Controller
 			
 				$data = array("rmks"=>"0");
 				
-				$this->db->update("claims",$data);
+				$this->db->update("app_medical_claims",$data);
 				
 				++$cnt_processed;	
 			}
@@ -548,7 +550,7 @@ class Medical extends CI_Controller
 			
 				$data = array("rmks"=>"0");
 				
-				$this->db->update("claims",$data);
+				$this->db->update("app_medical_claims",$data);
 				
 				++$cnt_processed;	
 			}
@@ -566,9 +568,9 @@ class Medical extends CI_Controller
 
 	function process_claim($rec_id=""){
 		
-		$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;
+		$chk = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;
 		
-		$reinstatedate = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->reinstatementdate;
+		$reinstatedate = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->reinstatementdate;
 		
 		$reinstated = "no";
 	
@@ -584,7 +586,7 @@ class Medical extends CI_Controller
 				
 			$this->db->where(array('rec'=>$rec_id));
 			$data=array("rmks"=>2);
-			$this->db->update('claims',$data);
+			$this->db->update('app_medical_claims',$data);
 			$updated_count = $this->db->affected_rows();
 			$statusMsg = "Claim checked successfully";
 			
@@ -592,7 +594,7 @@ class Medical extends CI_Controller
 		
 			$this->db->where(array('rec'=>$rec_id));
 			$data=array("rmks"=>2,"reinstatementdate"=>"0000-00-00");
-			$this->db->update('claims',$data);
+			$this->db->update('app_medical_claims',$data);
 			$updated_count = $this->db->affected_rows();
 			$statusMsg = "Reinstated claim checked successfully";			
 		
@@ -600,7 +602,7 @@ class Medical extends CI_Controller
 			
 			$this->db->where(array('rec'=>$rec_id));
 			$data=array("rmks"=>4);
-			$this->db->update('claims',$data);
+			$this->db->update('app_medical_claims',$data);
 			$updated_count = $this->db->affected_rows();
 			$statusMsg = "Claim processed successfully";
 			
@@ -608,7 +610,7 @@ class Medical extends CI_Controller
 			
 			$this->db->where(array('rec'=>$rec_id));
 			$data=array("rmks"=>4,"reinstatementdate"=>"0000-00-00");
-			$this->db->update('claims',$data);
+			$this->db->update('app_medical_claims',$data);
 			$updated_count = $this->db->affected_rows();
 			$statusMsg = "Reinstated claim processed successfully";							
 						
@@ -616,7 +618,7 @@ class Medical extends CI_Controller
 				
 			$this->db->where(array('rec'=>$rec_id));
 			$data=array("rmks"=>7);
-			$this->db->update('claims',$data);
+			$this->db->update('app_medical_claims',$data);
 			$updated_count = $this->db->affected_rows();
 			$statusMsg = "Claim paid successfully";
 		}	
@@ -632,7 +634,7 @@ class Medical extends CI_Controller
 	
 	function delete_claim($rec_id=""){
 			
-		$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;	
+		$chk = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;	
 		
 		$statusMsg = "Claim deleted successfully";
 		
@@ -640,7 +642,7 @@ class Medical extends CI_Controller
 		
 		if($chk==="-1"){
 			$this->db->where(array('rec'=>$rec_id));
-			$this->db->delete("claims");
+			$this->db->delete("app_medical_claims");
 			$updated_count = $this->db->affected_rows();
 		}
 		
@@ -655,9 +657,9 @@ class Medical extends CI_Controller
 	
 	function decline_claim($rec_id=""){
 		
-		$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;	
+		$chk = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;	
 		
-		$reinstatementdate = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->reinstatementdate;
+		$reinstatementdate = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->reinstatementdate;
 		
 		$statusMsg = "Claim could not be declined <br>";
 		
@@ -667,7 +669,7 @@ class Medical extends CI_Controller
 			
 			//$this->db->where(array('rec'=>$rec_id));
 			//$dt = array('rmks'=>1,"reinstatementdate"=>"0000-00-00");
-			//$this->db->update("claims",$dt);
+			//$this->db->update("app_medical_claims",$dt);
 						
 						
 			//$data['comment'] = $this->input->post('comment');
@@ -684,7 +686,7 @@ class Medical extends CI_Controller
 
 			$this->db->where(array('rec'=>$rec_id));
 			$dt = array('rmks'=>1);
-			$this->db->update("claims",$dt);
+			$this->db->update("app_medical_claims",$dt);
 			
 						
 			$data['comment'] = $this->input->post('comment');
@@ -699,7 +701,7 @@ class Medical extends CI_Controller
 
 			$this->db->where(array('rec'=>$rec_id));
 			$dt = array('rmks'=>3);
-			$this->db->update("claims",$dt);
+			$this->db->update("app_medical_claims",$dt);
 			
 						
 			$data['comment'] = $this->input->post('comment');
@@ -713,7 +715,7 @@ class Medical extends CI_Controller
 		}elseif($reinstatementdate!=="0000-00-00" && ($chk==="1" || $chk==="3")){
 				$this->db->where(array('rec'=>$rec_id));
 				$dt = array('reinstatementdate'=>"0000-00-00");
-				$this->db->update("claims",$dt);
+				$this->db->update("app_medical_claims",$dt);
 				
 							
 				$data['comment'] = $this->input->post('comment');
@@ -732,11 +734,11 @@ class Medical extends CI_Controller
 	
 	function edit_medical_claim($rec_id=""){
 		
-		$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;
+		$chk = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;
 
 		if($chk==="-1" || $chk === "1" || $chk ==="3"){
 			$page_data['rec_id'] = $rec_id;
-			$page_data['claim'] = $this->db->get_where("claims",array("rec"=>$rec_id))->row();
+			$page_data['claim'] = $this->db->get_where("app_medical_claims",array("rec"=>$rec_id))->row();
 			$page_data['page_name']  = 'edit_medical_claim';
 	        $page_data['page_title'] = get_phrase('edit_medical_claim');
 			$this->load->view('backend/index', $page_data);		
@@ -753,7 +755,7 @@ class Medical extends CI_Controller
 	
 	function add_claim_comments($rec_id=""){
 
-		$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;
+		$chk = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;
 		
 			if($chk === "1" || $chk ==="3"){
 				$data['comment'] = $this->input->post('comment');
@@ -777,7 +779,7 @@ class Medical extends CI_Controller
 	}
 	
 	function reinstate_claim($rec_id=""){
-		$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;
+		$chk = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;
 		
 			if($chk === "1" || $chk ==="3"){
 				
@@ -785,7 +787,7 @@ class Medical extends CI_Controller
 				
 				$data['reinstatementdate'] = date('Y-m-d');		
 		
-				$this->db->update("claims",$data);
+				$this->db->update("app_medical_claims",$data);
 				
 				$statusMsg = "Claim reinstated successfully";
 					
@@ -849,7 +851,7 @@ class Medical extends CI_Controller
 				break;
 		endswitch;
 		 
-		$claims = $this->db->get('claims')->result_object(); 
+		$claims = $this->db->get('app_medical_claims')->result_object(); 
 		
 		$page_data['claims'] = $claims;
         echo $this->load->view('backend/admin/claim_search_results', $page_data,TRUE);

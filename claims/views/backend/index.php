@@ -28,8 +28,25 @@
 </head>
 <body class="page-body <?php if ($skin_colour != '') echo 'skin-' . $skin_colour;?>" >
 	
+		<!-- BEGIN PHP Live! HTML Code -->
+		<!-- <span 
+			style="color: #0000FF; text-decoration: underline; line-height: 0px !important; cursor: pointer;position: absolute;z-index:10;bottom: 0px;right: 0px;" 
+			id="phplive_btn_1525838850" onclick="phplive_launch_chat_0()">
+		</span>
+		<script data-cfasync="false" type="text/javascript">
+		
+		(function() {
+		var phplive_e_1525838850 = document.createElement("script") ;
+		phplive_e_1525838850.type = "text/javascript" ;
+		phplive_e_1525838850.async = true ;
+		phplive_e_1525838850.src = "https://t2.phplivesupport.com/support/js/phplive_v2.js.php?v=0|1525838850|2|" ;
+		document.getElementById("phplive_btn_1525838850").appendChild( phplive_e_1525838850 ) ;
+		})() ;
+		
+		</script> -->
+	<!-- END PHP Live! HTML Code -->
 	
-	<div class="page-container sidebar-collapsed  <?php if ($text_align == 'right-to-left') echo 'right-sidebar';?>" >
+	<div class="page-container <?php if ($text_align == 'right-to-left') echo 'right-sidebar';?>" >
 		<?php include $account_type.'/navigation.php';?>	
 		<div class="main-content">
 		

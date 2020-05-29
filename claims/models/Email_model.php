@@ -38,15 +38,7 @@ class Email_model extends CI_Model {
 		$email = $this->db->get_where('users',array('cname'=>$claim->cluster,'userlevel'=>'2'))->row()->email;
 		
 		if($rmk==='3'){
-			//$email = $this->db->select('email')->get_where('users',array('userlevel'=>'5'))->row()->email;
-			$this->db->join('users','users.ID=detail.userid');
-			$max_comment_id_for_claim = $this->db->select('max(detail.id) as com_id')->get_where('detail',array('recid'=>$claim_id,'userlevel'=>'5'))->row()->com_id;
-			
-			$get_last_commenting_userid = $this->db->get_where('detail',array('id'=>$max_comment_id_for_claim))
-			->row()->userid;
-			
-			$email = $this->db->select('email')->get_where('users',array('ID'=>$get_last_commenting_userid))
-			->row()->email;
+			$email = $this->db->select('email')->get_where('users',array('userlevel'=>'5'))->result_array();
 		}
 		
 		$email_msg		=	$claim->proNo." has reinstated a claim with details as below:<br />";

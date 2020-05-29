@@ -19,14 +19,8 @@
             </li>
 			
 			<li class="">
-            	<a href="#partner_participants" data-toggle="tab"><i class="entypo-plus"></i> 
-					<?php echo get_phrase('partner_participants');?>
-                    	</a>
-            </li>
-            
-            <li class="">
-            	<a href="#no_participants" data-toggle="tab"><i class="entypo-plus"></i> 
-					<?php echo get_phrase('national_office_participants');?>
+            	<a href="#add_participants" data-toggle="tab"><i class="entypo-plus"></i> 
+					<?php echo get_phrase('add_participants');?>
                     	</a>
             </li>
             
@@ -102,9 +96,9 @@
 					    						<td><input type="checkbox" class="choose" id="<?=$participant->users_id;?>" /></td>
 					    						<td><?=$staff->userfirstname;?></td>
 					    						<td><?=$staff->userlastname;?></td>
-					    						<td><?=$staff->department==0?"KE":$staff->cname;?></td>
-					    						<td><?=$staff->department==0?"Not Applicable":$staff->fname;?></td>
-					    						<td><?=$staff->department==0?"NO Staff":$this->db->get_where("department",array("department_id"=>$staff->department))->row()->name;?></td>
+					    						<td><?=$staff->cname;?></td>
+					    						<td><?=$staff->fname;?></td>
+					    						<td><?=$this->db->get_where("department",array("department_id"=>$staff->department))->row()->name;?></td>
 					    						<td><input type="checkbox" class="confirm mark" id="confirm_<?=$participant->users_id;?>" value="<?=$participant->confirmed;?>" <?php if($participant->confirmed === '1') echo "checked";?>  <?php if($participant->attended === '1') echo "disabled='disabled'";?>  /></td>
 					    						<td><input type="checkbox" class="attend mark" id="attend_<?=$participant->users_id;?>" value="<?=$participant->attended;?>" <?php if($participant->attended === '1') echo "checked";?>  <?php if($participant->confirmed === '0') echo "disabled='disabled'";?> /></td>
 					    						
@@ -123,7 +117,7 @@
    			</div>
    			</div>
    			
-   			<div class="tab-pane box" id="partner_participants" style="padding: 5px">
+   			<div class="tab-pane box" id="add_participants" style="padding: 5px">
                <div class="box-content">
                		
                	<div class="row">
@@ -251,82 +245,7 @@
             </div>   	
    			
    		</div>
-   		
-   		
-   		<div class="tab-pane box" id="no_participants" style="padding: 5px">
-            <div class="box-content">
-               		
-               	<div class="row">
-               		
-               			<?php echo form_open(base_url() . 'training.php/admin/manage_register/add_participants/'.$event->event_id, array('id'=>'frm_user_add','class' => 'form-horizontal form-groups-bordered validate',"autocomplete"=>"off",'enctype' => 'multipart/form-data'));?>               					
-               		<div class="form-group">
-               			<div class="col-sm-12">	
-               				<div class="col-sm-5">
-               					<?php 
-               						//$query = "select * from users LEFT JOIN positions ON users.userlevel=positions.pstID where userlevel>1";
-               						$this->db->select("ID,dsgn,userfirstname,userlastname");
-               						$country_staff = $this->db->join("positions","positions.pstID=users.userlevel")->get_where("users",array("userlevel>"=>"1"))->result_object();
-               						//print_r($country_staff);
-									$opt_group = array();
-									foreach($country_staff as $group){
-										$opt_group[$group->dsgn][] = $group;
-									}
-									
-									//print_r($opt_group);	
-               					?>
-								
-								<select  id="multiselect" class="form-control" size="8" multiple="multiple">
-									<?php
-										foreach($opt_group as $key=>$value){
-									?>
-										<optgroup label="<?=$key;?>">
-											<?php
-												foreach($value as $staff){
-													$selected = "";
-									      			foreach($participants as $marked){
-									      				if($marked->users_id === $staff->ID){
-									      					$selected = "disabled='disabled' style='color:red;'";		
-									      				}
-									      			}
-											?>
-												<option <?=$selected;?> value="<?=$staff->ID;?>"><?=$staff->userfirstname.' '.$staff->userlastname;?></option>
-											<?php		
-												}
-											?>
-										</optgroup>
-									<?php		
-										}
-									?>
-	 							</select>
-	 						</div>				
-	 										
-               				 <div class="col-xs-2">
-								<button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
-								<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
-								<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
-								<button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
-							</div>
-									    
-									    
-							<div class="col-xs-5">
-								<select name="selected_participants[]" id="multiselect_to" class="form-control" size="8" multiple="multiple">
-								</select> 
-    						</div>
-    				
-						</div>	
-						</div>
-    				
-    					<div class="form-group">
-								<div class="col-xs-12">
-									<button class="btn btn-primary btn-icon"><i class="fa fa-save"></i><?=get_phrase('create');?></button>
-								</div>
-						</div>
-								
-    					</form>
-					
-				</div>
-			</div>	
-		</div>		
+	
 	
 
 </div>

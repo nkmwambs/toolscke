@@ -72,27 +72,16 @@ class Partner extends CI_Controller
 			$row[] = $claims->vnum;//16
 			
 			$rct = "<a href='".base_url()."claims.php/partner/add_claim_rct/".$claims->rec."' class='btn btn-green btn-icon'><i class='fa fa-cloud-download'></i>".get_phrase('download')."</a>";
-			$receipt_obj = $this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"receipt"));
 			
-			 $dir = 'uploads/document/medical/claims/'.$claims->rec; 
- 			 $isRctDirEmpty = (count(glob("$dir/*")) === 0) ? TRUE : FALSE;
-			
-			if(
-				count($receipt_obj->result_object())=== 0 ||
-				!file_exists('uploads/document/medical/claims/'.$claims->rec) ||
-				$isRctDirEmpty
-				){
+			if(count($this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"receipt"))->result_object())=== 0){
 				$rct =  "<a href='".base_url()."claims.php/partner/add_claim_rct/".$claims->rec."' class='btn btn-orange btn-icon'><i class='fa fa-cloud-upload'></i>".get_phrase('attach_receipt')."</a>";
 			}
 			
 			$row[] = $rct;//17-view
 			
 			$refNo = "<a href='".base_url()."claims.php/partner/add_claim_docs/".$claims->rec."' class='btn btn-green btn-icon'><i class='fa fa-cloud-download'></i>".get_phrase('download')."</a>";
-			$ref_obj = $this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"approval"));
-			if(count($ref_obj->result_object())=== 0 ||
-				!file_exists('uploads/document/medical/supportdocs/'.$claims->rec)
-			)
-			{		
+			
+			if(count($this->db->get_where('apps_files',array('file_group'=>$claims->rec,'upload_type'=>"approval"))->result_object())=== 0){
 				$refNo =  "<a href='".base_url()."claims.php/partner/add_claim_docs/".$claims->rec."' class='btn btn-orange btn-icon'><i class='fa fa-cloud-upload'></i>".get_phrase('attach_approval')."</a>";
 			}						
 			
@@ -560,20 +549,19 @@ class Partner extends CI_Controller
 
 	function ziparchive($param1="",$param2="",$param3=""){
 		
-			try{
-				$dir_path = 'uploads/document/medical/'.$param1.'/'.$param2;
-				$dir = new DirectoryIterator($dir_path);
-					foreach ($dir as $fileinfo) {
-					    if (!$fileinfo->isDot()) 
-					    {
-					    	$file_path = $dir_path.'/'.$fileinfo->getFilename();
-							$data = file_get_contents($file_path);
+			$files = $this->db->get_where('apps_files',array('file_group'=>$param2,'upload_type'=>$param3))->result_object();
+			
+			
+			foreach ($files as $file) {
+
+				//if (is_file($filename)) {
+					$path = 'uploads/document/medical/'.$param1.'/'.$param2.'/'.$file->file_name;
+					
+					$data = file_get_contents($path);
 				
-							$this->zip->add_data($fileinfo->getFilename(), $data); 
-						}
-					}
-			}catch(Exception $e){
-									
+					$this->zip->add_data($file->file_name, $data);
+				//}				    
+								    
 			}
 			
 			// Write the zip file to a folder on your server. Name it "my_backup.zip"
@@ -830,7 +818,7 @@ class Partner extends CI_Controller
 	
 	function decline_claim($rec_id=""){
 		
-		$chk = $this->db->get_where('claims',array('rec'=>$rec_id))->row()->rmks;	
+		$chk = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->rmks;	
 		
 		$reinstatementdate = $this->db->get_where('app_medical_claims',array('rec'=>$rec_id))->row()->reinstatementdate;
 		

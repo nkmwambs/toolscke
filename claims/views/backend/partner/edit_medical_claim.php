@@ -50,70 +50,7 @@
 									<input type="text" class="form-control" name="childName" id="childName" readonly="readonly" value="<?=$claim->childName;?>"/>
 								</div>
 							</div>
-							
-							<!--<div class="form-group">
-								<label class="control-label col-sm-4"><?php echo get_phrase('incident_type');?></label>
-								<div class="col-sm-8">
-									<select class="form-control" name="incident_type" id="incident_type" onchange="get_incident_category(this);">
-										<option value=""><?php echo get_phrase('select');?></option>
-										<option value="illness" <?php if($claim->incident_type==='illness') echo 'selected';?>><?php echo get_phrase('illness');?></option>
-										<option value="injury" <?php if($claim->incident_type==='injury') echo 'selected';?>><?php echo get_phrase('injury');?></option>
-									</select>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="control-label col-sm-4"><?php echo get_phrase('incident_category');?></label>
-								<div class="col-sm-8">
-									<?php
-										$types = $this->db->get_where('illness_sub_category',array('type'=>$claim->incident_type))->result_object();
-		
-										$opt = "";
-										
-										$sel = "";
-										
-										foreach($types as $type):
-							
-											if($type->illness_sub_category_id===$claim->incident_sub_category_id){
-												$sel = "selected";
-											}
-											$opt .="<option value='".$type->illness_sub_category_id."' ".$sel.">".$type->name."</option>";
-										endforeach;	
-
-									?>
-									<select class="form-control" name="incident_sub_category_id" id="incident_sub_category_id" readonly="readonly" onchange="get_incident_sub_category(this);">
-										<option value=""><?php echo get_phrase('select');?></option>
-										<?php echo $opt;?>
-									</select>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="control-label col-sm-4"><?php echo get_phrase('incident');?></label>
-								<div class="col-sm-8">
-									<?php
-											$ty = $this->db->get_where('illness',array('illness_id'=>$claim->illness_id))->result_object();
-											
-											$sl = "";
-											
-											$op ="";
-											
-											foreach($ty as $type):
-												if($type->illness_id === $claim->illness_id){
-													$sl = "selected";
-												}
-												$op .="<option value='".$type->illness_id."' ".$sl.">".ucfirst($type->illness_name)."</option>";
-											endforeach;	
-											
-
-									?>
-									<select class="form-control" name="illness_id" id="illness_id" readonly="readonly">
-										<option value=""><?php echo get_phrase('select');?></option>
-										<?php echo $op;?>
-									</select>
-								</div>
-							</div>
-					-->		
+								
 							
 							<div class="form-group">
 								<label class="control-label col-sm-4"><?php echo get_phrase('diagnosis');?></label>

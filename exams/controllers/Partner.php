@@ -92,14 +92,8 @@ class Partner extends CI_Controller
 		}else{
 			$epoch_start_of_year_date = strtotime('first day of january this year');
 		}
-
-		$center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
 		
-		
-		$this->db->join('projectsdetails','projectsdetails.ID = kcse.projectsdetails_id');
-  		$this->db->join('clusters','clusters.clusters_id = projectsdetails.cluster_id');
-		
-		 $results = $this->db->get_where('kcse',array('projectsdetails_id'=>$center_id,
+		$results = $this->db->get_where('kcse',array('pNo'=>$this->session->center_id,
 		'acYr'=>$year))->result_object();			
         
 		$page_data['grades_key'] = array('12'=>'A','11'=>'A-','10'=>'B+','9'=>'B','8'=>'B-','7'=>'C+',
@@ -130,26 +124,16 @@ class Partner extends CI_Controller
 		$fields[] = array(
 		  'label'=>get_phrase('cluster'),
 		  'element'=>'input',
-		  'properties' => array('id'=>'cstName',
+		  'properties' => array('name'=>'cstName','id'=>'cstName',
 		  'value'=>$this->session->cluster,'readonly'=>'readonly')
 		 );
 		 
 		 $fields[] = array(
 		  'label'=>get_phrase('project_id'),
 		  'element'=>'input',
-		  'properties' => array('id'=>'pNo',
+		  'properties' => array('name'=>'pNo','id'=>'pNo',
 		  'value'=>$this->session->center_id,'readonly'=>'readonly')
 		 );
-
-		 $center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
-
-
-		 $fields[] = array(
-			'label'=>get_phrase('project_key'),
-			'element'=>'input',
-			'properties' => array('name'=>'projectsdetails_id','id'=>'projectsdetails_id',
-			'value'=>$center_id,'readonly'=>'readonly')
-		   );
 		 
 		 $fields[] = array(
 		  'label'=>get_phrase('beneficiary_number'),
@@ -355,27 +339,17 @@ class Partner extends CI_Controller
 		$fields[] = array(
 		  'label'=>get_phrase('cluster'),
 		  'element'=>'input',
-		  'properties' => array('id'=>'cstName',
+		  'properties' => array('name'=>'cstName','id'=>'cstName',
 		  'value'=>$this->session->cluster,'readonly'=>'readonly')
 		 );
 		 
-		
 		 $fields[] = array(
 		  'label'=>get_phrase('project_id'),
 		  'element'=>'input',
-		  'properties' => array('id'=>'pNo',
+		  'properties' => array('name'=>'pNo','id'=>'pNo',
 		  'value'=>$this->session->center_id,'readonly'=>'readonly')
 		 );
-
-		 $center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
-
-		 $fields[] = array(
-			'label'=>get_phrase('project_key'),
-			'element'=>'input',
-			'properties' => array('name'=>'projectsdetails_id','id'=>'projectsdetails_id',
-			'value'=>$center_id,'readonly'=>'readonly')
-		   );
-
+		 
 		 $fields[] = array(
 		  'label'=>get_phrase('beneficiary_number'),
 		  'element'=>'input',
@@ -502,8 +476,8 @@ class Partner extends CI_Controller
 		
 		$post = $this->input->post();
 		
-		//$header['cstName'] 		= $post['cstName'];
-		$header['projectsdetails_id'] 			= $post['projectsdetails_id'];
+		$header['cstName'] 		= $post['cstName'];
+		$header['pNo'] 			= $post['pNo'];
 		$header['childNo'] 		= $post['childNo'];
 		$header['childName'] 	= $post['childName'];
 		$header['dob'] 			= $post['dob'];
@@ -542,25 +516,17 @@ class Partner extends CI_Controller
 			
         $crud = new grocery_CRUD();
 		$crud->set_theme('bootstrap');
-		$crud->set_table('kcpe','projectsdetails');
+		$crud->set_table('kcpe');
 		
 		$acYr = date('Y');
 		
 		if(isset($_POST['acYr'])){
 			$acYr = $this->input->post('acYr');
 		}
-
-		$crud->set_model('Exam_join');
-
-		//$crud->set_relation('cluster_id','clusters','clusterName');
-		//$crud->set_relation('projectsdetails_id','projectsdetails','icpNo');
-
-		$center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
+		$crud->where(array('pNo'=>$this->session->center_id,'acYr'=>$acYr));
 		
-		$crud->where(array('projectsdetails_id'=>$center_id,'acYr'=>$acYr));
-		
-		$crud->display_as('icpNo','Project')
-			->display_as('clusterName','Cluster')
+		$crud->display_as('cstName','Cluster')
+			->display_as('pNo','Project')
 			->display_as('childNo','Beneficiary Number')
 			->display_as('childName','Beneficiary Name')
 			->display_as('sex','Gender')
@@ -575,30 +541,25 @@ class Partner extends CI_Controller
 			->display_as('dob','Date Of Birth')
 			->display_as('sstd','Social Studies');	
 		
-		$crud->columns('clusterName','icpNo','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
-
-		$crud->required_fields('clusterName','icpNo','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
-	
-		//$crud->edit_fields('clusters_id','projectsdetails_id','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
-	
-		$crud->callback_field('clusters_id',array($this,'field_callback_cluster'));
-		$crud->callback_field('projectsdetails_id',array($this,'field_callback_pNo'));
+		$crud->required_fields('cstName','pNo','childNo','childName','dob','sex','indx','eng','kis','sci','mat','sstd','totMrk','acYr');	
+		
+		
+		$crud->callback_field('cstName',array($this,'field_callback_cluster'));
+		$crud->callback_field('pNo',array($this,'field_callback_pNo'));
 		
 		$years = array_combine(range('2012', '2030'), range('2012', '2030'));
 		
 		$crud->field_type('acYr', 'dropdown',$years);
 		$crud->field_type('dob', 'numeric');
 		
-		$crud->callback_before_insert(array($this,'insert_result_callback'));
-		$crud->callback_before_update(array($this,'update_result_callback'));
+		//$crud->callback_before_insert(array($this,'insert_result_callback'));
 		
 		$crud->unset_fields(array('stmp'));
 		//$crud->unset_edit();	
 		//$crud->unset_delete();			
 		
 		
-		$output = $crud->render();
-		$page_data['yrs']  = $this->db->select('DISTINCT(acYr)')->get_where('kcpe',array("projectsdetails_id"=>$center_id))->result_object();			
+		$output = $crud->render();		
 		$page_data['acYr'] = $acYr;		
         $page_data['page_name']  = __FUNCTION__;
         $page_data['page_title'] = get_phrase('KCPE_results');
@@ -609,32 +570,21 @@ class Partner extends CI_Controller
 
 	function insert_result_callback($post_array){
 		
-		//$yr = range('2012', '2030');
+		$yr = range('2012', '2030');
 		
-		//$post_array['acYr'] =  $post_array['acYr'];
-		$post_array['clusters_id'] = $this->db->get_where('clusters',array('clusterName'=>$post_array['clusters_id']))->row()->clusters_id;
-		$post_array['projectsdetails_id'] = $this->db->get_where('projectsdetails',array('icpNo'=>$post_array['projectsdetails_id']))->row()->ID;
-
-		return $post_array;
+		$post_array['acYr'] =  $yr[$post_array['acYr']];
 		
-	}
-
-	function update_result_callback($post_array,$primary_key){
-		
-		$post_array['clusters_id'] = $this->db->get_where('clusters',array('clusterName'=>$post_array['clusters_id']))->row()->clusters_id;
-		$post_array['projectsdetails_id'] = $this->db->get_where('projectsdetails',array('icpNo'=>$post_array['projectsdetails_id']))->row()->ID;
-
 		return $post_array;
 		
 	}
 
 	function field_callback_cluster(){
-		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-clusters_id' name='clusters_id' value='".$this->session->cluster."'>";
+		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-cstName' name='cstName' value='".$this->session->cluster."'>";
 		
 	}
 
 	function field_callback_pNo(){
-		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-projectsdetails_id' name='projectsdetails_id' value='".$this->session->center_id."'>";
+		return "<INPUT type='text' maxlength='20' class='form-control' readonly='readonly' id='field-pNo' name='pNo' value='".$this->session->center_id."'>";
 		
 	}
 	
@@ -670,20 +620,15 @@ class Partner extends CI_Controller
 		'6'=>'C','5'=>'C-','4'=>'D+','3'=>'D','2'=>'D-','1'=>'E');
 		
 		$data = array();
-
-		$center_id = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->center_id))->row()->ID;
-
-		$this->db->join('projectsdetails','projectsdetails.ID = kcse.projectsdetails_id');
-  		$this->db->join('clusters','clusters.clusters_id = projectsdetails.cluster_id');
 		
 		$this->db->join('kcse_spread','kcse_spread.rID=kcse.rID');	  
 		$results = $this->db->get_where('kcse',array('acYr'=>date("Y",$epoch_date),
-		'projectsdetails_id'=>$center_id))->result_object();				
+		'pNo'=>$this->session->center_id))->result_object();				
 		
 		foreach($results as $row){
 						
-			$data[$row->childNo]['Cluster'] = $row->clusterName;
-			$data[$row->childNo]['Project'] = $row->icpNo;
+			$data[$row->childNo]['Cluster'] = $row->cstName;
+			$data[$row->childNo]['Project'] = $row->pNo;
 			$data[$row->childNo]['Beneficiary ID'] = $row->childNo;
 			$data[$row->childNo]['Beneficiary Name'] = $row->childName;
 			$data[$row->childNo]['Gender'] = $row->sex;

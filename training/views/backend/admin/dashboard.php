@@ -272,7 +272,7 @@
 							status: "<?php echo $row['color_code'];?>"
 						},
 						<?php 
-						endforeach
+						endforeach;
 						?>
 						
 					],

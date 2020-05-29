@@ -196,13 +196,13 @@
 						foreach($notices as $row):
 						?>
 						{
-							title: "<?php echo $row['event_title'];?>",
+							title: "<?php echo trim($row['event_title']);?>",
 							start: new Date(<?php echo date('Y',strtotime($row['event_start_date']));?>, <?php echo date('m',strtotime($row['event_start_date']))-1;?>, <?php echo date('d',strtotime($row['event_start_date']));?>),
 							end:	new Date(<?php echo date('Y',strtotime($row['event_end_date']));?>, <?php echo date('m',strtotime($row['event_end_date']))-1;?>, <?php echo date('d',strtotime($row['event_end_date']));?>), 
 							color:'<?php echo $row['color_code'];?>',
 							allDay:'<?php echo $row['allDay'];?>',
 							id: "<?php echo $row['event_id'];?>",
-							description: "<?php echo $row['event_description'];?>",
+							description: "<?php echo trim($row['event_description']);?>",
 							status: "<?php echo $row['color_code'];?>"
 						},
 						<?php 

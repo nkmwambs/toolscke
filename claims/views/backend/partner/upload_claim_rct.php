@@ -30,28 +30,16 @@
 				 
 				    <div class="col-sm-12">
 				        <ul class="gallery" style="list-style: none;">
-				        	<?php
-				        		try{
-								$dir = new DirectoryIterator("uploads/document/medical/claims/".$claim->rec);
-								foreach ($dir as $fileinfo) {
-								    if (!$fileinfo->isDot()) {
-								        ?>
-								        	<li class="item">
-								                <a href="<?=base_url();?>claims.php/medical/download/claims/<?=$claim->rec;?>/<?=$fileinfo->getFilename();?>" class="fa fa-file">
-								                	<span><?php echo $fileinfo->getFilename();?></span>
-								                </a>
-								                
-								            </li>
-								        <?php
-								    }
-								}
-								}catch(Exception $e){
-									?>
-										<li class="item"><?=get_phrase('no_file_found')?></li>
-									<?php
-								}
-				        	?>
-				            
+				            <?php if(!empty($files)): foreach($files as $file): ?>
+				            <li class="item">
+				                <a href="<?=base_url();?>claims.php/medical/download/claims/<?=$file['id'];?>" class="fa fa-file">
+				                	<span><?php echo $file['file_name'];?></span>
+				                </a>
+				                
+				            </li>
+				            <?php endforeach; else: ?>
+				            <p>Image(s) not found.....</p>
+				            <?php endif; ?>
 				        </ul>
 				    </div>
 				    

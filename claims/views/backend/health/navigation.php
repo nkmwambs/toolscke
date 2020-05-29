@@ -46,12 +46,7 @@
             </a>
         </li>  
         
-       <li class="<?php if ($page_name == 'process_medical_claims') echo 'active'; ?> ">
-            <a href="<?php echo base_url(); ?>claims.php/health/process_medical_claims">
-                <i class="fa fa-list"></i>
-                <span><?php echo get_phrase('process_claims'); ?></span>
-            </a>
-        </li>  
+       
 
     </ul>
 

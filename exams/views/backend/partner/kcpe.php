@@ -20,7 +20,7 @@ foreach($css_files as $file): ?>
 						<select class="form-control" name="acYr" id="acYr">
 							<option><?=get_phrase('select');?></option>
 							<?php
-								//$yrs = $this->db->select('DISTINCT(acYr)')->get_where('kcpe',array("pNo"=>$this->session->center_id))->result_object();
+								$yrs = $this->db->select('DISTINCT(acYr)')->get_where('kcpe',array("pNo"=>$this->session->center_id))->result_object();
 								
 								foreach($yrs as $row):
 									if($row->acYr > 0){
@@ -60,9 +60,7 @@ $(document).ready(function(){
 	
 	$.each($('input:text'),function(i,el){
 		if(i>6 && i< 13){
-			if('<?=$this->uri->segment(3,0)?>' == 'add'){
-				$(el).val('0');
-			}
+			$(el).val('0');
 		}
 	});
 });

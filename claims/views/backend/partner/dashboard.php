@@ -124,7 +124,7 @@ $(document).ready(function(){
 	Morris.Donut({
 		  element: 'cost_per_status',
 		  data: JSON.parse('<?=json_encode($amount_status_arr);?>')
-	});
+		});
 
 	Morris.Line({
 	  element: 'cost_trend',

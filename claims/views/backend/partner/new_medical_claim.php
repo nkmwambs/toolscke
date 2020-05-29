@@ -491,8 +491,8 @@
 														
 							var count_of_attachments = parseInt(receipt_attached) + parseInt(approval_attached);
 							
-							alert(available_file_inputs);
-							alert(receipt_attached);
+							//alert(available_file_inputs);
+							//alert(receipt_attached);
 							
 							var cnf = confirm("Do you want  to submit this claim?");
 							

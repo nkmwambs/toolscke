@@ -95,8 +95,8 @@
 												</div>										
 		                    					
 		                    				</td>
-		                    				<td><?=$row->clusterName;?></td>
-		                    				<td><?=$row->icpNo;?></td>
+		                    				<td><?=$row->cstName;?></td>
+		                    				<td><?=$row->pNo;?></td>
 		                    				<td><?=$row->childNo;?></td>
 		                    				<td><?=$row->childName;?></td>
 		                    				<td><?=$row->dob;?></td>
