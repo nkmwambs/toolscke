@@ -58,14 +58,22 @@ class Smp extends CI_Controller
 		}
 
 		$page_data['page_name']  = 'dashboard';
+		//$page_data['active_announcements'] = $this->get_active_announcements();
 		$page_data['page_title'] = get_phrase('Unconditional_Direct_Cash_Transfers');
 		//$page_data['fcps']=$this->cluster_fcps();
 		$page_data['regions'] = $this->get_regions();
-		$page_data['clusters'] = $this->get_total_for_a_region();
+		$page_data['dct_expenses_per_cluster_in_region'] = $this->get_total_for_a_region($report_month);
 		$page_data['total_dct_expense'] = $this->get_total_direct_cash_transfers_countrywide($report_month);
 		$page_data['total_dct_beneficiaries'] = 54747;
 		$this->load->view('backend/index', $page_data);
 	}
+	// function get_active_announcements()
+	// {
+	// 	$active_announcements = $this->db->order_by('announcement_created_date DESC')->get_where('announcement', array('announcement_end_date>=' => date('Y-m-d')))->result_array();
+
+	// 	return $active_announcements;
+	// }
+
 
 	//Clusters in a region method
 	//FCPS method
@@ -74,8 +82,8 @@ class Smp extends CI_Controller
 	{
 		return $this->db->select(array('region_id', 'region_name'))->get('region')->result_array();
 	}
-	function get_total_for_a_region(){
-		return $this->dct_model->get_direct_cash_transfer_in_region();
+	function get_total_for_a_region($dct_report_month){
+		return $this->dct_model->get_direct_cash_transfer_in_region($dct_report_month);
 	}
 	function get_total_direct_cash_transfers_countrywide($dct_report_month)
 	{

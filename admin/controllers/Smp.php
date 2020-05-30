@@ -40,10 +40,17 @@ class Smp extends CI_Controller
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
 			
-        $page_data['page_name']  = 'dashboard';
+		$page_data['page_name']  = 'dashboard';
+		$page_data['active_announcements'] = $this->get_active_announcements();
         $page_data['page_title'] = get_phrase('apps_login_panel');
         $this->load->view('backend/index', $page_data);
-    }
+	}
+	function get_active_announcements()
+	{
+		$active_announcements = $this->db->order_by('announcement_created_date DESC')->get_where('announcement', array('announcement_end_date>=' => date('Y-m-d')))->result_array();
+
+		return $active_announcements;
+	}
     
   	function users_list(){
         if ($this->session->userdata('admin_login') != 1)
