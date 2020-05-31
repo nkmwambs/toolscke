@@ -61,26 +61,31 @@ class Smp extends CI_Controller
 		//$page_data['active_announcements'] = $this->get_active_announcements();
 		$page_data['page_title'] = get_phrase('Unconditional_Direct_Cash_Transfers');
 		//$page_data['fcps']=$this->cluster_fcps();
+		// $page_data['test']=$this->get_dcts_for_clusters_per_region();
+
 		$page_data['regions'] = $this->get_regions();
-		$page_data['dct_expenses_per_cluster_in_region'] = $this->get_total_for_a_region($report_month);
-		$page_data['total_dct_expense'] = $this->get_total_direct_cash_transfers_countrywide($report_month);
+		$page_data['dct_expenses_per_cluster_in_region'] = !is_numeric($report_month)? $this->get_total_for_a_region(strtotime(date('Y-m-d'))):$this->get_total_for_a_region($report_month);
+		$page_data['total_dct_expense'] = !is_numeric($report_month)?$this->get_total_direct_cash_transfers_countrywide(strtotime(date('Y-m-d'))):$this->get_total_direct_cash_transfers_countrywide($report_month);
 		$page_data['total_dct_beneficiaries'] = 54747;
 		$this->load->view('backend/index', $page_data);
 	}
-	// function get_active_announcements()
-	// {
-	// 	$active_announcements = $this->db->order_by('announcement_created_date DESC')->get_where('announcement', array('announcement_end_date>=' => date('Y-m-d')))->result_array();
-
-	// 	return $active_announcements;
-	// }
-
-
+	
 	//Clusters in a region method
 	//FCPS method
 	//Region method
 	function get_regions()
 	{
 		return $this->db->select(array('region_id', 'region_name'))->get('region')->result_array();
+	}
+	function cluster_dct_in_aregion($dct_report_month,$region_name){
+
+		//$url_decode=urldecode($region_name);
+
+		$page_data['page_name']  = 'cluster_dct_in_aregion';
+		$page_data['page_title'] ='DCT';
+		$page_data['region_name'] =$region_name ;
+		$this->load->view('backend/index', $page_data);
+
 	}
 	function get_total_for_a_region($dct_report_month){
 		return $this->dct_model->get_direct_cash_transfer_in_region($dct_report_month);
