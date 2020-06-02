@@ -47,7 +47,7 @@ class Dct_model extends CI_Model {
         $month_start_date = date('Y-m-01',$dct_report_month);
         $month_end_date = date('Y-m-t',$dct_report_month);
         $this->db->select(array('clusters.clusterName as cluster_name','AccText','region.region_id AS regionId','region.region_name AS region'));
-        $this->db->group_by(array('voucher_body.AccNo','region_name'));
+        $this->db->group_by(array('region.region_name','voucher_body.AccNo'));
         $this->db->join('projectsdetails','projectsdetails.icpNo=voucher_body.icpNo');
         $this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
         $this->db->join('region','region.region_id=clusters.region_id');    

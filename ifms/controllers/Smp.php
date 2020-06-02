@@ -87,6 +87,25 @@ class Smp extends CI_Controller
 		$this->load->view('backend/index', $page_data);
 
 	}
+	function get_data($report_month){
+		$dct_expenses_per_cluster_in_region=!is_numeric($report_month)? $this->get_total_for_a_region(strtotime(date('Y-m-d'))):$this->get_total_for_a_region($report_month);
+		// $region_expenses=[];
+		// $region_names_and_ids=[];
+		//  foreach($dct_expenses_per_cluster_in_region as $dct_expenses_in_aregion){
+		// 	$region_expenses[$dct_expenses_in_aregion['regionId']][$dct_expenses_in_aregion['region']][$dct_expenses_in_aregion['AccText']]=$dct_expenses_in_aregion['Cost'];
+			
+		// }
+		// foreach($region_expenses as $key=> $region_expense){
+		// 	foreach ($region_expense as $k=> $expense){
+				
+		// 		$region_names_and_ids[$key]=$expense;
+		// 	}
+		// }
+
+		echo json_encode($dct_expenses_per_cluster_in_region);
+		//echo ('Yes');
+		
+	}
 	function get_total_for_a_region($dct_report_month){
 		return $this->dct_model->get_direct_cash_transfer_in_region($dct_report_month);
 	}
