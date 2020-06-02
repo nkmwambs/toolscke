@@ -349,6 +349,7 @@ function interventions($param1="",$param2="",$param3=""){
 				for($k=0;$k<count($accid_array);$k++){
 					$data4['accID'] = $accid_array[$k];
 					$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA');
+					$data4['is_direct_cash_transfer'] =  $this->input->post('is_direct_cash_transfer');
 					$data4['AccTextCIVA'] =  $this->input->post('AccNoCIVA');
 					$data4['allocate'] =  $allocate;
 					$data4['closureDate'] =  $this->input->post('closureDate');
@@ -362,6 +363,7 @@ function interventions($param1="",$param2="",$param3=""){
 			
 			$data2['allocate'] = $new_allocate;
 			$data2['closureDate'] = $this->input->post('closureDate');
+			
 			
 			$this->db->update('civa',$data2,array('AccNoCIVA'=>$this->input->post('AccNoCIVA')));
 			
@@ -385,6 +387,7 @@ function interventions($param1="",$param2="",$param3=""){
 			
 			$data6['allocate'] = $new_allocate2;
 			$data6['closureDate'] = $this->input->post('closureDate');
+			$data6['is_direct_cash_transfer'] =  $this->input->post('is_direct_cash_transfer');
 			
 			$this->db->update('civa',$data6,array('AccNoCIVA'=>$this->input->post('AccNoCIVA')));
 			

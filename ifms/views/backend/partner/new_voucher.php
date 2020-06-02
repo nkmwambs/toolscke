@@ -658,19 +658,19 @@
 						}
 						
 						else{
-							if(responseText==0){
-								//$('#error_msg').html('<p> Error: You have not defined your short code</p>');
-								alert('You have not defined your Mpesa short code. Go enter ');
+							// if(responseText==0){
+							// 	//$('#error_msg').html('<p> Error: You have not defined your short code</p>');
+							// 	alert('You have not defined your Mpesa short code. Go enter ');
 
-								var url="<?=base_url()?>admin.php/partner/manage_profile";
+							// 	var url="<?=base_url()?>admin.php/partner/manage_profile";
 
-								window.location.href = url;
+							// 	window.location.href = url;
 
 								
-							}
-							else{
-								//$('#DCTReference').attr('value', responseText);
-							}
+							// }
+							// else{
+							// 	//$('#DCTReference').attr('value', responseText);
+							// }
 							
 						}
 					}
@@ -933,7 +933,7 @@
 						//alert(response);
 						var obj = response;
 						//var obj = JSON.parse(response);
-						//alert(obj[1].AccNo);
+						//alert(obj[1].AccNoCIVA);
 						var table = document.getElementById('bodyTable').children[1];
 						var rowCount = table.rows.length;
 						var row = table.insertRow(rowCount);

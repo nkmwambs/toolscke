@@ -797,18 +797,20 @@ class Partner extends CI_Controller
 		}
 
 		//Onduso 14/5/2020 START
-		if ($param1 == 'UDCTB') {
+		if ($param1 == 'UDCTB' || $param1 == 'UDCTC') {
 			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
-			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			//$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR (civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1 ) )";
+			$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.is_direct_cash_transfer = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
 			$rst_rw = $this->get_accounts($exp_cond);
 		}
 
 
-		if ($param1 == 'UDCTC') {
-			//DCTC expenses accounts [PC implementation plus is_direct_cash_transfer flag]
-			$pc_exp_cond = "accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$rst_rw = $this->get_accounts($pc_exp_cond);
-		}
+		// if ($param1 == 'UDCTC') {
+		// 	//DCTC expenses accounts [PC implementation plus is_direct_cash_transfer flag]
+		// 	//$pc_exp_cond = "accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())))";// AND civa.is_direct_cash_transfer = 1
+		// 	$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
+		// 	$rst_rw = $this->get_accounts($pc_exp_cond);
+		// }
 		//Onduso 14/5/2020 END
 
 		$rst = array();

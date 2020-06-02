@@ -409,4 +409,71 @@ class Api extends CI_Controller
         }
         return TRUE;
     }
+
+
+    private function get_accounts(String $condition): array
+	{
+
+		$expenses_or_income_accs = $this->db->where($condition)->join('civa', 'accounts.accID=civa.accID', 'left')->get('accounts')->result_array();
+
+		return $expenses_or_income_accs;
+	}
+
+	function voucher_accounts($param1 = '')
+	{
+		//Return as JSON object
+		$rst_rw = "";
+		if ($param1 === 'CHQ') {
+			//Bank Expenses Accounts
+			$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$rst_rw = $this->get_accounts($exp_cond);
+		}
+
+		if ($param1 === 'PC' || $param1 === 'BCHG') {
+			//PC and BC Expenses Accounts	
+			$pc_exp_cond = "accounts.AccGrp = 0 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$rst_rw = $this->get_accounts($pc_exp_cond);
+		}
+
+		if ($param1 === 'CR') {
+			//Revenue accounts
+			$revenues_cond = "accounts.AccGrp = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$rst_rw = $this->get_accounts($revenues_cond);
+		}
+
+		if ($param1 === 'PCR') {
+			//Petty Cash rebanking account	
+			$rebank_cond = "accounts.AccGrp = 4 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$rst_rw = $this->get_accounts($rebank_cond);
+		}
+
+		//Onduso 14/5/2020 START
+		if ($param1 == 'UDCTB') {
+			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
+			//$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR (civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1 ) )";
+            $exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
+            $rst_rw = $this->get_accounts($exp_cond);
+		}
+
+
+		if ($param1 == 'UDCTC') {
+			//DCTC expenses accounts [PC implementation plus is_direct_cash_transfer flag]
+			$pc_exp_cond = "accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())))";// AND civa.is_direct_cash_transfer = 1
+			$rst_rw = $this->get_accounts($pc_exp_cond);
+		}
+		//Onduso 14/5/2020 END
+
+		$rst = array();
+		foreach ($rst_rw as $civaAcc) :
+			if (is_numeric($civaAcc['civaID']) && substr_count($civaAcc['allocate'], $this->session->userdata('center_id')) > 0) {
+				$rst[] = $civaAcc;
+			} elseif (!is_numeric($civaAcc['civaID'])) {
+				$rst[] = $civaAcc;
+			}
+		endforeach;
+
+		// $this->output->set_content_type('application/json');
+        // $this->output->set_output(json_encode($rst));
+        echo json_encode($rst);
+	}
 }    
