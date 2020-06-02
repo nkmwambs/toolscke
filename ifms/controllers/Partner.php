@@ -774,13 +774,14 @@ class Partner extends CI_Controller
 		$rst_rw = "";
 		if ($param1 === 'CHQ') {
 			//Bank Expenses Accounts
-			$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			//$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
 			$rst_rw = $this->get_accounts($exp_cond);
 		}
 
 		if ($param1 === 'PC' || $param1 === 'BCHG') {
 			//PC and BC Expenses Accounts	
-			$pc_exp_cond = "accounts.AccGrp = 0 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
 			$rst_rw = $this->get_accounts($pc_exp_cond);
 		}
 
