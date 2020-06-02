@@ -161,7 +161,7 @@
 													<option value="PC"><?php echo get_phrase('payment_by_cash'); ?></option>
 													<!-- Added the DCT option Onduso 5/13/2020 -->
 													<option value="UDCTB"><?php echo get_phrase('unconditional_direct_cash_transfer_via_bank'); ?></option>
-													<!-- <option value="UDCTC"><?php echo get_phrase('unconditional_direct_cash_transfer_via_petty_cash'); ?></option> -->
+													<option value="UDCTC"><?php echo get_phrase('unconditional_direct_cash_transfer_via_virtual_petty_cash'); ?></option>
 													<option value="CHQ"><?php echo get_phrase('payment_by_cheque'); ?></option>
 													<option value="BCHG"><?php echo get_phrase('bank_adjustments'); ?></option>
 													<option value="CR"><?php echo get_phrase('cash_received'); ?></option>
@@ -181,7 +181,7 @@
 											<!-- MPESA REFERENCE NO -->
 											<div class="col-sm-10 form-group hidden" id='DCT_div'>
 												<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('reference_no.'); ?>:</span></label>
-												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" value="" readonly="readonly" />
+												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" value=""  />
 
 											</div>
 										</td>
@@ -669,7 +669,7 @@
 								
 							}
 							else{
-								$('#DCTReference').attr('value', responseText);
+								//$('#DCTReference').attr('value', responseText);
 							}
 							
 						}
