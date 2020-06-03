@@ -14,6 +14,7 @@ $region_names = [];
 $expense_accounts[]='Region';
 
 $outer_array=[];
+$keys_array=[];
 
 $counter=0;
 foreach ($region_all_expenses as $key => $region_expense) {
@@ -23,43 +24,44 @@ foreach ($region_all_expenses as $key => $region_expense) {
 		$array_keys_of_expenses= array_keys($expense);
 
 		$array_of_unique_accounts=array_unique(array_merge($expense_accounts,$array_keys_of_expenses));
-
+        
 		$expense_accounts=$array_of_unique_accounts;
-		//$region_names[$key . '-' . $k] = $expense;
-		if($counter==0)
-		{
+		
+		$keys_array[]=$expense_accounts;
 
-			//print_r($expense_accounts);
-			//$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($expense_accounts)));
-			//$outer_y=array_push($outer_array,$expense_accounts);
-			print_r($expense_accounts);
-			$outer_array[]=$expense_accounts;
+			//$outer_array[]=$expense_accounts;
+		
+		$result_array=[];
+		foreach (array_values($expense) as $expense_value) {
+			$result_array[] = (float) $expense_value;
+			
 			
 		}
-
+		array_unshift($result_array,$k);
+		$outer_array[]=$result_array;
 		
-		$counter++;
 
 	}
 	
 	
 }
+//$merged_exp_accounts_and_cost=array_merge(end($keys_array),$outer_array);
 //print_r($outer_array);
+print_r(end($keys_array));
+//$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($merged_exp_accounts_and_cost)));
 
-$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($outer_array)));
-
-print_r($javascrip_array);
+//print_r($javascrip_array);
 
 //['Region', 'E15', 'E20', 'E25', 'E30', 'E45', 'E60'],
 //['Western',  165,      938,         522,             998,           450,      614.6],
-$array[]='Region';
+//$array[]='Region';
 
-foreach($expense_accounts as $val){
-	array_push($array,$val);
+// foreach($expense_accounts as $val){
+// 	array_push($array,$val);
 
-}
+// }
 //print_r($array);
-$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($array)));
+//$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($array)));
 //print_r($javascrip_array);
 //print_r($expense_accounts);
 //$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($region_names)));
@@ -80,18 +82,32 @@ $javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($array)));
 
 
 	function drawChart() {
-       
-		//{"3-Central Region":{"E15":"3048.00","E30":"6166.00"},"4-Nairobi Region":{"E15":"4.00","E30":"2.00"},"1-Western Region":{"E15":"2000.00"}}
-      
+		
+		/*
+		Array from the server of format
+		[["Region","E15","E30"],["Central Region",3048,6166],["Nairobi Region",4,2],["Western Region",2000,40000]]
+		
+		*/
 
-        var data = google.visualization.arrayToDataTable([
+        var regions_and_expense_accounts='<?=$javascrip_array;?>';
+		
+        var data = google.visualization.arrayToDataTable(
+            //Array of expenses accounts, cost, region
+			//JSON.parse(regions_and_expense_accounts),
+
+			["Region","E15","E30","E415",["Central Region",3048,6166,0],["Coast Region",0,0,22000],["Nairobi Region",4,2,0],["Western Region",2000,68000,0]]
+
+					
+			/*[
 		 
-          ['Region', 'E15', 'E20', 'E25', 'E30', 'E45', 'E60'],
-          ['Western',  165,      938,         522,             998,           450,      614.6],
-          ['Nairobi',  135,      1120,        599,             1268,          288,      682],
-          ['Central',  157,      1167,        587,             807,           397,      623],
-          ['Costal',  139,      1110,        615,             968,           215,      609.4],
-        ]);
+				['Region', 'E15', 'E20', 'E25', 'E30', 'E45', 'E60'],
+				['Western',  165,      938,         522,             998,           450,      614.6],
+				['Nairobi',  135,      1120,        599,             1268,          288,      682],
+				['Central',  157,      1167,        587,             807,           397,      623],
+				['Costal',  139,      1110,        615,             968,           215,      609.4],
+        	]*/
+		
+		);
 
         var options = {
           title : 'Direct Cash Transfers per region per expense account',
