@@ -21,6 +21,7 @@ foreach ($region_all_expenses as $key => $region_expense) {
 
 	echo '<br>';
 	foreach ($region_expense as $k => $expense) {
+		//print_r($expense);
 		$array_keys_of_expenses= array_keys($expense);
 
 		$array_of_unique_accounts=array_unique(array_merge($expense_accounts,$array_keys_of_expenses));
@@ -32,7 +33,18 @@ foreach ($region_all_expenses as $key => $region_expense) {
 			//$outer_array[]=$expense_accounts;
 		
 		$result_array=[];
+		array_shift($array_of_unique_accounts);
+		$result_array=[];
+		print_r($expense);
+	   
+		if(count($array_of_unique_accounts)==count($expense)){
+			echo 'yes';
+
+		}
+
+		//'E15'=>'7748'
 		foreach (array_values($expense) as $expense_value) {
+			//if()
 			$result_array[] = (float) $expense_value;
 			
 			
@@ -45,26 +57,14 @@ foreach ($region_all_expenses as $key => $region_expense) {
 	
 	
 }
-//$merged_exp_accounts_and_cost=array_merge(end($keys_array),$outer_array);
-//print_r($outer_array);
-print_r(end($keys_array));
-//$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($merged_exp_accounts_and_cost)));
 
-//print_r($javascrip_array);
+$keys[]=end($keys_array);
+//print_r(end($keys_array));
+echo('<br>');
+//[["Region","E15","E30","E415"],["Central Region",3048,6166],["Coast Region",22000],["Nairobi Region",4,2],["Western Region",2000,68000]]
+$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode(array_merge($keys,$outer_array))));
+print_r($javascrip_array);
 
-//['Region', 'E15', 'E20', 'E25', 'E30', 'E45', 'E60'],
-//['Western',  165,      938,         522,             998,           450,      614.6],
-//$array[]='Region';
-
-// foreach($expense_accounts as $val){
-// 	array_push($array,$val);
-
-// }
-//print_r($array);
-//$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($array)));
-//print_r($javascrip_array);
-//print_r($expense_accounts);
-//$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode($region_names)));
 
 
 ?>
@@ -90,12 +90,20 @@ print_r(end($keys_array));
 		*/
 
         var regions_and_expense_accounts='<?=$javascrip_array;?>';
+
+		alert(regions_and_expense_accounts);
 		
         var data = google.visualization.arrayToDataTable(
             //Array of expenses accounts, cost, region
 			//JSON.parse(regions_and_expense_accounts),
 
-			["Region","E15","E30","E415",["Central Region",3048,6166,0],["Coast Region",0,0,22000],["Nairobi Region",4,2,0],["Western Region",2000,68000,0]]
+			[
+				["Region","E15","E30","E415"],
+				["Central Region",3048,6166,0],
+				["Coast Region",0,0,22000],
+				["Nairobi Region",4,2,0],
+				["Western Region",2000,68000,0]
+			]
 
 					
 			/*[
