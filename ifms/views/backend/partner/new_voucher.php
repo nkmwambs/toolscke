@@ -620,8 +620,10 @@
 				url: url,
 				success: function(response) {
 					//alert(response);
-					obj = jQuery.parseJSON(response); // Global Accounts Variable
+					//obj = jQuery.parseJSON(response); // Global Accounts Variable
+
 					//alert(jQuery.parseJSON(response));
+					//alert('yes');
 				}
 			});
 
