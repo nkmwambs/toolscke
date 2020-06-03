@@ -763,10 +763,21 @@ $('#chq_dctb_vtype_change').on('click',function(){
 	var url = "<?=base_url();?>ifms.php/partner/chq_dctb_vtype_change";
 	var post_data = {'voucher_number':voucher_number,'hid':hid,'cheque_number':cnfrm};
 	
-	$.post(url,post_data,function(response){
-		alert(response);
-		window.location.reload();
+	// $.post(url,post_data,function(response){
+	// 	alert(response);
+	// 	window.location.reload();
+	// });
+
+	$.ajax({
+		url:url,
+		type:"POST",
+		data:post_data,
+		success:function(response){
+			alert(response);
+			window.location.reload();
+		}
 	});
+	
 });
 	
 </script>				

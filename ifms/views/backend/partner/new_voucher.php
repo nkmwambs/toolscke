@@ -772,7 +772,7 @@
 
 		/** Add a row */
 		$('#addrow,#addrow_footer').click(function(e) {
-			alert($('#reversal').val());
+			//alert($('#reversal').val());
 			var vtype = $('#VTypeMain').val();
 			var reverse = $('#reversal').prop('checked');
 			if (vtype === '#') {
