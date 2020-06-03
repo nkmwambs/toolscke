@@ -1692,4 +1692,31 @@ class Partner extends CI_Controller
 			unlink('downloads/' . $backup_file);
 		}
 	}
+
+	/**
+	 * @author Nicodemus Karisa
+	 * @date 3rd June 2020
+	 * @description - Implementing CHQ - DCTB voucher type change 
+	 */
+
+	 function chq_dctb_vtype_change(){
+		
+		$hid = $this->input->post('hid');
+		$voucher_number = $this->input->post('voucher_number');
+		$cheque_number = $this->input->post('cheque_number');
+
+		// Check if the cheque number provided exists
+		$message = "Payment by Cheque to Direct Cash Transfer voucher type change successful";
+		$db_chq_no = explode('-',$this->db->get_where('voucher_header',array('hID'=>$hid))->row()->ChqNo)[0];
+
+		if($db_chq_no == $cheque_number){
+			$data['VType'] = 'UDCTB';
+			$this->db->update('voucher_header',$data,array('hID'=>$hid));
+		}else{
+			$message = "Payment by Cheque to Direct Cash Transfer voucher type change failed due to mismatched cheque number";
+		}
+
+		echo $message;
+		
+	 }
 }

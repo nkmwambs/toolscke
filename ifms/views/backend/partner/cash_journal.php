@@ -355,7 +355,7 @@ tr.shown td.details-control {
 																}
 				
 													?>
-														<td>
+														<td> 
 															<?php
 															if($this->finance_model->editable($this->session->center_id,date('Y-m-t',$tym))===0){
 															?>
@@ -370,7 +370,9 @@ tr.shown td.details-control {
 															}
 															?>	
 																
-															
+															<?php if($row['VType'] == 'CHQ'){?>
+																<i id='chq_dctb_vtype_change' data-hid = '<?=$row['hID'];?>' data-voucher = '<?php echo $row['VNumber'];?>' class='fa fa-magic' style='font-size:18pt;cursor:pointer;'></i>
+															<?php }?>
 														</td>	
 													<?php
 														}else{
@@ -379,6 +381,7 @@ tr.shown td.details-control {
 															<div class="make-switch switch-small" data-off-label="<?php echo $row['VType'];?>">
 															    <input type="checkbox" disabled>
 															</div>
+															
 														</td>
 													<?php
 														}
@@ -752,5 +755,18 @@ $('#print_vouchers').click(function(){
 	
 });
 
+$('#chq_dctb_vtype_change').on('click',function(){
+	var voucher_number = $(this).data('voucher');
+	var hid = $(this).data('hid');
+	var cnfrm = prompt('If you are sure you want to change voucher ' + voucher_number + ' to UDCTB, please enter the cheque number below. This process is not reversible.');
+
+	var url = "<?=base_url();?>ifms.php/partner/chq_dctb_vtype_change";
+	var post_data = {'voucher_number':voucher_number,'hid':hid,'cheque_number':cnfrm};
+	
+	$.post(url,post_data,function(response){
+		alert(response);
+		window.location.reload();
+	});
+});
 	
 </script>				
