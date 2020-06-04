@@ -433,6 +433,8 @@
 			//alert(reference_number);
 			var val = $('#VTypeMain').val();
 
+			alert (val);
+
 			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {
 				//alert("Here 1");
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
@@ -494,7 +496,7 @@
 									'border': '3px solid red'
 								});
 								return;
-							} else if (data == 2) {
+							} else if (data == 2 && (val=='UDCTB' ||val=='UDCTC')) {
 
 								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
 								$('#DCTReference').css({
@@ -549,7 +551,7 @@
 								'border': '3px solid red'
 							});
 							return;
-						} else if (data == 2) {
+						} else if (data == 2 && (val=='UDCTB' ||val=='UDCTC')){
 
 							$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
 							$('#DCTReference').css({
