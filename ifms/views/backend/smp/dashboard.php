@@ -3,7 +3,8 @@
 print_r($dct_expenses_per_cluster_in_region);
 echo '<br>';
 echo '<br>';
-echo $tym;
+//echo $tym;
+echo $date;
 $region_all_expenses = [];
 $region_expense_totals = [];
 //$expense_acc_codesr=[];
@@ -17,12 +18,18 @@ $outer_array=[];
 $keys_array=[];
 
 $counter=0;
-foreach ($region_all_expenses as $key => $region_expense) {
+echo '<br>';
+print_r($region_all_expenses);
 
+$array_keys_of_expenses=[];
+
+foreach ($region_all_expenses as $key => $region_expense) {
+    print_r($region_expense);
+	echo '<br>';
 	echo '<br>';
 	foreach ($region_expense as $k => $expense) {
-		//print_r($expense);
-		$array_keys_of_expenses= array_keys($expense);
+		print_r($expense);
+		$array_keys_of_expenses=array_merge($array_keys_of_expenses,array_keys($expense));
 
 		$array_of_unique_accounts=array_unique(array_merge($expense_accounts,$array_keys_of_expenses));
         
@@ -40,37 +47,15 @@ foreach ($region_all_expenses as $key => $region_expense) {
 
 
 		$result_array=[];
-		//foreach (array_values($expense) as $expense_value) {
+		foreach (array_values($expense) as $expense_value) {
 			//print_r($expense);
-			$test=array_diff_key(array_flip($array_of_unique_accounts),$expense);
-			if(count($test)>0){
-				foreach($test as $w=>$r){
-					if($expense[$w]>0)
-					{
-						$result_array[] = (float) $expense[$w];
-					}
-					else{
-                        $result_array[] = (float) 0;
-					}
-					
-	
-				}
-			}
-			else{
-				//$result_array[] = (float) $expense[];
-			}
+			$result_array[] = (float)$expense_value;
 			
-			
-			
-			
-			
-			
-			
-		//}
-        echo(';;;;<br>');
-		print_r(array_diff_key(array_flip($array_of_unique_accounts),$expense));
+		}
+        //echo(';;;;<br>');
+		//print_r(array_diff_key(array_flip($array_of_unique_accounts),$expense));
 
-		echo(' --<br>');
+		//echo(' --<br>');
 		//print_r($expense);
 
 
@@ -83,6 +68,7 @@ foreach ($region_all_expenses as $key => $region_expense) {
 	
 	
 }
+print_r($array_keys_of_expenses);
 
 $keys[]=end($keys_array);
 //print_r(end($keys_array));

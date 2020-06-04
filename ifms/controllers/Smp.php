@@ -64,6 +64,7 @@ class Smp extends CI_Controller
 		// $page_data['test']=$this->get_dcts_for_clusters_per_region();
 
 		$page_data['regions'] = $this->get_regions();
+		$page_data['date']=date('Y-m-d',$report_month);
 		$page_data['dct_expenses_per_cluster_in_region'] = !is_numeric($report_month)? $this->get_total_for_a_region(strtotime(date('Y-m-d'))):$this->get_total_for_a_region($report_month);
 		$page_data['total_dct_expense'] = !is_numeric($report_month)?$this->get_total_direct_cash_transfers_countrywide(strtotime(date('Y-m-d'))):$this->get_total_direct_cash_transfers_countrywide($report_month);
 		$page_data['total_dct_beneficiaries'] = 54747;
@@ -107,7 +108,8 @@ class Smp extends CI_Controller
 		
 	}
 	function get_total_for_a_region($dct_report_month){
-		return $this->dct_model->get_direct_cash_transfer_in_region($dct_report_month);
+		$current_month=strtotime('-1 months',$dct_report_month);
+		return $this->dct_model->get_direct_cash_transfer_in_region($current_month);
 	}
 	function get_total_direct_cash_transfers_countrywide($dct_report_month)
 	{
