@@ -29,26 +29,52 @@ foreach ($region_all_expenses as $key => $region_expense) {
 		$expense_accounts=$array_of_unique_accounts;
 		
 		$keys_array[]=$expense_accounts;
-
-			//$outer_array[]=$expense_accounts;
 		
+			//$outer_array[]=$expense_accounts;
+	
+          
 		$result_array=[];
 		array_shift($array_of_unique_accounts);
+
+		//print_r($array_of_unique_accounts);
+
+
 		$result_array=[];
-		print_r($expense);
-	   
-		if(count($array_of_unique_accounts)==count($expense)){
-			echo 'yes';
-
-		}
-
-		//'E15'=>'7748'
-		foreach (array_values($expense) as $expense_value) {
-			//if()
-			$result_array[] = (float) $expense_value;
+		//foreach (array_values($expense) as $expense_value) {
+			//print_r($expense);
+			$test=array_diff_key(array_flip($array_of_unique_accounts),$expense);
+			if(count($test)>0){
+				foreach($test as $w=>$r){
+					if($expense[$w]>0)
+					{
+						$result_array[] = (float) $expense[$w];
+					}
+					else{
+                        $result_array[] = (float) 0;
+					}
+					
+	
+				}
+			}
+			else{
+				//$result_array[] = (float) $expense[];
+			}
 			
 			
-		}
+			
+			
+			
+			
+			
+		//}
+        echo(';;;;<br>');
+		print_r(array_diff_key(array_flip($array_of_unique_accounts),$expense));
+
+		echo(' --<br>');
+		//print_r($expense);
+
+
+		
 		array_unshift($result_array,$k);
 		$outer_array[]=$result_array;
 		
