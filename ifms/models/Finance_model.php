@@ -722,7 +722,7 @@ class Finance_model extends CI_Model
 	public function months_pc_expense($project, $date)
 	{
 		//Expenses
-		$cond_pc_exp = "TDate>='" . date('Y-m-01', strtotime($date)) . "' AND TDate<='" . date('Y-m-t', strtotime($date)) . "' AND icpNo='" . $project . "' AND (VType = 'PC' OR VType = 'PCR' OR VType='DCTC')";
+		$cond_pc_exp = "TDate>='" . date('Y-m-01', strtotime($date)) . "' AND TDate<='" . date('Y-m-t', strtotime($date)) . "' AND icpNo='" . $project . "' AND (VType = 'PC' OR VType = 'PCR' OR VType='UDCTC')";
 		$pc_exp = $this->db->select_sum('Cost')->where($cond_pc_exp)->get('voucher_body')->row()->Cost;
 
 		return $pc_exp;
