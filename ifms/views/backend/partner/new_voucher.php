@@ -189,7 +189,7 @@
 										<td colspan="2">
 											<div id="label-toggle-switch" for="reversal" class="col-sm-6 hidden"><span style="font-weight: bold;"><?php echo get_phrase('cheque_reversal'); ?></span>
 												<div class="make-switch switch-small" data-on-label="Yes" data-off-label="No">
-													<input type="checkbox" id="reversal" name="reversal" value='1' />
+													<input type="checkbox" id="reversal" name="reversal" />
 												</div>
 											</div>
 
@@ -446,7 +446,7 @@
 			} else if ($('#hidden').val().length > 0 && $('#reversal').prop('checked') === false) {
 				//alert($('#hidden').val());
 				//alert("Here 3");
-				$('#error_msg').html('<?php echo get_phrase("cheque_numbers_cannot_be_re-used"); ?>');
+				$('#error_msg').html('<?php echo get_phrase("cheque_numbers_cannot_be_re-used_or_missing_bank_details"); ?>');
 				e.preventDefault();
 			} else if (myDropzone.files.length == 0 && (val == 'UDCTB' || val == 'UDCTC')) {
 
@@ -729,21 +729,24 @@
 
 
 
-		$('#ChqNo').keyup(function() {
+		$('#ChqNo').change(function() {
 			//alert('Hello');
 			var chqno = $(this).val();
 			var reversal = 'no';
 			if ($('#reversal').prop('checked')) {
 				reversal = 'yes';
 			}
-
+			
 			var url = "<?php echo base_url(); ?>ifms.php/partner/chqIntel/" + chqno;
 
 			$.ajax({
 				url: url,
 				success: function(response) {
-
-					if (response === '1' && reversal === 'no') {
+					//alert(response);
+					if(response === '-1'){
+						$('#error_msg').html('<?php echo get_phrase('missing_bank_details'); ?>');
+						$('#hidden').val(1);
+					}else if (response === '1' && reversal === 'no') {
 						$('#error_msg').html('<?php echo get_phrase('cheque_number'); ?> ' + chqno + ' <?php echo get_phrase('has_already_been_used_or_invalid_input'); ?>');
 						$('#hidden').val(1);
 					} else if (response === '1' && reversal === 'yes') {

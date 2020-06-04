@@ -829,24 +829,37 @@ class Partner extends CI_Controller
 
 	function chqIntel($param1)
 	{
+		$return_flag = -1;// Error occurred flag
+
+		$bank_code_obj = $this->db->get_where('projectsdetails', 
+		array('icpNo' => $this->session->userdata('center_id')));
+
 		//Get Bank Code
-		$bank_code = $this->db->get_where('projectsdetails', array('icpNo' => $this->session->userdata('center_id')))->row()->bankID;
+		if($bank_code_obj->num_rows() > 0){
 
-		//Check if Cheque No exists
-		$chqNo = $param1 . "-" . $bank_code;
-		$chqNo_reversed = $param1 . "-" . $bank_code . "-0";
+			$bank_code = $bank_code_obj->row()->bankID;
+			
+			//Check if Cheque No exists
+			$chqNo = $param1 . "-" . $bank_code;
+			$chqNo_reversed = $param1 . "-" . $bank_code . "-0";
 
-		$chk_cond = "(ChqNo ='" . $chqNo . "' OR ChqNo='" . $chqNo_reversed . "') AND icpNo='" . $this->session->userdata('center_id') . "'";
-		$chk = $this->db->where($chk_cond)->get('voucher_header')->result_array();
+			$chk_cond = "(ChqNo ='" . $chqNo . "' OR ChqNo='" . $chqNo_reversed . "') AND icpNo='" . $this->session->userdata('center_id') . "'";
+			$chk = $this->db->where($chk_cond)->get('voucher_header')->result_array();
 
-		//echo count($chk)>0?1:0;
-		if (count($chk) === 1) {
-			echo 1;
-		} elseif (count($chk) > 1) {
-			echo 2;
-		} else {
-			echo 0;
+			//echo count($chk)>0?1:0;
+			if (count($chk) === 1) {
+				//Cheque present but not reversed
+				$return_flag  = 1;
+			} elseif (count($chk) > 1) {
+				// Cheque present and reversed
+				$return_flag  = 2;
+			} else {
+				// Cheque not used
+				$return_flag  = 0;
+			}
 		}
+
+		echo $return_flag;
 	}
 
 	public function multiple_vouchers($tym)
