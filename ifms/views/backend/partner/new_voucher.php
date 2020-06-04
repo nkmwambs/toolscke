@@ -433,7 +433,7 @@
 			//alert(reference_number);
 			var val = $('#VTypeMain').val();
 
-			alert (val);
+			//alert (val);
 
 			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {
 				//alert("Here 1");
