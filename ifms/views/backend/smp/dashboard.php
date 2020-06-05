@@ -5,6 +5,7 @@ echo '<br>';
 echo '<br>';
 //echo $tym;
 echo $date;
+echo '<br>';
 $region_all_expenses = [];
 $region_expense_totals = [];
 //$expense_acc_codesr=[];
@@ -13,71 +14,55 @@ foreach ($dct_expenses_per_cluster_in_region as $cluster) {
 }
 $region_names = [];
 $expense_accounts[]='Region';
-
-$outer_array=[];
+$region_expense_costs=[];
 $keys_array=[];
-
-$counter=0;
-echo '<br>';
-print_r($region_all_expenses);
 
 $array_keys_of_expenses=[];
 
+foreach ($region_all_expenses as $region_expense) {
+
+	foreach ($region_expense as $expense) {
+		$array_keys_of_expenses=array_unique(array_merge($array_keys_of_expenses,array_keys($expense)));
+	   
+	}
+}
+
+$region_expense_costs=[];
 foreach ($region_all_expenses as $key => $region_expense) {
-    print_r($region_expense);
-	echo '<br>';
-	echo '<br>';
-	foreach ($region_expense as $k => $expense) {
-		print_r($expense);
-		$array_keys_of_expenses=array_merge($array_keys_of_expenses,array_keys($expense));
-
-		$array_of_unique_accounts=array_unique(array_merge($expense_accounts,$array_keys_of_expenses));
-        
-		$expense_accounts=$array_of_unique_accounts;
-		
-		$keys_array[]=$expense_accounts;
-		
-			//$outer_array[]=$expense_accounts;
+    //print_r($key);
 	
-          
+	foreach ($region_expense as $k => $expense) {
 		$result_array=[];
-		array_shift($array_of_unique_accounts);
+		//print_r($array_keys_of_expenses);
+		foreach($array_keys_of_expenses as $te){
+			
+			if(isset($expense[$te])){
 
-		//print_r($array_of_unique_accounts);
-
-
-		$result_array=[];
-		foreach (array_values($expense) as $expense_value) {
-			//print_r($expense);
-			$result_array[] = (float)$expense_value;
+				$result_array[] = (float)$expense[$te];
+				
+			}
+			else{
+				$result_array[]=0;
+			}
 			
 		}
-        //echo(';;;;<br>');
-		//print_r(array_diff_key(array_flip($array_of_unique_accounts),$expense));
-
-		//echo(' --<br>');
-		//print_r($expense);
-
-
-		
-		array_unshift($result_array,$k);
-		$outer_array[]=$result_array;
-		
-
+	   array_unshift($result_array,$k);
+	   $region_expense_costs[$key]=$result_array;
 	}
-	
-	
 }
-print_r($array_keys_of_expenses);
 
-$keys[]=end($keys_array);
-//print_r(end($keys_array));
-echo('<br>');
+$expense_account_codes[]=array_merge($expense_accounts,$array_keys_of_expenses);
+
 //[["Region","E15","E30","E415"],["Central Region",3048,6166],["Coast Region",22000],["Nairobi Region",4,2],["Western Region",2000,68000]]
-$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode(array_merge($keys,$outer_array))));
+$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode(array_merge($expense_account_codes,$region_expense_costs))));
+
 print_r($javascrip_array);
+echo  '<br>';
+echo  '<br>';
+//print_r($region_expense_costs);
 
-
+echo  '<br>';
+echo  '<br>';
 
 ?>
 <!-- <head> -->
@@ -104,29 +89,18 @@ print_r($javascrip_array);
         var regions_and_expense_accounts='<?=$javascrip_array;?>';
 
 		alert(regions_and_expense_accounts);
-		
+
         var data = google.visualization.arrayToDataTable(
             //Array of expenses accounts, cost, region
-			//JSON.parse(regions_and_expense_accounts),
+			JSON.parse(regions_and_expense_accounts),
 
-			[
-				["Region","E15","E30","E415"],
-				["Central Region",3048,6166,0],
-				["Coast Region",0,0,22000],
-				["Nairobi Region",4,2,0],
-				["Western Region",2000,68000,0]
-			]
-
-					
-			/*[
-		 
-				['Region', 'E15', 'E20', 'E25', 'E30', 'E45', 'E60'],
-				['Western',  165,      938,         522,             998,           450,      614.6],
-				['Nairobi',  135,      1120,        599,             1268,          288,      682],
-				['Central',  157,      1167,        587,             807,           397,      623],
-				['Costal',  139,      1110,        615,             968,           215,      609.4],
-        	]*/
-		
+			// [
+			// 	["Region","E15","E30","E415",'E45', 'E60'],
+			// 	["Central Region",3048,6166,7777,7000,8098],
+			// 	["Coast Region",2334,9876,22000,3400,730],
+			// 	["Nairobi Region",4100,3000,2000,4000,45000],
+			// 	["Western Region",2000,68000,999,4500,9000]
+			// ]
 		);
 
         var options = {
@@ -136,52 +110,12 @@ print_r($javascrip_array);
           seriesType: 'bars',
           //series: {5: {type: 'line'}}        
 		  };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('bar_chart'));
-        chart.draw(data, options);
+       
+			var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        
       }
 
-	// function drawChart() {
-	// 	// alert('<?= base_url(); ?>ifms.php/smp/get_data/'+<?= $tym; ?>);
-	// 	$.ajax({
-	// 		type: 'GET',
-	// 		url: '<?= base_url(); ?>ifms.php/smp/get_data/' + <?= $tym; ?>,
-	// 		success: function(data1) {
-	// 			alert(data1);
-	// 			var data = new google.visualization.DataTable();
-	// 			// Add legends with data type
-	// 			data.addColumn('string', 'region');
-	// 			data.addColumn('string', 'AccText');
-	// 			data.addColumn('number', 'Cost');
-	// 			//Parse data into Json
-	// 			var jsonData = $.parseJSON(data1);
-	// 			for (var i = 0; i < jsonData.length; i++) {
-	// 				data.addRow([jsonData[i].region, jsonData[i].AccText, parseInt(jsonData[i].Cost)]);
-	// 			}
-
-	// 			var options = {
-	// 				chart: {
-	// 					title: 'DCT Expenses',
-	// 					//subtitle: 'Showing total DCT'
-	// 				},
-	// 				width: 900,
-	// 				height: 500,
-	// 				axes: {
-	// 					x: {
-	// 						0: {
-	// 							side: 'bottom'
-	// 						}
-							
-	// 					},
-	// 					//colors: ['green', 'red']
-	// 				}
-
-	// 			};
-	// 			var chart = new google.charts.Bar(document.getElementById('bar_chart'));
-	// 			chart.draw(data, options);
-	// 		}
-	// 	});
-	//}
 </script>
 
 <!-- </head> -->
@@ -253,7 +187,72 @@ print_r($javascrip_array);
 				}
 			}
 
+			//print_r($expense_account_codes);
+			echo '<br>';
+			//print_r($region_expense_costs)
+
 			?>
+			<table class='table-striped table'>
+				<!-- table head -->
+				<thead>
+                  <tr><th><?=get_phrase('region');?></th>
+				  <?php
+				  /*Shift to remove get Array of format: array ( [0] => E15 [1] => E30 [2] => E415 )
+				  Then loop to draw th for the table for accounts
+				  */
+				   array_shift($expense_account_codes[0]);
+
+				   ksort($expense_account_codes[0]);
+
+				   foreach($expense_account_codes[0] as $expense_account_code){?>
+
+					  <th><?=$expense_account_code;?></th>
+
+				  <?php }?>
+				   </tr>
+				</thead>
+
+               <!-- table body -->
+				<tbody>
+					<!-- Array ( 
+						 [3] => Array ( [0] => Central Region [1] => 3169 [2] => 6166 [3] => 0 ) 
+						 [2] => Array ( [0] => Coast Region [1] => 0 [2] => 0 [3] => 22000 ) 
+						 [4] => Array ( [0] => Nairobi Region [1] => 4 [2] => 2 [3] => 0 ) 
+						 [1] => Array ( [0] => Western Region [1] => 2000 [2] => 68000 [3] => 0 )
+					   ) -->
+					   
+					<?php  
+					  $national_total_dct=[];
+					  foreach($region_expense_costs as $region_id=>$region_expense_cost){
+						  
+						
+						?>
+
+					<tr>
+
+						<?php
+						    $array_sum=[];
+							
+							foreach($region_expense_cost as $cost)
+							{?>
+							     
+								<td><?=is_numeric($cost)?number_format($cost,2):$cost;?></td>
+							
+
+							<?php } ?>
+					</tr>
+                  <?php
+					}
+					
+					?>
+
+				</tbody>
+
+
+			</table>
+
+			<br>
+			<br>
 
 			<table class='table-striped table'>
 				<!-- thead -->
@@ -263,7 +262,7 @@ print_r($javascrip_array);
 						<th><?= get_phrase('region') ?></th>
 						<th><?= get_phrase('region-wide_total'); ?></th>
 						<?php
-						
+						//print_r()
 						$expense_account_codes = [];
 						foreach ($region_names_and_ids as $region_name_and_id) {
 
@@ -285,6 +284,7 @@ print_r($javascrip_array);
 					$national_total_dct = 0;
 					foreach ($region_names_and_ids as $region_name_id_key => $region_name_and_id) {
 						$national_total_dct += array_sum($region_name_and_id);
+						print_r($region_name_and_id);
 					?>
 
 						<tr>
@@ -344,7 +344,7 @@ print_r($javascrip_array);
 		</div>
 
 	</div>
-	<div id='bar_chart'></div>
+	<div id='chart_div'></div>
 </div>
 
 
