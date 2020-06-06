@@ -32,22 +32,22 @@ foreach ($region_all_expenses as $key => $region_expense) {
     //print_r($key);
 	
 	foreach ($region_expense as $k => $expense) {
-		$result_array=[];
+		$expense_costs=[];
 		//print_r($array_keys_of_expenses);
-		foreach($array_keys_of_expenses as $te){
+		foreach($array_keys_of_expenses as $exp_cost){
 			
-			if(isset($expense[$te])){
+			if(isset($expense[$exp_cost])){
 
-				$result_array[] = (float)$expense[$te];
+				$expense_costs[] = (float)$expense[$exp_cost];
 				
 			}
 			else{
-				$result_array[]=0;
+				$expense_costs[]=0;
 			}
 			
 		}
-	   array_unshift($result_array,$k);
-	   $region_expense_costs[$key]=$result_array;
+	   array_unshift($expense_costs,$k);
+	   $region_expense_costs[$key]=$expense_costs;
 	}
 }
 
@@ -105,13 +105,18 @@ echo  '<br>';
 
         var options = {
           title : 'Direct Cash Transfers per region per expense account',
+		  is3D: true,
           vAxis: {title: 'Cost'},
           hAxis: {title: 'Region'},
           seriesType: 'bars',
           //series: {5: {type: 'line'}}        
 		  };
        
-			var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+		var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+		google.visualization.events.addListener(chart, 'error', function (googleError) {
+              google.visualization.errors.removeError(googleError.id);
+              $('#chart_div').html('No data to display graphically')
+		  });
             chart.draw(data, options);
         
       }
