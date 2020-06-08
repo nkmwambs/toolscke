@@ -20,6 +20,7 @@ class Facilitator extends CI_Controller
 		$this->load->database();
         $this->load->library('session');
 		$this->load->library('zip');
+		$this->load->model('dct_model');
 		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 		
        /*cache control*/
@@ -60,7 +61,8 @@ class Facilitator extends CI_Controller
 				$page_data['tym']  = strtotime($sign.$param2.' months',$param1);	
 		}
 		
-        $page_data['page_name']  = 'dashboard';
+		$page_data['page_name']  = 'dashboard';
+		$page_data['fcps']=$this->cluster_fcps();
         $page_data['page_title'] = get_phrase('finance_dashboard');
         $this->load->view('backend/index', $page_data);
     }
@@ -685,34 +687,45 @@ public function multiple_vouchers($tym,$project){
 // public function dct_documents_download($fcp_number,$tym,$vnumber){
 // 	force_download('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber,NULL);
 // }
-
+function cluster_fcps(){
+    $cluster = $this->session->cluster;
+ 
+    $this->db->select(array('icpNo'));
+    $this->db->where(array('clusterName'=>$cluster,'projectsdetails.status'=>1));
+    $this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
+    $result = $this->db->get('projectsdetails')->result_array();
+ 
+    return array_column($result,'icpNo');
+ }
+ 
+ function direct_cash_transfers_report($tym){
+    if ($this->session->userdata('admin_login') != 1)
+          redirect(base_url(), 'refresh');
+    
+    $page_data['tym']  = $tym;
+    //$page_data['fcps']  = $this->cluster_fcps();
+    $page_data['direct_cash_transfers'] = $this->dct_model->fcp_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
+    $page_data['page_name']  = 'direct_cash_transfers_report';
+    $page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);
+    $this->load->view('backend/index', $page_data); 
+ }
+ 
+ function direct_cash_transfer_vouchers($tym,$fcp){
+    if ($this->session->userdata('admin_login') != 1)
+          redirect(base_url(), 'refresh');
+    
+    $page_data['fcp'] = $fcp;
+    $page_data['tym'] = $tym;
+    $page_data['direct_cash_transfer_vouchers'] = $this->dct_model->direct_cash_transfers_by_fcp($fcp,$tym);
+    $page_data['page_name']  = 'direct_cash_transfer_vouchers';
+    $page_data['page_title'] = date('F Y',$tym).' '.get_phrase('direct_cash_transfer_vouchers_for').' '.$fcp;
+    $this->load->view('backend/index', $page_data);      
+ }
+ 
 function dct_documents_download($fcp_number,$tym,$vnumber){
-			
-		if(file_exists('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/')){
-			$map = directory_map('uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.$vnumber.'/', FALSE, TRUE);
-					
-				foreach($map as $row): 
-
-				$path = 'uploads/dct_documents/'.$fcp_number.'/'.date('Y-m',$tym).'/'.'/'.$vnumber.'/'.$row;
-			
-				$data = file_get_contents($path);
-		
-				$this->zip->add_data($row, $data);
-			endforeach;
+    $this->dct_library->dct_documents_download($fcp_number,$tym,$vnumber);
+}   
 
 	
-	// Write the zip file to a folder on your server. Name it "my_backup.zip"
-	$this->zip->archive('downloads/my_backup_'.$this->session->login_user_id.'.zip');
-	
-	// Download the file to your desktop. Name it "my_backup.zip"
-	
-	$backup_file = 'downloads_'.$this->session->login_user_id.date("Y_m_d_H_i_s").'.zip'; 
-	
-	$this->zip->download($backup_file);
-	
-	unlink('downloads/'.$backup_file);
-		
-	}
-}	
  
 }	
