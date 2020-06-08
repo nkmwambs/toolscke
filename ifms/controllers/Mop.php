@@ -453,6 +453,7 @@ private function region_fcps($region_id = 0){
 	
 	$page_data['tym']  = $this->time_scoller($date,$cnt,$flag);
 	$page_data['account_type'] = 'mop';	
+	$page_data['region_id'] = $region_id;
 	$page_data['direct_cash_transfers'] = $this->dct_model->cluster_grouped_direct_cash_transfers($this->region_fcps($region_id),$page_data['tym']);
 	$page_data['page_name']  = 'direct_cash_transfers_report';
 	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$page_data['tym']);

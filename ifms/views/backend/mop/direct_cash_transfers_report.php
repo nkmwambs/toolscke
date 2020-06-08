@@ -84,8 +84,10 @@
         var dt = '<?php echo $tym;?>';
         
         var flag = $(this).attr('id');
+
+        var region_id = '<?php echo $region_id;?>';
         
-        var url = '<?php echo base_url();?>ifms.php/mop/direct_cash_transfers_report/'+dt+'/0/'+cnt+'/'+flag;
+        var url = '<?php echo base_url();?>ifms.php/mop/direct_cash_transfers_report/'+dt+'/'+region_id+'/'+cnt+'/'+flag;
         
         $(this).attr('href',url);
     });
