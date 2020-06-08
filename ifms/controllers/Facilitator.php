@@ -560,8 +560,12 @@ public function multiple_vouchers($tym,$project){
     $this->load->view('backend/index', $page_data);	 	
  } 
 
- function cluster_fcps(){
+ function cluster_fcps($cluster_name = ""){
 	$cluster = $this->session->cluster;
+
+	if($cluster_name !== ""){
+		$cluster = $cluster_name;
+	}
 
 	$this->db->select(array('icpNo'));
 	$this->db->where(array('clusterName'=>$cluster,'projectsdetails.status'=>1));
@@ -571,13 +575,14 @@ public function multiple_vouchers($tym,$project){
 	return array_column($result,'icpNo');
  }
 
- function direct_cash_transfers_report($tym){
+ function direct_cash_transfers_report($tym,$cluster_name = ""){
 	if ($this->session->userdata('admin_login') != 1)
 		  redirect(base_url(), 'refresh');
 	
 	$page_data['tym']  = $tym;
-	//$page_data['fcps']  = $this->direct_cash_transfers($this->cluster_fcps(),$tym,'fcp_number');
-	$page_data['direct_cash_transfers'] = $this->fcp_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
+	
+	$page_data['account_type'] = 'facilitator';
+	$page_data['direct_cash_transfers'] = $this->fcp_grouped_direct_cash_transfers($this->cluster_fcps($cluster_name),$tym);
 	$page_data['page_name']  = 'direct_cash_transfers_report';
 	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);
     $this->load->view('backend/index', $page_data);	
@@ -589,6 +594,7 @@ public function multiple_vouchers($tym,$project){
 	
 	$page_data['fcp'] = $fcp;
 	$page_data['tym'] = $tym;
+	$page_data['account_type'] = 'facilitator';
 	$page_data['direct_cash_transfer_vouchers'] = $this->direct_cash_transfers_by_fcp($fcp,$tym);
 	$page_data['page_name']  = 'direct_cash_transfer_vouchers';
 	$page_data['page_title'] = date('F Y',$tym).' '.get_phrase('direct_cash_transfer_vouchers_for').' '.$fcp;

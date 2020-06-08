@@ -15,7 +15,7 @@ $month_start_date = date('Y-m-01',$tym);
 
 $month_end_date = date('Y-m-t',$tym);
 
-echo $month_start_date;
+//echo $month_start_date;
 
 $total_dct_expense = $this->db->select_sum('Cost')->get_where('voucher_body',
 array('TDate>='=>$month_start_date,'TDate<='=>$month_end_date))->row()->Cost;

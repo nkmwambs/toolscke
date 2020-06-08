@@ -18,7 +18,9 @@ class Mop extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
-        $this->load->library('session');
+		$this->load->library('session');
+		
+		$this->load->model('dct_model');
 		
        /*cache control*/
 // 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -410,27 +412,50 @@ function fund_balance_report($month = ""){
 
 /** DCT Report start */
 
-function region_fcps(){
+private function region_fcps($region_id = 0){
 	$login_user_id = $this->session->login_user_id;
-
-	$this->db->select(array('icpNo'));
-	$this->db->where(array('region.region_manager_id'=>$login_user_id,'projectsdetails.status'=>1));
-	$this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
-	$this->db->join('region','region.region_id=clusters.region_id');
-	$result = $this->db->get('projectsdetails')->result_array();
-
-	return array_column($result,'icpNo');
+	
+	if($region_id != 0){
+		$login_user_id = $this->db->get_where('region',
+		array('region_id'=>$region_id))->row()->region_manager_id;
+	}
+	return $this->dct_model->region_fcps($login_user_id);
  }
 
- function direct_cash_transfers_report($tym = 0){
+ function cluster_fcps($cluster_name){
+	return $this->dct_model->cluster_fcps($cluster_name);
+ }
+
+ function time_scoller($date = "",$cnt = "" ,$flag = ""){
+	$tym  = strtotime(date('Y-m-d'));
+							
+	if($date !== "" && $cnt == ""){
+
+		$tym  = $date;
+	}
+	
+	if($flag == "prev" || $flag == "next"){
+			$sign = '+';
+	
+			if($flag == 'prev'){
+				$sign = '-';
+			}
+				 
+			$tym  = strtotime($sign.$cnt.' months',$date);	
+	}
+
+	return $tym;
+ }
+
+ function direct_cash_transfers_report($date = "",$region_id = 0,$cnt = "" ,$flag = ""){
 	if ($this->session->userdata('admin_login') != 1)
 		  redirect(base_url(), 'refresh');
 	
-	$page_data['tym']  = $tym;
-	$page_data['fcps']  = $this->region_fcps();//$this->direct_cash_transfers($this->cluster_fcps(),$tym,'fcp_number');
-	//$page_data['direct_cash_transfers'] = $this->fcp_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
+	$page_data['tym']  = $this->time_scoller($date,$cnt,$flag);
+	$page_data['account_type'] = 'mop';	
+	$page_data['direct_cash_transfers'] = $this->dct_model->cluster_grouped_direct_cash_transfers($this->region_fcps($region_id),$page_data['tym']);
 	$page_data['page_name']  = 'direct_cash_transfers_report';
-	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);
+	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$page_data['tym']);
     $this->load->view('backend/index', $page_data);	
  }
 
