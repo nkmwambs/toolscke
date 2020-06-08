@@ -1,71 +1,54 @@
 <?php
 
-print_r($dct_expenses_per_cluster_in_region);
-echo '<br>';
-echo '<br>';
-//echo $tym;
+//print_r($dct_expenses_per_cluster_in_region);
 echo $date;
-echo '<br>';
+
+//Construct an array of region all expenses from the raw data from database
 $region_all_expenses = [];
-$region_expense_totals = [];
-//$expense_acc_codesr=[];
+
 foreach ($dct_expenses_per_cluster_in_region as $cluster) {
 	$region_all_expenses[$cluster['regionId']][$cluster['region']][$cluster['AccText']] = $cluster['Cost'];
 }
-$region_names = [];
-$expense_accounts[]='Region';
-$region_expense_costs=[];
-$keys_array=[];
-
-$array_keys_of_expenses=[];
-
+//Construct array keys of expenses
+$array_keys_of_expenses = [];
 foreach ($region_all_expenses as $region_expense) {
 
 	foreach ($region_expense as $expense) {
-		$array_keys_of_expenses=array_unique(array_merge($array_keys_of_expenses,array_keys($expense)));
-	   
+		$array_keys_of_expenses = array_unique(array_merge($array_keys_of_expenses, array_keys($expense)));
 	}
 }
-
-$region_expense_costs=[];
+//Costruct array of costs per expense code per region
+$region_expense_costs = [];
 foreach ($region_all_expenses as $key => $region_expense) {
-    //print_r($key);
-	
-	foreach ($region_expense as $k => $expense) {
-		$expense_costs=[];
-		//print_r($array_keys_of_expenses);
-		foreach($array_keys_of_expenses as $exp_cost){
-			
-			if(isset($expense[$exp_cost])){
 
-				$expense_costs[] = (float)$expense[$exp_cost];
-				
+	foreach ($region_expense as $region_name => $expense) {
+		//print_r($region_name);
+		$expense_costs = [];
+		foreach ($array_keys_of_expenses as $exp_cost) {
+           //Check if the expense code is set if so type cast the cost to float otherwise pass 0
+			if (isset($expense[$exp_cost])) {
+
+				$expense_costs[] = (float) $expense[$exp_cost];
+			} else {
+				$expense_costs[] = 0;
 			}
-			else{
-				$expense_costs[]=0;
-			}
-			
 		}
-	   array_unshift($expense_costs,$k);
-	   $region_expense_costs[$key]=$expense_costs;
+        //Add region name to the expense_costs array as the first element of the array
+		array_unshift($expense_costs, $region_name);
+
+		$region_expense_costs[$key] = $expense_costs;
 	}
 }
-
-$expense_account_codes[]=array_merge($expense_accounts,$array_keys_of_expenses);
+$expense_accounts[] = 'Region';
+$expense_account_codes[] = array_merge($expense_accounts, $array_keys_of_expenses);
 
 //[["Region","E15","E30","E415"],["Central Region",3048,6166],["Coast Region",22000],["Nairobi Region",4,2],["Western Region",2000,68000]]
-$javascrip_array=str_replace('}',']',str_replace( '{','[',json_encode(array_merge($expense_account_codes,$region_expense_costs))));
+$javascrip_array = str_replace('}', ']', str_replace('{', '[', json_encode(array_merge($expense_account_codes, $region_expense_costs))));
 
-print_r($javascrip_array);
-echo  '<br>';
-echo  '<br>';
-//print_r($region_expense_costs);
-
-echo  '<br>';
-echo  '<br>';
+//print_r($javascrip_array);
 
 ?>
-<!-- <head> -->
+<!-- Google Graphs Script-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 
@@ -79,19 +62,18 @@ echo  '<br>';
 
 
 	function drawChart() {
-		
+
 		/*
 		Array from the server of format
 		[["Region","E15","E30"],["Central Region",3048,6166],["Nairobi Region",4,2],["Western Region",2000,40000]]
 		
 		*/
+		var regions_and_expense_accounts = '<?= $javascrip_array; ?>';
 
-        var regions_and_expense_accounts='<?=$javascrip_array;?>';
+		//alert(regions_and_expense_accounts);
 
-		alert(regions_and_expense_accounts);
-
-        var data = google.visualization.arrayToDataTable(
-            //Array of expenses accounts, cost, region
+		var data = google.visualization.arrayToDataTable(
+			//Array of expenses accounts, cost, region
 			JSON.parse(regions_and_expense_accounts),
 
 			// [
@@ -103,27 +85,27 @@ echo  '<br>';
 			// ]
 		);
 
-        var options = {
-          title : 'Direct Cash Transfers per region per expense account',
-		  is3D: true,
-          vAxis: {title: 'Cost'},
-          hAxis: {title: 'Region'},
-          seriesType: 'bars',
-          //series: {5: {type: 'line'}}        
-		  };
-       
+		var options = {
+			title: 'Direct Cash Transfers per region per expense account',
+			vAxis: {
+				title: 'Cost'
+			},
+			hAxis: {
+				title: 'Region'
+			},
+			seriesType: 'bars',
+			//series: {5: {type: 'line'}}        
+		};
+
 		var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-		google.visualization.events.addListener(chart, 'error', function (googleError) {
-              google.visualization.errors.removeError(googleError.id);
-              $('#chart_div').html('No data to display graphically')
-		  });
-            chart.draw(data, options);
-        
-      }
+		google.visualization.events.addListener(chart, 'error', function(googleError) {
+			google.visualization.errors.removeError(googleError.id);
+			$('#chart_div').html('No data to display graphically')
+		});
+		chart.draw(data, options);
 
+	}
 </script>
-
-<!-- </head> -->
 
 <div class="row">
 	<div class="col-sm-6">
@@ -142,214 +124,113 @@ echo  '<br>';
 
 <hr />
 
-<!-- <div class="row">
+<div id='chart_div'></div>
+<br>
+<br>
+<hr />
+
+<div class="row">
 	<div class="col-sm-12">
-		<div class="row">
 
-			<div class="col-sm-3">
 
-				<div class="tile-stats tile-primary">
-					<div class="icon"><i class="entypo-suitcase"></i></div>
-					<h3><?= get_phrase('Nation-wide total_dct_expense'); ?></h3>
-					<div class="num" data-start="0" data-end="<?= $total_dct_expense; ?>" data-prefix="Kshs " data-postfix="" data-duration="1500" data-delay="0">0</div>
+		<table class='table-striped table'>
+			<!-- table head -->
+			<thead>
+				<tr>
+					<th><?= get_phrase('region'); ?></th>
+					<?php
 
-				</div>
 
-			</div>
+					/*Shift to remove get Array of format: array ( [0] => E15 [1] => E30 [2] => E415 )
+				     Then loop to draw th for the table for accounts
+				    */
+					array_shift($expense_account_codes[0]);
 
-			<div class="col-md-3">
-				<a href="#" style="text-decoration: none;">
-					<div class="tile-stats tile-red">
-						<div class="icon"><i class="fa fa-book"></i></div>
-						<div class="num" data-start="0" data-end="<?= $total_dct_beneficiaries; ?>" data-postfix="" data-duration="1500" data-delay="0">0</div>
+					ksort($expense_account_codes[0]);
 
-						<h3>% <?= get_phrase('total_dct_beneficiaries'); ?></h3>
+					foreach ($expense_account_codes[0] as $expense_account_code) { ?>
 
-					</div>
-				</a>
-			</div>
+						<th><?= $expense_account_code; ?></th>
 
-		</div>
-	</div> -->
+					<?php } ?>
+				</tr>
+			</thead>
 
-	<div class="row">
-		<div class="col-sm-12">
-
-			<?php
-			/*
-		  Create the array of format: 
-			Array ( [3-Central Region] => Array ( [E15] => 1052.00 [E30] => 6166.00 ) [4-Nairobi Region] => Array ( [E15] => 4.00 [E30] => 2.00 ) [1-Western Region] => Array ( [E15] => 2000.00 ) )
-		*/
-			$region_expenses = [];
-			$region_names_and_ids = [];
-			foreach ($dct_expenses_per_cluster_in_region as $dct_expenses_in_aregion) {
-				$region_expenses[$dct_expenses_in_aregion['regionId']][$dct_expenses_in_aregion['region']][$dct_expenses_in_aregion['AccText']] = $dct_expenses_in_aregion['Cost'];
-			}
-			foreach ($region_expenses as $key => $region_expense) {
-				foreach ($region_expense as $k => $expense) {
-
-					$region_names_and_ids[$key . '-' . $k] = $expense;
-				}
-			}
-
-			//print_r($expense_account_codes);
-			echo '<br>';
-			//print_r($region_expense_costs)
-
-			?>
-			<table class='table-striped table'>
-				<!-- table head -->
-				<thead>
-                  <tr><th><?=get_phrase('region');?></th>
-				  <?php
-				  /*Shift to remove get Array of format: array ( [0] => E15 [1] => E30 [2] => E415 )
-				  Then loop to draw th for the table for accounts
-				  */
-				   array_shift($expense_account_codes[0]);
-
-				   ksort($expense_account_codes[0]);
-
-				   foreach($expense_account_codes[0] as $expense_account_code){?>
-
-					  <th><?=$expense_account_code;?></th>
-
-				  <?php }?>
-				   </tr>
-				</thead>
-
-               <!-- table body -->
-				<tbody>
-					<!-- Array ( 
+			<!-- table body -->
+			<tbody>
+				<!-- Array ( 
 						 [3] => Array ( [0] => Central Region [1] => 3169 [2] => 6166 [3] => 0 ) 
 						 [2] => Array ( [0] => Coast Region [1] => 0 [2] => 0 [3] => 22000 ) 
 						 [4] => Array ( [0] => Nairobi Region [1] => 4 [2] => 2 [3] => 0 ) 
 						 [1] => Array ( [0] => Western Region [1] => 2000 [2] => 68000 [3] => 0 )
 					   ) -->
-					   
-					<?php  
-					  $national_total_dct=[];
-					  foreach($region_expense_costs as $region_id=>$region_expense_cost){
-						  
-						
-						?>
+
+				<?php
+				//Populate each each region with expenses per account codes
+				foreach ($region_expense_costs as $region_id => $region_expense_cost) { ?>
 
 					<tr>
 
 						<?php
-						    $array_sum=[];
-							
-							foreach($region_expense_cost as $cost)
-							{?>
-							     
-								<td><?=is_numeric($cost)?number_format($cost,2):$cost;?></td>
-							
+						foreach ($region_expense_cost as $cost) {
+							//Populate the cost of an expense account
 
-							<?php } ?>
-					</tr>
-                  <?php
-					}
-					
-					?>
+							if (is_numeric($cost)) { ?>
+								<td><?= number_format($cost, 2); ?></td>
 
-				</tbody>
-
-
-			</table>
-
-			<br>
-			<br>
-
-			<table class='table-striped table'>
-				<!-- thead -->
-				<thead>
-					<tr>
-						<!-- Draw th for region and region-wide -->
-						<th><?= get_phrase('region') ?></th>
-						<th><?= get_phrase('region-wide_total'); ?></th>
-						<?php
-						//print_r()
-						$expense_account_codes = [];
-						foreach ($region_names_and_ids as $region_name_and_id) {
-
-							foreach ($region_name_and_id as $exp_code => $expense_code) {
-								if (!in_array($exp_code, $expense_account_codes)) {
-									$expense_account_codes[] = $exp_code; ?>
-									<!-- draw the th for expenses -->
-									<th><?= $exp_code; ?></th>
-
+							<?php
+							} else { ?>
+								<td>
+									<a target='_blank' href='<?= base_url(); ?>ifms.php/mop/direct_cash_transfers_report/<?= $tym . '/' . $region_id  ?>'><?= $cost; ?></a>
+								</td>
 						<?php }
-							}
-						}
-						?>
-					</tr>
-				</thead>
-				<!-- tboady -->
-				<tbody>
-					<?php
-					$national_total_dct = 0;
-					foreach ($region_names_and_ids as $region_name_id_key => $region_name_and_id) {
-						$national_total_dct += array_sum($region_name_and_id);
-						print_r($region_name_and_id);
-					?>
-
-						<tr>
-							<!-- Populate region name e.g. Western region and total amount for dct in 
-					that region for all dct expenses acc -->
-							<td>
-
-								<?php
-								//Get the value name and id for a region
-								$region_name_and_id_array = explode('-', $region_name_id_key); ?>
-
-								<a target='_blank' href='<?= base_url(); ?>ifms.php/smp/cluster_dct_in_aregion/<?= $tym . '/' . $region_name_and_id_array[0]; ?>'><?= $region_name_and_id_array[1]; ?></a>
-								<?php
-
-								?>
-
-							</td>
-							<td><?= number_format(array_sum($region_name_and_id), 2) ?></td>
-
-							<!-- Populate  the expense amount for each region -->
-
-							<?php foreach ($region_name_and_id as $key => $exp_account_and_totals) {
-
-							?>
-								<td><?= number_format($exp_account_and_totals, 2); ?></td>
-
-							<?php } ?>
-
-						</tr>
-
-					<?php } ?>
-
-					<tr>
-						<td>
-							<h2><?= get_phrase('nation-wide_total') ?></h2>
-						</td>
-						<td>
-							<h2><?= number_format($national_total_dct, 2) ?></h2>
-						</td>
-
-						<?php
-						//loop to populate totals for dct expense accounts in last row of the table
-						foreach ($expense_account_codes as $expense_account_code) {
-							$array_column_for_acc_exp = array_column($region_names_and_ids, $expense_account_code); ?>
-
-							<td>
-								<h2><?= number_format(array_sum($array_column_for_acc_exp), 2) ?></h2>
-							</td>
-
-						<?php
 						} ?>
 					</tr>
 
-				</tbody>
+				<?php }
+				?>
+				<tr>
+					<td>
+						<h3><?= get_phrase('expense_totals'); ?></h3>
+					</td>
+					<?php
+					//Get expense account codes with their monetary cost
+					$expense_acc_codes_with_its_cost = [];
+					foreach ($region_all_expenses as $key => $region_all_expense) {
+						foreach ($region_all_expense as $exp_acc_code_keys_and_cost) {
+							//store the array of expense account codes and cost
+							$expense_acc_codes_with_its_cost[] = $exp_acc_code_keys_and_cost;
+						}
+					}
 
-			</table>
-		</div>
+					//loop to populate totals for dct expense accounts in last row of the table for each expense account code
+					foreach ($expense_account_codes[0] as $key => $expense_account_code) {
+						$grouped_expenses_per_expense_account = array_column($expense_acc_codes_with_its_cost, $expense_account_code);
+						//print_r($grouped_expenses_per_expense_account);
+
+					?>
+						<td>
+							<!-- Sum up per account codes using array_sum -->
+							<h3><?= number_format(array_sum($grouped_expenses_per_expense_account), 2) ?></h3>
+						</td>
+					<?php }
+
+					?>
+				</tr>
+
+
+			</tbody>
+
+		</table>
+
+		<br>
+		<br>
+
 
 	</div>
-	<div id='chart_div'></div>
+
+</div>
+
 </div>
 
 
