@@ -60,55 +60,27 @@ class Smp extends CI_Controller
 		$page_data['page_name']  = 'dashboard';
 		//$page_data['active_announcements'] = $this->get_active_announcements();
 		$page_data['page_title'] = get_phrase('Unconditional_Direct_Cash_Transfers');
-		//$page_data['fcps']=$this->cluster_fcps();
-		// $page_data['test']=$this->get_dcts_for_clusters_per_region();
-
-		//$report_month = $this->time_scoller($report_month,$this->uri->segment(4,''),$this->uri->segment(5,''));
-
-		$page_data['regions'] = $this->get_regions();
+		
+		//$page_data['regions'] = $this->get_regions();
 		$page_data['date']=date('Y-m-d',$this->time_scoller($report_month,$this->uri->segment(4,''),$this->uri->segment(5,'')));//$report_month!=''?date('Y-m-d',$report_month):date('Y-m-d',strtotime('Y-m-d'));
 		$page_data['dct_expenses_per_cluster_in_region'] = $this->get_total_for_a_region($report_month);
-		$page_data['total_dct_expense'] = !is_numeric($report_month)?$this->get_total_direct_cash_transfers_countrywide(strtotime(date('Y-m-d'))):$this->get_total_direct_cash_transfers_countrywide($report_month);
+		//$page_data['total_dct_expense'] = !is_numeric($report_month)?$this->get_total_direct_cash_transfers_countrywide(strtotime(date('Y-m-d'))):$this->get_total_direct_cash_transfers_countrywide($report_month);
 		$page_data['total_dct_beneficiaries'] = 54747;
 		$this->load->view('backend/index', $page_data);
 	}
 	
-	//Clusters in a region method
-	//FCPS method
-	//Region method
-	function get_regions()
-	{
-		return $this->db->select(array('region_id', 'region_name'))->get('region')->result_array();
-	}
-	function cluster_dct_in_aregion($dct_report_month,$region_name){
+	// function get_data($report_month){
+	// 	$dct_expenses_per_cluster_in_region=!is_numeric($report_month)? $this->get_total_for_a_region(strtotime(date('Y-m-d'))):$this->get_total_for_a_region($report_month);
+	
 
-		//$url_decode=urldecode($region_name);
-
-		$page_data['page_name']  = 'cluster_dct_in_aregion';
-		$page_data['page_title'] ='DCT';
-		$page_data['region_name'] =$region_name ;
-		$this->load->view('backend/index', $page_data);
-
-	}
-	function get_data($report_month){
-		$dct_expenses_per_cluster_in_region=!is_numeric($report_month)? $this->get_total_for_a_region(strtotime(date('Y-m-d'))):$this->get_total_for_a_region($report_month);
-		// $region_expenses=[];
-		// $region_names_and_ids=[];
-		//  foreach($dct_expenses_per_cluster_in_region as $dct_expenses_in_aregion){
-		// 	$region_expenses[$dct_expenses_in_aregion['regionId']][$dct_expenses_in_aregion['region']][$dct_expenses_in_aregion['AccText']]=$dct_expenses_in_aregion['Cost'];
-			
-		// }
-		// foreach($region_expenses as $key=> $region_expense){
-		// 	foreach ($region_expense as $k=> $expense){
-				
-		// 		$region_names_and_ids[$key]=$expense;
-		// 	}
-		// }
-
-		echo json_encode($dct_expenses_per_cluster_in_region);
-		//echo ('Yes');
+	// 	echo json_encode($dct_expenses_per_cluster_in_region);
+	// 	//echo ('Yes');
 		
-	}
+	// }
+	/**
+	 * @author: Karisa
+	 * @date: 
+	 */
 
 	function time_scoller($date = "",$cnt = "" ,$flag = ""){
 		$tym  = strtotime(date('Y-m-d'));
@@ -130,7 +102,11 @@ class Smp extends CI_Controller
 	
 		return $tym;
 	 }
-
+	
+	 /**
+	  * @author: Onduso,
+	   * @date: 2/6/2020
+	  */
 	function get_total_for_a_region($dct_report_month){
 		//$current_month=strtotime('-1 months',$dct_report_month);
 		$cnt = $this->uri->segment(4,'');
@@ -140,11 +116,7 @@ class Smp extends CI_Controller
 
 		return $this->dct_model->get_direct_cash_transfer_in_region($current_month);
 	}
-	function get_total_direct_cash_transfers_countrywide($dct_report_month)
-	{
-		return $this->dct_model->get_total_dct_countrywide($dct_report_month);
-
-	}
+	
 	function cluster_fcps()
 	{
 		$cluster = $this->session->cluster;

@@ -9,35 +9,35 @@ class Dct_model extends CI_Model {
         parent::__construct();
     }
 
-    /**
-     * @author: Onduso
-     * @date: 5/28/2020
-     */
-    function get_total_dct_countrywide($dct_report_month){
+    // /**
+    //  * @author: Onduso
+    //  * @date: 5/28/2020
+    //  */
+    // function get_total_dct_countrywide($dct_report_month){
 
-            $month_start_date = date('Y-m-01',$dct_report_month);
-            $month_end_date = date('Y-m-t',$dct_report_month);
-            $this->db->select(array('region.region_name as region_name', 'AccText'));
-            $this->db->group_by('voucher_body.AccNo', 'region_name');
-            $this->db->join('projectsdetails', 'projectsdetails.icpNo=voucher_body.icpNo');
-            $this->db->join('clusters', 'clusters.clusters_id=projectsdetails.cluster_id');
-            $this->db->join('region', 'region.region_id=clusters.region_id');
+    //         $month_start_date = date('Y-m-01',$dct_report_month);
+    //         $month_end_date = date('Y-m-t',$dct_report_month);
+    //         $this->db->select(array('region.region_name as region_name', 'AccText'));
+    //         $this->db->group_by('voucher_body.AccNo', 'region_name');
+    //         $this->db->join('projectsdetails', 'projectsdetails.icpNo=voucher_body.icpNo');
+    //         $this->db->join('clusters', 'clusters.clusters_id=projectsdetails.cluster_id');
+    //         $this->db->join('region', 'region.region_id=clusters.region_id');
     
-            $this->db->select_sum('Cost');
+    //         $this->db->select_sum('Cost');
     
-            $this->db->join('voucher_header', 'voucher_header.hID=voucher_body.hID');
-            $this->db->join('accounts', 'accounts.AccNo=voucher_body.AccNo');
-            $this->db->where_in('voucher_header.VType', array('UDCTB', 'UDCTC'));
-            $this->db->where(array('voucher_header.TDate>='=>$month_start_date));
-            $this->db->where(array('voucher_header.TDate<='=>$month_end_date));
-            $all_udctb_countrywide= $this->db->get('voucher_body')->result_array();
+    //         $this->db->join('voucher_header', 'voucher_header.hID=voucher_body.hID');
+    //         $this->db->join('accounts', 'accounts.AccNo=voucher_body.AccNo');
+    //         $this->db->where_in('voucher_header.VType', array('UDCTB', 'UDCTC'));
+    //         $this->db->where(array('voucher_header.TDate>='=>$month_start_date));
+    //         $this->db->where(array('voucher_header.TDate<='=>$month_end_date));
+    //         $all_udctb_countrywide= $this->db->get('voucher_body')->result_array();
             
-            $array_column_cost=array_column($all_udctb_countrywide,'Cost');
+    //         $array_column_cost=array_column($all_udctb_countrywide,'Cost');
             
-            $total_udctb_countrywide=array_sum( $array_column_cost);
+    //         $total_udctb_countrywide=array_sum( $array_column_cost);
     
-            return $total_udctb_countrywide;
-    }
+    //         return $total_udctb_countrywide;
+    // }
     /**
      * @author: Onduso
      * @date: 5/28/2020
@@ -65,14 +65,7 @@ class Dct_model extends CI_Model {
         return $result;
         
     }
-    /**
-     * @author: Onduso
-     * @date: 5/28/2020
-     */
-    function cluster_dct_in_aregion($dct_report_month,$region_name){
-
-
-    }
+  
     
     private function direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp,$aggregate_by = 'account_number'){
 
