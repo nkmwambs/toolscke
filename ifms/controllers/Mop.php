@@ -407,5 +407,33 @@ function fund_balance_report($month = ""){
    	$this->load->view('backend/index', $page_data);	
 }
 
+
+/** DCT Report start */
+
+function region_fcps(){
+	$login_user_id = $this->session->login_user_id;
+
+	$this->db->select(array('icpNo'));
+	$this->db->where(array('region.region_manager_id'=>$login_user_id,'projectsdetails.status'=>1));
+	$this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
+	$this->db->join('region','region.region_id=clusters.region_id');
+	$result = $this->db->get('projectsdetails')->result_array();
+
+	return array_column($result,'icpNo');
+ }
+
+ function direct_cash_transfers_report($tym = 0){
+	if ($this->session->userdata('admin_login') != 1)
+		  redirect(base_url(), 'refresh');
+	
+	$page_data['tym']  = $tym;
+	$page_data['fcps']  = $this->region_fcps();//$this->direct_cash_transfers($this->cluster_fcps(),$tym,'fcp_number');
+	//$page_data['direct_cash_transfers'] = $this->fcp_grouped_direct_cash_transfers($this->cluster_fcps(),$tym);
+	$page_data['page_name']  = 'direct_cash_transfers_report';
+	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);
+    $this->load->view('backend/index', $page_data);	
+ }
+
+/** DCT Reports end */
   
 }

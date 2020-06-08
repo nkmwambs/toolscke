@@ -32,14 +32,22 @@
 
         <!-- DASHBOARD -->
         <li class="<?php if ($page_name == 'dashboard') echo 'active'; ?> ">
-            <a href="<?php echo base_url(); ?>ifms.php/accountant/dashboard">
+            <a href="<?php echo base_url(); ?>ifms.php/mop/dashboard">
                 <i class="entypo-gauge"></i>
                 <span><?php echo get_phrase('dashboard'); ?></span>
             </a>
         </li>
+
+        <li class="<?php if ($page_name == 'DCT_report') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>ifms.php/mop/direct_cash_transfers_report">
+                <i class="entypo-chart-bar"></i>
+                <span><?php echo get_phrase('DCT_report'); ?></span>
+            </a>
+        </li>
+
         
         <li class="<?php if ($page_name == 'civ_report') echo 'active'; ?> ">
-            <a href="<?php echo base_url(); ?>ifms.php/facilitator/civ_report">
+            <a href="<?php echo base_url(); ?>ifms.php/mop/civ_report">
                 <i class="entypo-chart-pie"></i>
                 <span><?php echo get_phrase('C.I.Vs'); ?></span>
             </a>
@@ -57,7 +65,7 @@
             <ul>
                 
                 <li class="<?php if ($page_name == 'fo_fund_balance_report') echo 'active'; ?> ">
-                    <a href="<?php echo base_url(); ?>ifms.php/readonly/fo_fund_balance_report">
+                    <a href="<?php echo base_url(); ?>ifms.php/mop/fo_fund_balance_report">
                         <span><i class="fa fa-chart-line" aria-hidden="true"></i> <?php echo get_phrase('fund_balance'); ?></span>
                     </a>
                 </li>
