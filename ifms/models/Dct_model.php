@@ -73,6 +73,7 @@ class Dct_model extends CI_Model {
 
 
     }
+    
     private function direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp,$aggregate_by = 'account_number'){
 
         //aggregate_by = account_number or fcp_number
@@ -80,31 +81,28 @@ class Dct_model extends CI_Model {
         $month_start_date = date('Y-m-01',$reporting_month_stamp);
         $month_end_date = date('Y-m-t',$reporting_month_stamp);
         
-    
+        $this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
+        $this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
+
         if($aggregate_by == 'fcp_number'){
             $this->db->select(array('voucher_body.icpNo as icpNo','AccText'));
-            $this->db->group_by('voucher_body.AccNo','voucher_body.icpNo');
-        }elseif($aggregate_by == 'region'){    
-            $this->db->select(array('region.region_name as region_name','AccText'));
-            $this->db->group_by('voucher_body.AccNo','region_name');
-            $this->db->join('projectsdetails','projectsdetails.icpNo=voucher_body.icpNo');
+            $this->db->group_by(array('voucher_body.AccNo','voucher_body.icpNo'));
+        }elseif($aggregate_by == 'cluster'){
+            $this->db->select(array('clusters.clusterName as cluster_name','AccText'));
+            $this->db->group_by(array('voucher_body.AccNo','clusters.clusterName'));
+            
+            $this->db->join('projectsdetails','projectsdetails.icpNo=voucher_header.icpNo');
             $this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
             $this->db->join('region','region.region_id=clusters.region_id');
-        }elseif($aggregate_by == 'cluster'){    
-            $this->db->select(array('clusters.clusterName as cluster_name','AccText'));
-            $this->db->group_by('voucher_body.AccNo','region_name');
-            $this->db->join('projectsdetails','projectsdetails.icpNo=voucher_body.icpNo');
-            $this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
-            //$this->db->join('region','region.region_id=clusters.region_id');    
         }else{
+
             $this->db->select(array('AccText'));
-            $this->db->group_by('voucher_body.AccNo');
+            $this->db->group_by(array('voucher_body.AccNo'));
         }
     
         $this->db->select_sum('Cost');
     
-        $this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
-        $this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
+        
         $this->db->where_in('voucher_header.VType',array('UDCTB','UDCTC'));
         $this->db->where_in('voucher_header.icpNo',$list_of_fcps);
         $this->db->where(array('voucher_header.TDate>='=>$month_start_date));
@@ -135,5 +133,31 @@ class Dct_model extends CI_Model {
         return array_column($result,'icpNo');
      }
 
+
+     function cluster_grouped_direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp){
+        $raw_data = $this->direct_cash_transfers($list_of_fcps,$reporting_month_stamp,'cluster');
+        
+        $dct_records = [];
+    
+        $dct_accounts = [];
+    
+        $cnt = 0;
+        foreach($raw_data as $account_expense_for_cluster){
+            $cluster_name = $account_expense_for_cluster['cluster_name'];
+            
+            unset($account_expense_for_cluster['cluster_name']);
+    
+            $dct_records[$cluster_name]['spread'][$account_expense_for_cluster['AccText']] = $account_expense_for_cluster['Cost'];
+            
+            $dct_records[$cluster_name]['total_dct_expense'] = array_sum($dct_records[$cluster_name]['spread']);
+            
+        }
+    
+        foreach($dct_records as $spread){
+            $dct_accounts = array_merge($dct_accounts,array_keys($spread['spread']));
+        }
+    
+        return ['dct_records'=>$dct_records,'dct_accounts'=>array_unique($dct_accounts)];
+     }
 }
 
