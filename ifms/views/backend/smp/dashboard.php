@@ -1,7 +1,7 @@
 <?php
 
 //print_r($dct_expenses_per_cluster_in_region);
-echo $date;
+//echo $date;
 
 //Construct an array of region all expenses from the raw data from database
 $region_all_expenses = [];

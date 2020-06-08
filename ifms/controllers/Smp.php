@@ -63,9 +63,11 @@ class Smp extends CI_Controller
 		//$page_data['fcps']=$this->cluster_fcps();
 		// $page_data['test']=$this->get_dcts_for_clusters_per_region();
 
+		//$report_month = $this->time_scoller($report_month,$this->uri->segment(4,''),$this->uri->segment(5,''));
+
 		$page_data['regions'] = $this->get_regions();
-		$page_data['date']=$report_month!=''?date('Y-m-d',$report_month):date('Y-m-d',strtotime('Y-m-d'));
-		$page_data['dct_expenses_per_cluster_in_region'] = !is_numeric($report_month)? $this->get_total_for_a_region(strtotime(date('Y-m-d'))):$this->get_total_for_a_region($report_month);
+		$page_data['date']=date('Y-m-d',$this->time_scoller($report_month,$this->uri->segment(4,''),$this->uri->segment(5,'')));//$report_month!=''?date('Y-m-d',$report_month):date('Y-m-d',strtotime('Y-m-d'));
+		$page_data['dct_expenses_per_cluster_in_region'] = $this->get_total_for_a_region($report_month);
 		$page_data['total_dct_expense'] = !is_numeric($report_month)?$this->get_total_direct_cash_transfers_countrywide(strtotime(date('Y-m-d'))):$this->get_total_direct_cash_transfers_countrywide($report_month);
 		$page_data['total_dct_beneficiaries'] = 54747;
 		$this->load->view('backend/index', $page_data);
@@ -107,8 +109,35 @@ class Smp extends CI_Controller
 		//echo ('Yes');
 		
 	}
+
+	function time_scoller($date = "",$cnt = "" ,$flag = ""){
+		$tym  = strtotime(date('Y-m-d'));
+								
+		if($date !== "" && $cnt == ""){
+	
+			$tym  = $date;
+		}
+		
+		if($flag == "prev" || $flag == "next"){
+				$sign = '+';
+		
+				if($flag == 'prev'){
+					$sign = '-';
+				}
+					 
+				$tym  = strtotime($sign.$cnt.' months',$date);	
+		}
+	
+		return $tym;
+	 }
+
 	function get_total_for_a_region($dct_report_month){
-		$current_month=strtotime('-1 months',$dct_report_month);
+		//$current_month=strtotime('-1 months',$dct_report_month);
+		$cnt = $this->uri->segment(4,'');
+		$flag = $this->uri->segment(5,'');
+
+		$current_month = $this->time_scoller($dct_report_month,$cnt,$flag);
+
 		return $this->dct_model->get_direct_cash_transfer_in_region($current_month);
 	}
 	function get_total_direct_cash_transfers_countrywide($dct_report_month)
