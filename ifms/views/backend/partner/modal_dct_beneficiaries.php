@@ -8,7 +8,8 @@ extract($dct_accounts_and_spread['dct_records'][$this->session->center_id]);
 $dct_account_account_no_and_text = $this->dct_model->get_account_no_and_text($dct_accounts_and_spread['dct_accounts']);
 $beneficiary_counts = $this->dct_model->get_beneficiary_counts($reporting_month_stamp,$dct_account_account_no_and_text);
 
-//print_r($this->dct_model->validate_if_beneficiary_count_not_required($reporting_month_stamp));
+$dct_beneficiary_report_class_name =  $this->dct_model->dct_beneficiary_report_required($dct_account_account_no_and_text);
+print_r($dct_beneficiary_report_class_name);
 ?>
 
 <div class='row'>
@@ -37,7 +38,7 @@ $beneficiary_counts = $this->dct_model->get_beneficiary_counts($reporting_month_
                                         <tr>
                                             <td><?=$dct_account;?></td>
                                             <td><?=$amount;?></td>
-                                            <td><input type='number' class='form-control' value='<?=$beneficiary_counts[$dct_account_account_no_and_text[$dct_account]];?>' required='required' name='<?=$dct_account_account_no_and_text[$dct_account];?>' /></td>
+                                            <td><input type='number' class='form-control <?=$dct_beneficiary_report_class_name[$dct_account_account_no_and_text[$dct_account]];?>' value='<?=$beneficiary_counts[$dct_account_account_no_and_text[$dct_account]];?>' required='required' name='<?=$dct_account_account_no_and_text[$dct_account];?>' /></td>
                                         </tr>
                                 <?php }?>
                             </tbody>
@@ -70,8 +71,40 @@ $beneficiary_counts = $this->dct_model->get_beneficiary_counts($reporting_month_
         var data = $('#frm_dct_beneficiaries').serializeArray();
         var url = $('#frm_dct_beneficiaries').attr('action');
 
-        $.post(url,data,function(response){
-            alert(response);
+        var report_required = $('.report_required');
+
+        var cnt_required_with_zero_beneficiaries = 0;
+
+        $.each(report_required,function(i,el){
+            if($(el).val() == 0){
+                cnt_required_with_zero_beneficiaries++;
+            }
         });
+
+
+        if(report_required.length > 0 && cnt_required_with_zero_beneficiaries > 0){
+           
+            $.each(report_required,function(i,el){
+                if($(el).val() == 0){
+                    $(el).css('border','1px solid red');
+                }
+            });
+
+            alert('The fields in red cannot have zero count');
+        }
+        else{
+            
+            $.each(report_required,function(i,el){
+                if($(el).val() != 0){
+                    $(el).css('border','1px solid gray');
+                }
+            });
+            
+            $.post(url,data,function(response){
+                alert(response);
+            });
+        }
+
+        
     }); 
 </script>

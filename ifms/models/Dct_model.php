@@ -240,5 +240,28 @@ class Dct_model extends CI_Model {
         return $fcp_dct_counts && !$has_dct_beneficiary_report ? 0 : 1;
     }
 
+    function dct_beneficiary_report_required($account_no_array){
+        
+        $this->db->where_in('AccNo',$account_no_array);
+        $raw_result = $this->db->select(array('AccText','AccNo','is_dct_beneficiary_report_required'))->get('accounts');
+
+        $return_array = [];
+
+        if($raw_result->num_rows() == 0){
+            $flipped_array_of_accounts = array_flip(array_values($account_no_array));
+            $return_array = array_map(function($elem){return 'report_not_required';},$flipped_array_of_accounts);
+        }else{
+            foreach($account_no_array as $account_no){
+                foreach($raw_result->result_array() as $row_of_account){
+                    if($row_of_account['AccNo'] === $account_no){
+                        $return_array[$account_no] = $row_of_account['is_dct_beneficiary_report_required']?'report_required':'report_not_required';
+                    }
+                }
+            }
+        }   
+
+        return $return_array;
+    }
+
 }
 
