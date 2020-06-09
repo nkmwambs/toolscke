@@ -1553,7 +1553,9 @@ class Partner extends CI_Controller
 
 		$bs_check = $this->finance_model->check_bank_statement($this->session->center_id, date('Y-m-t', $date));
 
-		if ($proof_of_cash <> 0 || $bank_validation <> 0 || $bs_check === 0) {
+		$dct_beneficiaries_not_required = $this->dct_model->validate_if_beneficiary_count_not_required($date);
+		
+		if ($proof_of_cash <> 0 || $bank_validation <> 0 || $bs_check === 0  || $dct_beneficiaries_not_required === 0) {
 
 			echo get_phrase('report_not_submitted_due_to_validation_error');
 		} elseif ($this->db->get_where('opfundsbalheader', array('icpNo' => $this->session->center_id, 'closureDate' => date('Y-m-t', $date)))->num_rows() > 0) {
@@ -1561,7 +1563,7 @@ class Partner extends CI_Controller
 			echo get_phrase('report_not_submitted_due_to_an_existing_report');
 		} else {
 
-
+		
 			//Update Fund Balances
 
 			$data2['icpNo'] = $this->session->center_id;
@@ -1732,4 +1734,70 @@ class Partner extends CI_Controller
 		echo $message;
 		
 	 }
+
+	 function save_dct_beneficiaries($reporting_month_stamp){
+		 $beneficiary_count_per_account = $this->input->post();
+		
+		 $message = "Successfully Created";
+		 // Check if a record exists else insert
+
+		 $count_existing_record = $this->db->get_where('dct_beneficiaries',
+		 array('fcp_number'=>$this->session->center_id,
+		 'mfr_closure_date'=>date('Y-m-t',$reporting_month_stamp)));
+
+		 // Transaction begins
+		 $this->db->trans_start();
+
+		 if($count_existing_record->num_rows() == 0){
+
+			$beneficiary_data['fcp_number'] = $this->session->center_id;
+			$beneficiary_data['mfr_closure_date'] = date('Y-m-t',$reporting_month_stamp);
+			$beneficiary_data['created_date'] = date('Y-m-d h:i:s');
+			$beneficiary_data['created_by'] = $this->session->login_user_id;
+			$beneficiary_data['last_modified_date'] = date('Y-m-d h:i:s');
+
+			$this->db->insert('dct_beneficiaries',$beneficiary_data);
+
+			$dct_beneficiaries_id = $this->db->insert_id();
+
+			$this->insert_beneficiary_count_data($beneficiary_count_per_account, $dct_beneficiaries_id);
+
+		 }else{
+				$dct_beneficiaries_id = $count_existing_record->row()->dct_beneficiaries_id;
+				
+				// Delete counts
+				$this->db->where(array('dct_beneficiaries_id'=>$dct_beneficiaries_id));
+				$this->db->delete('dct_beneficiaries_counts');
+
+				$this->insert_beneficiary_count_data($beneficiary_count_per_account, $dct_beneficiaries_id);
+
+				$message = "Successfully Updated";
+		 }
+
+		 $this->db->trans_complete();
+
+		 if($this->db->trans_status() === FALSE){
+			$message = "DB error occurred";
+		 }
+
+		 echo $message;
+		
+	 }
+
+	 private function insert_beneficiary_count_data($beneficiary_count_per_account_array, $dct_beneficiaries_id){
+		$batch_array = [];
+
+		$cnt = 0;
+
+		foreach($beneficiary_count_per_account_array as $account_no => $beneficiary_count){
+			$batch_array[$cnt]['dct_beneficiaries_id'] = $dct_beneficiaries_id;
+			$batch_array[$cnt]['account_number'] = $account_no;
+			$batch_array[$cnt]['beneficiaries_count'] = $beneficiary_count;
+
+			$cnt++;
+		}
+
+		$this->db->insert_batch('dct_beneficiaries_counts',$batch_array);
+	 }
+	 
 }
