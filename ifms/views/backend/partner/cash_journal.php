@@ -124,16 +124,23 @@ tr.shown td.details-control {
 												<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_fund_ratios/<?php echo date('Y-m-t',$tym);?>')"><?php echo get_phrase('financial_ratios');?></a>
 												
 											</li>
-											
-																			
+																											
+										
+											<li class="divider"></li>
+
+											<li style="<?=$hide_status;?>">
+												<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_dct_beneficiaries/<?php echo $tym;?>');"><?php echo get_phrase('DCT_beneficiaries');?></a>
+												
+											</li>
+										
 											<li class="divider"></li>
 											
 											<li style="">
 												<a href="<?php echo base_url();?>ifms.php/partner/bank_statements/<?php echo date('Y-m-t',$tym);?>"><?php echo get_phrase('upload_bank_statements');?></a>
 											</li>
+										
 											
 											<li class="divider"></li>
-											
 											<!--<li class="divider"></li>-->
 											
 											<li style="<?=$hide_status;?>">

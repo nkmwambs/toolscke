@@ -20,7 +20,7 @@ class Mop extends CI_Controller
 		$this->load->database();
 		$this->load->library('session');
 		
-		$this->load->model('dct_model');
+		//$this->load->model('dct_model');
 		
        /*cache control*/
 // 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');

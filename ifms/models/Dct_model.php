@@ -65,7 +65,7 @@ class Dct_model extends CI_Model {
         return $result;
         
     }
-  
+    
     
     private function direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp,$aggregate_by = 'account_number'){
 
@@ -78,7 +78,7 @@ class Dct_model extends CI_Model {
         $this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
 
         if($aggregate_by == 'fcp_number'){
-            $this->db->select(array('voucher_body.icpNo as icpNo','AccText'));
+            $this->db->select(array('voucher_body.icpNo as icpNo','AccText','voucher_body.AccNo'));
             $this->db->group_by(array('voucher_body.AccNo','voucher_body.icpNo'));
         }elseif($aggregate_by == 'cluster'){
             $this->db->select(array('clusters.clusterName as cluster_name','AccText'));
@@ -152,5 +152,34 @@ class Dct_model extends CI_Model {
     
         return ['dct_records'=>$dct_records,'dct_accounts'=>array_unique($dct_accounts)];
      }
+
+
+     public function fcp_grouped_direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp){
+        $raw_data = $this->direct_cash_transfers($list_of_fcps,$reporting_month_stamp,'fcp_number');
+        // print_r($raw_data);
+        // exit;
+        $dct_records = [];
+    
+        $dct_accounts = [];
+    
+        $cnt = 0;
+        foreach($raw_data as $account_expense_for_fcp){
+            $fcp_no = $account_expense_for_fcp['icpNo'];
+            
+            unset($account_expense_for_fcp['icpNo']);
+    
+            $dct_records[$fcp_no]['spread'][$account_expense_for_fcp['AccText']] = $account_expense_for_fcp['Cost'];
+            
+            $dct_records[$fcp_no]['total_dct_expense'] = array_sum($dct_records[$fcp_no]['spread']);
+            
+        }
+    
+        foreach($dct_records as $spread){
+            $dct_accounts = array_merge($dct_accounts,array_keys($spread['spread']));
+        }
+    
+        return ['dct_records'=>$dct_records,'dct_accounts'=>array_unique($dct_accounts)];
+     }
+
 }
 
