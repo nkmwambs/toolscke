@@ -30,7 +30,7 @@ foreach ($region_all_expenses as $key => $region_expense) {
 		//print_r($region_name);
 		$expense_costs = [];
 		foreach ($array_keys_of_expenses as $exp_cost) {
-           //Check if the expense code is set if so type cast the cost to float otherwise pass 0
+			//Check if the expense code is set if so type cast the cost to float otherwise pass 0
 			if (isset($expense[$exp_cost])) {
 
 				$expense_costs[] = (float) $expense[$exp_cost];
@@ -38,7 +38,7 @@ foreach ($region_all_expenses as $key => $region_expense) {
 				$expense_costs[] = 0;
 			}
 		}
-        //Add region name to the expense_costs array as the first element of the array
+		//Add region name to the expense_costs array as the first element of the array
 		array_unshift($expense_costs, $region_name);
 
 		$region_expense_costs[$key] = $expense_costs;
@@ -91,7 +91,7 @@ $javascrip_array = str_replace('}', ']', str_replace('{', '[', json_encode(array
 		);
 
 		var options = {
-			title: 'Direct Cash Transfers per region per expense account',
+			//title: 'Direct Cash Transfers per region per expense account',
 			vAxis: {
 				title: 'Cost'
 			},
@@ -103,10 +103,12 @@ $javascrip_array = str_replace('}', ']', str_replace('{', '[', json_encode(array
 		};
 
 		var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-		google.visualization.events.addListener(chart, 'error', function(googleError) {
-			google.visualization.errors.removeError(googleError.id);
-			$('#chart_div').html('No data to display graphically')
+		// Hide the div for the the message if graph draws
+		google.visualization.events.addListener(chart, 'ready', function() {
+			
+			$('#message_div').addClass('hidden');
 		});
+		
 		chart.draw(data, options);
 
 	}
@@ -128,8 +130,11 @@ $javascrip_array = str_replace('}', ']', str_replace('{', '[', json_encode(array
 </div>
 
 <hr />
-
+<div id='message_div' class='well well-lg'>
+	<h4><b>No data to display graphically</b></h4>
+</div>
 <div id='chart_div'></div>
+
 <br>
 <br>
 <hr />
