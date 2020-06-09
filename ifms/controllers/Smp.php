@@ -18,7 +18,7 @@ class Smp extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
-		//$this->load->library('session');
+		$this->load->library('session');
 		$this->load->model('dct_model');
 
 		/*cache control*/
