@@ -103,12 +103,15 @@ $javascrip_array = str_replace('}', ']', str_replace('{', '[', json_encode(array
 		};
 
 		var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-		// Hide the div for the the message if graph draws
 		google.visualization.events.addListener(chart, 'ready', function() {
-			
+			// Hidde the the message if graph draws
 			$('#message_div').addClass('hidden');
 		});
-		
+		google.visualization.events.addListener(chart, 'error', function(googleError) {
+			google.visualization.errors.removeError(googleError.id);
+			$('#message_div').html('<h4><b>No data to display graphically</b></h4>');
+			$('#chart_div').addClass('hidden');
+		});
 		chart.draw(data, options);
 
 	}
@@ -131,7 +134,7 @@ $javascrip_array = str_replace('}', ']', str_replace('{', '[', json_encode(array
 
 <hr />
 <div id='message_div' class='well well-lg'>
-	<h4><b>No data to display graphically</b></h4>
+	<!-- <h4><b>No data to display graphicallys</b></h4> -->
 </div>
 <div id='chart_div'></div>
 

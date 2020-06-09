@@ -21,6 +21,7 @@ class Facilitator extends CI_Controller
         $this->load->library('session');
 		$this->load->library('zip');
 		$this->load->model('dct_model');
+		$this->load->library('dct_library');
 		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 		
        /*cache control*/

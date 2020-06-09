@@ -111,7 +111,8 @@ class Mop extends CI_Controller
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
 			
-        $page_data['page_name']  = 'users_list';
+		$page_data['page_name']  = 'users_list';
+		$page_data['active_announcements'] = $this->get_active_announcements();
         $page_data['page_title'] = get_phrase('users_list');
         $this->load->view('backend/index', $page_data);  		
   	}

@@ -58,7 +58,7 @@ class Smp extends CI_Controller
 		}
 
 		$page_data['page_name']  = 'dashboard';
-		//$page_data['active_announcements'] = $this->get_active_announcements();
+		$page_data['active_announcements'] = $this->get_active_announcements();
 		$page_data['page_title'] = get_phrase('Unconditional_Direct_Cash_Transfers');
 		
 		//$page_data['regions'] = $this->get_regions();
@@ -67,6 +67,11 @@ class Smp extends CI_Controller
 		//$page_data['total_dct_expense'] = !is_numeric($report_month)?$this->get_total_direct_cash_transfers_countrywide(strtotime(date('Y-m-d'))):$this->get_total_direct_cash_transfers_countrywide($report_month);
 		$page_data['total_dct_beneficiaries'] = 54747;
 		$this->load->view('backend/index', $page_data);
+	}
+	function get_active_announcements(){
+		$active_announcements = $this->db->order_by('announcement_created_date DESC')->get_where('announcement',array('announcement_end_date>='=>date('Y-m-d')))->result_array();
+		
+		return $active_announcements;
 	}
 	
 	// function get_data($report_month){
