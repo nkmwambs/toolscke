@@ -16,7 +16,7 @@ class Smp extends CI_Controller
 
 	function __construct()
 	{
-		ob_start();
+		//ob_start();
 		parent::__construct();
 		$this->load->database();
 		//$this->load->library('session');
