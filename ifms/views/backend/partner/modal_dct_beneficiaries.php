@@ -6,10 +6,10 @@ $dct_accounts_and_spread = $this->dct_model->fcp_grouped_direct_cash_transfers($
 extract($dct_accounts_and_spread['dct_records'][$this->session->center_id]);
 
 $dct_account_account_no_and_text = $this->dct_model->get_account_no_and_text($dct_accounts_and_spread['dct_accounts']);
-$beneficiary_counts = $this->dct_model->get_beneficiary_counts($reporting_month_stamp,$dct_account_account_no_and_text);
+$beneficiary_counts = $this->dct_model->get_beneficiary_counts($reporting_month_stamp,$dct_account_account_no_and_text,[$this->session->center_id]);
 
 $dct_beneficiary_report_class_name =  $this->dct_model->dct_beneficiary_report_required($dct_account_account_no_and_text);
-print_r($dct_beneficiary_report_class_name);
+//print_r($dct_beneficiary_report_class_name);
 ?>
 
 <div class='row'>

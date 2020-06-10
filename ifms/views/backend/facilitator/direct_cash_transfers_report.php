@@ -1,5 +1,5 @@
 <?php
-//print_r($direct_cash_transfers);
+//print_r($accounts_no_and_text);
 
 ?>
 <div class='row'>
@@ -50,6 +50,13 @@
                     <td style='font-weight:bold;'><?=number_format($sum_dct_amount,2);?></td>
                     <?php foreach($direct_cash_transfers['dct_accounts'] as $account){?>
                         <td style='font-weight:bold;'><?=number_format(array_sum($account_sum[$account]),2);?></td>
+                    <?php }?>
+                </tr>
+
+                <tr>
+                    <td colspan='2'><?=get_phrase('dct_beneficiaries');?></td>
+                    <?php foreach($direct_cash_transfers['dct_accounts'] as $account){?>
+                        <td style='font-weight:bold;'><?=number_format($dct_beneficiaries[$accounts_no_and_text[$account]],0);?></td>
                     <?php }?>
                 </tr>
             </tfoot>

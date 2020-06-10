@@ -124,15 +124,17 @@ tr.shown td.details-control {
 												<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_fund_ratios/<?php echo date('Y-m-t',$tym);?>')"><?php echo get_phrase('financial_ratios');?></a>
 												
 											</li>
-																											
-										
+											
+
+											<?php if($this->dct_model->check_if_fcp_has_dct_records($tym)){?>
 											<li class="divider"></li>
 
-											<li style="<?=$hide_status;?>">
+											<li style="">
 												<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_dct_beneficiaries/<?php echo $tym;?>');"><?php echo get_phrase('DCT_beneficiaries');?></a>
 												
 											</li>
-										
+											<?php }?>
+
 											<li class="divider"></li>
 											
 											<li style="">

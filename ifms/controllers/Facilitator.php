@@ -582,10 +582,14 @@ public function multiple_vouchers($tym,$project){
 	if ($this->session->userdata('admin_login') != 1)
 		  redirect(base_url(), 'refresh');
 	
+	$direct_cash_transfers = $this->dct_model->fcp_grouped_direct_cash_transfers($this->cluster_fcps($cluster_name),$tym);
+	$acc_nos = $this->dct_model->get_account_no_and_text($direct_cash_transfers['dct_accounts']);
+
 	$page_data['tym']  = $tym;
-	
 	$page_data['account_type'] = 'facilitator';
-	$page_data['direct_cash_transfers'] = $this->dct_model->fcp_grouped_direct_cash_transfers($this->cluster_fcps($cluster_name),$tym);
+	$page_data['direct_cash_transfers'] = $direct_cash_transfers;
+	$page_data['dct_beneficiaries'] = $this->dct_model->get_beneficiary_counts($tym,$acc_nos,$this->cluster_fcps($cluster_name));
+	$page_data['accounts_no_and_text'] = $acc_nos;
 	$page_data['page_name']  = 'direct_cash_transfers_report';
 	$page_data['page_title'] = get_phrase('direct_cash_transfers_report_for').' '.date('F Y',$tym);
     $this->load->view('backend/index', $page_data);	

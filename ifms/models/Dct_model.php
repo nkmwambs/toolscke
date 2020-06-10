@@ -181,24 +181,43 @@ class Dct_model extends CI_Model {
         return ['dct_records'=>$dct_records,'dct_accounts'=>array_unique($dct_accounts)];
      }
 
-    public function get_account_no_and_text($account_text_array){
-        $this->db->where_in('AccText',$account_text_array);
-        $raw_accounts = $this->db->select(array('AccNo','AccText'))->get('accounts')->result_array();
+    public function get_account_no_and_text($account_text_array = []){
         
+        $raw_accounts = [];
+        
+        if(empty($account_text_array)){
+            $account_text_array = $this->db->select(array('AccNo','AccText'))->get_where('accounts',
+            array('is_direct_cash_transfer'=>1))->result_array();
+        }else{
+            $this->db->where_in('AccText',$account_text_array);
+            $raw_accounts = $this->db->select(array('AccNo','AccText'))->get('accounts')->result_array();    
+        }
+
+       
         $acc_nos = array_column($raw_accounts,'AccNo');
         $acc_text = array_column($raw_accounts,'AccText');
 
         return array_combine($acc_text,$acc_nos);
     }
 
-    function get_beneficiary_counts($reporting_month_stamp, $account_no_array){
+
+    function get_beneficiary_counts($reporting_month_stamp, $account_no_array,$fcps_array){
+        
+        if(empty($account_no_array)){
+            $account_no_array_raw = $this->db->select(array('AccNo'))->get_where('accounts',
+            array('is_direct_cash_transfer'=>1))->result_array();
+
+            $account_no_array = array_column($account_no_array_raw,'AccNo');
+        }
+
         $this->db->where_in('account_number',$account_no_array);
+        $this->db->where_in('fcp_number',$fcps_array);
+        $this->db->where(array('mfr_closure_date'=>date('Y-m-t',$reporting_month_stamp)));
         
-        $this->db->where(array('fcp_number'=>$this->session->center_id,
-        'mfr_closure_date'=>date('Y-m-t',$reporting_month_stamp)));
-        
-        $this->db->select(array('account_number','beneficiaries_count'));
-        
+        $this->db->select(array('account_number'));
+        $this->db->select_sum('beneficiaries_count');
+        $this->db->group_by('account_number');
+
         $this->db->join('dct_beneficiaries','dct_beneficiaries.dct_beneficiaries_id=dct_beneficiaries_counts.dct_beneficiaries_id');
         
         $raw_result = $this->db->get('dct_beneficiaries_counts');
@@ -221,15 +240,26 @@ class Dct_model extends CI_Model {
         return $return_array;
     }
 
-    function validate_if_beneficiary_count_not_required($reporting_month_stamp){
-
-
-        // Does FCP contain DCT vouchers in the month
+    function check_if_fcp_has_dct_records($reporting_month_stamp){
         $dct_records = $this->direct_cash_transfers([$this->session->center_id],$reporting_month_stamp);
         
         $fcp_dct_counts = count($dct_records);
 
         $has_dct_records = $fcp_dct_counts > 0 ? true : false;
+
+        return $has_dct_records;
+    }
+
+    function validate_if_beneficiary_count_not_required($reporting_month_stamp){
+
+
+        // Does FCP contain DCT vouchers in the month
+        // $dct_records = $this->direct_cash_transfers([$this->session->center_id],$reporting_month_stamp);
+        
+        // $fcp_dct_counts = count($dct_records);
+
+        // $has_dct_records = $fcp_dct_counts > 0 ? true : false;
+        $has_dct_records = $this->check_if_fcp_has_dct_records($reporting_month_stamp);
         
         // Does the FCP DCT beneficiary count recorded
         $this->db->where(array('fcp_number'=>$this->session->center_id,'mfr_closure_date'=>date('Y-m-t',$reporting_month_stamp)));
