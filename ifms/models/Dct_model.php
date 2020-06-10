@@ -116,10 +116,15 @@ class Dct_model extends CI_Model {
         return array_column($result,'icpNo');
      }
     
-     public function cluster_fcps($cluster_name){
+     function cluster_fcps($cluster_name = ""){
+        $cluster = $this->session->cluster;
+    
+        if($cluster_name !== ""){
+            $cluster = $cluster_name;
+        }
     
         $this->db->select(array('icpNo'));
-        $this->db->where(array('clusterName'=>$cluster_name,'projectsdetails.status'=>1));
+        $this->db->where(array('clusterName'=>$cluster,'projectsdetails.status'=>1));
         $this->db->join('clusters','clusters.clusters_id=projectsdetails.cluster_id');
         $result = $this->db->get('projectsdetails')->result_array();
     
@@ -240,8 +245,13 @@ class Dct_model extends CI_Model {
         return $return_array;
     }
 
-    function check_if_fcp_has_dct_records($reporting_month_stamp){
-        $dct_records = $this->direct_cash_transfers([$this->session->center_id],$reporting_month_stamp);
+    function check_if_fcp_has_dct_records($reporting_month_stamp,$fcps_array = []){
+
+        if(empty($fcps_array)){
+            $fcps_array = [$this->session->center_id];
+        }
+
+        $dct_records = $this->direct_cash_transfers($fcps_array,$reporting_month_stamp);
         
         $fcp_dct_counts = count($dct_records);
 

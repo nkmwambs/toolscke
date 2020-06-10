@@ -17,9 +17,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
-
-						<a class='btn btn-default' target='__blank' href="<?php echo base_url();?>ifms.php/facilitator/direct_cash_transfers_report/<?=$tym;?>"><?php echo get_phrase('direct_cash_transfers_report');?></a>
-
+						<?php if($this->dct_model->check_if_fcp_has_dct_records($tym,$this->dct_model->cluster_fcps())){?>
+							<a class='btn btn-default' target='__blank' href="<?php echo base_url();?>ifms.php/facilitator/direct_cash_transfers_report/<?=$tym;?>"><?php echo get_phrase('direct_cash_transfers_report');?></a>
+						<?php }?>
 						<hr/>
                     	<div class="row">
                     		<div class="col-sm-12">
