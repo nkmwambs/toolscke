@@ -56,7 +56,7 @@
                 <tr>
                     <td colspan='2'><?=get_phrase('dct_beneficiaries');?></td>
                     <?php foreach($direct_cash_transfers['dct_accounts'] as $account){?>
-                        <td style='font-weight:bold;'><?=number_format($dct_beneficiaries[$accounts_no_and_text[$account]],0);?></td>
+                        <td style='font-weight:bold;'><?=isset($dct_beneficiaries[$accounts_no_and_text[$account]])?number_format($dct_beneficiaries[$accounts_no_and_text[$account]],0):0;?></td>
                     <?php }?>
                 </tr>
             </tfoot>
