@@ -115,6 +115,13 @@ class Dct_model extends CI_Model {
     
         return array_column($result,'icpNo');
      }
+
+     function country_fcps(){
+         $raw_result =  $this->db->select(array('icpNo'))->get_where('projectsdetails',
+         array('status'=>1))->result_array();
+
+         return array_column($raw_result,'icpNo');
+     }
     
      function cluster_fcps($cluster_name = ""){
         $cluster = $this->session->cluster;

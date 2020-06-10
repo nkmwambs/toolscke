@@ -58,6 +58,15 @@ class Smp extends CI_Controller
 			$page_data['tym']  = strtotime($sign . $param2 . ' months', $report_month);
 		}
 
+		/**Added by Karisa 10/6/2020 */
+		$direct_cash_transfers = $this->dct_model->fcp_grouped_direct_cash_transfers($this->dct_model->country_fcps(),$page_data['tym']);
+		$acc_nos = $this->dct_model->get_account_no_and_text($direct_cash_transfers['dct_accounts']);
+
+		$page_data['direct_cash_transfers'] = $direct_cash_transfers;
+		$page_data['dct_beneficiaries'] = $this->dct_model->get_beneficiary_counts($page_data['tym'],$acc_nos,$this->dct_model->country_fcps());
+		$page_data['accounts_no_and_text'] = $acc_nos;
+		/**End of Added by Karisa 10/6/2020 */
+
 		$page_data['page_name']  = 'dashboard';
 		$page_data['active_announcements'] = $this->get_active_announcements();
 		$page_data['page_title'] = get_phrase('Unconditional_Direct_Cash_Transfers');
@@ -67,6 +76,7 @@ class Smp extends CI_Controller
 		$page_data['dct_expenses_per_cluster_in_region'] = $this->get_total_for_a_region($report_month);
 		//$page_data['total_dct_expense'] = !is_numeric($report_month)?$this->get_total_direct_cash_transfers_countrywide(strtotime(date('Y-m-d'))):$this->get_total_direct_cash_transfers_countrywide($report_month);
 		$page_data['total_dct_beneficiaries'] = 54747;
+		
 		$this->load->view('backend/index', $page_data);
 	}
 	function get_active_announcements(){
