@@ -768,7 +768,7 @@ class Partner extends CI_Controller
 
 		if($support_mode_id > 0){
 			$this->db->join('accounts_support_mode','accounts_support_mode.fk_accounts_id=accounts.accID');
-			$this->db->where(array('accounts_support_mode.fk_support_mode_id'=>$support_mode_id));
+			$condition = '('.$condition.') AND fk_support_mode_id = '.$support_mode_id;
 		}
 
 		$this->db->where($condition);
@@ -783,13 +783,13 @@ class Partner extends CI_Controller
 		if ($param1 === 'CHQ') {
 			//Bank Expenses Accounts
 			//$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
+			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE())";
 			$rst_rw = $this->get_accounts($exp_cond,$support_mode_id);
 		}
 
 		if ($param1 === 'PC' || $param1 === 'BCHG') {
 			//PC and BC Expenses Accounts	
-			$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
+			$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE())";
 			$rst_rw = $this->get_accounts($pc_exp_cond,$support_mode_id);
 		}
 
@@ -806,12 +806,12 @@ class Partner extends CI_Controller
 		}
 
 		//Onduso 14/5/2020 START
-		if ($param1 == 'UDCTB' || $param1 == 'UDCTC') {
-			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
-			//$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR (civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1 ) )";
-			$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.is_direct_cash_transfer = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
-			$rst_rw = $this->get_accounts($exp_cond,$support_mode_id);
-		}
+		// if ($param1 == 'UDCTB' || $param1 == 'UDCTC') {
+		// 	//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
+		// 	//$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR (civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1 ) )";
+		// 	$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.is_direct_cash_transfer = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
+		// 	$rst_rw = $this->get_accounts($exp_cond,$support_mode_id);
+		// }
 
 
 		// if ($param1 == 'UDCTC') {
@@ -832,9 +832,22 @@ class Partner extends CI_Controller
 		endforeach;
 
 		$rst['item_types'] = $this->dct_model->get_voucher_item_types();
+		$rst['support_modes_is_dct'] = $this->get_support_modes_by_id($support_mode_id);
 
 		return $rst;
 
+	}
+
+	function get_support_modes_by_id($support_mode_id){
+		$support_mode_obj =  $this->db->get_where('support_mode',array('support_mode_id'=>$support_mode_id));
+
+		$support_mode_is_dct = 0;
+
+		if($support_mode_obj->num_rows() > 0){
+			$support_mode_is_dct = $support_mode_obj->row()->support_mode_is_dct;
+		}
+
+		return $support_mode_is_dct;
 	}
 
 	function voucher_accounts($param1 = '', $support_mode_id = 0)

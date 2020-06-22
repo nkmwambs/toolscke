@@ -138,7 +138,7 @@
 										<div class="col-sm-10 form-group hidden" id='support_mode_main'>
 												<label for="support_mode" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('support_modes'); ?>:</span></label>
 												<select name="support_mode" id="support_mode" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
-													<option value="#"><?php echo get_phrase('select_support_mode'); ?></option>
+													<option value="0"><?php echo get_phrase('select_support_mode'); ?></option>
 												</select>
 											</div>
 										</td>
@@ -584,24 +584,59 @@
 		});
 
 		$("#support_mode").on('change',function(){
-			var url = "<?=base_url();?>ifms.php/partner/filter_accounts_by_support_mode/"+$(this).val()+"/"+$('#VTypeMain').val();
+			var support_mode_id = $(this).val() > 0 ? $(this).val() : 0;
+			var url = "<?=base_url();?>ifms.php/partner/filter_accounts_by_support_mode/"+ support_mode_id +"/"+ $('#VTypeMain').val();
 			
 			$.get(url,function(response){
 				//alert(response);
 				//create_voucher_row(response);
-				var obj = response.acc;
-				var options = "<option value=''><?=get_phrase('select_account');?></option>";
+				var accs = response.acc;
+				var support_modes_is_dct = response.support_modes_is_dct;
+				var options = "<option value='0'><?=get_phrase('select_account');?></option>";
 
-				for (i = 0; i < obj.length; i++) {
-							if (obj[i].AccTextCIVA !== null && obj[i].open === "1") {
-								options += "<option value='"+obj[i].AccNo+"'>"+obj[i].AccNoCIVA+"</option>";
+				for (i = 0; i < accs.length; i++) {
+							if (accs[i].AccTextCIVA !== null && accs[i].open === "1") {
+								options += "<option value='"+accs[i].AccNo+"'>"+accs[i].AccNoCIVA+"</option>";
 							}else{
-								options += "<option value='"+obj[i].AccNo+"'>"+obj[i].AccText + ' - ' + obj[i].AccName+"</option>";
+								options += "<option value='"+accs[i].AccNo+"'>"+accs[i].AccText + ' - ' + accs[i].AccName+"</option>";
 							}
 					
 				}
 
 				$('.acSelect').html(options);
+
+				if (support_modes_is_dct == 1) {
+					//$('#DCTReference').removeAttr('readonly');
+					$('#myDropzone').removeClass('hidden');
+					$('#DCT_div').removeClass('hidden');
+
+					//get the transaction date
+					var date_val = ($('#TDate').val());
+
+					var url="<?=base_url();?>ifms.php/partner/generate_dct_reference_number/" + date_val;
+
+					//Make the ajax call
+					$.get(
+						url,
+						date_val,
+						function(responseText) {
+							
+							if (responseText.status === 'error') {
+								$('#error_msg').html('<p> Error:'+responseText.message +'</p>');
+							}
+							
+							else{
+		
+							}
+						}
+					);
+
+				}else{
+					$('#myDropzone').addClass('hidden');
+					$('#DCT_div').addClass('hidden');
+				}
+
+
 			});
 		});
 
@@ -642,49 +677,36 @@
 			
 			//Modified by Onduso on 13/5/2020 start
 			
-			if (val == "UDCTB" || val == "UDCTC") {
-				//$('#DCTReference').removeAttr('readonly');
-				$('#myDropzone').removeClass('hidden');
-				$('#DCT_div').removeClass('hidden');
+			// if (val == "UDCTB" || val == "UDCTC") {
+			// 	//$('#DCTReference').removeAttr('readonly');
+			// 	$('#myDropzone').removeClass('hidden');
+			// 	$('#DCT_div').removeClass('hidden');
 
-				//get the transaction date
-				var date_val = ($('#TDate').val());
+			// 	//get the transaction date
+			// 	var date_val = ($('#TDate').val());
 
-				var url="<?=base_url();?>ifms.php/partner/generate_dct_reference_number/" + date_val;
+			// 	var url="<?=base_url();?>ifms.php/partner/generate_dct_reference_number/" + date_val;
 
-                //Make the ajax call
-				$.get(
-					url,
-					date_val,
-					function(responseText) {
+            //     //Make the ajax call
+			// 	$.get(
+			// 		url,
+			// 		date_val,
+			// 		function(responseText) {
 						
-						if (responseText.status === 'error') {
-							$('#error_msg').html('<p> Error:'+responseText.message +'</p>');
-						}
+			// 			if (responseText.status === 'error') {
+			// 				$('#error_msg').html('<p> Error:'+responseText.message +'</p>');
+			// 			}
 						
-						else{
-							// if(responseText==0){
-							// 	//$('#error_msg').html('<p> Error: You have not defined your short code</p>');
-							// 	alert('You have not defined your Mpesa short code. Go enter ');
+			// 			else{
+	
+			// 			}
+			// 		}
+			// 	);
 
-							// 	var url="<?=base_url()?>admin.php/partner/manage_profile";
-
-							// 	window.location.href = url;
-
-								
-							// }
-							// else{
-							// 	//$('#DCTReference').attr('value', responseText);
-							// }
-							
-						}
-					}
-				);
-
-			}
-			if (val == 'BCHG' || val == 'CR' || val == 'PC' || val == 'PCR') {
-				$('#DCTReference').removeClass('accNos');
-			}
+			// }
+			// if (val == 'BCHG' || val == 'CR' || val == 'PC' || val == 'PCR') {
+			// 	$('#DCTReference').removeClass('accNos');
+			// }
 			//Modified by Onduso on 13/5/2020 End
 
 		});
