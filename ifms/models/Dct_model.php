@@ -152,5 +152,12 @@ class Dct_model extends CI_Model {
     
         return ['dct_records'=>$dct_records,'dct_accounts'=>array_unique($dct_accounts)];
      }
+
+     function get_voucher_item_types(){
+		$this->db->select(array('voucher_item_type_id','voucher_item_type_name'));
+		$voucher_item_types = $this->db->get_where('voucher_item_type',array('voucher_type_item_is_active'=>1))->result_array();
+
+		return $voucher_item_types;
+	}
 }
 

@@ -21,7 +21,8 @@ class Partner extends CI_Controller
 		$this->load->database();
 		$this->load->library('session');
 		$this->load->library('zip');
-
+		$this->load->model('dct_model');
+		$this->load->model('finance_model');
 
 
 		/*cache control*/
@@ -760,15 +761,22 @@ class Partner extends CI_Controller
 
 */
 
-	private function get_accounts(String $condition): array
+	private function get_accounts(String $condition, int $support_mode_id = 0): array
 	{
+	
+		$this->db->join('civa', 'accounts.accID=civa.accID', 'left');
 
-		$expenses_or_income_accs = $this->db->where($condition)->join('civa', 'accounts.accID=civa.accID', 'left')->get('accounts')->result_array();
+		if($support_mode_id > 0){
+			$this->db->join('accounts_support_mode','accounts_support_mode.fk_accounts_id=accounts.accID');
+			$this->db->where(array('accounts_support_mode.fk_support_mode_id'=>$support_mode_id));
+		}
+
+		$this->db->where($condition);
+		$expenses_or_income_accs = $this->db->get('accounts')->result_array();
 
 		return $expenses_or_income_accs;
 	}
-
-	function voucher_accounts($param1 = '')
+	function voucher_accounts_array($param1, $support_mode_id = 0)
 	{
 		//Return as JSON object
 		$rst_rw = "";
@@ -776,25 +784,25 @@ class Partner extends CI_Controller
 			//Bank Expenses Accounts
 			//$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
 			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
-			$rst_rw = $this->get_accounts($exp_cond);
+			$rst_rw = $this->get_accounts($exp_cond,$support_mode_id);
 		}
 
 		if ($param1 === 'PC' || $param1 === 'BCHG') {
 			//PC and BC Expenses Accounts	
 			$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
-			$rst_rw = $this->get_accounts($pc_exp_cond);
+			$rst_rw = $this->get_accounts($pc_exp_cond,$support_mode_id);
 		}
 
 		if ($param1 === 'CR') {
 			//Revenue accounts
 			$revenues_cond = "accounts.AccGrp = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$rst_rw = $this->get_accounts($revenues_cond);
+			$rst_rw = $this->get_accounts($revenues_cond,$support_mode_id);
 		}
 
 		if ($param1 === 'PCR') {
 			//Petty Cash rebanking account	
 			$rebank_cond = "accounts.AccGrp = 4 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$rst_rw = $this->get_accounts($rebank_cond);
+			$rst_rw = $this->get_accounts($rebank_cond,$support_mode_id);
 		}
 
 		//Onduso 14/5/2020 START
@@ -802,7 +810,7 @@ class Partner extends CI_Controller
 			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
 			//$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR (civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1 ) )";
 			$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.is_direct_cash_transfer = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
-			$rst_rw = $this->get_accounts($exp_cond);
+			$rst_rw = $this->get_accounts($exp_cond,$support_mode_id);
 		}
 
 
@@ -816,12 +824,31 @@ class Partner extends CI_Controller
 
 		$rst = array();
 		foreach ($rst_rw as $civaAcc) :
-			if (is_numeric($civaAcc['civaID']) && substr_count($civaAcc['allocate'], $this->session->userdata('center_id')) > 0) {
-				$rst[] = $civaAcc;
+			if (is_numeric($civaAcc['civaID']) && $civaAcc['allocate'] && substr_count($civaAcc['allocate'], $this->session->userdata('center_id')) > 0) {
+				$rst['acc'][] = $civaAcc;
 			} elseif (!is_numeric($civaAcc['civaID'])) {
-				$rst[] = $civaAcc;
+				$rst['acc'][] = $civaAcc;
 			}
 		endforeach;
+
+		$rst['item_types'] = $this->dct_model->get_voucher_item_types();
+
+		return $rst;
+
+	}
+
+	function voucher_accounts($param1 = '', $support_mode_id = 0)
+	{
+		$rst = $this->voucher_accounts_array($param1, $support_mode_id);
+		//Return as JSON object
+	
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($rst));
+	}
+
+	function filter_accounts_by_support_mode($support_mode_id, $voucher_type_abbrev){
+		//echo $voucher_type_abbrev;
+		$rst = $this->voucher_accounts_array($voucher_type_abbrev, $support_mode_id);
 
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($rst));
@@ -894,6 +921,7 @@ class Partner extends CI_Controller
 
 
 
+		$page_data['voucher_types'] = $this->finance_model->get_voucher_types();
 		$page_data['page_name']  = 'new_voucher';
 		$page_data['page_title'] = get_phrase('new_voucher');
 		$this->load->view('backend/index', $page_data);
@@ -904,6 +932,21 @@ class Partner extends CI_Controller
 	 * 
 	 *
 	 */
+
+	 function voucher_support_modes($voucher_type_abbrev){
+		
+		//$voucher_type_id = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$voucher_type_abbrev))->row()->voucher_type_id;
+		$this->db->select(array('support_mode_id','support_mode_name'));
+
+		$this->db->join('voucher_type_support_mode','voucher_type_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('voucher_type','voucher_type.voucher_type_id=voucher_type_support_mode.fk_voucher_type_id');
+
+		$this->db->where(array('voucher_type_abbrev'=>$voucher_type_abbrev));
+		
+		$result = $this->db->get_where('support_mode',array('support_mode_is_active'=>1))->result_array();
+
+		echo json_encode($result); 
+	 }
 
 	function upload_files($storeFolder)
 	{

@@ -12,6 +12,11 @@ class Finance_model extends CI_Model
 		parent::__construct();
 	}
 
+	function get_voucher_types(){
+		$this->db->select(array('voucher_type_id','voucher_type_name','voucher_type_abbrev'));
+		return $this->db->get_where('voucher_type',array('voucher_type_is_active'=>1))->result_array();
+	}
+	
 	function months_opening_fund_balances_for_centers($month)
 	{
 		$this->db->select(array('icpNo', 'funds', 'amount'));
