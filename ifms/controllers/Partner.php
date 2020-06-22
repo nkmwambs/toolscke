@@ -833,6 +833,7 @@ class Partner extends CI_Controller
 
 		$rst['item_types'] = $this->dct_model->get_voucher_item_types();
 		$rst['support_modes_is_dct'] = $this->get_support_modes_by_id($support_mode_id);
+		$rst['voucher_type_effect'] = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$param1))->row()->voucher_type_effect;
 
 		return $rst;
 
@@ -956,7 +957,8 @@ class Partner extends CI_Controller
 
 		$this->db->where(array('voucher_type_abbrev'=>$voucher_type_abbrev));
 		
-		$result = $this->db->get_where('support_mode',array('support_mode_is_active'=>1))->result_array();
+		$result['support_modes'] = $this->db->get_where('support_mode',array('support_mode_is_active'=>1))->result_array();
+		$result['voucher_type_effect'] = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$voucher_type_abbrev))->row()->voucher_type_effect;
 
 		echo json_encode($result); 
 	 }
@@ -1185,7 +1187,7 @@ class Partner extends CI_Controller
 		$data['Payee'] = $this->input->post('Payee');
 		$data['Address'] = $this->input->post('Address');
 		$data['VType'] = $this->input->post('VTypeMain');
-		$data['fk_support_mode_id'] = $this->input->post('support_mode');
+		$data['fk_support_mode_id'] = $this->input->post('support_mode')?$this->input->post('support_mode'):0;
 		//$data['raiser_id'] = $this->session->login_user_id;
 
 		//Check if Bank Details exists
@@ -1249,7 +1251,7 @@ class Partner extends CI_Controller
 			$cost = $this->input->post('cost');
 			$acc = $this->input->post('acc');
 			$civ = $this->input->post('civaCode');
-			$voucher_item_type = $this->input->post('voucher_item_type');
+			$voucher_item_type = $this->input->post('voucher_item_type')?$this->input->post('voucher_item_type'):[];
 
 			for ($i = 0; $i < sizeof($this->input->post('qty')); $i++) {
 				$data2['hID'] = $hID;
@@ -1272,7 +1274,7 @@ class Partner extends CI_Controller
 
 				//Onduso code ended
 				$data2['unixStmp'] = time();
-				$data2['fk_voucher_item_type_id'] = $voucher_item_type[$i];
+				$data2['fk_voucher_item_type_id'] = isset($voucher_item_type[$i])?$voucher_item_type[$i]:0;
 				$data2['Qty'] = $qty[$i];
 				$data2['Details'] = $details[$i];
 				$data2['UnitCost'] = $unitcost[$i];

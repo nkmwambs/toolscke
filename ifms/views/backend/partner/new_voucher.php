@@ -605,6 +605,12 @@
 
 				$('.acSelect').html(options);
 
+				if($("#support_mode").val() == 0){
+					$('.voucher_item_type').prop('disabled','disabled');
+				}else{
+					$('.voucher_item_type').removeAttr('disabled');
+				}
+
 				if (support_modes_is_dct == 1) {
 
 					$("#DCTReference").addClass('accNos');
@@ -652,18 +658,27 @@
 			$.ajax({
 				url: url,
 				success: function(response) {
-					$("#support_mode_main").removeClass('hidden');
-					//alert(response);
-					var obj = JSON.parse(response);
 
-					var options = "<option value=''><?=get_phrase('select_support_mode');?></option>";
+					var obj_raw = JSON.parse(response);
+					var voucher_type_effect = obj_raw.voucher_type_effect;
 
-					for(var i=0;i<obj.length;i++){
-						options += "<option value='"+obj[i].support_mode_id+"'>"+obj[i].support_mode_name+"</option>";
+					if(voucher_type_effect == 'expense'){
+						
+						$("#support_mode_main").removeClass('hidden');
+
+						var obj = obj_raw.support_modes;
+
+						var options = "<option value=''><?=get_phrase('select_support_mode');?></option>";
+
+						for(var i=0;i<obj.length;i++){
+							options += "<option value='"+obj[i].support_mode_id+"'>"+obj[i].support_mode_name+"</option>";
+						}
+
+						$("#support_mode").html(options);
 					}
-
-					$("#support_mode").html(options);
-
+					// else{
+					// 	$(".voucher_item_type").prop('disabled','disabled');
+					// }
 				}
 			});
 
@@ -979,8 +994,11 @@
 	});
 
 	function create_voucher_row(response){
+
+
 						var obj_voucher_item_type = response.item_types;
 						var obj = response.acc;
+						var voucher_type_effect = response.voucher_type_effect;
 
 						//alert(obj);
 						var table = document.getElementById('bodyTable').children[1];
@@ -1037,6 +1055,7 @@
 						var x = document.createElement("select");
 						x.name = "voucher_item_type[]";
 						x.setAttribute('required', 'required');
+						voucher_type_effect == 'expense' && $("#support_mode").val() > 0 ? '' : x.setAttribute('disabled', 'disabled');
 						x.className = 'form-control voucher_item_type';
 						var option1 = document.createElement("option");
 						option1.text = "Select ...";
