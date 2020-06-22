@@ -1185,6 +1185,7 @@ class Partner extends CI_Controller
 		$data['Payee'] = $this->input->post('Payee');
 		$data['Address'] = $this->input->post('Address');
 		$data['VType'] = $this->input->post('VTypeMain');
+		$data['fk_support_mode_id'] = $this->input->post('support_mode');
 		//$data['raiser_id'] = $this->session->login_user_id;
 
 		//Check if Bank Details exists
@@ -1208,10 +1209,13 @@ class Partner extends CI_Controller
 
 		//Onduso modification 14/5/2020 START
 
+		$support_mode_is_dct = $this->db->get_where('support_mode',
+		array('support_mode_id'=>$this->input->post('support_mode')))->row()->support_mode_is_dct;
+
 		if ($data['VType'] == 'CHQ') {
 
 			$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
-		} else if ($data['VType'] == 'UDCTB' || $data['VType'] == 'UDCTC') {
+		} else if ($support_mode_is_dct) {
 
 			$data['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
 		}
@@ -1245,6 +1249,7 @@ class Partner extends CI_Controller
 			$cost = $this->input->post('cost');
 			$acc = $this->input->post('acc');
 			$civ = $this->input->post('civaCode');
+			$voucher_item_type = $this->input->post('voucher_item_type');
 
 			for ($i = 0; $i < sizeof($this->input->post('qty')); $i++) {
 				$data2['hID'] = $hID;
@@ -1252,6 +1257,7 @@ class Partner extends CI_Controller
 				$data2['VNumber'] = $this->input->post('VNumber');
 				$data2['TDate'] = $this->input->post('TDate');
 				$data2['VType'] = $this->input->post('VTypeMain');
+				
 				//$data2['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
 
 				//Added by Onduso 23/5/2020
@@ -1259,13 +1265,14 @@ class Partner extends CI_Controller
 				if ($data2['VType'] == 'CHQ') {
 
 					$data2['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
-				} else if ($data2['VType'] == 'UDCTB' || $data['VType'] == 'UDCTC') {
+				} else if ($support_mode_is_dct) {
 		
 					$data2['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
 				} 
 
 				//Onduso code ended
 				$data2['unixStmp'] = time();
+				$data2['fk_voucher_item_type_id'] = $voucher_item_type[$i];
 				$data2['Qty'] = $qty[$i];
 				$data2['Details'] = $details[$i];
 				$data2['UnitCost'] = $unitcost[$i];

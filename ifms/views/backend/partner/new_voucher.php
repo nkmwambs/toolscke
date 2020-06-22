@@ -137,7 +137,7 @@
 										<td colspan="2">
 										<div class="col-sm-10 form-group hidden" id='support_mode_main'>
 												<label for="support_mode" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('support_modes'); ?>:</span></label>
-												<select name="support_mode" id="support_mode" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
+												<select name="support_mode" id="support_mode" class="form-control" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
 													<option value="0"><?php echo get_phrase('select_support_mode'); ?></option>
 												</select>
 											</div>
@@ -153,7 +153,7 @@
 											<!-- MPESA REFERENCE NO -->
 											<div class="col-sm-10 form-group hidden" id='DCT_div'>
 												<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('reference_no.'); ?>:</span></label>
-												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" value=""  />
+												<input class="form-control" type="text" id="DCTReference" name="DCTReference" data-validate="required" value=""  />
 
 											</div>
 										</td>
@@ -606,6 +606,8 @@
 				$('.acSelect').html(options);
 
 				if (support_modes_is_dct == 1) {
+
+					$("#DCTReference").addClass('accNos');
 					//$('#DCTReference').removeAttr('readonly');
 					$('#myDropzone').removeClass('hidden');
 					$('#DCT_div').removeClass('hidden');
