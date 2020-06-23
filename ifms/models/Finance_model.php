@@ -180,7 +180,7 @@ class Finance_model extends CI_Model
 		//Get the fcp short code
 		$dct_mpesa_short_code = 0;
 
-		$dct_mpesa_short_code = $this->db->get_where('projectsdetails', array('icpno' => $this->session->center_id))->row_array('dct_mpesa_short_code');
+		$dct_mpesa_short_code = $this->db->get_where('projectsdetails', array('icpno' => $this->session->center_id))->row_array();
 
 		if (count($dct_mpesa_short_code) > 0) {
 			$mpesa_short_code = $dct_mpesa_short_code['dct_mpesa_short_code'];
