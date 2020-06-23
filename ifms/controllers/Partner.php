@@ -816,7 +816,7 @@ class Partner extends CI_Controller
 
 		$rst = array();
 		foreach ($rst_rw as $civaAcc) :
-			if (is_numeric($civaAcc['civaID']) && substr_count($civaAcc['allocate'], $this->session->userdata('center_id')) > 0) {
+			if (is_numeric($civaAcc['civaID']) && strpos($civaAcc['allocate'], $this->session->userdata('center_id'))) {
 				$rst[] = $civaAcc;
 			} elseif (!is_numeric($civaAcc['civaID'])) {
 				$rst[] = $civaAcc;
@@ -1380,7 +1380,7 @@ class Partner extends CI_Controller
 		if ($this->session->userdata('admin_login') != 1)
 			redirect(base_url(), 'refresh');
 
-		if (count($this->db->get_where('planheader', array('icpNo' => $project, 'fy' => $this->input->post('fy')))->row()) === 0) {
+		if (count($this->db->get_where('planheader', array('icpNo' => $project, 'fy' => $this->input->post('fy')))->row_array()) === 0) {
 
 			$header['icpNo'] = 	$project;
 			$header['fy'] = $this->input->post('fy');
