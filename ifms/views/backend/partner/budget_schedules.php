@@ -36,9 +36,7 @@
 					<div class="pull-left hidden-print">
 						<div class="row">
 							<div class="col-sm-12">
-								<!-- <button onclick="new_budget_item(this);" class="btn btn-primary btn-icon"><i class="fa fa-plus-square"></i><?=get_phrase('new_budget_item');?></button> -->
-								<!-- <button onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/delete_budget/<?php echo $this->db->get_where('planheader',array('fy'=>$fyr,'icpNo'=>$this->session->center_id))->row()->planHeaderID?>');"  class="btn btn-red btn-icon"><i class="fa fa-trash"></i><?=get_phrase('delete_new_items');?></button>
-								<button onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_set_fy/<?php echo $fyr;?>/<?php echo $fyr+1;?>');" class="btn btn-warning btn-icon"><i class="fa fa-gg"></i><?=get_phrase('clone');?></button>-->
+								
 								<?php if(!empty($this->db->get_where('planheader',array('fy'=>$fyr,"icpNo"=>$this->session->center_id))->row())) {?> <button onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/mass_submit/<?php echo $this->db->get_where('planheader',array('fy'=>$fyr,"icpNo"=>$this->session->center_id))->row()->planHeaderID;?>');" class="btn btn-info btn-icon"><i class="fa fa-send"></i><?=get_phrase('mass_submit');?></button> <?php }?> 
 							</div>
 						</div>
