@@ -346,6 +346,8 @@
 	$(document).ready(function() {
 
 		check_if_temp_session_is_empty();
+		
+		Dropzone.autoDiscover = false;
 
 		$('#TDate').change(function(e) {
 			$('#VType').removeClass('hidden');

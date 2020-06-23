@@ -1,0 +1,12 @@
+[02-Jun-2020 20:32:50 UTC] PHP Warning:  POST Content-Length of 54829293 bytes exceeds the limit of 52428800 bytes in Unknown on line 0
+[03-Jun-2020 19:18:59 UTC] PHP Warning:  POST Content-Length of 53922045 bytes exceeds the limit of 52428800 bytes in Unknown on line 0
+[03-Jun-2020 19:22:21 UTC] PHP Warning:  POST Content-Length of 53922054 bytes exceeds the limit of 52428800 bytes in Unknown on line 0
+[15-Jun-2020 07:03:00 UTC] PHP Fatal error:  Allowed memory size of 402653184 bytes exhausted (tried to allocate 20480 bytes) in /home/compatl8/public_html/tools/system/database/drivers/pdo/pdo_result.php on line 195
+[15-Jun-2020 07:03:00 UTC] PHP Fatal error:  Allowed memory size of 402653184 bytes exhausted (tried to allocate 32768 bytes) in /home/compatl8/public_html/tools/system/core/Exceptions.php on line 1
+[15-Jun-2020 07:03:00 UTC] PHP Fatal error:  Uncaught Error: Cannot access protected property CI_Session_database_driver::$_db in /home/compatl8/public_html/tools/system/libraries/Session/drivers/Session_database_driver.php:211
+Stack trace:
+#0 [internal function]: CI_Session_database_driver->write('e5da564fc1178c2...', 'admin_login|i:1...')
+#1 {main}
+  thrown in /home/compatl8/public_html/tools/system/libraries/Session/drivers/Session_database_driver.php on line 211
+[15-Jun-2020 07:03:00 UTC] PHP Warning:  Unknown: Cannot call session save handler in a recursive manner in Unknown on line 0
+[17-Jun-2020 13:52:15 UTC] PHP Fatal error:  Allowed memory size of 402653184 bytes exhausted (tried to allocate 76009472 bytes) in /home/compatl8/public_html/tools/claims/controllers/Partner.php on line 153
