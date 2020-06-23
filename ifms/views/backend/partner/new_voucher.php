@@ -279,6 +279,7 @@
 </div>
 
 <script type="text/javascript">
+
 	//Added by Onduso on 15/3/2020
 	function post_using_ajax() {
 		var frm = $("#frm_voucher");
@@ -318,6 +319,8 @@
 
 	$(document).ready(function() {
 
+		Dropzone.autoDiscover = false;
+
 		check_if_temp_session_is_empty();
 
 		$('#TDate').change(function(e) {
@@ -334,6 +337,8 @@
 			acceptedFiles: 'image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv',
 		});
 
+		
+		
 		myDropzone.on("success", function(file, response) {
 				if (response == 0) {
 					alert('Error in uploading files');
