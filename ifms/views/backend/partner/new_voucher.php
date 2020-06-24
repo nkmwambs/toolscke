@@ -1179,6 +1179,7 @@
 						x.add(option1, x[0]);
 						x.onchange = function() {
 							enable_disabled_voucher_item_type(this);
+							show_upload_area(this);
 						};
 						x.setAttribute('required', 'required');
 						cell7.appendChild(x);
@@ -1253,6 +1254,15 @@
 			sibling_voucher_item_type_select.html(options);
 		}
 		
-		
+	}
+
+	function show_upload_area(modes_select){
+		var url = "<?=base_url();?>ifms.php/partner/check_if_mode_is_dct/"+$(modes_select).val();
+
+		$.get(url,function(response){
+			if(response == 1){
+				$(modes_select).prop('onclick',showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_upload_dct_documents/'));
+			}
+		});
 	}
 </script>

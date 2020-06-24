@@ -844,6 +844,12 @@ class Partner extends CI_Controller
 		echo json_encode($this->dct_model->get_voucher_item_types());
 	}
 
+	function check_if_mode_is_dct($support_mode_id){
+		$mode_is_dct = $this->db->get_where('support_mode',array('support_mode_id'=>$support_mode_id))->row()->support_mode_is_dct;
+
+		echo $mode_is_dct;
+	}
+
 	function get_support_modes(){
 
 		$voucher_type_abbrev = $this->input->post('voucher_type_abbrev');
