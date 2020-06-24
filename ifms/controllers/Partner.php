@@ -1185,6 +1185,34 @@ class Partner extends CI_Controller
 		//echo $this->session->$session_name;
 	}
 
+	function get_uploaded_support_mode_files($voucher_detail_row_index){
+		$result  = array();
+		
+		$session_name = "detail_upload_session_".$voucher_detail_row_index;
+		
+		if($this->session->upload_session && $this->session->$session_name){
+				
+			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session . DS . $this->session->$session_name;
+
+			$result['store_folder'] = $storeFolder;
+
+			$files = scandir($storeFolder);                 
+			if ( false!==$files ) {
+				foreach ( $files as $file ) {
+					if ( '.'!=$file && '..'!=$file) {       
+						$obj['name'] = $file;
+						$obj['size'] = filesize($storeFolder. DS .$file);
+						$result['uploaded_files'][] = $obj;
+					}
+				}
+			}
+		}
+		
+		header('Content-type: text/json');              
+		header('Content-type: application/json');
+		echo json_encode($result);
+	}
+
 	/** 
 	 * @author: Onduso
 	 * @date: 16/5/2020

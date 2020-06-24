@@ -64,6 +64,25 @@ var myDropzone = new Dropzone("#myDropzone", {
 			uploadMultiple: true,
 			addRemoveLinks: true,
 			acceptedFiles: 'image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv',
+            init: function() {
+                
+                var thisDropzone = this;
+                var url = "<?=base_url();?>ifms.php/partner/get_uploaded_support_mode_files/<?=$param3;?>";
+                
+                $.get(url, function(data) {
+                   //alert(data.store_folder);
+                    $.each(data.uploaded_files, function(key,value){
+                        
+                        var mockFile = { name: value.name, size: value.size };
+                        
+                        thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+        
+                        //thisDropzone.options.thumbnail.call(thisDropzone, mockFile, data.store_folder+"/"+value.name);
+                        
+                    });
+                    
+                });
+            }
 		});
 
 		myDropzone.on('sending', function(file, xhr, formData){
@@ -109,5 +128,8 @@ var myDropzone = new Dropzone("#myDropzone", {
 			});
 
 		});
+
+
+        
 </script>
 
