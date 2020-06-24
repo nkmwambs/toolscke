@@ -1130,7 +1130,8 @@
 						x.add(option1, x[0]);
 						x.onchange = function() {
 							enable_disabled_voucher_item_type(this);
-							show_upload_area(this);
+							
+							remove_support_documents(this);
 						};
 						x.setAttribute('required', 'required');
 						cell7.appendChild(x);
@@ -1139,10 +1140,17 @@
 						dct_uploads.className = 'badge badge-primary dct_uploads_count_label';
 						dct_uploads.innerHTML = 0 + " files";
 						dct_uploads.onclick = function(){
-							show_upload_area($(this).parent().find('.support_mode'));
+							show_upload_area($(this).parent().find('.support_mode'),$(this).parent().find('.dct_ref_number').val());
 						};
 						dct_uploads.setAttribute('style','cursor:pointer;');
 						cell7.appendChild(dct_uploads);
+
+						var dct_ref_number = document.createElement("input");
+						dct_ref_number.className = 'form-control dct_ref_number hidden';
+						dct_ref_number.name = "dct_reference_number[]";
+						//dct_ref_number.setAttribute('style','cursor:pointer;');
+						cell7.appendChild(dct_ref_number);
+
 
 						//CIV Code Column
 						var cell8 = row.insertCell(8);
@@ -1218,7 +1226,7 @@
 		
 	}
 
-	function show_upload_area(modes_select){
+	function show_upload_area(modes_select, ref_number = ''){
 		var support_mode_id = $(modes_select).val();
 		var voucher_detail_row_number = parseInt($(modes_select).closest('tr').index()) + 1;
 		var voucher_number = $("#Generated_VNumber").val();
@@ -1227,7 +1235,7 @@
 
 		$.get(url,function(response){
 			if(response == 1){
-				$(modes_select).prop('onclick',showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_upload_dct_documents/'+ voucher_number +'/'+voucher_detail_row_number+'/'+support_mode_id));
+				$(modes_select).prop('onclick',showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_upload_dct_documents/'+ voucher_number +'/'+voucher_detail_row_number+'/'+support_mode_id + '/'+ ref_number));
 			}
 			
 		});
@@ -1237,13 +1245,32 @@
 		var temp_session = '<?=$this->session->upload_session?$this->session->upload_session:0;?>';
 		var voucher_detail_row_index = $(this).data('row_id');
 		var dct_uploads_count_label = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('i.dct_uploads_count_label');
+		var dct_ref_number = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('input.dct_ref_number');
 
 		if(temp_session !== 0){
 			var url = "<?=base_url();?>ifms.php/partner/count_files_in_temp_dir/"+voucher_detail_row_index;
 			$.get(url,function(response){
 				dct_uploads_count_label.html(response + " files [Click here to Update]");
+				dct_ref_number.val($("#modal_dct_reference").val());
 			});
 		}		
 		
 	});
+
+	function remove_support_documents(modes_select){
+		
+		var support_mode_id = $(modes_select).val();
+		var voucher_detail_row_index = parseInt($(modes_select).closest('tr').index()) + 1;
+		var voucher_number = $("#Generated_VNumber").val();
+
+		var url = "<?= base_url() ?>ifms.php/partner/remove_all_dct_files_in_temp/"+voucher_number+"/"+voucher_detail_row_index+"/"+support_mode_id;
+	
+		$.get(url,function(response){
+			if(response > 0){
+				alert('All files are removed');
+			}
+			
+			show_upload_area(modes_select);
+		});
+	}
 </script>

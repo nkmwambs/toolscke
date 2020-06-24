@@ -22,7 +22,7 @@
                     <div class='form-group'>
                         <label class='control-label col-xs-12'><?=get_phrase('reference_number');?></label>
                         <div class='col-xs-12'>
-                            <input type='text' class='form-control' value = '' name = '' />
+                            <input type='text' id='modal_dct_reference' class='form-control' value = '<?=$param5;?>' name = '' />
                         </div>
                     </div>
 
@@ -57,6 +57,20 @@
 </div>
 
 <script>
+
+$("#btn_save_uploads").on('click',function(ev){
+    if($("#modal_dct_reference").val() == ""){
+        alert('Reference number is required');
+        ev.preventDefault();
+    }
+    
+});
+
+$(document).ready(function(){
+    //$("#modal_dct_reference").val();
+});
+
+
 var myDropzone = new Dropzone("#myDropzone", {
 			url: "<?= base_url() ?>ifms.php?/partner/create_uploads_temp",
 			paramName: "fileToUpload", // The name that will be used to transfer the file

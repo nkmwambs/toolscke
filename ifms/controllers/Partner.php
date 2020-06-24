@@ -1084,6 +1084,36 @@ class Partner extends CI_Controller
 			echo '0';
 		}
 	}
+
+	function remove_all_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id){
+		$hash_folder_name = $this->session->login_user_id . date('Y-m-d'); //.random_int(10,1000000);
+		$detail_folder = $voucher_number.'_'.$voucher_detail_row_number.'_'.$support_mode_id;
+		$hash = md5($hash_folder_name);
+
+		//Folder path
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder;
+		
+		$cnt = 0;
+		
+		$count_files_in_temp_dir = $this->count_files_in_temp_dir($voucher_detail_row_number);
+
+		if($count_files_in_temp_dir > 0){
+	
+				foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+					if ($fileInfo->isDot()) continue;
+		
+					if ($fileInfo->isFile()) {
+						unlink($storeFolder . DS . $fileInfo);
+						$cnt++;
+					}
+				}
+				rmdir($storeFolder);
+			
+		}
+
+		echo $cnt;
+		
+	}
 	/** 
 	 * @author: Onduso
 	 * @date: 16/5/2020
@@ -1118,7 +1148,7 @@ class Partner extends CI_Controller
 		}
 
 		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number);
-		
+
 		echo json_encode($output);
 	}
 
