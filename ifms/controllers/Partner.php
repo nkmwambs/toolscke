@@ -833,8 +833,8 @@ class Partner extends CI_Controller
 
 		$rst['item_types'] = $this->dct_model->get_voucher_item_types();
 		//$rst['support_modes_is_dct'] = $this->get_support_modes_by_id($support_mode_id);
-		//$rst['voucher_type_effect'] = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$param1))->row()->voucher_type_effect;
-		//$rst['support_modes'] = $this->db->select(array('support_mode_id','support_mode_name','support_mode_is_dct'))->get('support_mode')->result_array();
+		$rst['voucher_type_effect'] = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$param1))->row()->voucher_type_effect;
+		$rst['support_modes'] = $this->get_support_modes_for_voucher_type($param1);
 
 		return $rst;
 
@@ -848,6 +848,25 @@ class Partner extends CI_Controller
 		$mode_is_dct = $this->db->get_where('support_mode',array('support_mode_id'=>$support_mode_id))->row()->support_mode_is_dct;
 
 		echo $mode_is_dct;
+	}
+
+	function get_support_modes_for_voucher_type($voucher_type_abbrev){
+		$this->db->select(array('support_mode_id','support_mode_name','support_mode_is_dct'));
+		
+		$this->db->join('voucher_type_support_mode','voucher_type_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('voucher_type','voucher_type.voucher_type_id=voucher_type_support_mode.fk_voucher_type_id');
+		
+		$this->db->where(array('support_mode_is_active'=>1,'voucher_type_abbrev'=>$voucher_type_abbrev));
+		
+		$support_mode_obj =  $this->db->get('support_mode');
+
+		$support_modes = [];
+
+		if($support_mode_obj->num_rows() > 0){
+			$support_modes = $support_mode_obj->result_array();
+		}
+
+		return $support_modes;
 	}
 
 	function get_support_modes(){
@@ -1115,7 +1134,19 @@ class Partner extends CI_Controller
 
 				if ($fileInfo->isFile()) {
 					unlink($storeFolder . DS . $fileInfo);
+				}else{
+					$detailStoreFolder = $storeFolder . DS . $fileInfo;
+					foreach (new DirectoryIterator($detailStoreFolder) as $detailFileInfo) {
+						if ($detailFileInfo->isDot()) continue;
+								
+						if ($detailFileInfo->isFile()) {
+							unlink($detailStoreFolder . DS . $detailFileInfo);
+						}
+					}
+
+					rmdir($detailStoreFolder);
 				}
+
 			}
 
 			rmdir($storeFolder);
@@ -1128,9 +1159,29 @@ class Partner extends CI_Controller
 		if ($this->session->upload_session) {
 			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session;
 			$this->delete_empty_folder($storeFolder);
+			$this->session->unset_userdata('upload_session');
+		}
+		//$this->session->unset_userdata('upload_session');
+		//echo $this->session->upload_session;
+	}
+
+	function count_files_in_temp_dir($voucher_detail_row_index){
+		
+		$filecount = 0;
+
+		if ($this->session->upload_session) {
+			$session_name = "detail_upload_session_".$voucher_detail_row_index;
+			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session . DS . $this->session->$session_name;
+			$files2 = glob($storeFolder . "/*.*");
+
+			if( $files2 ) { 
+				$filecount = count($files2); 
+			} 
+			  
 		}
 
-		//echo "Complete";
+		echo $filecount . " files "; 
+		//echo $this->session->$session_name;
 	}
 
 	/** 
@@ -1140,12 +1191,20 @@ class Partner extends CI_Controller
 	function create_uploads_temp()
 	{
 
+		$voucher_number = $_POST['voucher_number'];
+		$voucher_detail_row_index = $_POST['voucher_detail_row_number'];
+		$support_mode_id = $_POST['support_mode_id'];
+
 		//Hash the folder to make user depended
-		$hash_folder_name = $this->session->login_user_id . date('Y-m-d'); //.random_int(10,1000000);
-		$hash = md5($hash_folder_name);
+		$hash_main_folder_name = $this->session->login_user_id . date('Y-m-d'); //.random_int(10,1000000);
+		$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id; //.random_int(10,1000000);
+
+		$hash = md5($hash_main_folder_name);
+		//$hash_detail =  md5($hash_detail_folder_name);
 
 		//Folder for temp and call the upload_files method to temperarily hold files on server
-		$storeFolder = 'uploads' . DS . 'temps' . DS . $hash;
+		
+		$storeFolder = 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder_name;
 
 		if (
 			is_array($this->upload_files($storeFolder)) &&
@@ -1157,11 +1216,19 @@ class Partner extends CI_Controller
 
 			if (!$this->session->has_userdata('upload_session')) {
 				$this->session->set_userdata('upload_session', $hash);
+				//$this->session->set_userdata('detail_upload_session_'.$voucher_detail_row_index, $hash_detail);
 			}
-			echo json_encode($files_array);
+			
+			$this->session->set_userdata('detail_upload_session_'.$voucher_detail_row_index, $detail_folder_name);
+			
+			//echo json_encode($files_array);
+			echo $this->session->upload_session;
+			//echo json_encode($_POST);
 		} else {
 			echo 0;
 		}
+
+		//echo $this->session->upload_session;
 	}
 	function generate_dct_reference_number($voucher_date){
 		//$date=$this->input->post('TDate');

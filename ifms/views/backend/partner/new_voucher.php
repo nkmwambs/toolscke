@@ -151,11 +151,11 @@
 											</div>
 
 											<!-- MPESA REFERENCE NO -->
-											<div class="col-sm-10 form-group hidden" id='DCT_div'>
+											<!-- <div class="col-sm-10 form-group hidden" id='DCT_div'>
 												<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('reference_no.'); ?>:</span></label>
 												<input class="form-control" type="text" id="DCTReference" name="DCTReference" data-validate="required" value=""  />
 
-											</div>
+											</div> -->
 										</td>
 
 										<td colspan="2">
@@ -167,15 +167,12 @@
 
 											<!-- Upload Files Area -->
 
-											<div id="myDropzone" class="dropzone hidden">
+											<!-- <div id="myDropzone" class="dropzone hidden">
 												<div class="dropzone-previews"></div>
 												<div class="fallback">
-													<!-- this is the fallback if JS isn't working -->
 													<input name="fileToUpload" type="file" multiple />
 												</div>
-
-
-											</div>
+											</div> -->
 
 											<!-- Upload Files Area -->
 											<!-- <div id="uploads_dct_support_docs" for="fileupload" class="col-sm-6 hidden"><span style="font-weight: bold;"><?php echo get_phrase('support_documents'); ?></span>
@@ -329,55 +326,8 @@
 		});
 
 
-		var myDropzone = new Dropzone("#myDropzone", {
-			url: "<?= base_url() ?>ifms.php?/partner/create_uploads_temp",
-			paramName: "fileToUpload", // The name that will be used to transfer the file
-			maxFilesize: 5, // MB
-			uploadMultiple: true,
-			addRemoveLinks: true,
-			acceptedFiles: 'image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv',
-		});
-
 		
-		
-		myDropzone.on("success", function(file, response) {
-				if (response == 0) {
-					alert('Error in uploading files');
-					return false;
-				}
-				$('#myDropzone').css({
-					'border': '2px solid gray'
-				});
-				$('#error_msg').html('');
 
-			}
-
-
-
-		);
-		myDropzone.on('removedfile', function(file) {
-
-			/* here do AJAX call to the server ... */
-			var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/";
-			var file_name = file.name;
-			$.ajax({
-				//async: false,
-				type: "POST",
-				url: url,
-				data: {
-					'file_name': file_name
-				},
-				// beforeSend: function() {
-				// 	$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
-				// },
-				success: function(response) {
-					//alert('This file'+data+' has been removed');
-					alert('This file ' + response + ' has been removed');
-				},
-
-			});
-
-		});
 		//Go button
 		$("#go_btn").click(function() {
 			var VNum = $("#VNumber").val();
@@ -985,7 +935,6 @@
 					url: url,
 					success: function(response) {
 						//alert(response);
-		
 						create_voucher_row(response);
 
 					}
@@ -1005,9 +954,11 @@
 						var obj_voucher_item_type = response.item_types;
 						var obj = response.acc;
 						var voucher_type_effect = response.voucher_type_effect;
-						//var obj_support_mode = response.support_modes;
+						var obj_support_mode = response.support_modes;
 
-						//alert(obj);
+						//alert(obj_support_mode.length);
+						var show_voucher_item_type = voucher_type_effect == 'expense' && obj_support_mode.length > 0 ? true : false;
+
 						var table = document.getElementById('bodyTable').children[1];
 						var rowCount = table.rows.length;
 						var row = table.insertRow(rowCount);
@@ -1063,7 +1014,7 @@
 						var x = document.createElement("select");
 						x.name = "voucher_item_type[]";
 						x.setAttribute('required', 'required');
-						x.setAttribute('disabled', 'disabled');
+						show_voucher_item_type ? '' : x.setAttribute('disabled', 'disabled');
 						x.className = 'form-control voucher_item_type';
 						var option1 = document.createElement("option");
 						option1.text = "Select ...";
@@ -1184,6 +1135,11 @@
 						x.setAttribute('required', 'required');
 						cell7.appendChild(x);
 
+						var dct_uploads = document.createElement("i");
+						dct_uploads.className = 'badge badge-primary dct_uploads_count_label pull-right';
+						dct_uploads.innerHTML = 0 + " files";
+						cell7.appendChild(dct_uploads);
+
 						//CIV Code Column
 						var cell8 = row.insertCell(8);
 						var element8 = document.createElement("input");
@@ -1193,6 +1149,8 @@
 						element8.className = "civaCode form-control";
 						element8.id = "civaCode" + rowCount;
 						cell8.appendChild(element8);
+
+						
 	}
 
 	function build_support_mode_list(acSelect){
@@ -1257,12 +1215,40 @@
 	}
 
 	function show_upload_area(modes_select){
-		var url = "<?=base_url();?>ifms.php/partner/check_if_mode_is_dct/"+$(modes_select).val();
+		var support_mode_id = $(modes_select).val();
+		var voucher_detail_row_number = parseInt($(modes_select).closest('tr').index()) + 1;
+		var voucher_number = $("#Generated_VNumber").val();
+
+		var url = "<?=base_url();?>ifms.php/partner/check_if_mode_is_dct/"+support_mode_id;
 
 		$.get(url,function(response){
 			if(response == 1){
-				$(modes_select).prop('onclick',showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_upload_dct_documents/'));
+				$(modes_select).prop('onclick',showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_upload_dct_documents/'+ voucher_number +'/'+voucher_detail_row_number+'/'+support_mode_id));
 			}
+			
 		});
 	}
+
+	$(document).on('click',"#btn_save_uploads",function(){
+		var temp_session = '<?=$this->session->upload_session?$this->session->upload_session:0;?>';
+		var voucher_detail_row_index = $(this).data('row_id');
+		//var dct_uploads_count_label = $("#bodyTable tr").eq(voucher_detail_row_index).find('.td_support_mode').find('i.dct_uploads_count_label');
+		var dct_uploads_count_label = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('i.dct_uploads_count_label');
+
+		//alert($("#bodyTable tr").eq(voucher_detail_row_index).html());
+		//alert(voucher_detail_row_index);
+		//alert($("#bodyTable tr").eq(voucher_detail_row_index).html());
+
+		if(temp_session !== 0){
+			var url = "<?=base_url();?>ifms.php/partner/count_files_in_temp_dir/"+voucher_detail_row_index;
+
+			$.get(url,function(response){
+				dct_uploads_count_label.html(response);
+				//alert(response);
+			});
+			
+		}		
+		
+		//alert(temp_session);
+	});
 </script>
