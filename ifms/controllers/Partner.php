@@ -1088,15 +1088,18 @@ class Partner extends CI_Controller
 	 * @author: Onduso
 	 * @date: 16/5/2020
 	 */
-	function remove_dct_files_in_temp()
+	function remove_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id)
 	{
 
+		$output = [];
+		//count_files_in_temp_dir($voucher_detail_row_number);
 		//Hash the folder to make user depended
 		$hash_folder_name = $this->session->login_user_id . date('Y-m-d'); //.random_int(10,1000000);
+		$detail_folder = $voucher_number.'_'.$voucher_detail_row_number.'_'.$support_mode_id;
 		$hash = md5($hash_folder_name);
 
 		//Folder path
-		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash;
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder;
 
 		//Loop the $hash directory and delete the selected file
 		//$data = urldecode($file);
@@ -1109,17 +1112,14 @@ class Partner extends CI_Controller
 
 				unlink($storeFolder . DS . $fileInfo);
 
-				// $cnt = iterator_count(
-				// 	new \RecursiveIteratorIterator(
-				// 		new \RecursiveDirectoryIterator($storeFolder, \FilesystemIterator::SKIP_DOTS)
-				// 	)
-				// 	);
-
-				echo $fileInfo->getFilename(); //for ajax use
+				$output['file_name'] = $fileInfo->getFilename();
+				//echo $fileInfo->getFilename(); //for ajax use
 			}
 		}
 
-		//$this->delete_empty_folder($storeFolder);
+		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number);
+		
+		echo json_encode($output);
 	}
 
 	function delete_empty_folder($storeFolder)

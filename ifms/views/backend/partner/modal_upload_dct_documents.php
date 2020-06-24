@@ -67,7 +67,7 @@ var myDropzone = new Dropzone("#myDropzone", {
             init: function() {
                 
                 var thisDropzone = this;
-                var url = "<?=base_url();?>ifms.php/partner/get_uploaded_support_mode_files/<?=$param3;?>";
+                var url = "<?=base_url();?>ifms.php/partner/get_uploaded_support_mode_files/<?=$param3;?>";//get_uploaded_support_mode_files
                 
                 $.get(url, function(data) {
                    //alert(data.store_folder);
@@ -108,7 +108,7 @@ var myDropzone = new Dropzone("#myDropzone", {
 		myDropzone.on('removedfile', function(file) {
 
 			/* here do AJAX call to the server ... */
-			var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/";
+			var url = "<?= base_url() ?>ifms.php/partner/remove_dct_files_in_temp/<?=$param2;?>/<?=$param3;?>/<?=$param4;?>";
 			var file_name = file.name;
 			$.ajax({
 				//async: false,
@@ -122,8 +122,12 @@ var myDropzone = new Dropzone("#myDropzone", {
 				// },
 				success: function(response) {
 					//alert('This file'+data+' has been removed');
-					alert('This file ' + response + ' has been removed');
-				},
+                    var obj = JSON.parse(response);
+
+					alert('This file ' + obj.file_name + ' has been removed');
+                    var dct_uploads_count_label = $("#bodyTable tr").eq('<?=$param3;?>').find('td.td_support_mode').find('i.dct_uploads_count_label');
+                    dct_uploads_count_label.html(obj.count_of_files + " files [Click here to Update]");
+                },
 
 			});
 

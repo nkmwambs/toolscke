@@ -1242,7 +1242,6 @@
 			var url = "<?=base_url();?>ifms.php/partner/count_files_in_temp_dir/"+voucher_detail_row_index;
 			$.get(url,function(response){
 				dct_uploads_count_label.html(response + " files [Click here to Update]");
-				//dct_uploads_count_label.parent().find('.support_mode').prop('disabled','disabled');
 			});
 		}		
 		
