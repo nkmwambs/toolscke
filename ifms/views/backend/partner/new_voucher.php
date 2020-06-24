@@ -1136,8 +1136,12 @@
 						cell7.appendChild(x);
 
 						var dct_uploads = document.createElement("i");
-						dct_uploads.className = 'badge badge-primary dct_uploads_count_label pull-right';
+						dct_uploads.className = 'badge badge-primary dct_uploads_count_label';
 						dct_uploads.innerHTML = 0 + " files";
+						dct_uploads.onclick = function(){
+							show_upload_area($(this).parent().find('.support_mode'));
+						};
+						dct_uploads.setAttribute('style','cursor:pointer;');
 						cell7.appendChild(dct_uploads);
 
 						//CIV Code Column
@@ -1232,23 +1236,15 @@
 	$(document).on('click',"#btn_save_uploads",function(){
 		var temp_session = '<?=$this->session->upload_session?$this->session->upload_session:0;?>';
 		var voucher_detail_row_index = $(this).data('row_id');
-		//var dct_uploads_count_label = $("#bodyTable tr").eq(voucher_detail_row_index).find('.td_support_mode').find('i.dct_uploads_count_label');
 		var dct_uploads_count_label = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('i.dct_uploads_count_label');
-
-		//alert($("#bodyTable tr").eq(voucher_detail_row_index).html());
-		//alert(voucher_detail_row_index);
-		//alert($("#bodyTable tr").eq(voucher_detail_row_index).html());
 
 		if(temp_session !== 0){
 			var url = "<?=base_url();?>ifms.php/partner/count_files_in_temp_dir/"+voucher_detail_row_index;
-
 			$.get(url,function(response){
-				dct_uploads_count_label.html(response);
-				//alert(response);
+				dct_uploads_count_label.html(response + " files [Click here to Update]");
+				//dct_uploads_count_label.parent().find('.support_mode').prop('disabled','disabled');
 			});
-			
 		}		
 		
-		//alert(temp_session);
 	});
 </script>

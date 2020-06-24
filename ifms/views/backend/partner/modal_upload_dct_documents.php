@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
 
 <?php 
-echo $param3;
+//echo $param3;
 ?>
 
 <div class='row'>

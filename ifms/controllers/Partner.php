@@ -1151,6 +1151,7 @@ class Partner extends CI_Controller
 
 			rmdir($storeFolder);
 		}
+		
 	}
 
 	function check_if_temp_session_is_empty()
@@ -1180,7 +1181,7 @@ class Partner extends CI_Controller
 			  
 		}
 
-		echo $filecount . " files "; 
+		echo $filecount; 
 		//echo $this->session->$session_name;
 	}
 
