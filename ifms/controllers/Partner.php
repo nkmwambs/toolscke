@@ -832,23 +832,41 @@ class Partner extends CI_Controller
 		endforeach;
 
 		$rst['item_types'] = $this->dct_model->get_voucher_item_types();
-		$rst['support_modes_is_dct'] = $this->get_support_modes_by_id($support_mode_id);
-		$rst['voucher_type_effect'] = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$param1))->row()->voucher_type_effect;
+		//$rst['support_modes_is_dct'] = $this->get_support_modes_by_id($support_mode_id);
+		//$rst['voucher_type_effect'] = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$param1))->row()->voucher_type_effect;
+		//$rst['support_modes'] = $this->db->select(array('support_mode_id','support_mode_name','support_mode_is_dct'))->get('support_mode')->result_array();
 
 		return $rst;
 
 	}
 
-	function get_support_modes_by_id($support_mode_id){
-		$support_mode_obj =  $this->db->get_where('support_mode',array('support_mode_id'=>$support_mode_id));
+	function get_voucher_item_types(){
+		echo json_encode($this->dct_model->get_voucher_item_types());
+	}
 
-		$support_mode_is_dct = 0;
+	function get_support_modes(){
+
+		$voucher_type_abbrev = $this->input->post('voucher_type_abbrev');
+		$accno = $this->input->post('accno');
+
+		$this->db->select(array('support_mode_id','support_mode_name','support_mode_is_dct'));
+		
+		$this->db->join('voucher_type_support_mode','voucher_type_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('voucher_type','voucher_type.voucher_type_id=voucher_type_support_mode.fk_voucher_type_id');
+		$this->db->join('accounts_support_mode','accounts_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('accounts','accounts.accID=accounts_support_mode.fk_accounts_id');
+		
+		$this->db->where(array('support_mode_is_active'=>1,'voucher_type_abbrev'=>$voucher_type_abbrev,'AccNo'=>$accno));
+		
+		$support_mode_obj =  $this->db->get('support_mode');
+
+		$support_modes = [];
 
 		if($support_mode_obj->num_rows() > 0){
-			$support_mode_is_dct = $support_mode_obj->row()->support_mode_is_dct;
+			$support_modes = $support_mode_obj->result_array();
 		}
 
-		return $support_mode_is_dct;
+		echo json_encode($support_modes);
 	}
 
 	function voucher_accounts($param1 = '', $support_mode_id = 0)
@@ -860,13 +878,13 @@ class Partner extends CI_Controller
 		$this->output->set_output(json_encode($rst));
 	}
 
-	function filter_accounts_by_support_mode($support_mode_id, $voucher_type_abbrev){
-		//echo $voucher_type_abbrev;
-		$rst = $this->voucher_accounts_array($voucher_type_abbrev, $support_mode_id);
+	// function filter_accounts_by_support_mode($support_mode_id, $voucher_type_abbrev){
+	// 	//echo $voucher_type_abbrev;
+	// 	$rst = $this->voucher_accounts_array($voucher_type_abbrev, $support_mode_id);
 
-		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($rst));
-	}
+	// 	$this->output->set_content_type('application/json');
+	// 	$this->output->set_output(json_encode($rst));
+	// }
 
 	function chqIntel($param1)
 	{

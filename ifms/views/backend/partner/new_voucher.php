@@ -122,7 +122,7 @@
 									</tr>
 									<tr>
 
-										<td colspan="2">
+										<td colspan="4">
 											<div class="col-sm-10 form-group hidden" id='VType'>
 												<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type'); ?>:</span></label>
 												<select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
@@ -134,14 +134,14 @@
 											</div>
 										</td>
 										
-										<td colspan="2">
+										<!-- <td colspan="2">
 										<div class="col-sm-10 form-group hidden" id='support_mode_main'>
 												<label for="support_mode" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('support_modes'); ?>:</span></label>
 												<select name="support_mode" id="support_mode" class="form-control" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
 													<option value="0"><?php echo get_phrase('select_support_mode'); ?></option>
 												</select>
 											</div>
-										</td>
+										</td> -->
 
 										<td colspan="2">
 											<!-- CHEQUE Number -->
@@ -226,6 +226,7 @@
 										<th><?php echo get_phrase('unit_cost'); ?></th>
 										<th><?php echo get_phrase('cost'); ?></th>
 										<th><?php echo get_phrase('account'); ?></th>
+										<th><?php echo get_phrase('support_mode'); ?></th>
 										<th><?php echo get_phrase('civ_code'); ?></th>
 									</tr>
 								</thead>
@@ -658,34 +659,34 @@
 			$(this).remove();
 			$('#VType').append('<INPUT TYPE="text" VALUE="' + val + '" name="VTypeMain" id="VTypeMain" class="form-control" readonly/>');
 
-			var url = '<?php echo base_url(); ?>ifms.php/partner/voucher_support_modes/' + val;
+			// var url = '<?php echo base_url(); ?>ifms.php/partner/voucher_support_modes/' + val;
 
-			$.ajax({
-				url: url,
-				success: function(response) {
+			// $.ajax({
+			// 	url: url,
+			// 	success: function(response) {
 
-					var obj_raw = JSON.parse(response);
-					var voucher_type_effect = obj_raw.voucher_type_effect;
+			// 		var obj_raw = JSON.parse(response);
+			// 		var voucher_type_effect = obj_raw.voucher_type_effect;
 
-					if(voucher_type_effect == 'expense'){
+			// 		if(voucher_type_effect == 'expense'){
 						
-						$("#support_mode_main").removeClass('hidden');
+			// 			$("#support_mode_main").removeClass('hidden');
 
-						var obj = obj_raw.support_modes;
+			// 			var obj = obj_raw.support_modes;
 
-						var options = "<option value=''><?=get_phrase('select_support_mode');?></option>";
+			// 			var options = "<option value=''><?=get_phrase('select_support_mode');?></option>";
 
-						for(var i=0;i<obj.length;i++){
-							options += "<option value='"+obj[i].support_mode_id+"'>"+obj[i].support_mode_name+"</option>";
-						}
+			// 			for(var i=0;i<obj.length;i++){
+			// 				options += "<option value='"+obj[i].support_mode_id+"'>"+obj[i].support_mode_name+"</option>";
+			// 			}
 
-						$("#support_mode").html(options);
-					}
-					// else{
-					// 	$(".voucher_item_type").prop('disabled','disabled');
-					// }
-				}
-			});
+			// 			$("#support_mode").html(options);
+			// 		}
+			// 		// else{
+			// 		// 	$(".voucher_item_type").prop('disabled','disabled');
+			// 		// }
+			// 	}
+			// });
 
 			if (val === 'CHQ') {
 				$('#ChqNo').removeAttr('readonly');
@@ -1004,6 +1005,7 @@
 						var obj_voucher_item_type = response.item_types;
 						var obj = response.acc;
 						var voucher_type_effect = response.voucher_type_effect;
+						//var obj_support_mode = response.support_modes;
 
 						//alert(obj);
 						var table = document.getElementById('bodyTable').children[1];
@@ -1057,10 +1059,11 @@
 
 						// Voucher Item Type
 						var cell2 = row.insertCell(2);
+						cell2.className = 'td_voucher_item_type';
 						var x = document.createElement("select");
 						x.name = "voucher_item_type[]";
 						x.setAttribute('required', 'required');
-						voucher_type_effect == 'expense' && $("#support_mode").val() > 0 ? '' : x.setAttribute('disabled', 'disabled');
+						x.setAttribute('disabled', 'disabled');
 						x.className = 'form-control voucher_item_type';
 						var option1 = document.createElement("option");
 						option1.text = "Select ...";
@@ -1076,11 +1079,9 @@
 
 						}
 						x.onchange = function() {
-							//alert("Hello!");  
-							// document.getElementById("civaCode" + rowCount).value = obj[this.selectedIndex].civaID;
-							// check_pc_other_ac_mix(this);
+
 						};
-						x.setAttribute('required', 'required');
+
 						cell2.appendChild(x);
 
 						//Details Column
@@ -1158,19 +1159,100 @@
 						x.onchange = function() {
 							//alert("Hello!");  
 							document.getElementById("civaCode" + rowCount).value = obj[this.selectedIndex].civaID;
-							check_pc_other_ac_mix(this);
+							//check_pc_other_ac_mix(this);
+							build_support_mode_list(this);
 						};
 						x.setAttribute('required', 'required');
 						cell6.appendChild(x);
 
-						//CIV Code Column
+						//Support Modes Column
 						var cell7 = row.insertCell(7);
-						var element7 = document.createElement("input");
-						element7.type = "text";
-						element7.name = "civaCode[]";
-						element7.setAttribute('readonly', 'readonly');
-						element7.className = "civaCode form-control";
-						element7.id = "civaCode" + rowCount;
-						cell7.appendChild(element7);
+						cell7.className = 'td_support_mode';
+						var x = document.createElement("select");
+						x.name = "support_mode[]";
+						x.setAttribute('required', 'required');
+						x.setAttribute('disabled', 'disabled');
+						x.className = 'form-control accNos support_mode';
+						var option1 = document.createElement("option");
+						option1.text = "Select ...";
+						option1.value = "";
+						x.add(option1, x[0]);
+						x.onchange = function() {
+							enable_disabled_voucher_item_type(this);
+						};
+						x.setAttribute('required', 'required');
+						cell7.appendChild(x);
+
+						//CIV Code Column
+						var cell8 = row.insertCell(8);
+						var element8 = document.createElement("input");
+						element8.type = "text";
+						element8.name = "civaCode[]";
+						element8.setAttribute('readonly', 'readonly');
+						element8.className = "civaCode form-control";
+						element8.id = "civaCode" + rowCount;
+						cell8.appendChild(element8);
+	}
+
+	function build_support_mode_list(acSelect){
+		var sibling_support_mode_select = $(acSelect).closest('tr').find('.td_support_mode').find('select');
+
+		//sibling_support_mode_select.removeAttr('disabled')
+		//alert(sibling_support_mode_select);
+
+		var accno = $(acSelect).val();
+		var voucher_type_abbrev = $('#VTypeMain').val();
+
+		var url = "<?=base_url();?>ifms.php/partner/get_support_modes";
+		var data = {'accno':accno,'voucher_type_abbrev':voucher_type_abbrev};
+
+		$.post(url,data,function(response){
+			var obj = JSON.parse(response);
+
+			var options = "<option value='0'><?=get_phrase('select_support_mode');?></option>";
+
+			if(obj.length > 0){
+				sibling_support_mode_select.removeAttr('disabled');
+
+				for(var i=0;i<obj.length;i++){
+					options += "<option value='"+obj[i].support_mode_id+"'>"+obj[i].support_mode_name+"</option>";
+				}
+
+				sibling_support_mode_select.html(options);
+			}else{
+				sibling_support_mode_select.prop('disabled','disabled');
+			}
+
+			sibling_support_mode_select.html(options);
+			
+		});
+
+	}
+
+	function enable_disabled_voucher_item_type(modes_select){
+		var sibling_voucher_item_type_select = $(modes_select).closest('tr').find('.td_voucher_item_type').find('select');
+		
+		var options = "<option value='0'><?=get_phrase('select_item_type');?></option>";
+
+		if($(modes_select).val() > 0){
+			
+			var url = "<?=base_url();?>ifms.php/partner/get_voucher_item_types";
+			
+				$.get(url,function(response){
+					sibling_voucher_item_type_select.removeAttr('disabled');
+
+					var obj = JSON.parse(response);
+
+					for(var i=0;i<obj.length;i++){
+						options += "<option value='"+obj[i].voucher_item_type_id+"'>"+obj[i].voucher_item_type_name+"</option>";
+					}
+					sibling_voucher_item_type_select.html(options);
+				});
+		}else{		
+			sibling_voucher_item_type_select.prop('disabled','disabled');
+			sibling_voucher_item_type_select.html(options);
+		}
+		
+		
 	}
 </script>
