@@ -1,20 +1,28 @@
 <?php
-$icps_civs_open_income_statement = "SELECT SUM(`voucher_body`.`Cost`) as Cost,`civa`.`civaID` as civaID,`voucher_body`.`icpNo` as icpNo,";
-$icps_civs_open_income_statement .= "`civa`.`AccNoCIVA` as AccNoCIVA,`civa`.`closureDate` as closureDate,`accounts`.`AccGrp` as AccGrp,`civa`.`accID` as accID  FROM `voucher_body`"; 
-$icps_civs_open_income_statement .= "LEFT JOIN `accounts` ON `voucher_body`.`AccNo`=`accounts`.`AccNo`"; 
-$icps_civs_open_income_statement .= "LEFT JOIN `civa` ON `voucher_body`.`civaCode`=`civa`.`civaID`"; 
-$icps_civs_open_income_statement .= "WHERE `civa`.`open`='1'"; 
-$icps_civs_open_income_statement .= "GROUP BY `voucher_body`.`icpNo`,`accounts`.`AccGrp`,`civa`.`civaID`"; 
+// $icps_civs_open_income_statement = "SELECT SUM(`voucher_body`.`Cost`) as Cost,`civa`.`civaID` as civaID,`voucher_body`.`icpNo` as icpNo,";
+// $icps_civs_open_income_statement .= "`civa`.`AccNoCIVA` as AccNoCIVA,`civa`.`closureDate` as closureDate,`accounts`.`AccGrp` as AccGrp,`civa`.`accID` as accID  FROM `voucher_body`"; 
+// $icps_civs_open_income_statement .= "LEFT JOIN `accounts` ON `voucher_body`.`AccNo`=`accounts`.`AccNo`"; 
+// $icps_civs_open_income_statement .= "LEFT JOIN `civa` ON `voucher_body`.`civaCode`=`civa`.`civaID`"; 
+// $icps_civs_open_income_statement .= "WHERE `civa`.`open`='1'"; 
+// $icps_civs_open_income_statement .= "GROUP BY `voucher_body`.`icpNo`,`accounts`.`AccGrp`,`civa`.`civaID`"; 
 
-$icps_civs_open_income = $this->db->query($icps_civs_open_income_statement)->result_object();
+//$icps_civs_open_income = $this->db->query($icps_civs_open_income_statement)->result_object();
 
-//$icps_with_civs_statement = "SELECT DISTINCT icpNo FROM voucher_body WHERE civaCode>0";
-//$icps_with_civs = $this->db->query($icps_with_civs_statement)->result_object();
+$this->db->select(array('accounts.accID as account_id','parentAccID','civaID','icpNo',
+'AccNoCIVA','closureDate','AccGrp','civa.accID as accID'));
+$this->db->select_sum('Cost');
+$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
+$this->db->join('civa','civa.civaID=voucher_body.civaCode');
+$this->db->group_by('icpNo','civaID');
+$this->db->where(array('open'=>1));
+$icps_civs_open_income = $this->db->get('voucher_body')->result_object();
+
+print_r($icps_civs_open_income);
 
 $refined_arr = array();
 
 foreach($icps_civs_open_income as $rw){
-	$refined_arr[$rw->icpNo][$rw->AccNoCIVA][$rw->AccGrp] = array('civaID'=>$rw->civaID,'accID'=>$rw->accID,'closureDate'=>$rw->closureDate,'Cost'=>$rw->Cost);
+	$refined_arr[trim($rw->icpNo)][trim($rw->AccNoCIVA)][$rw->AccGrp] = array('civaID'=>$rw->civaID,'accID'=>$rw->accID,'closureDate'=>$rw->closureDate,'Cost'=>$rw->Cost);
 }
 
 ?>
@@ -50,41 +58,50 @@ foreach($icps_civs_open_income as $rw){
 	                 			</thead>
 	                 			<tbody>
 	                 				<?php
-	                 				foreach($refined_arr as $key=>$value){
-	                 					$inc = 0;
-										$exp = 0;
-	                 					foreach($value as $key2=>$value2){
+	                 				foreach($refined_arr as $fcp_number=>$civ_income_or_expense_record){
+	                 					$civ_income = 0;
+										$civ_expense = 0;
+										$balance = 0;
+	                 					foreach($civ_income_or_expense_record as $AccNoCIVA=>$civ_account_groups){
 	                 				?>
 	                 						
 	                 							<tr>
-		                 							<td><?=$key;?></td>
-													<td><?=$key2;?></td>
+		                 							<td><?=$fcp_number;?></td>
+													<td><?=$AccNoCIVA;?></td>
 		                 							<td>
 		                 								<?php
-		                 									if(isset($value2[1])){
-		                 										echo $value2[1]['closureDate'];
-		                 									}elseif(isset($value2[0])){
-		                 										echo $value2[0]['closureDate'];
+		                 									if(isset($civ_account_groups[1])){
+		                 										echo $civ_account_groups[1]['closureDate'];
+		                 									}elseif(isset($civ_account_groups[0])){
+		                 										echo $civ_account_groups[0]['closureDate'];
 		                 									} 
 		                 								?>
 		                 							</td>
 		                 							<td style="text-align: right;">
 		                 								<?php
-		                 									if(isset($value2[1])) $inc = $value2[1]['Cost'];
+		                 									if(isset($civ_account_groups[1])) {
+																 $civ_income = $civ_account_groups[1]['Cost'];
+																
+																 $balance = $civ_income-$civ_expense;
+															 }
 		                 									
 		                 								?>
-		                 								<a class="btn btn-default" href="#" onclick="showAjaxModal('<?=base_url();?>ifms.php/modal/popup/modal_show_breakdown/<?=$key;?>/<?=$value2[1]['civaID'];?>');"><?=number_format($inc,2);?></a>
+		                 								<a class="btn btn-default" href="#" <?php if(isset($civ_account_groups[1]['civaID'])){?> onclick="showAjaxModal('<?=base_url();?>ifms.php/modal/popup/modal_show_breakdown/<?=$fcp_number;?>/<?=$civ_account_groups[1]['civaID'];?>');" <?php }?> ><?=number_format($civ_income,2);?></a>
 		                 							</td>
 		                 							<td style="text-align: right;">
 		                 								<?php
-		                 									if(isset($value2[0])) $exp = $value2[0]['Cost'];
+		                 									if(isset($civ_account_groups[0])) {
+																
+																$civ_expense = $civ_account_groups[0]['Cost'];
+																$balance = $civ_income-$civ_expense;
+																}
 		  
 		                 								?>
-		                 								<a class="btn btn-default" href="#" onclick="showAjaxModal('<?=base_url();?>ifms.php/modal/popup/modal_show_breakdown/<?=$key;?>/<?=$value2[0]['civaID'];?>');"><?=number_format($exp,2);?></a>
+		                 								<a class="btn btn-default" href="#" <?php if(isset($civ_account_groups[0]['civaID'])){?> onclick="showAjaxModal('<?=base_url();?>ifms.php/modal/popup/modal_show_breakdown/<?=$fcp_number;?>/<?=$civ_account_groups[0]['civaID'];?>');" <?php }?> ><?=number_format($civ_expense,2);?></a>
 		                 							</td>
 		                 							<td style="text-align: right;">
 		                 								<?php
-		                 									echo number_format($inc-$exp,2);
+		                 									echo number_format($balance,2);
 		                 								?>
 		                 							</td>
 		                 							

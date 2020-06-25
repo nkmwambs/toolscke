@@ -358,7 +358,7 @@ function interventions($param1="",$param2="",$param3=""){
 				
 				foreach($accid_array as $account_type => $account_id){
 					$data4['accID'] = $account_id;
-					$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA') .' ('.ucfirst($account_type).')';
+					$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA');
 					$data4['is_direct_cash_transfer'] =  $this->input->post('is_direct_cash_transfer');
 					$data4['AccTextCIVA'] =   $this->input->post('AccNoCIVA') .' ('.ucfirst($account_type).')';
 					$data4['allocate'] =  $allocate;
