@@ -344,17 +344,27 @@ function interventions($param1="",$param2="",$param3=""){
 		
 		if($this->db->get_where("civa",array("AccNoCIVA"=>$this->input->post('AccNoCIVA')))->num_rows()===0){
 		
-			$accid_array = array($inc_accid,$exp_accid);
+			$accid_array = array('income'=>$inc_accid,'expense'=>$exp_accid);
 			
-				for($k=0;$k<count($accid_array);$k++){
-					$data4['accID'] = $accid_array[$k];
-					$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA');
+				// for($k=0;$k<count($accid_array);$k++){
+				// 	$data4['accID'] = $accid_array[$k];
+				// 	$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA');
+				// 	$data4['is_direct_cash_transfer'] =  $this->input->post('is_direct_cash_transfer');
+				// 	$data4['AccTextCIVA'] =  $this->input->post('AccNoCIVA');
+				// 	$data4['allocate'] =  $allocate;
+				// 	$data4['closureDate'] =  $this->input->post('closureDate');
+				// 	$this->db->insert('civa',$data4);
+				// }	
+				
+				foreach($accid_array as $account_type => $account_id){
+					$data4['accID'] = $account_id;
+					$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA') .' ('.ucfirst($account_type).')';
 					$data4['is_direct_cash_transfer'] =  $this->input->post('is_direct_cash_transfer');
-					$data4['AccTextCIVA'] =  $this->input->post('AccNoCIVA');
+					$data4['AccTextCIVA'] =   $this->input->post('AccNoCIVA') .' ('.ucfirst($account_type).')';
 					$data4['allocate'] =  $allocate;
 					$data4['closureDate'] =  $this->input->post('closureDate');
 					$this->db->insert('civa',$data4);
-				}			
+				}
 			
 			$msg = get_phrase('account_added_successfully');
 		}else{
