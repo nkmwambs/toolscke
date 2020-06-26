@@ -16,17 +16,17 @@
                 </div>
             </div>
                 
-            <div class="panel-body"  style="max-width:50; overflow: auto;">	
+            <div class="panel-body"  style="max-width:50;  overflow: auto;">	
                 <?php echo form_open("", array('id' => 'frm_dct_documents', 'class' => 'form-vertical form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
                 
-                    <div class='form-group'>
+                    <!-- <div class='form-group'>
                         <label class='control-label col-xs-12'><?=get_phrase('reference_number');?></label>
                         <div class='col-xs-12'>
                             <input type='text' id='modal_dct_reference' class='form-control' value = '<?=$param5;?>' name = '' />
                         </div>
                     </div>
 
-                    <hr style='margin:25px 0px 25px 0px'/>
+                    <hr style='margin:25px 0px 25px 0px'/> -->
                     
                     <div class='form-group'>
                         <label class='control-label col-xs-12'><?=get_phrase('reference_documents');?></label>
@@ -59,10 +59,10 @@
 <script>
 
 $("#btn_save_uploads").on('click',function(ev){
-    if($("#modal_dct_reference").val() == ""){
-        alert('Reference number is required');
-        ev.preventDefault();
-    }
+    // if($("#modal_dct_reference").val() == ""){
+    //     alert('Reference number is required');
+    //     ev.preventDefault();
+    // }
     
 });
 
