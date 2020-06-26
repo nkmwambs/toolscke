@@ -13,8 +13,9 @@ $this->db->select(array('accounts.accID as account_id','parentAccID','civaID','i
 $this->db->select_sum('Cost');
 $this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
 $this->db->join('civa','civa.civaID=voucher_body.civaCode');
-$this->db->group_by('icpNo','civaID');
 $this->db->where(array('open'=>1));
+$this->db->group_by('civaID','icpno');
+
 $icps_civs_open_income = $this->db->get('voucher_body')->result_object();
 
 print_r($icps_civs_open_income);
@@ -64,7 +65,8 @@ foreach($icps_civs_open_income as $rw){
 										$balance = 0;
 	                 					foreach($civ_income_or_expense_record as $AccNoCIVA=>$civ_account_groups){
 	                 				?>
-	                 						
+											 <?php 
+											   if(isset($civ_account_groups[0])){ print_r($civ_account_groups);}?>
 	                 							<tr>
 		                 							<td><?=$fcp_number;?></td>
 													<td><?=$AccNoCIVA;?></td>
@@ -82,7 +84,7 @@ foreach($icps_civs_open_income as $rw){
 		                 									if(isset($civ_account_groups[1])) {
 																 $civ_income = $civ_account_groups[1]['Cost'];
 																
-																 $balance = $civ_income-$civ_expense;
+																 $balance = $civ_income- $civ_expense;
 															 }
 		                 									
 		                 								?>
