@@ -328,6 +328,8 @@ function closed_interventions(){
     $this->load->view('backend/index', $page_data);		
 }
 
+
+
 function interventions($param1="",$param2="",$param3=""){
 	if ($this->session->userdata('admin_login') != 1)
 	      redirect(base_url(), 'refresh');
@@ -344,17 +346,27 @@ function interventions($param1="",$param2="",$param3=""){
 		
 		if($this->db->get_where("civa",array("AccNoCIVA"=>$this->input->post('AccNoCIVA')))->num_rows()===0){
 		
-			$accid_array = array($inc_accid,$exp_accid);
+			$accid_array = array('income'=>$inc_accid,'expense'=>$exp_accid);
 			
-				for($k=0;$k<count($accid_array);$k++){
-					$data4['accID'] = $accid_array[$k];
+				// for($k=0;$k<count($accid_array);$k++){
+				// 	$data4['accID'] = $accid_array[$k];
+				// 	$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA');
+				// 	$data4['is_direct_cash_transfer'] =  $this->input->post('is_direct_cash_transfer');
+				// 	$data4['AccTextCIVA'] =  $this->input->post('AccNoCIVA');
+				// 	$data4['allocate'] =  $allocate;
+				// 	$data4['closureDate'] =  $this->input->post('closureDate');
+				// 	$this->db->insert('civa',$data4);
+				// }	
+				
+				foreach($accid_array as $account_type => $account_id){
+					$data4['accID'] = $account_id;
 					$data4['AccNoCIVA'] =  $this->input->post('AccNoCIVA');
 					$data4['is_direct_cash_transfer'] =  $this->input->post('is_direct_cash_transfer');
-					$data4['AccTextCIVA'] =  $this->input->post('AccNoCIVA');
+					$data4['AccTextCIVA'] =   $this->input->post('AccNoCIVA') .' ('.ucfirst($account_type).')';
 					$data4['allocate'] =  $allocate;
 					$data4['closureDate'] =  $this->input->post('closureDate');
 					$this->db->insert('civa',$data4);
-				}			
+				}
 			
 			$msg = get_phrase('account_added_successfully');
 		}else{
@@ -419,6 +431,26 @@ function interventions($param1="",$param2="",$param3=""){
     redirect(base_url().'ifms.php/civa/dashboard','refresh');	
 }
 
+function civ_report_query(){
+	
+	$this->db->select(array('accounts.accID as account_id','parentAccID','civaID','icpNo',
+	'AccNoCIVA','closureDate','AccGrp','civa.accID as accID'));
+	$this->db->select_sum('Cost');
+	$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
+	$this->db->join('civa','civa.civaID=voucher_body.civaCode');
+	$this->db->group_by(array('icpNo','civaID'));
+	$this->db->where(array('open'=>1));
+	$icps_civs_open_income = $this->db->get('voucher_body')->result_object();
+	
+	$refined_arr = array();
+	
+	foreach($icps_civs_open_income as $rw){
+		$refined_arr[trim($rw->icpNo)][trim($rw->AccNoCIVA)][$rw->AccGrp] = array('civaID'=>$rw->civaID,'accID'=>$rw->accID,'closureDate'=>$rw->closureDate,'Cost'=>$rw->Cost);
+	}
+
+	return $refined_arr;
+}
+
  function civ_report($param1=""){
 	if ($this->session->userdata('admin_login') != 1)
 	      redirect(base_url(), 'refresh');
@@ -428,7 +460,7 @@ function interventions($param1="",$param2="",$param3=""){
 	if($param1==="closed"){
 		$page_data['page_name']  = 'closed_civs_report';
 	}
-	//$page_data['page_name']  = 'civ_report';
+	$page_data['refined_arr']  = $this->civ_report_query();
     $page_data['page_title'] = get_phrase('interventions_report');
     $this->load->view('backend/index', $page_data);	 	
  } 

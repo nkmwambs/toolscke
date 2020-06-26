@@ -775,19 +775,20 @@ class Partner extends CI_Controller
 		if ($param1 === 'CHQ') {
 			//Bank Expenses Accounts
 			//$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
+			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.Active=1) OR (accounts.AccGrp = 0 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
 			$rst_rw = $this->get_accounts($exp_cond);
 		}
 
 		if ($param1 === 'PC' || $param1 === 'BCHG') {
 			//PC and BC Expenses Accounts	
-			$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.Active=1) OR (accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
+			$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.Active=1) OR (accounts.AccGrp = 0 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
 			$rst_rw = $this->get_accounts($pc_exp_cond);
 		}
 
 		if ($param1 === 'CR') {
 			//Revenue accounts
-			$revenues_cond = "accounts.AccGrp = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			//$revenues_cond = "accounts.AccGrp = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$revenues_cond = "(accounts.AccGrp = 1 AND accounts.Active=1) OR (accounts.AccGrp = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE())";
 			$rst_rw = $this->get_accounts($revenues_cond);
 		}
 
@@ -801,7 +802,7 @@ class Partner extends CI_Controller
 		if ($param1 == 'UDCTB' || $param1 == 'UDCTC') {
 			//DCTB expenses [CHQ implementation plus is_direct_cash_transfer flag]
 			//$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1) AND (accounts.Active=1 OR (civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1 ) )";
-			$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.is_direct_cash_transfer = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
+			$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
 			$rst_rw = $this->get_accounts($exp_cond);
 		}
 
@@ -816,7 +817,11 @@ class Partner extends CI_Controller
 
 		$rst = array();
 		foreach ($rst_rw as $civaAcc) :
-			if (is_numeric($civaAcc['civaID']) && strpos($civaAcc['allocate'], $this->session->userdata('center_id'))) {
+			
+			$untrimmed_explode_allocate = explode(',',$civaAcc['allocate']);
+			$trimmed_explode_allocate = array_map(array($this,'trim_spaces'),$untrimmed_explode_allocate);
+			
+			if (is_numeric($civaAcc['civaID']) && in_array($this->session->userdata('center_id'),$trimmed_explode_allocate)) {
 				$rst[] = $civaAcc;
 			} elseif (!is_numeric($civaAcc['civaID'])) {
 				$rst[] = $civaAcc;
@@ -825,6 +830,10 @@ class Partner extends CI_Controller
 
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($rst));
+	}
+
+	function trim_spaces($elem){
+		return trim($elem);
 	}
 
 	function chqIntel($param1)
