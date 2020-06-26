@@ -1,33 +1,3 @@
-<?php
-// $icps_civs_open_income_statement = "SELECT SUM(`voucher_body`.`Cost`) as Cost,`civa`.`civaID` as civaID,`voucher_body`.`icpNo` as icpNo,";
-// $icps_civs_open_income_statement .= "`civa`.`AccNoCIVA` as AccNoCIVA,`civa`.`closureDate` as closureDate,`accounts`.`AccGrp` as AccGrp,`civa`.`accID` as accID  FROM `voucher_body`"; 
-// $icps_civs_open_income_statement .= "LEFT JOIN `accounts` ON `voucher_body`.`AccNo`=`accounts`.`AccNo`"; 
-// $icps_civs_open_income_statement .= "LEFT JOIN `civa` ON `voucher_body`.`civaCode`=`civa`.`civaID`"; 
-// $icps_civs_open_income_statement .= "WHERE `civa`.`open`='1'"; 
-// $icps_civs_open_income_statement .= "GROUP BY `voucher_body`.`icpNo`,`accounts`.`AccGrp`,`civa`.`civaID`"; 
-
-//$icps_civs_open_income = $this->db->query($icps_civs_open_income_statement)->result_object();
-
-$this->db->select(array('accounts.accID as account_id','parentAccID','civaID','icpNo',
-'AccNoCIVA','closureDate','AccGrp','civa.accID as accID'));
-$this->db->select_sum('Cost');
-$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
-$this->db->join('civa','civa.civaID=voucher_body.civaCode');
-$this->db->where(array('open'=>1));
-$this->db->group_by('civaID','icpno');
-
-$icps_civs_open_income = $this->db->get('voucher_body')->result_object();
-
-print_r($icps_civs_open_income);
-
-$refined_arr = array();
-
-foreach($icps_civs_open_income as $rw){
-	$refined_arr[trim($rw->icpNo)][trim($rw->AccNoCIVA)][$rw->AccGrp] = array('civaID'=>$rw->civaID,'accID'=>$rw->accID,'closureDate'=>$rw->closureDate,'Cost'=>$rw->Cost);
-}
-
-?>
-
 <div class="row">
 	<div class="col-sm-12">
 		<a href="<?=base_url();?>ifms.php/civa/civ_report/closed" class="btn btn-danger"><?=get_phrase('closed_interventions_report');?></a>	
@@ -65,8 +35,7 @@ foreach($icps_civs_open_income as $rw){
 										$balance = 0;
 	                 					foreach($civ_income_or_expense_record as $AccNoCIVA=>$civ_account_groups){
 	                 				?>
-											 <?php 
-											   if(isset($civ_account_groups[0])){ print_r($civ_account_groups);}?>
+	                 						
 	                 							<tr>
 		                 							<td><?=$fcp_number;?></td>
 													<td><?=$AccNoCIVA;?></td>
@@ -84,7 +53,7 @@ foreach($icps_civs_open_income as $rw){
 		                 									if(isset($civ_account_groups[1])) {
 																 $civ_income = $civ_account_groups[1]['Cost'];
 																
-																 $balance = $civ_income- $civ_expense;
+																 $balance = $civ_income-$civ_expense;
 															 }
 		                 									
 		                 								?>
