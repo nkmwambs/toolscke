@@ -844,6 +844,16 @@ class Partner extends CI_Controller
 		echo json_encode($this->dct_model->get_voucher_item_types());
 	}
 
+	/**
+	 * @author: Onduso
+	 * @date: 6/27/2020
+	 */
+
+	 function get_accounts_for_voucher_item_type(int $voucher_item_type_id=0){
+		echo json_encode($this->dct_model->get_accounts_related_voucher_item_type($voucher_item_type_id));
+
+	 }
+	 
 	function check_if_mode_is_dct($support_mode_id){
 		$mode_is_dct = $this->db->get_where('support_mode',array('support_mode_id'=>$support_mode_id))->row()->support_mode_is_dct;
 

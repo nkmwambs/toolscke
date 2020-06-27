@@ -65,6 +65,17 @@ class Dct_model extends CI_Model {
         return $result;
         
     }
+
+    /**
+     * @author: Onduso
+     * @date: 6/27/2020
+     */
+    function get_accounts_related_voucher_item_type(int $voucher_item_type_id=0){
+
+        
+        return $this->db->select(array('accno','AccText','AccName'))->get_where('accounts', array('fk_voucher_item_type_id'=>$voucher_item_type_id))->result_array();
+    }
+  
   
     
     private function direct_cash_transfers(Array $list_of_fcps,$reporting_month_stamp,$aggregate_by = 'account_number'){
