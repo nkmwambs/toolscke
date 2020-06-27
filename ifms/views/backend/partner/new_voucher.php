@@ -217,13 +217,16 @@
 								<thead>
 									<tr style="font-weight: bold;">
 										<th><?php echo get_phrase('delete_row'); ?></th>
-										<th><?php echo get_phrase('quantity'); ?></th>
-										<th><?php echo get_phrase('item_type'); ?></th>
-										<th><?php echo get_phrase('items_purchased_/_services_received'); ?></th>
-										<th><?php echo get_phrase('unit_cost'); ?></th>
-										<th><?php echo get_phrase('cost'); ?></th>
+										<th><?php echo get_phrase('Recipient'); ?></th>
 										<th><?php echo get_phrase('account'); ?></th>
 										<th><?php echo get_phrase('support_mode'); ?></th>
+										<th><?php echo get_phrase('quantity'); ?></th>
+										
+										<th><?php echo get_phrase('details_/_particulars'); ?></th>
+										<th><?php echo get_phrase('unit_cost'); ?></th>
+										<th><?php echo get_phrase('cost'); ?></th>
+										
+										
 										<th><?php echo get_phrase('civ_code'); ?></th>
 									</tr>
 								</thead>
@@ -982,35 +985,9 @@
 						//element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 						cell0.appendChild(element0);
 
-						//Quantity Column
+                        // Voucher Item Type/Rcipient
 						var cell1 = row.insertCell(1);
-						var element1 = document.createElement("input");
-						element1.type = "number";
-						element1.step = "0.01"
-						element1.name = "qty[]";
-						element1.className = "qty accNos form-control";
-						element1.id = "qty" + rowCount;
-						element1.setAttribute('required', 'required');
-						element1.onkeyup = function() {
-							var x = this.value;
-							var y = document.getElementById('unit' + rowCount).value;
-							document.getElementById('cost' + rowCount).value = x * y;
-
-							var sum = 0;
-							$('.cost').each(function() {
-								sum += parseFloat(this.value);
-							});
-							document.getElementById('totals').value = accounting.formatMoney(sum, {
-								symbol: "<?php echo get_phrase('Kes.'); ?>",
-								format: "%v %s"
-							});
-
-						};
-						cell1.appendChild(element1);
-
-						// Voucher Item Type
-						var cell2 = row.insertCell(2);
-						cell2.className = 'td_voucher_item_type';
+						cell1.className = 'td_voucher_item_type';
 						var x = document.createElement("select");
 						x.name = "voucher_item_type[]";
 						x.setAttribute('required', 'required');
@@ -1033,58 +1010,12 @@
 
 						};
 
-						cell2.appendChild(x);
+						cell1.appendChild(x);
 
-						//Details Column
-						var cell3 = row.insertCell(3);
-						var element3 = document.createElement("input");
-						element3.type = "text";
-						element3.name = "desc[]";
-						element3.className = "desc accNos form-control";
-						element3.id = "desc" + rowCount;
-						element3.setAttribute('required', 'required');
-						cell3.appendChild(element3);
 
-						//Unit Cost Column
-						var cell4 = row.insertCell(4);
-						var element4 = document.createElement("input");
-						element4.type = "number";
-						element4.step = "0.01"
-						element4.name = "unit[]";
-						element4.className = "unit accNos form-control";
-						element4.id = "unit" + rowCount;
-						element4.onkeyup = function() {
-							var x = this.value;
-							var y = document.getElementById('qty' + rowCount).value;
-							document.getElementById('cost' + rowCount).value = x * y;
-
-							var sum = 0;
-							$('.cost').each(function() {
-								sum += parseFloat(this.value);
-							});
-							document.getElementById('totals').value = accounting.formatMoney(sum, {
-								symbol: "<?php echo get_phrase('Kes.'); ?>",
-								format: "%v %s"
-							});
-
-						};
-						element4.setAttribute('required', 'required');
-						cell4.appendChild(element4);
-
-						//Cost Column
-						var cell5 = row.insertCell(5);
-						var element5 = document.createElement("input");
-						element5.type = "number";
-						element5.step = "0.01"
-						element5.name = "cost[]";
-						element5.setAttribute('readonly', 'readonly');
-						element5.className = "cost accNos form-control";
-						element5.id = "cost" + rowCount;
-						element5.setAttribute('required', 'required');
-						cell5.appendChild(element5);
 
 						//Accounts Column
-						var cell6 = row.insertCell(6);
+						var cell2 = row.insertCell(2);
 						var x = document.createElement("select");
 						x.name = "acc[]";
 						x.setAttribute('required', 'required');
@@ -1114,11 +1045,12 @@
 							build_support_mode_list(this);
 						};
 						x.setAttribute('required', 'required');
-						cell6.appendChild(x);
+						cell2.appendChild(x);
 
-						//Support Modes Column
-						var cell7 = row.insertCell(7);
-						cell7.className = 'td_support_mode';
+
+                        //Support Modes Column
+						var cell3 = row.insertCell(3);
+						cell3.className = 'td_support_mode';
 						var x = document.createElement("select");
 						x.name = "support_mode[]";
 						x.setAttribute('required', 'required');
@@ -1134,7 +1066,7 @@
 							remove_support_documents(this);
 						};
 						x.setAttribute('required', 'required');
-						cell7.appendChild(x);
+						cell3.appendChild(x);
 
 						var dct_uploads = document.createElement("i");
 						dct_uploads.className = 'badge badge-primary dct_uploads_count_label';
@@ -1144,8 +1076,86 @@
 							show_upload_area($(this).parent().find('.support_mode'));
 						};
 						dct_uploads.setAttribute('style','cursor:pointer;');
-						cell7.appendChild(dct_uploads);
+						cell3.appendChild(dct_uploads);
 
+						
+						//Quantity Column
+						var cell4 = row.insertCell(4);
+						var element4 = document.createElement("input");
+						element4.type = "number";
+						element4.step = "0.01"
+						element4.name = "qty[]";
+						element4.className = "qty accNos form-control";
+						element4.id = "qty" + rowCount;
+						element4.setAttribute('required', 'required');
+						element4.onkeyup = function() {
+							var x = this.value;
+							var y = document.getElementById('unit' + rowCount).value;
+							document.getElementById('cost' + rowCount).value = x * y;
+
+							var sum = 0;
+							$('.cost').each(function() {
+								sum += parseFloat(this.value);
+							});
+							document.getElementById('totals').value = accounting.formatMoney(sum, {
+								symbol: "<?php echo get_phrase('Kes.'); ?>",
+								format: "%v %s"
+							});
+
+						};
+						cell4.appendChild(element4);
+
+						
+						//Details Column
+						var cell5 = row.insertCell(5);
+						var element5 = document.createElement("input");
+						element5.type = "text";
+						element5.name = "desc[]";
+						element5.className = "desc accNos form-control";
+						element5.id = "desc" + rowCount;
+						element5.setAttribute('required', 'required');
+						cell5.appendChild(element5);
+
+						//Unit Cost Column
+						var cell6 = row.insertCell(6);
+						var element6 = document.createElement("input");
+						element6.type = "number";
+						element6.step = "0.01"
+						element6.name = "unit[]";
+						element6.className = "unit accNos form-control";
+						element6.id = "unit" + rowCount;
+						element6.onkeyup = function() {
+							var x = this.value;
+							var y = document.getElementById('qty' + rowCount).value;
+							document.getElementById('cost' + rowCount).value = x * y;
+
+							var sum = 0;
+							$('.cost').each(function() {
+								sum += parseFloat(this.value);
+							});
+							document.getElementById('totals').value = accounting.formatMoney(sum, {
+								symbol: "<?php echo get_phrase('Kes.'); ?>",
+								format: "%v %s"
+							});
+
+						};
+						element6.setAttribute('required', 'required');
+						cell6.appendChild(element6);
+
+						//Cost Column
+						var cell7 = row.insertCell(7);
+						var element7 = document.createElement("input");
+						element7.type = "number";
+						element7.step = "0.01"
+						element7.name = "cost[]";
+						element7.setAttribute('readonly', 'readonly');
+						element7.className = "cost accNos form-control";
+						element7.id = "cost" + rowCount;
+						element7.setAttribute('required', 'required');
+						cell7.appendChild(element7);
+
+						
+						
 						// var dct_ref_number = document.createElement("input");
 						// dct_ref_number.className = 'form-control dct_ref_number hidden';
 						// dct_ref_number.name = "dct_reference_number[]";
