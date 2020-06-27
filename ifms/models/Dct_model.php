@@ -73,7 +73,7 @@ class Dct_model extends CI_Model {
     function get_accounts_related_voucher_item_type(int $voucher_item_type_id=0){
 
         
-        return $this->db->select(array('accno','AccText','AccName'))->get_where('accounts', array('fk_voucher_item_type_id'=>$voucher_item_type_id))->result_array();
+        return $this->db->select(array('accno','acctext','accname'))->get_where('accounts', array('fk_voucher_item_type_id'=>$voucher_item_type_id))->result_array();
     }
   
   

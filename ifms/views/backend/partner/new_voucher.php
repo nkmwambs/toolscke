@@ -1209,7 +1209,7 @@
 			accounts_dropdown.removeAttr('disabled');
 
 			for (var index = 0; index < response_object.length; index++) {
-					options += "<option value='" + response_object[index].accno + "'>" + response_object[index].AccText +' - '+response_object[index].AccName+ "</option>";
+					options += "<option value='" + response_object[index].accno + "'>" + response_object[index].acctext +' - '+response_object[index].accname+ "</option>";
 				}
 
 				accounts_dropdown.html(options);
