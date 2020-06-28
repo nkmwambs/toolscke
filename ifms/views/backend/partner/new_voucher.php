@@ -42,10 +42,10 @@
 								<i class="entypo-plus-circled"></i>
 							</a>
 
-							<button type="submit" id="btnPostVch" class="btn btn-default btn-icon icon-left hidden-print pull-left">
+							<!-- <button type="submit" id="btnPostVch" class="btn btn-default btn-icon icon-left hidden-print pull-left">
 								<?php echo get_phrase('post'); ?>
 								<i class="entypo-thumbs-up"></i>
-							</button>
+							</button> -->
 
 
 							<div style="display: none" id='btnDelRow' class="btn btn-default btn-icon icon-left hidden-print pull-left">
@@ -53,10 +53,10 @@
 								<i class="entypo-minus-circled"></i>
 							</div>
 
-							<div id='addrow' class="btn btn-default btn-icon icon-left hidden-print pull-left">
-								<?php echo get_phrase('new_item_row'); ?>
+							<!-- <div id='addrow' class="btn btn-default btn-icon icon-left hidden-print pull-left">
+								<?php echo get_phrase('add_item_row'); ?>
 								<i class="entypo-plus-circled"></i>
-							</div>
+							</div> -->
 
 						</div>
 
@@ -218,6 +218,14 @@
 						<div class="col-sm-12">
 							<table id="bodyTable" class="table table-bordered">
 								<thead>
+									<tr>
+                                     <!-- Add row -->
+										<div id='addrow_div' class='hidden'>
+											<button id='addrow' class="btn btn-primary btn-icon icon-left hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></button>
+										</div>
+									</tr>
+									<hr>
+
 									<tr style="font-weight: bold;">
 										<th><?php echo get_phrase('delete_row'); ?></th>
 										<th><?php echo get_phrase('Recipient'); ?></th>
@@ -236,7 +244,10 @@
 								<tbody>
 
 								</tbody>
+
 							</table>
+
+
 						</div>
 					</div>
 
@@ -252,7 +263,14 @@
 										</div>
 									</td>
 								</tr>
+								<tr>
+
+								</tr>
 							</table>
+							<!-- Post Voucher Btn -->
+							<div>
+								<button type="submit" id="btnPostVch" class="btn btn-primary btn-icon icon-left hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
+							</div>
 						</div>
 					</div>
 					<INPUT type="hidden" id="hidden" value="" />
@@ -618,7 +636,7 @@
 			var val = $(this).val();
 			$(this).remove();
 			//Added by Onduso 27/06/2020- Start
-			//$('#bodyTable').removeClass('hidden');
+			$('#addrow_div').removeClass('hidden');
 
 			//Onduso 27/06/2020 -End
 
@@ -1188,42 +1206,40 @@
 
 
 	//added by Onduso on 6/27/2020-Start
-	
+
 
 	function populate_accounts(account_code_select) {
 		//Find the closest td with accounts dropdown
 		var accounts_dropdown = $(account_code_select).closest('tr').find('.td_accounts').find('select');
-		var voucher_item_type_value=$(account_code_select).val();
+		var voucher_item_type_value = $(account_code_select).val();
 
-        //Get the accounts form server
-		var url='<?=base_url()?>ifms.php/partner/get_accounts_for_voucher_item_type/'+voucher_item_type_value;
-        
+		//Get the accounts form server
+		var url = '<?= base_url() ?>ifms.php/partner/get_accounts_for_voucher_item_type/' + voucher_item_type_value;
+
 		$.get(url, function(response) {
 
-		  var response_object = JSON.parse(response);
+			var response_object = JSON.parse(response);
 
-		  var options = "<option value='0'><?= get_phrase('select_account'); ?></option>";
-         //Redraw the account dropdown with options
-		  if (response_object.length > 0) {
+			var options = "<option value='0'><?= get_phrase('select_account'); ?></option>";
+			//Redraw the account dropdown with options
+			if (response_object.length > 0) {
 
-			accounts_dropdown.removeAttr('disabled');
+				accounts_dropdown.removeAttr('disabled');
 
-			for (var index = 0; index < response_object.length; index++) {
-					options += "<option value='" + response_object[index].accno + "'>" + response_object[index].acctext +' - '+response_object[index].accname+ "</option>";
+				for (var index = 0; index < response_object.length; index++) {
+					options += "<option value='" + response_object[index].accno + "'>" + response_object[index].acctext + ' - ' + response_object[index].accname + "</option>";
 				}
 
 				accounts_dropdown.html(options);
 
-		  }
-
-		  else {
-			     accounts_dropdown.prop('disabled', 'disabled');
+			} else {
+				accounts_dropdown.prop('disabled', 'disabled');
 			}
 			accounts_dropdown.html(options);
 
 		});
 
-		
+
 	}
 
 	//END Onduso Added code
