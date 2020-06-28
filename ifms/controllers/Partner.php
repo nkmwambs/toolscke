@@ -1067,9 +1067,9 @@ class Partner extends CI_Controller
 	 * @author: Onduso
 	 * @date: 16/5/2020
 	 */
-	function is_reference_number_exist($ref_number_from_post, $voucher_number_from_post)
+	function is_reference_number_exist($voucher_number_from_post)
 	{
-
+        $ref_number_from_post='';
 		$bank_code = $this->get_bank_code();
 		$reference_number_in_db = trim($ref_number_from_post) . '-' . $bank_code;
 		$voucher_number_in_db = trim($voucher_number_from_post);
@@ -1334,6 +1334,8 @@ class Partner extends CI_Controller
 
 	function post_voucher($param1 = '')
 	{
+		//echo ('Test');
+		
 		if ($this->session->userdata('admin_login') != 1)
 			redirect(base_url(), 'refresh');
 		//Populate header elements //icpNo,TDate,Fy,VNumber,Payee,Address,VType,ChqNo,TDescription,totals,unixStmp
@@ -1372,7 +1374,7 @@ class Partner extends CI_Controller
 		//Onduso modification 14/5/2020 START
 
 		$support_mode_is_dct = $this->db->get_where('support_mode',
-		array('support_mode_id'=>$this->input->post('support_mode')))->row()->support_mode_is_dct;
+		array('support_mode_id'=>$this->input->post('support_mode')))->row();
 
 		if ($data['VType'] == 'CHQ') {
 
@@ -1406,12 +1408,15 @@ class Partner extends CI_Controller
 
 			//Populate body //hID,icpNo,VNumber,TDate,VType,ChqNo,unixStmp     Qty,Details,UnitCost,Cost,AccNo,civaCode //$data2[''][$i]=
 			$qty = $this->input->post('qty');
+			$support_mode_id=$this->input->post('support_mode')?$this->input->post('support_mode'):[];
+			$voucher_item_type = $this->input->post('voucher_item_type')?$this->input->post('voucher_item_type'):[];
+			
 			$details = $this->input->post('desc');
 			$unitcost = $this->input->post('unit');
 			$cost = $this->input->post('cost');
 			$acc = $this->input->post('acc');
 			$civ = $this->input->post('civaCode');
-			$voucher_item_type = $this->input->post('voucher_item_type')?$this->input->post('voucher_item_type'):[];
+			
 
 			for ($i = 0; $i < sizeof($this->input->post('qty')); $i++) {
 				$data2['hID'] = $hID;
@@ -1435,6 +1440,7 @@ class Partner extends CI_Controller
 				//Onduso code ended
 				$data2['unixStmp'] = time();
 				$data2['fk_voucher_item_type_id'] = isset($voucher_item_type[$i])?$voucher_item_type[$i]:0;
+                $data2['fk_support_mode_id']=isset($support_mode_id[$i])?$support_mode_id[$i]:0;
 				$data2['Qty'] = $qty[$i];
 				$data2['Details'] = $details[$i];
 				$data2['UnitCost'] = $unitcost[$i];
@@ -1468,6 +1474,8 @@ class Partner extends CI_Controller
 					$this->move_temp_files_to_dct_document($temp_dir_name, $voucher_date, $voucher_number);
 			} else {
 				//input error to log file
+
+				print_r(get_phrase('Failed to '));
 
 			}
 		}
