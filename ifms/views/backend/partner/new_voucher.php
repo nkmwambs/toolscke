@@ -491,8 +491,7 @@
 
 							}
 							$('#error_msg').html('');
-							alert('test 3');
-
+							
 							post_using_ajax();
 
 						}
