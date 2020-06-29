@@ -3,6 +3,7 @@
 //$result=$this->db->select(array('AccText','AccName'))->get_where('accounts', array('fk_voucher_item_type_id'=>1))->result_array();
 //print_r($this->dct_model->get_accounts_related_voucher_item_type(1));
 
+//print_r($icpNo);
 
 ?>
 <div id="load_voucher">
@@ -253,7 +254,7 @@
 									<tr>
 										<!-- Add row -->
 										<div id='addrow_div' class='hidden'>
-											<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
+											<a id='addrow_cr' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
 										</div>
 									</tr>
 									<hr>
@@ -402,7 +403,7 @@
 
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
 
-
+            //alert ('<?=	print_r($this->input->post('cost'));?>')
 			// added by onduso on 19/5/2020 start
 			/** check if the reference number exists*/
 			var voucher_number = $('#Generated_VNumber').val();
@@ -413,7 +414,7 @@
 				//alert("Here 1");
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
 				e.preventDefault();
-			} else if ($("#bodyTable > tbody").children().length === 0||$("#bodyTable_cr > tbody").children().length === 0) {
+			} else if ($("#bodyTable > tbody").children().length === 0 && $("#bodyTable_cr > tbody").children().length === 0) {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
 				e.preventDefault();
@@ -1020,6 +1021,26 @@
 
 	});
 
+	// function create_cell(table_id, cell_position_value, input_type,elem_name) {
+
+    //     table = document.getElementById(table_id).children[1];
+	// 	var rowCount = table.rows.length;
+	// 	var row = table.insertRow(rowCount);
+
+    //     var cell=[];
+	// 	var element=[];
+
+	// 	cell[cell_position_value] = row.insertCell(cell_position_value);
+	// 	element[cell_position_value] = document.createElement(input_type);
+	// 	element[cell_position_value].type = "number";
+	// 	element[cell_position_value].step = "0.01"
+	// 	element[cell_position_value].name = elem_name+"[]";
+	// 	element[cell_position_value].className = elem_name+" "+"accNos form-control";
+	// 	element[cell_position_value].id = elem_name+"_cr" + rowCount;
+	// 	element[cell_position_value].setAttribute('required', 'required');
+	// 	return  cell[cell_position_value].appendChild(element[cell_position_value]);		
+	// }
+
 	function create_voucher_row(response, vtype) {
 
 
@@ -1031,216 +1052,12 @@
 		//alert(obj_support_mode.length);
 		var show_voucher_item_type = voucher_type_effect == 'expense' && obj_support_mode.length > 0 ? true : false;
 
-		var table='';
-		if(vtype=='CR'){
-			table=document.getElementById('bodyTable_cr').children[1];
-		}
-		 table = document.getElementById('bodyTable').children[1];
-		var rowCount = table.rows.length;
-		var row = table.insertRow(rowCount);
-
-
-		//Delete row cell added by onduso on 5/22/2020
-
-		var cell0 = row.insertCell(0);
-		var element0 = document.createElement("a");
-		element0.type = "a";
-		if (rowCount != 0) { //only provide delete btn if only rows >1
-			element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
-		}
-		//element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
-		cell0.appendChild(element0);
-
-		//Quantity Column
-		var cell1 = row.insertCell(1);
-		var element1 = document.createElement("input");
-		element1.type = "number";
-		element1.step = "0.01"
-		element1.name = "qty[]";
-		element1.className = "qty accNos form-control";
-		element1.id = "qty" + rowCount;
-		element1.setAttribute('required', 'required');
-		element1.onkeyup = function() {
-			var x = this.value;
-			var y = document.getElementById('unit' + rowCount).value;
-			document.getElementById('cost' + rowCount).value = x * y;
-
-			var sum = 0;
-			$('.cost').each(function() {
-				sum += parseFloat(this.value);
-			});
-			document.getElementById('totals').value = accounting.formatMoney(sum, {
-				symbol: "<?php echo get_phrase('Kes.'); ?>",
-				format: "%v %s"
-			});
-
-		};
-		cell1.appendChild(element1);
-
-
-		// Voucher Item Type/Rcipient
-		var cell2 = row.insertCell(2);
-		cell2.className = 'td_voucher_item_type';
-		var x = document.createElement("select");
-		x.name = "voucher_item_type[]";
-		x.setAttribute('required', 'required');
-		show_voucher_item_type ? '' : x.setAttribute('disabled', 'disabled');
-		x.className = 'form-control voucher_item_type';
-		var option1 = document.createElement("option");
-		option1.text = "Select ...";
-		option1.value = "";
-		x.add(option1, x[0]);
-
-		for (i = 0; i < obj_voucher_item_type.length; i++) {
-			var option = document.createElement("option");
-
-			option.text = obj_voucher_item_type[i].voucher_item_type_name;
-			option.value = obj_voucher_item_type[i].voucher_item_type_id;
-			x.add(option, x[i]);
-
-		}
-		x.onchange = function() {
-
-			populate_accounts(this);
-
-		};
-
-		cell2.appendChild(x);
-
-
-
-		//Accounts Column
-		var cell3 = row.insertCell(3);
-		cell3.className = 'td_accounts';
-		var x = document.createElement("select");
-		x.name = "acc[]";
-		x.setAttribute('required', 'required');
-		x.setAttribute('disabled', 'disabled')
-		x.className = 'form-control accNos acSelect';
-		var option1 = document.createElement("option");
-		option1.text = "Select ...";
-		option1.value = "";
-		x.add(option1, x[0]);
-
-		for (i = 0; i < obj.length; i++) {
-			var option = document.createElement("option");
-			if (obj[i].AccTextCIVA !== null && obj[i].open === "1") {
-				option.text = obj[i].AccNoCIVA;
-				option.value = obj[i].AccNo;
-			} else {
-				option.text = obj[i].AccText + ' - ' + obj[i].AccName;
-				option.value = obj[i].AccNo;
-			}
-
-			x.add(option, x[i]);
-
-		}
-		x.onchange = function() {
-			//alert("Hello!");  
-			document.getElementById("civaCode" + rowCount).value = obj[this.selectedIndex].civaID;
-			//check_pc_other_ac_mix(this);
-			build_support_mode_list(this);
-		};
-		x.setAttribute('required', 'required');
-		cell3.appendChild(x);
-
-
-		//Support Modes Column
-		var cell4 = row.insertCell(4);
-		cell4.className = 'td_support_mode';
-		var x = document.createElement("select");
-		x.name = "support_mode[]";
-		x.setAttribute('required', 'required');
-		x.setAttribute('disabled', 'disabled');
-		x.className = 'form-control accNos support_mode';
-		var option1 = document.createElement("option");
-		option1.text = "Select ...";
-		option1.value = "";
-		x.add(option1, x[0]);
-		x.onchange = function() {
-			enable_disabled_voucher_item_type(this);
-
-			remove_support_documents(this);
-		};
-		x.setAttribute('required', 'required');
-		cell4.appendChild(x);
-
-		var dct_uploads = document.createElement("i");
-		dct_uploads.className = 'badge badge-primary dct_uploads_count_label';
-		dct_uploads.innerHTML = 0 + " files";
-		dct_uploads.onclick = function() {
-			//show_upload_area($(this).parent().find('.support_mode'),$(this).parent().find('.dct_ref_number').val());
-			show_upload_area($(this).parent().find('.support_mode'));
-		};
-		dct_uploads.setAttribute('style', 'cursor:pointer;');
-		cell4.appendChild(dct_uploads);
-
-
-
-
-		//Details Column
-		var cell5 = row.insertCell(5);
-		var element5 = document.createElement("input");
-		element5.type = "text";
-		element5.name = "desc[]";
-		element5.className = "desc accNos form-control";
-		element5.id = "desc" + rowCount;
-		element5.setAttribute('required', 'required');
-		cell5.appendChild(element5);
-
-		//Unit Cost Column
-		var cell6 = row.insertCell(6);
-		var element6 = document.createElement("input");
-		element6.type = "number";
-		element6.step = "0.01"
-		element6.name = "unit[]";
-		element6.className = "unit accNos form-control";
-		element6.id = "unit" + rowCount;
-		element6.onkeyup = function() {
-			var x = this.value;
-			var y = document.getElementById('qty' + rowCount).value;
-			document.getElementById('cost' + rowCount).value = x * y;
-
-			var sum = 0;
-			$('.cost').each(function() {
-				sum += parseFloat(this.value);
-			});
-			document.getElementById('totals').value = accounting.formatMoney(sum, {
-				symbol: "<?php echo get_phrase('Kes.'); ?>",
-				format: "%v %s"
-			});
-
-		};
-		element6.setAttribute('required', 'required');
-		cell6.appendChild(element6);
-
-		//Cost Column
-		var cell7 = row.insertCell(7);
-		var element7 = document.createElement("input");
-		element7.type = "number";
-		element7.step = "0.01"
-		element7.name = "cost[]";
-		element7.setAttribute('readonly', 'readonly');
-		element7.className = "cost accNos form-control";
-		element7.id = "cost" + rowCount;
-		element7.setAttribute('required', 'required');
-		cell7.appendChild(element7);
-
-
-		//CIV Code Column
-		var cell8 = row.insertCell(8);
-		var element8 = document.createElement("input");
-		element8.type = "text";
-		element8.name = "civaCode[]";
-		element8.setAttribute('readonly', 'readonly');
-		element8.className = "civaCode form-control";
-		element8.id = "civaCode" + rowCount;
-		cell8.appendChild(element8);
-
-
-		//When Vtype=CR added by onduso
-
+		var table = '';
+		//Modified by Onduso on 29/6/2020
 		if (vtype == 'CR') {
+			table = document.getElementById('bodyTable_cr').children[1];
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
 
 			var cell0 = row.insertCell(0);
 			var element0 = document.createElement("a");
@@ -1250,7 +1067,6 @@
 			}
 			//element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 			cell0.appendChild(element0);
-
 			//Quantity Column
 			var cell1 = row.insertCell(1);
 			var element1 = document.createElement("input");
@@ -1277,45 +1093,13 @@
 			};
 			cell1.appendChild(element1);
 
-
-			// Voucher Item Type/Rcipient
-			/*var cell2 = row.insertCell(2);
-			cell2.className = 'td_voucher_item_type';
-			var x = document.createElement("select");
-			x.name = "voucher_item_type[]";
-			x.setAttribute('required', 'required');
-			show_voucher_item_type ? '' : x.setAttribute('disabled', 'disabled');
-			x.className = 'form-control voucher_item_type';
-			var option1 = document.createElement("option");
-			option1.text = "Select ...";
-			option1.value = "";
-			x.add(option1, x[0]);
-
-			for (i = 0; i < obj_voucher_item_type.length; i++) {
-				var option = document.createElement("option");
-
-				option.text = obj_voucher_item_type[i].voucher_item_type_name;
-				option.value = obj_voucher_item_type[i].voucher_item_type_id;
-				x.add(option, x[i]);
-
-			}
-			x.onchange = function() {
-
-				populate_accounts(this);
-
-			};
-
-			cell2.appendChild(x);*/
-
-
-
 			//Accounts Column
 			var cell2 = row.insertCell(2);
 			cell2.className = 'td_accounts';
 			var x = document.createElement("select");
 			x.name = "acc[]";
 			x.setAttribute('required', 'required');
-			x.setAttribute('disabled', 'disabled')
+			//x.setAttribute('disabled', 'disabled')
 			x.className = 'form-control accNos acSelect';
 			var option1 = document.createElement("option");
 			option1.text = "Select ...";
@@ -1345,39 +1129,6 @@
 			cell2.appendChild(x);
 
 
-			//Support Modes Column
-			/*var cell4 = row.insertCell(4);
-			cell4.className = 'td_support_mode';
-			var x = document.createElement("select");
-			x.name = "support_mode[]";
-			x.setAttribute('required', 'required');
-			x.setAttribute('disabled', 'disabled');
-			x.className = 'form-control accNos support_mode';
-			var option1 = document.createElement("option");
-			option1.text = "Select ...";
-			option1.value = "";
-			x.add(option1, x[0]);
-			x.onchange = function() {
-				enable_disabled_voucher_item_type(this);
-
-				remove_support_documents(this);
-			};
-			x.setAttribute('required', 'required');
-			cell4.appendChild(x);
-
-			var dct_uploads = document.createElement("i");
-			dct_uploads.className = 'badge badge-primary dct_uploads_count_label';
-			dct_uploads.innerHTML = 0 + " files";
-			dct_uploads.onclick = function() {
-				//show_upload_area($(this).parent().find('.support_mode'),$(this).parent().find('.dct_ref_number').val());
-				show_upload_area($(this).parent().find('.support_mode'));
-			};
-			dct_uploads.setAttribute('style', 'cursor:pointer;');
-			cell4.appendChild(dct_uploads);*/
-
-
-
-
 			//Details Column
 			var cell3 = row.insertCell(3);
 			var element3 = document.createElement("input");
@@ -1399,7 +1150,7 @@
 			element4.onkeyup = function() {
 				var x = this.value;
 				var y = document.getElementById('qty_cr' + rowCount).value;
-				document.getElementById('cost' + rowCount).value = x * y;
+				document.getElementById('cost_cr' + rowCount).value = x * y;
 
 				var sum = 0;
 				$('.cost').each(function() {
@@ -1414,7 +1165,9 @@
 			element4.setAttribute('required', 'required');
 			cell4.appendChild(element4);
 
-			//Cost Column
+
+
+			// //Cost Column
 			var cell5 = row.insertCell(5);
 			var element5 = document.createElement("input");
 			element5.type = "number";
@@ -1422,10 +1175,11 @@
 			element5.name = "cost[]";
 			element5.setAttribute('readonly', 'readonly');
 			element5.className = "cost accNos form-control";
-			element5.id = "cost" + rowCount;
+			element5.id = "cost_cr" + rowCount;
 			element5.setAttribute('required', 'required');
 			cell5.appendChild(element5);
 
+			//create_cell('#bodyTable_cr',5,'input','cost');
 
 			//CIV Code Column
 			var cell6 = row.insertCell(6);
@@ -1434,11 +1188,218 @@
 			element6.name = "civaCode[]";
 			element6.setAttribute('readonly', 'readonly');
 			element6.className = "civaCode form-control";
-			element6.id = "civaCode" + rowCount;
+			element6.id = "civaCode_cr" + rowCount;
 			cell6.appendChild(element6);
+
+		} else {
+
+			table = document.getElementById('bodyTable').children[1];
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
+
+
+			//Delete row cell added by onduso on 5/22/2020
+
+			var cell0 = row.insertCell(0);
+			var element0 = document.createElement("a");
+			element0.type = "a";
+			if (rowCount != 0) { //only provide delete btn if only rows >1
+				element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
+			}
+			//element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
+			cell0.appendChild(element0);
+
+			//Quantity Column
+			var cell1 = row.insertCell(1);
+			var element1 = document.createElement("input");
+			element1.type = "number";
+			element1.step = "0.01"
+			element1.name = "qty[]";
+			element1.className = "qty accNos form-control";
+			element1.id = "qty" + rowCount;
+			element1.setAttribute('required', 'required');
+			element1.onkeyup = function() {
+				var x = this.value;
+				var y = document.getElementById('unit' + rowCount).value;
+				document.getElementById('cost' + rowCount).value = x * y;
+
+				var sum = 0;
+				$('.cost').each(function() {
+					sum += parseFloat(this.value);
+				});
+				document.getElementById('totals').value = accounting.formatMoney(sum, {
+					symbol: "<?php echo get_phrase('Kes.'); ?>",
+					format: "%v %s"
+				});
+
+			};
+			cell1.appendChild(element1);
+
+
+			// Voucher Item Type/Rcipient
+			var cell2 = row.insertCell(2);
+			cell2.className = 'td_voucher_item_type';
+			var x = document.createElement("select");
+			x.name = "voucher_item_type[]";
+			x.setAttribute('required', 'required');
+			show_voucher_item_type ? '' : x.setAttribute('disabled', 'disabled');
+			x.className = 'form-control voucher_item_type';
+			var option1 = document.createElement("option");
+			option1.text = "Select ...";
+			option1.value = "";
+			x.add(option1, x[0]);
+
+			for (i = 0; i < obj_voucher_item_type.length; i++) {
+				var option = document.createElement("option");
+
+				option.text = obj_voucher_item_type[i].voucher_item_type_name;
+				option.value = obj_voucher_item_type[i].voucher_item_type_id;
+				x.add(option, x[i]);
+
+			}
+			x.onchange = function() {
+
+				populate_accounts(this);
+
+			};
+
+			cell2.appendChild(x);
+
+
+
+			//Accounts Column
+			var cell3 = row.insertCell(3);
+			cell3.className = 'td_accounts';
+			var x = document.createElement("select");
+			x.name = "acc[]";
+			x.setAttribute('required', 'required');
+			x.setAttribute('disabled', 'disabled')
+			x.className = 'form-control accNos acSelect';
+			var option1 = document.createElement("option");
+			option1.text = "Select ...";
+			option1.value = "";
+			x.add(option1, x[0]);
+
+			for (i = 0; i < obj.length; i++) {
+				var option = document.createElement("option");
+				if (obj[i].AccTextCIVA !== null && obj[i].open === "1") {
+					option.text = obj[i].AccNoCIVA;
+					option.value = obj[i].AccNo;
+				} else {
+					option.text = obj[i].AccText + ' - ' + obj[i].AccName;
+					option.value = obj[i].AccNo;
+				}
+
+				x.add(option, x[i]);
+
+			}
+			x.onchange = function() {
+				//alert("Hello!");  
+				document.getElementById("civaCode" + rowCount).value = obj[this.selectedIndex].civaID;
+				//check_pc_other_ac_mix(this);
+				build_support_mode_list(this);
+			};
+			x.setAttribute('required', 'required');
+			cell3.appendChild(x);
+
+
+			//Support Modes Column
+			var cell4 = row.insertCell(4);
+			cell4.className = 'td_support_mode';
+			var x = document.createElement("select");
+			x.name = "support_mode[]";
+			x.setAttribute('required', 'required');
+			x.setAttribute('disabled', 'disabled');
+			x.className = 'form-control accNos support_mode';
+			var option1 = document.createElement("option");
+			option1.text = "Select ...";
+			option1.value = "";
+			x.add(option1, x[0]);
+			x.onchange = function() {
+				//enable_disabled_voucher_item_type(this);
+
+				remove_support_documents(this);
+			};
+			x.setAttribute('required', 'required');
+			cell4.appendChild(x);
+
+			var dct_uploads = document.createElement("i");
+			dct_uploads.className = 'badge badge-primary dct_uploads_count_label';
+			dct_uploads.innerHTML = 0 + " files";
+			dct_uploads.onclick = function() {
+				//show_upload_area($(this).parent().find('.support_mode'),$(this).parent().find('.dct_ref_number').val());
+				show_upload_area($(this).parent().find('.support_mode'));
+			};
+			dct_uploads.setAttribute('style', 'cursor:pointer;');
+			cell4.appendChild(dct_uploads);
+
+
+
+
+			//Details Column
+			var cell5 = row.insertCell(5);
+			var element5 = document.createElement("input");
+			element5.type = "text";
+			element5.name = "desc[]";
+			element5.className = "desc accNos form-control";
+			element5.id = "desc" + rowCount;
+			element5.setAttribute('required', 'required');
+			cell5.appendChild(element5);
+
+			//Unit Cost Column
+			var cell6 = row.insertCell(6);
+			var element6 = document.createElement("input");
+			element6.type = "number";
+			element6.step = "0.01"
+			element6.name = "unit[]";
+			element6.className = "unit accNos form-control";
+			element6.id = "unit" + rowCount;
+			element6.onkeyup = function() {
+				var x = this.value;
+				var y = document.getElementById('qty' + rowCount).value;
+				document.getElementById('cost' + rowCount).value = x * y;
+
+				var sum = 0;
+				$('.cost').each(function() {
+					sum += parseFloat(this.value);
+				});
+				document.getElementById('totals').value = accounting.formatMoney(sum, {
+					symbol: "<?php echo get_phrase('Kes.'); ?>",
+					format: "%v %s"
+				});
+
+			};
+			element6.setAttribute('required', 'required');
+			cell6.appendChild(element6);
+
+			//Cost Column
+			var cell7 = row.insertCell(7);
+			var element7 = document.createElement("input");
+			element7.type = "number";
+			element7.step = "0.01"
+			element7.name = "cost[]";
+			element7.setAttribute('readonly', 'readonly');
+			element7.className = "cost accNos form-control";
+			element7.id = "cost" + rowCount;
+			element7.setAttribute('required', 'required');
+			cell7.appendChild(element7);
+
+
+			//CIV Code Column
+			var cell8 = row.insertCell(8);
+			var element8 = document.createElement("input");
+			element8.type = "text";
+			element8.name = "civaCode[]";
+			element8.setAttribute('readonly', 'readonly');
+			element8.className = "civaCode form-control";
+			element8.id = "civaCode" + rowCount;
+			cell8.appendChild(element8);
 
 		}
 
+
+
+		//When Vtype=CR added by onduso
 
 
 
@@ -1565,17 +1526,18 @@
 
 	$(document).on('click', "#btn_save_uploads", function() {
 		var temp_session = '<?= $this->session->upload_session ? $this->session->upload_session : 0; ?>';
-		var voucher_detail_row_index = $(this).data('row_id');
+		var voucher_detail_row_index = parseInt($(this).data('row_id')+1);
 
 		var dct_uploads_count_label = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('i.dct_uploads_count_label');
 		//var dct_ref_number = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('input.dct_ref_number');
 
+        //alert($("#bodyTable tr").eq(voucher_detail_row_index).html());
 		if (temp_session !== 0) {
 
 			var url = "<?= base_url(); ?>ifms.php?/partner/count_files_in_temp_dir/" + voucher_detail_row_index;
 
 			$.get(url, function(response) {
-				alert(voucher_detail_row_index);
+				//alert(response);
 				dct_uploads_count_label.html(response + " files [Click here to Update]");
 
 

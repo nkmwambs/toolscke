@@ -1211,6 +1211,8 @@ class Partner extends CI_Controller
 		$filecount = 0;
 
 		if ($this->session->upload_session) {
+			
+			$voucher_detail_row_index--;
 			$session_name = "detail_upload_session_".$voucher_detail_row_index;
 			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session . DS . $this->session->$session_name;
 			$files2 = glob($storeFolder . "/*.*");
@@ -1223,6 +1225,7 @@ class Partner extends CI_Controller
 
 		echo $filecount; 
 		//echo $this->session->$session_name;
+		//echo $voucher_detail_row_index;
 	}
 
 	function get_uploaded_support_mode_files($voucher_detail_row_index){
@@ -1334,8 +1337,6 @@ class Partner extends CI_Controller
 
 	function post_voucher($param1 = '')
 	{
-		//echo ('Test');
-		
 		if ($this->session->userdata('admin_login') != 1)
 			redirect(base_url(), 'refresh');
 		//Populate header elements //icpNo,TDate,Fy,VNumber,Payee,Address,VType,ChqNo,TDescription,totals,unixStmp
@@ -1349,7 +1350,7 @@ class Partner extends CI_Controller
 		$data['Payee'] = $this->input->post('Payee');
 		$data['Address'] = $this->input->post('Address');
 		$data['VType'] = $this->input->post('VTypeMain');
-		$data['fk_support_mode_id'] = $this->input->post('support_mode')?$this->input->post('support_mode'):0;
+		//$data['fk_support_mode_id'] = $this->input->post('support_mode')?$this->input->post('support_mode'):0;
 		//$data['raiser_id'] = $this->session->login_user_id;
 
 		//Check if Bank Details exists
@@ -1373,16 +1374,17 @@ class Partner extends CI_Controller
 
 		//Onduso modification 14/5/2020 START
 
-		$support_mode_is_dct = $this->db->get_where('support_mode',
-		array('support_mode_id'=>$this->input->post('support_mode')))->row();
+		//$support_mode_is_dct = $this->db->get_where('support_mode',
+		//array('support_mode_id'=>$this->input->post('support_mode')))->row();
 
 		if ($data['VType'] == 'CHQ') {
 
 			$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
-		} else if ($support_mode_is_dct) {
+		} 
+		// else if ($support_mode_is_dct) {
 
-			$data['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
-		}
+		// 	$data['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
+		// }
 		// else {
 		// 	$data['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
 		// }
@@ -1390,6 +1392,7 @@ class Partner extends CI_Controller
 		//Onduso modification 14/5/2020 START
 
 		//$data['ChqNo'] = $this->input->post('ChqNo')."-".$bank_code;
+	
 		$data['TDescription'] = $this->input->post('TDescription');
 		$data['totals'] = array_sum($this->input->post('cost'));
 		$data['unixStmp'] = time();
@@ -1427,17 +1430,6 @@ class Partner extends CI_Controller
 				
 				//$data2['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
 
-				//Added by Onduso 23/5/2020
-
-				if ($data2['VType'] == 'CHQ') {
-
-					$data2['ChqNo'] = $this->input->post('ChqNo') . "-" . $bank_code;
-				} else if ($support_mode_is_dct) {
-		
-					$data2['ChqNo'] = $this->input->post('DCTReference') . "-" . $bank_code;
-				} 
-
-				//Onduso code ended
 				$data2['unixStmp'] = time();
 				$data2['fk_voucher_item_type_id'] = isset($voucher_item_type[$i])?$voucher_item_type[$i]:0;
                 $data2['fk_support_mode_id']=isset($support_mode_id[$i])?$support_mode_id[$i]:0;
