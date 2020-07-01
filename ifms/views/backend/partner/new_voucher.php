@@ -375,7 +375,7 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 				
 			if(cnfrm){
 				
-				var url = "http://localhost/toolkit/";
+				var url = "http://localhost/toolkit/admin.php/login/reroute/<?=$this->session->session_id;?>";
 				window.open(url,'__blank');
 
 			}else{
@@ -492,6 +492,19 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 	$('#addrow,#addrow_footer').click(function(){
 			
 			var vtype = $('#VTypeMain').val();
+
+			if(vtype == 'DCTC' || vtype == 'DCTB'){
+				var cnfrm = confirm("You can't record Direct Cash Transfer voucher in this voucher form. Do you want to be redirected to the correct voucher form?");
+
+				if(confirm){
+					var url = "http://localhost/toolkit/admin.php/login/reroute/<?=$this->session->session_id;?>";
+					window.open(url,'__blank');
+				}
+				
+				return false;	
+				
+			}	
+
 			var reverse = $('#reversal').prop('checked');
 				if(vtype==='#'){
 					$('#error_msg').html('<?php echo get_phrase('voucher_type_empty');?>');
