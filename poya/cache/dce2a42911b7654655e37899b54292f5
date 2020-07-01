@@ -1,0 +1,4763 @@
+a:2:{s:6:"expire";i:1561982023;s:7:"headers";a:0:{}}ENDCI---><!DOCTYPE html>
+<html lang="en" dir="">
+<head>
+	
+	<title>Finance Dashboard | Toolkit</title>
+    
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Techsys Inc Softwares" />
+	<meta name="author" content="Techsys Inc Softwares" />
+	
+	
+
+	<!--<link rel="stylesheet" href="http://localhost/tools/assets/css/bootstrap.css">
+<script src="http://localhost/tools/assets/js/jquery-1.11.0.min.js"></script>-->
+
+		<!-- Bootstrap CDN -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		
+		<!--Datatables CSS CDNs-->
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+		<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" /> -->
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css"/>
+
+		<!--Jquery CDN Minified -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+		<!--Datatables JS CDNs-->		
+		<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+		
+		<!--Bootstrap JS CDNs-->
+		<script src="http://localhost/tools/assets/js/bootstrap.js"></script>
+		
+		<!--Datatables Buttons JS CDNs-->
+		<script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+		<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+
+
+
+<link rel="stylesheet" href="http://localhost/tools/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/font-icons/entypo/css/entypo.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/neon-core.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/neon-theme.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/neon-forms.css">
+
+<link rel="stylesheet" href="http://localhost/tools/assets/css/custom.css">
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+
+<script src="http://localhost/tools/assets/js/accounting.min.js"></script>
+
+<link rel="stylesheet" href="http://localhost/tools/assets/css/columns.css">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
+
+
+    <link rel="stylesheet" href="http://localhost/tools/assets/css/skins/blue.css">
+
+
+
+        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="http://localhost/tools/assets/images/favicon.png">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/font-icons/font-awesome/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="http://localhost/tools/assets/js/vertical-timeline/css/component.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/js/datatables/responsive/css/datatables.responsive.css">
+
+<!--Morris Charts-->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<!--Amcharts-->
+<script src="http://localhost/tools/assets/js/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/pie.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/serial.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/gauge.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/funnel.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/radar.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/amexport.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/rgbcolor.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/canvg.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/jspdf.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/filesaver.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/jspdf.plugin.addimage.js" type="text/javascript"></script>
+
+<style>
+  .datepicker{z-index:1151 !important;}
+</style>
+
+<script>
+    function checkDelete()
+    {
+        var chk=confirm("Are You Sure To Delete This !");
+        if(chk)
+        {
+          return true;  
+        }
+        else{
+            return false;
+        }
+    }
+ 
+
+</script>	
+</head>
+<body class="page-body skin-blue" >
+	<div class="page-container sidebar-collapsed " >
+		    
+<div class="sidebar-menu">
+    <header class="logo-env" >
+
+        <!-- logo -->
+        <div class="logo" style="">
+            <a href="http://localhost/tools/">
+                <img src="http://localhost/tools/uploads/logo.png"  class="" width="200"/>
+            </a>
+        </div>
+
+        <!-- logo collapse icon -->
+        <div class="sidebar-collapse" style="">
+            <a href="#" class="sidebar-collapse-icon with-animation">
+
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+
+        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+        <div class="sidebar-mobile-menu visible-xs">
+            <a href="#" class="with-animation">
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+    </header>
+
+    <div style="border-top:1px solid rgba(69, 74, 84, 0.7);"></div>	
+    <ul id="main-menu" class="">
+        <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+        <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+
+
+        <!-- DASHBOARD -->
+        <li class="active ">
+            <a href="http://localhost/tools/ifms.php/accountant/dashboard">
+                <i class="entypo-gauge"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        
+        <!-- Switch Board 
+        <li class=" ">
+            <a href="http://localhost/tools/ifms.php/partner/switchboard">
+                <i class="entypo-retweet"></i>
+                <span>Switchboard</span>
+            </a>
+        </li>-->
+        
+        
+        <!-- CHART OF ACCOUNTS 
+        <li class="active ">
+            <a href="http://localhost/tools/ifms.php/partner/finance_settings">
+                <i class="entypo-gauge"></i>
+                <span>Accounts Chart</span>
+            </a>
+        </li>
+        -->
+			
+        
+
+
+    </ul>
+
+</div>
+	
+		<div class="main-content">
+		
+			<div class="row">
+	<div class="col-md-12 col-sm-12 clearfix" style="text-align:center;">
+
+			<h2 style="font-weight:200; margin:0px;">Toolkit</h2>
+    	
+    </div>
+	<!-- Raw Links -->
+	<div class="col-md-12 col-sm-12 clearfix ">
+		
+        <ul class="list-inline links-list pull-left">
+        <!-- Language Selector -->			
+           <li class="dropdown language-selector">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        	<i class="entypo-user"></i> Accountant                    </a>
+
+			</li>
+        </ul>
+        
+        
+		<ul class="list-inline links-list pull-right">
+			
+			<!-- Language Selector 			
+           <li class="dropdown language-selector">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        <i class="entypo-globe"></i> language
+                    </a>
+				
+				<ul class="dropdown-menu pull-left">
+					                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/english">
+                                            <img src="assets/images/flag/english.png" style="width:16px; height:16px;" />	
+												 <span>english</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/swahili">
+                                            <img src="assets/images/flag/swahili.png" style="width:16px; height:16px;" />	
+												 <span>swahili</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/spanish">
+                                            <img src="assets/images/flag/spanish.png" style="width:16px; height:16px;" />	
+												 <span>spanish</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/hindi">
+                                            <img src="assets/images/flag/hindi.png" style="width:16px; height:16px;" />	
+												 <span>hindi</span>
+                                        </a>
+                                    </li>
+                                                    
+				</ul>
+				
+			</li>
+			-->
+			<!--<li class="sep"></li>-->
+			
+			<li>
+				<a href="http://localhost/tools/admin.php">
+					Close App <i class="entypo-logout right"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+</div>
+
+<hr style="margin-top:0px;" />
+           <h3 style="">
+           	<i class="entypo-right-circled"></i> 
+				Finance Dashboard           </h3>
+
+			<div class='row'>
+	<div class='col-xs-12'>
+		<form class='form-horizontal form-groups-bordered validate'>
+
+			<div class="form-group">
+				<label class="control-label col-xs-3">Parameter</label>
+				<div class='col-xs-9' id=''>
+					<select class="form-control select2" multiple="multiple">
+						<option>Select parameter</option>
+						<option>Budget Variance</option>
+						<option>Count of petty cash transactions</option>
+						<option>Percent petty cash transaction</option>
+						<option>Bank statement available</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-xs-3">FCP</label>
+				<div class="col-xs-9">
+					<select class="form-control select2" multiple="multiple">
+						<option>Select FCP</option>
+						<option>KE0200</option>
+						<option>KE0415</option>
+						<option>KE0719</option>
+						<option>KE0910</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-3">Risk Levels</label>
+				<div class="col-xs-9">
+					<select class="form-control select2" multiple="multiple">
+						<option>Select Risk Level</option>
+						<option>Low</option>
+						<option>Medium</option>
+						<option>High</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+
+				<div class="col-xs-offset-6 col-xs-6">
+					<button class="btn btn-primary">
+						Filter
+					</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</div>
+<hr/>
+
+<div class="row">
+	
+		<div class="col-xs-4">
+		
+			<a href="#" id='btn_last_month' type='submit' class='btn btn-success pull-left'><i class='fa fa-angle-left'></i> Previous Month</a>
+			
+		</div>
+		
+	   <div class="col-xs-4" style="text-align: center;">
+			<span><h4>March 2018</h4> </span>
+			
+	   </div>
+	   	<div class="col-xs-4">
+			
+			<a id='btn_next_month' type='submit' href="#" class='btn btn-success pull-right'>Next Month <i class='fa fa-angle-right'></i></a>
+			
+		</div>
+	
+	
+</div>
+<hr />
+<div class='row'>
+	<div class='col-xs-12'>
+		
+		<table  class='table table-striped table-responsive datatable'>
+			<thead>
+				
+				<tr>
+					<th rowspan="2">FCP ID</th>
+					<th rowspan="2">Risk</th>
+										<th colspan="7">Non Requested Parameters</th>
+														</tr>
+				<tr>
+				
+								     
+				     <th>MFR Submitted</th>
+				 				     
+				     <th>Book Bank Balance</th>
+				 				     
+				     <th>Bank Statement uploaded</th>
+				 				     
+				     <th>Statement Bank Balance</th>
+				 				     
+				     <th>Outstanding Cheques</th>
+				 				     
+				     <th>Deposit in transit</th>
+				 				     
+				     <th>Date MFR Submitted</th>
+				 				<!--Requested Parameters-->
+				
+								
+				</tr>
+			</thead>
+			
+			<tbody>
+								   <tr>
+				   	 <td>KE200</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>85,309.36</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>346,756.36</td>
+				   	  				   	   <td>261,447.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:34:03</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE201</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE202</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>478,935.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>526,935.65</td>
+				   	  				   	   <td>48,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:35:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE203</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE204</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>491,032.75</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>501,522.75</td>
+				   	  				   	   <td>10,490.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:40:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE205</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE206</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>183,086.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>421,306.90</td>
+				   	  				   	   <td>238,220.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:47:51</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE207</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE208</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE209</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>-266,097.39</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>-222,338.39</td>
+				   	  				   	   <td>43,759.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:48:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE210</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE211</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>373,128.78</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>843,727.78</td>
+				   	  				   	   <td>470,599.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:48:19</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE212</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>174,309.45</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>534,506.45</td>
+				   	  				   	   <td>360,197.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 09:39:16</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE213</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE214</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>634,424.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>389,439.90</td>
+				   	  				   	   <td>785,936.00</td>
+				   	  				   	   <td>1,030,920.50</td>
+				   	  				   	   <td>2018-04-10 04:48:40</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE215</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>429,552.62</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>517,621.67</td>
+				   	  				   	   <td>66,062.00</td>
+				   	  				   	   <td>-22,007.05</td>
+				   	  				   	   <td>2018-04-09 14:09:24</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE216</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>447,012.08</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>706,493.08</td>
+				   	  				   	   <td>259,481.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 06:26:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE217</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,993,563.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,066,346.15</td>
+				   	  				   	   <td>72,783.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:48:53</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE221</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,198,389.66</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,415,482.55</td>
+				   	  				   	   <td>217,092.94</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 19:50:58</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE222</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,587,248.39</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,722,418.39</td>
+				   	  				   	   <td>135,170.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:50:04</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE223</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>416,236.60</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>576,352.60</td>
+				   	  				   	   <td>160,116.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 04:37:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE224</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>202,316.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>229,675.80</td>
+				   	  				   	   <td>66,459.00</td>
+				   	  				   	   <td>39,100.00</td>
+				   	  				   	   <td>2018-04-12 11:35:40</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE225</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>771,744.99</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,304,730.99</td>
+				   	  				   	   <td>532,986.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 11:52:51</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE226</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>236,845.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>574,030.80</td>
+				   	  				   	   <td>337,185.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 18:02:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE227</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>631,221.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE228</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,117,327.44</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,281,029.44</td>
+				   	  				   	   <td>163,702.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 03:32:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE229</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>357,018.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>467,114.50</td>
+				   	  				   	   <td>110,096.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 11:27:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE230</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>814,935.62</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,067,296.55</td>
+				   	  				   	   <td>252,361.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 11:15:37</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE231</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,201,768.97</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,329,710.97</td>
+				   	  				   	   <td>127,942.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 18:21:24</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE232</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,708,390.01</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,506,544.94</td>
+				   	  				   	   <td>798,155.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:46:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE301</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>776,444.49</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,569,890.81</td>
+				   	  				   	   <td>800,486.32</td>
+				   	  				   	   <td>7,040.00</td>
+				   	  				   	   <td>2018-04-05 06:09:59</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE304</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>402,092.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>578,872.85</td>
+				   	  				   	   <td>176,780.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 08:32:23</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE307</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>226,528.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>407,177.65</td>
+				   	  				   	   <td>180,649.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 19:58:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE313</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>384,038.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>738,889.95</td>
+				   	  				   	   <td>354,851.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:09:33</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE314</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>436,164.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>988,198.15</td>
+				   	  				   	   <td>552,034.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 04:39:13</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE315</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,648,826.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,724,326.50</td>
+				   	  				   	   <td>75,500.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 08:36:54</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE316</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,861,507.25</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,931,457.25</td>
+				   	  				   	   <td>69,950.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:03:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE320</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>599,587.49</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,120,290.35</td>
+				   	  				   	   <td>520,703.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:50:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE322</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>507,515.63</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,020,612.63</td>
+				   	  				   	   <td>513,097.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:52:42</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE323</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>330,039.69</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>611,757.56</td>
+				   	  				   	   <td>281,718.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 13:22:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE324</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>667,352.91</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,098,489.85</td>
+				   	  				   	   <td>431,137.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:17:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE325</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,470,042.70</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,581,784.70</td>
+				   	  				   	   <td>179,739.00</td>
+				   	  				   	   <td>67,997.00</td>
+				   	  				   	   <td>2018-04-05 19:53:30</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE326</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>52,797.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>338,503.65</td>
+				   	  				   	   <td>285,706.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 12:46:31</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE328</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,144,485.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,593,124.00</td>
+				   	  				   	   <td>448,639.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 14:22:42</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE329</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>991,455.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,093,991.35</td>
+				   	  				   	   <td>102,536.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 14:19:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE330</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>985,682.67</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,192,142.67</td>
+				   	  				   	   <td>206,460.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-24 06:08:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE331</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,563,337.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,925,568.85</td>
+				   	  				   	   <td>362,231.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 14:16:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE332</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>691,812.58</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>853,529.60</td>
+				   	  				   	   <td>161,717.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 14:13:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE333</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,105,483.18</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,284,614.10</td>
+				   	  				   	   <td>179,131.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 07:43:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE334</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,283,130.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,640,778.20</td>
+				   	  				   	   <td>357,648.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 13:16:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE335</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>768,051.09</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,107,085.09</td>
+				   	  				   	   <td>339,034.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:54:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE336</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>197,385.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>212,385.80</td>
+				   	  				   	   <td>15,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-25 13:56:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE337</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,055,304.72</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,369,026.70</td>
+				   	  				   	   <td>313,722.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 04:39:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE338</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,049,852.37</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,199,286.26</td>
+				   	  				   	   <td>149,434.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 11:36:17</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE339</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>383,712.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>444,955.20</td>
+				   	  				   	   <td>61,243.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-14 09:01:50</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE340</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>364,849.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>695,534.90</td>
+				   	  				   	   <td>330,685.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 11:15:57</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE342</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,039,848.25</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,102,675.25</td>
+				   	  				   	   <td>73,847.00</td>
+				   	  				   	   <td>11,020.00</td>
+				   	  				   	   <td>2018-04-09 13:08:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE343</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>647,657.49</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>820,310.40</td>
+				   	  				   	   <td>172,653.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 14:07:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE344</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,340,457.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,331,937.20</td>
+				   	  				   	   <td>26,480.00</td>
+				   	  				   	   <td>35,000.00</td>
+				   	  				   	   <td>2018-04-05 07:13:03</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE345</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>772,635.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,025,088.20</td>
+				   	  				   	   <td>254,643.00</td>
+				   	  				   	   <td>2,190.00</td>
+				   	  				   	   <td>2018-04-23 10:32:30</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE346</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>933,287.93</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,143,051.93</td>
+				   	  				   	   <td>209,764.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 14:09:48</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE347</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,425,386.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,920,758.15</td>
+				   	  				   	   <td>495,372.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-18 11:08:22</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE348</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,029,656.87</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,266,447.87</td>
+				   	  				   	   <td>236,791.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:52:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE349</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,954,989.47</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,065,522.81</td>
+				   	  				   	   <td>110,533.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 14:29:01</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE352</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>616,174.56</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,501,036.58</td>
+				   	  				   	   <td>884,862.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-27 07:19:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE353</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>883,219.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,133,484.50</td>
+				   	  				   	   <td>250,265.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-09 19:03:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE354</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>692,621.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,053,412.90</td>
+				   	  				   	   <td>360,791.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 06:13:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE355</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,665,153.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,526,153.30</td>
+				   	  				   	   <td>861,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:50:41</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE356</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>153,166.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>180,256.90</td>
+				   	  				   	   <td>27,090.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:09:48</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE357</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,908,263.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,565,623.90</td>
+				   	  				   	   <td>657,360.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:53:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE358</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,135,303.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,387,940.95</td>
+				   	  				   	   <td>252,637.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 08:53:37</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE359</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,353,674.02</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,825,781.00</td>
+				   	  				   	   <td>472,107.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 09:01:04</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE360</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,702,054.04</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,714,554.04</td>
+				   	  				   	   <td>12,500.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:31:39</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE362</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>834,827.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,100,839.80</td>
+				   	  				   	   <td>266,012.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:31:55</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE363</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>201,077.71</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>597,512.88</td>
+				   	  				   	   <td>396,435.17</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:10:33</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE364</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>413,378.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>539,361.85</td>
+				   	  				   	   <td>125,983.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:10:04</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE365</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>649,849.89</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>934,994.80</td>
+				   	  				   	   <td>285,145.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:10:19</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE366</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,490,060.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,372,189.85</td>
+				   	  				   	   <td>882,129.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:32:13</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE367</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>172,661.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>227,191.90</td>
+				   	  				   	   <td>54,530.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:32:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE368</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,040,631.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,564,631.15</td>
+				   	  				   	   <td>524,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 16:10:59</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE369</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>306,312.88</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>437,035.88</td>
+				   	  				   	   <td>130,723.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 11:40:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE370</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,093,658.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,525,946.20</td>
+				   	  				   	   <td>432,288.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 07:01:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE371</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,513,428.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,091,274.65</td>
+				   	  				   	   <td>577,846.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:50:54</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE372</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>274,424.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>604,261.00</td>
+				   	  				   	   <td>318,337.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:51:13</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE373</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,549,590.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,902,630.15</td>
+				   	  				   	   <td>353,040.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:52:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE374</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,103,816.45</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,444,893.45</td>
+				   	  				   	   <td>341,077.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 13:36:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE375</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>885,315.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,023,155.20</td>
+				   	  				   	   <td>137,840.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 11:30:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE376</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>552,340.49</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>577,219.60</td>
+				   	  				   	   <td>24,879.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:10:54</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE377</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>-25,184.26</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>52,305.80</td>
+				   	  				   	   <td>77,490.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:11:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE378</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>447,406.25</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>679,034.82</td>
+				   	  				   	   <td>231,628.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:51:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE379</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>445,519.11</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>606,094.01</td>
+				   	  				   	   <td>160,575.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 20:08:34</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE380</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>258,753.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>548,359.80</td>
+				   	  				   	   <td>289,606.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:32:40</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE381</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,627,525.03</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,622,694.40</td>
+				   	  				   	   <td>8,000.00</td>
+				   	  				   	   <td>12,830.00</td>
+				   	  				   	   <td>2018-04-16 19:00:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE382</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>780,591.54</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>998,362.54</td>
+				   	  				   	   <td>217,771.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 06:14:42</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE383</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,071,647.11</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,856,124.07</td>
+				   	  				   	   <td>784,477.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:52:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE384</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,482,124.03</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,652,570.03</td>
+				   	  				   	   <td>170,446.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:12:49</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE385</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,370,451.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,569,869.55</td>
+				   	  				   	   <td>199,418.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:32:51</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE386</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,801,689.27</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,061,929.27</td>
+				   	  				   	   <td>260,240.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:53:21</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE387</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>770,437.72</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>907,488.72</td>
+				   	  				   	   <td>137,051.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:11:30</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE388</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,321,720.77</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,404,360.69</td>
+				   	  				   	   <td>82,640.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 14:06:14</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE389</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>366,851.58</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>512,175.58</td>
+				   	  				   	   <td>145,324.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 14:26:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE390</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,482,833.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,482,833.20</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 15:02:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE391</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>943,032.45</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,143,167.45</td>
+				   	  				   	   <td>200,135.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 10:32:12</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE392</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,218,040.76</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,489,658.05</td>
+				   	  				   	   <td>285,047.29</td>
+				   	  				   	   <td>13,430.00</td>
+				   	  				   	   <td>2018-04-23 10:33:34</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE393</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>799,700.41</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,105,924.35</td>
+				   	  				   	   <td>306,224.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 07:01:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE394</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,093,579.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,102,579.85</td>
+				   	  				   	   <td>9,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:18:27</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE395</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>460,657.01</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>668,270.92</td>
+				   	  				   	   <td>207,614.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 07:02:32</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE396</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>438,564.26</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,070,854.20</td>
+				   	  				   	   <td>632,290.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 19:52:40</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE397</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>458,741.75</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>930,345.75</td>
+				   	  				   	   <td>471,604.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 19:54:23</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE398</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>755,126.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,132,668.20</td>
+				   	  				   	   <td>377,542.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 19:56:24</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE399</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,078,771.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,549,086.40</td>
+				   	  				   	   <td>470,315.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 19:57:57</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE400</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,027,260.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,250,066.00</td>
+				   	  				   	   <td>222,806.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:52:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE401</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,445,710.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,777,714.45</td>
+				   	  				   	   <td>449,074.00</td>
+				   	  				   	   <td>117,070.00</td>
+				   	  				   	   <td>2018-04-06 07:40:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE403</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,222,093.98</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,366,203.90</td>
+				   	  				   	   <td>144,110.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:52:40</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE404</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>64,872.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>441,089.50</td>
+				   	  				   	   <td>376,217.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:52:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE405</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>832,530.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>442,895.15</td>
+				   	  				   	   <td>208,379.00</td>
+				   	  				   	   <td>598,014.72</td>
+				   	  				   	   <td>2018-04-17 06:52:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE407</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>351,938.11</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,426,342.11</td>
+				   	  				   	   <td>1,074,404.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:01:25</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE411</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>644,525.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>672,020.40</td>
+				   	  				   	   <td>27,495.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:49:22</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE412</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,115,208.09</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,270,478.05</td>
+				   	  				   	   <td>155,270.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:49:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE413</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,105,773.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,352,885.55</td>
+				   	  				   	   <td>247,112.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 07:02:48</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE414</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>210,042.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>534,673.20</td>
+				   	  				   	   <td>324,631.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:48:58</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE415</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>755,493.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>959,183.85</td>
+				   	  				   	   <td>216,190.00</td>
+				   	  				   	   <td>12,500.00</td>
+				   	  				   	   <td>2018-04-03 13:22:03</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE416</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>590,803.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>661,610.00</td>
+				   	  				   	   <td>70,807.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 03:32:50</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE420</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>672,003.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>713,800.75</td>
+				   	  				   	   <td>43,447.35</td>
+				   	  				   	   <td>1,650.00</td>
+				   	  				   	   <td>2018-04-17 06:48:49</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE423</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>774,003.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,039,338.88</td>
+				   	  				   	   <td>265,335.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:03:21</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE424</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,898,164.44</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,466,004.44</td>
+				   	  				   	   <td>567,840.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:52:50</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE425</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>542,729.82</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>622,182.82</td>
+				   	  				   	   <td>79,453.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:37:22</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE426</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>785,371.87</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>987,665.81</td>
+				   	  				   	   <td>202,294.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 03:33:04</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE427</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>629,083.79</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>675,663.74</td>
+				   	  				   	   <td>46,580.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 11:21:46</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE428</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>788,210.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>995,659.20</td>
+				   	  				   	   <td>207,449.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:13:51</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE429</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>925,931.25</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,349,802.25</td>
+				   	  				   	   <td>423,871.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:19:24</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE430</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>485,461.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>501,461.15</td>
+				   	  				   	   <td>16,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:21:49</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE431</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>612,747.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>976,642.55</td>
+				   	  				   	   <td>363,895.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:27:51</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE432</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>911,962.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>992,938.50</td>
+				   	  				   	   <td>81,976.00</td>
+				   	  				   	   <td>1,000.00</td>
+				   	  				   	   <td>2018-04-05 20:33:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE433</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,118,710.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,251,749.95</td>
+				   	  				   	   <td>133,039.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 08:42:08</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE434</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>444,652.32</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>688,531.32</td>
+				   	  				   	   <td>243,879.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-10 09:11:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE435</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>78,013.39</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>397,824.39</td>
+				   	  				   	   <td>319,811.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 19:08:58</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE436</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE442</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>978,837.37</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,835,530.55</td>
+				   	  				   	   <td>856,693.19</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 06:23:14</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE443</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>572,123.07</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>572,123.07</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-03-31 09:35:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE444</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>114,424.43</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>273,599.43</td>
+				   	  				   	   <td>159,175.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 10:16:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE445</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,239,652.52</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,405,165.52</td>
+				   	  				   	   <td>165,513.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:50:41</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE446</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>182,110.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>182,110.50</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:53:03</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE447</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>711,692.64</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,059,319.64</td>
+				   	  				   	   <td>1,407,922.00</td>
+				   	  				   	   <td>60,295.00</td>
+				   	  				   	   <td>2018-04-10 04:52:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE448</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>536,402.33</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,076,537.30</td>
+				   	  				   	   <td>540,135.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 20:00:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE451</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,467,600.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,070,869.85</td>
+				   	  				   	   <td>603,269.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 09:30:57</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE452</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,302,356.98</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,594,256.98</td>
+				   	  				   	   <td>291,900.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-21 14:45:37</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE453</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>510,220.45</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>834,077.39</td>
+				   	  				   	   <td>323,857.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 06:38:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE454</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,677,813.89</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,785,315.89</td>
+				   	  				   	   <td>107,502.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 08:50:50</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE455</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>248,261.08</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>248,261.08</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 16:08:12</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE456</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>591,837.68</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>641,108.68</td>
+				   	  				   	   <td>49,270.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 13:31:38</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE457</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>262,545.04</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>484,348.04</td>
+				   	  				   	   <td>221,803.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 08:21:37</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE458</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>356,184.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>633,269.00</td>
+				   	  				   	   <td>277,085.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 09:33:27</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE460</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>124,759.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>190,246.90</td>
+				   	  				   	   <td>80,487.00</td>
+				   	  				   	   <td>15,000.00</td>
+				   	  				   	   <td>2018-04-16 07:16:17</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE461</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,633,690.09</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,824,602.45</td>
+				   	  				   	   <td>190,912.36</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 11:29:33</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE462</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>480,702.45</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>866,322.45</td>
+				   	  				   	   <td>385,620.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 09:34:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE463</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,133,257.92</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,599,737.92</td>
+				   	  				   	   <td>466,480.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:52:25</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE464</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>286,682.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>449,907.15</td>
+				   	  				   	   <td>163,225.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:21:13</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE465</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>592,196.24</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>681,707.40</td>
+				   	  				   	   <td>89,511.16</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:22:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE466</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,452,496.25</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,667,562.25</td>
+				   	  				   	   <td>215,066.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 06:38:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE467</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,531,054.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,878,965.20</td>
+				   	  				   	   <td>347,911.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:38:49</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE468</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>485,747.57</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>497,947.57</td>
+				   	  				   	   <td>12,200.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 12:05:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE469</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>611,531.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>840,311.15</td>
+				   	  				   	   <td>228,780.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 12:30:01</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE500</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>581,792.54</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>877,194.54</td>
+				   	  				   	   <td>295,402.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 11:43:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE502</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>87,640.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE504</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,127,369.13</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,391,468.13</td>
+				   	  				   	   <td>264,099.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:51:13</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE505</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,444,193.52</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,868,323.52</td>
+				   	  				   	   <td>424,130.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 11:45:37</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE506</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>235,044.51</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>480,590.51</td>
+				   	  				   	   <td>245,546.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:49:32</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE507</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,379,014.44</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,731,713.44</td>
+				   	  				   	   <td>352,699.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:55:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE508</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,498,032.60</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,722,109.60</td>
+				   	  				   	   <td>224,077.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:47:31</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE528</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,110,615.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,668,317.05</td>
+				   	  				   	   <td>557,702.00</td>
+				   	  				   	   <td>0.60</td>
+				   	  				   	   <td>2018-04-06 13:52:31</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE530</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>3,080,182.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,108,582.20</td>
+				   	  				   	   <td>28,400.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 07:42:17</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE531</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>471,859.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>518,836.00</td>
+				   	  				   	   <td>46,977.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 15:01:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE532</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>559,705.93</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>675,986.90</td>
+				   	  				   	   <td>124,856.00</td>
+				   	  				   	   <td>8,575.00</td>
+				   	  				   	   <td>2018-04-18 13:06:19</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE534</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,097,692.60</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,166,841.60</td>
+				   	  				   	   <td>69,149.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-18 08:21:38</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE550</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,766,339.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,219,610.85</td>
+				   	  				   	   <td>453,271.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 12:37:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE551</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,762,468.83</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,975,860.09</td>
+				   	  				   	   <td>213,391.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 09:17:57</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE552</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,080,366.84</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,239,890.84</td>
+				   	  				   	   <td>159,524.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 12:01:40</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE553</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>3,232,704.14</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,498,086.56</td>
+				   	  				   	   <td>254,883.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 10:31:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE554</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>271,090.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE555</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>641,965.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>904,764.00</td>
+				   	  				   	   <td>279,199.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 13:16:39</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE556</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,019,305.10</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,533,417.02</td>
+				   	  				   	   <td>514,112.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 07:19:04</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE560</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,192,096.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,468,804.95</td>
+				   	  				   	   <td>276,708.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:45:01</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE563</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>80,141.70</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>947,526.70</td>
+				   	  				   	   <td>867,385.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 05:49:05</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE588</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>319,329.32</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>445,229.32</td>
+				   	  				   	   <td>125,900.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-02 07:52:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE589</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>315,072.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>511,803.20</td>
+				   	  				   	   <td>196,731.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:23:14</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE590</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,110,549.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,470,549.00</td>
+				   	  				   	   <td>360,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:24:32</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE591</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>825,197.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,114,564.55</td>
+				   	  				   	   <td>289,367.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:26:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE592</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>689,842.26</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>970,473.26</td>
+				   	  				   	   <td>280,631.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 11:51:58</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE593</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>842,172.21</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,156,172.21</td>
+				   	  				   	   <td>314,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:29:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE596</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>590,176.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>716,848.30</td>
+				   	  				   	   <td>126,672.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 13:53:03</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE597</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,914,614.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,104,643.65</td>
+				   	  				   	   <td>190,029.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 13:49:31</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE599</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,299,502.11</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,435,796.11</td>
+				   	  				   	   <td>136,294.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:31:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE600</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>683,280.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>991,575.30</td>
+				   	  				   	   <td>308,295.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:18:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE603</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>800,895.57</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,268,729.53</td>
+				   	  				   	   <td>467,834.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:20:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE605</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,663,070.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,827,488.14</td>
+				   	  				   	   <td>164,418.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:56:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE610</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,937,541.02</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,754,118.02</td>
+				   	  				   	   <td>816,577.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:54:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE611</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>4,124.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>928,706.35</td>
+				   	  				   	   <td>924,582.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 10:02:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE612</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,965,322.70</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,792,755.70</td>
+				   	  				   	   <td>827,433.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 20:02:39</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE613</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>768,496.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,125,401.35</td>
+				   	  				   	   <td>356,905.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 20:04:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE614</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>75,435.75</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>323,570.48</td>
+				   	  				   	   <td>248,135.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 04:43:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE620</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,045,112.56</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,724,416.50</td>
+				   	  				   	   <td>679,303.94</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 10:44:12</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE622</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>585,094.11</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>719,389.11</td>
+				   	  				   	   <td>134,295.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-18 12:56:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE623</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>606,958.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>910,172.05</td>
+				   	  				   	   <td>320,864.00</td>
+				   	  				   	   <td>17,650.00</td>
+				   	  				   	   <td>2018-04-18 13:58:59</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE624</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,955,177.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,178,477.35</td>
+				   	  				   	   <td>223,300.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-02 10:14:59</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE630</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,396,570.02</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,682,606.02</td>
+				   	  				   	   <td>286,036.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 19:11:32</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE631</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,493,014.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,842,556.00</td>
+				   	  				   	   <td>349,542.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 11:06:42</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE633</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,055,119.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,318,221.65</td>
+				   	  				   	   <td>263,102.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 13:51:49</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE634</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,866,242.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,019,599.15</td>
+				   	  				   	   <td>153,357.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 14:38:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE640</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,416,950.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,450,452.15</td>
+				   	  				   	   <td>33,502.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:57:17</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE641</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>773,219.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,071,644.20</td>
+				   	  				   	   <td>298,425.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 11:52:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE642</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,927,200.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,316,710.95</td>
+				   	  				   	   <td>389,510.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 12:04:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE643</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>515,020.33</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>785,463.33</td>
+				   	  				   	   <td>270,443.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:22:57</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE645</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>3,726,869.26</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>4,370,399.25</td>
+				   	  				   	   <td>643,530.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 13:29:17</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE667</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,139,051.96</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,811,253.98</td>
+				   	  				   	   <td>672,202.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 20:06:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE700</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>533,134.67</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,139,141.65</td>
+				   	  				   	   <td>606,007.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 18:45:54</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE701</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>514,471.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>872,256.90</td>
+				   	  				   	   <td>357,785.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 09:36:13</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE702</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>175,852.69</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>469,341.60</td>
+				   	  				   	   <td>293,489.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 04:44:21</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE703</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>547,673.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,225,944.00</td>
+				   	  				   	   <td>678,271.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 04:45:05</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE704</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>671,553.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>861,084.05</td>
+				   	  				   	   <td>189,531.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 04:45:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE705</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>3,331,427.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,833,993.55</td>
+				   	  				   	   <td>502,566.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 17:58:55</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE706</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>598,765.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>988,366.30</td>
+				   	  				   	   <td>389,601.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 12:38:12</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE707</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,090,166.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,552,402.85</td>
+				   	  				   	   <td>462,236.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 14:29:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE708</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>838,080.24</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,013,265.10</td>
+				   	  				   	   <td>175,185.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-07 04:44:44</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE709</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>375,170.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>515,685.90</td>
+				   	  				   	   <td>140,515.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:04:14</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE710</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,113,028.46</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,350,492.46</td>
+				   	  				   	   <td>237,464.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 13:45:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE711</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,164,247.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,586,272.30</td>
+				   	  				   	   <td>422,025.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 13:40:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE712</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,266,441.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,600,753.85</td>
+				   	  				   	   <td>334,312.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 12:08:29</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE713</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,344,525.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,664,563.95</td>
+				   	  				   	   <td>320,038.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-02 04:55:28</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE714</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>703,488.60</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>991,949.60</td>
+				   	  				   	   <td>288,461.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 13:05:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE715</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>955,998.75</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,642,164.95</td>
+				   	  				   	   <td>686,166.20</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:04:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE716</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,432,551.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,593,796.85</td>
+				   	  				   	   <td>161,245.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-23 13:36:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE717</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>283,239.77</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>499,933.45</td>
+				   	  				   	   <td>216,693.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 06:17:29</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE718</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>336,790.09</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>463,007.09</td>
+				   	  				   	   <td>126,217.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 10:32:39</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE719</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>521,138.70</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>810,128.70</td>
+				   	  				   	   <td>288,990.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 07:27:39</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE720</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>525,084.14</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>711,056.00</td>
+				   	  				   	   <td>185,972.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 10:32:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE722</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>176,099.24</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>453,577.24</td>
+				   	  				   	   <td>282,478.00</td>
+				   	  				   	   <td>5,000.00</td>
+				   	  				   	   <td>2018-04-04 14:26:08</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE723</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>15,565.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>113,601.40</td>
+				   	  				   	   <td>98,036.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 14:28:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE724</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,370,208.28</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,578,038.25</td>
+				   	  				   	   <td>207,830.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 09:52:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE725</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,349,235.88</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,812,727.88</td>
+				   	  				   	   <td>463,492.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:54:51</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE726</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,410,216.81</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,941,147.81</td>
+				   	  				   	   <td>530,931.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:55:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE727</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,411,425.33</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,864,160.50</td>
+				   	  				   	   <td>471,896.00</td>
+				   	  				   	   <td>19,160.00</td>
+				   	  				   	   <td>2018-04-06 13:52:53</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE728</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>348,385.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>500,754.65</td>
+				   	  				   	   <td>152,369.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 11:18:25</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE729</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>611,218.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>934,539.55</td>
+				   	  				   	   <td>323,321.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 18:36:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE731</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>312,959.19</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,224,333.55</td>
+				   	  				   	   <td>911,374.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:43:13</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE732</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>466,963.18</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>623,542.00</td>
+				   	  				   	   <td>156,578.82</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 20:48:33</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE733</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>334,127.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>627,755.85</td>
+				   	  				   	   <td>293,628.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 17:10:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE734</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>892,951.52</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,275,254.40</td>
+				   	  				   	   <td>382,303.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 09:33:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE735</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,398,148.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,585,997.30</td>
+				   	  				   	   <td>187,849.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 14:26:22</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE736</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>376,235.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>482,416.35</td>
+				   	  				   	   <td>106,181.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 08:00:08</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE737</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>632,788.34</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,075,837.34</td>
+				   	  				   	   <td>443,049.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:15:21</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE738</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>516,078.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,454,777.50</td>
+				   	  				   	   <td>938,699.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:32:24</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE739</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>627,319.32</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>820,032.27</td>
+				   	  				   	   <td>192,713.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 08:46:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE740</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>538,716.25</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>604,387.25</td>
+				   	  				   	   <td>65,671.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 12:14:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE742</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>805,068.69</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,165,606.31</td>
+				   	  				   	   <td>360,537.62</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 14:02:27</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE743</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,379,049.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,652,482.35</td>
+				   	  				   	   <td>273,433.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-25 10:04:07</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE744</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,189,887.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,432,500.15</td>
+				   	  				   	   <td>242,613.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 11:07:12</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE745</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,187,724.48</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,720,860.48</td>
+				   	  				   	   <td>533,136.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:23:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE746</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>738,493.32</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,005,881.22</td>
+				   	  				   	   <td>267,388.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:25:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE747</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>855,983.51</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>988,889.51</td>
+				   	  				   	   <td>132,906.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:27:24</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE748</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>299,450.38</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,006,097.30</td>
+				   	  				   	   <td>706,647.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:30:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE749</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>231,893.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>328,705.80</td>
+				   	  				   	   <td>96,812.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:34:55</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE751</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,039,786.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,258,680.10</td>
+				   	  				   	   <td>218,894.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:36:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE752</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>29,374.47</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>838,111.47</td>
+				   	  				   	   <td>808,737.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 07:40:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE753</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,383,654.83</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,465,305.83</td>
+				   	  				   	   <td>81,651.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-11 13:39:34</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE754</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,043,252.07</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,243,735.05</td>
+				   	  				   	   <td>200,482.98</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 08:18:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE755</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>347,777.83</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>724,798.83</td>
+				   	  				   	   <td>377,021.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 09:14:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE756</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>625,709.96</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,073,630.96</td>
+				   	  				   	   <td>447,921.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:53:08</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE757</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>519,211.04</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>608,896.00</td>
+				   	  				   	   <td>120,535.00</td>
+				   	  				   	   <td>30,850.00</td>
+				   	  				   	   <td>2018-04-16 07:42:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE758</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>8,327.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>46,164.80</td>
+				   	  				   	   <td>37,837.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 11:28:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE759</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,868,189.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,121,980.30</td>
+				   	  				   	   <td>253,791.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 08:48:45</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE760</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,368,223.19</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,722,581.00</td>
+				   	  				   	   <td>354,357.76</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:55:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE761</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,309,746.41</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,436,087.40</td>
+				   	  				   	   <td>126,341.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:59:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE762</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>588,787.56</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>620,341.97</td>
+				   	  				   	   <td>31,555.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-30 14:58:32</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE763</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>716,290.72</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>785,478.15</td>
+				   	  				   	   <td>69,187.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-12 12:16:38</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE764</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,100,538.24</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,245,408.24</td>
+				   	  				   	   <td>145,870.00</td>
+				   	  				   	   <td>1,000.00</td>
+				   	  				   	   <td>2018-04-16 19:30:21</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE765</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>748,803.66</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>795,686.42</td>
+				   	  				   	   <td>46,883.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:34:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE766</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,187,412.02</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,329,512.02</td>
+				   	  				   	   <td>142,100.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:35:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE767</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>3,569,685.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>4,047,342.00</td>
+				   	  				   	   <td>477,657.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:39:14</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE768</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,725,926.45</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,754,326.45</td>
+				   	  				   	   <td>28,400.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:12:25</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE769</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,013,896.96</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,122,226.93</td>
+				   	  				   	   <td>108,330.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:39:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE770</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,995,978.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,958,324.00</td>
+				   	  				   	   <td>-37,654.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 09:37:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE771</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,906,089.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,927,289.00</td>
+				   	  				   	   <td>21,200.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:19:31</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE772</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,263,428.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,486,788.65</td>
+				   	  				   	   <td>223,360.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 16:39:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE773</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>376,739.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,360,853.00</td>
+				   	  				   	   <td>984,114.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 20:12:03</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE774</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>815,055.84</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>948,235.84</td>
+				   	  				   	   <td>133,180.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 09:20:23</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE775</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,074,291.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,232,456.40</td>
+				   	  				   	   <td>158,165.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 09:04:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE776</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,639,962.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,898,229.86</td>
+				   	  				   	   <td>258,267.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:42:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE777</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>233,980.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>477,699.50</td>
+				   	  				   	   <td>243,719.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 08:03:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE778</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>973,588.88</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,202,525.88</td>
+				   	  				   	   <td>228,937.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:47:12</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE781</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>723,364.87</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>751,673.87</td>
+				   	  				   	   <td>58,209.00</td>
+				   	  				   	   <td>29,900.00</td>
+				   	  				   	   <td>2018-04-05 13:05:03</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE783</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>575,698.75</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>628,122.75</td>
+				   	  				   	   <td>52,424.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:52:51</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE784</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>660,515.79</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>725,457.79</td>
+				   	  				   	   <td>64,942.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 19:53:42</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE785</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,287,545.33</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,510,787.26</td>
+				   	  				   	   <td>223,241.93</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 07:08:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE786</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>457,891.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>610,382.35</td>
+				   	  				   	   <td>152,491.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 06:02:49</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE787</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,744,196.63</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,813,699.70</td>
+				   	  				   	   <td>69,503.10</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 11:30:44</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE788</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,304,791.60</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,907,296.60</td>
+				   	  				   	   <td>602,505.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 09:17:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE789</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>480,739.46</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>508,749.33</td>
+				   	  				   	   <td>28,010.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 08:17:23</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE790</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>790,658.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>824,108.80</td>
+				   	  				   	   <td>33,450.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-05-21 04:47:34</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE792</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>783,121.72</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,050,178.72</td>
+				   	  				   	   <td>267,057.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 16:25:14</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE793</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>725,076.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>982,933.00</td>
+				   	  				   	   <td>257,857.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 11:25:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE799</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>543,841.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>811,940.00</td>
+				   	  				   	   <td>268,099.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 20:12:16</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE801</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>650,615.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>990,876.55</td>
+				   	  				   	   <td>340,261.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 14:56:55</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE802</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>442,381.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>596,724.15</td>
+				   	  				   	   <td>154,343.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 09:46:50</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE805</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>492,390.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>628,600.05</td>
+				   	  				   	   <td>136,210.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 13:31:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE806</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>483,310.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>909,248.30</td>
+				   	  				   	   <td>425,938.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-11 06:59:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE807</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>612,073.15</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>831,591.15</td>
+				   	  				   	   <td>219,518.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 07:22:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE808</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>153,484.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>302,205.65</td>
+				   	  				   	   <td>187,536.00</td>
+				   	  				   	   <td>38,815.00</td>
+				   	  				   	   <td>2018-04-10 18:44:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE809</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>432,374.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>616,989.55</td>
+				   	  				   	   <td>184,615.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 13:18:48</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE810</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>651,323.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>788,355.55</td>
+				   	  				   	   <td>137,032.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 17:37:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE811</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>383,468.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>716,960.95</td>
+				   	  				   	   <td>333,492.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-07 13:56:33</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE812</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>372,816.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>529,516.05</td>
+				   	  				   	   <td>156,700.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 07:36:41</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE813</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>673,324.20</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,283,603.20</td>
+				   	  				   	   <td>610,279.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 08:26:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE814</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>843,082.33</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,403,206.33</td>
+				   	  				   	   <td>560,124.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 07:24:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE816</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>272,549.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>537,757.55</td>
+				   	  				   	   <td>265,208.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 12:52:39</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE817</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>77,909.64</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>443,208.05</td>
+				   	  				   	   <td>352,088.45</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:48:34</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE818</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>422,579.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>678,260.00</td>
+				   	  				   	   <td>255,681.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:48:18</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE819</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>435,026.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>739,041.50</td>
+				   	  				   	   <td>304,015.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 03:33:22</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE820</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>389,778.63</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>683,742.63</td>
+				   	  				   	   <td>293,964.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-03 20:19:27</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE821</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,925,574.40</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,151,258.40</td>
+				   	  				   	   <td>250,694.00</td>
+				   	  				   	   <td>25,010.00</td>
+				   	  				   	   <td>2018-04-04 10:34:19</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE822</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>872,673.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>916,411.55</td>
+				   	  				   	   <td>43,738.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:32:57</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE823</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>102,723.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>163,383.35</td>
+				   	  				   	   <td>60,660.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:33:17</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE824</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>651,120.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,141,917.50</td>
+				   	  				   	   <td>490,797.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:35:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE825</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>889,895.85</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,049,455.85</td>
+				   	  				   	   <td>159,560.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:53:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE826</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>782,619.48</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,237,268.48</td>
+				   	  				   	   <td>454,649.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:36:25</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE828</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>428,800.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>461,824.55</td>
+				   	  				   	   <td>33,024.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:53:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE830</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,714,916.84</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,998,847.80</td>
+				   	  				   	   <td>283,931.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 13:57:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE900</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>654,190.46</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>690,980.46</td>
+				   	  				   	   <td>36,790.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:38:10</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE901</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>276,058.05</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>588,611.05</td>
+				   	  				   	   <td>312,553.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 09:41:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE903</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>643,745.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,115,985.55</td>
+				   	  				   	   <td>472,240.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 13:58:02</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE904</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>713,634.24</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>924,267.24</td>
+				   	  				   	   <td>278,463.00</td>
+				   	  				   	   <td>67,830.00</td>
+				   	  				   	   <td>2018-04-05 09:32:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE905</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,721,646.32</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>3,073,221.32</td>
+				   	  				   	   <td>351,575.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 15:31:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE906</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,160,427.04</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,423,542.82</td>
+				   	  				   	   <td>263,116.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:52:26</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE907</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,983,592.62</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,207,739.62</td>
+				   	  				   	   <td>224,147.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 11:44:56</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE908</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>81,726.02</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>314,638.02</td>
+				   	  				   	   <td>232,912.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 11:25:36</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE909</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,187,116.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,920,620.80</td>
+				   	  				   	   <td>733,504.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-08 10:51:41</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE910</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,346,732.90</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,365,912.90</td>
+				   	  				   	   <td>19,180.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-06 13:53:20</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE912</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>890,170.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,512,153.65</td>
+				   	  				   	   <td>621,983.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 09:16:47</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE913</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>706,066.80</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,081,972.80</td>
+				   	  				   	   <td>390,906.00</td>
+				   	  				   	   <td>15,000.00</td>
+				   	  				   	   <td>2018-04-19 11:29:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE914</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,031,217.10</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,448,122.05</td>
+				   	  				   	   <td>416,905.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 15:38:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE915</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>797,917.50</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,090,519.50</td>
+				   	  				   	   <td>292,602.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-04 08:41:38</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE916</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>437,607.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>955,567.75</td>
+				   	  				   	   <td>517,960.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 09:18:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE917</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>244,562.65</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>531,525.65</td>
+				   	  				   	   <td>286,963.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 11:39:11</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE918</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>2,437,289.08</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>2,794,298.05</td>
+				   	  				   	   <td>357,009.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:56:30</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE920</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>693,336.54</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>981,461.50</td>
+				   	  				   	   <td>288,125.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-05 13:23:50</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE921</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>501,659.30</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>928,185.30</td>
+				   	  				   	   <td>426,526.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-19 11:41:37</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE922</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>606,786.79</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,174,264.79</td>
+				   	  				   	   <td>567,478.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-09 12:56:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE233</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>699,925.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>748,304.00</td>
+				   	  				   	   <td>48,379.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 06:09:40</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE234</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>221,145.94</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>587,534.87</td>
+				   	  				   	   <td>366,389.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 06:10:52</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE235</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>775,833.91</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,031,510.90</td>
+				   	  				   	   <td>255,677.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 05:04:43</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE236</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>199,525.03</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>217,122.03</td>
+				   	  				   	   <td>17,597.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 05:29:12</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE237</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>245,871.75</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>339,095.75</td>
+				   	  				   	   <td>93,224.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 05:46:25</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE238</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>235,511.70</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>455,455.50</td>
+				   	  				   	   <td>219,943.80</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 05:57:38</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE239</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>484,693.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>491,393.35</td>
+				   	  				   	   <td>37,500.00</td>
+				   	  				   	   <td>30,800.00</td>
+				   	  				   	   <td>2018-04-25 12:05:15</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE240</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>1,198,184.55</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,198,184.55</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 05:56:19</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE241</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>911,243.89</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,064,733.89</td>
+				   	  				   	   <td>153,490.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 05:57:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE245</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>499,845.46</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>662,745.40</td>
+				   	  				   	   <td>162,900.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 05:53:24</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE280</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>425,706.95</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>433,706.95</td>
+				   	  				   	   <td>8,000.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-10 04:35:14</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE261</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>136,468.47</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>253,501.47</td>
+				   	  				   	   <td>117,033.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-16 21:50:37</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE256</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>380,825.78</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>520,134.65</td>
+				   	  				   	   <td>139,309.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-11 19:21:35</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE255</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>779,929.34</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,318,352.34</td>
+				   	  				   	   <td>538,423.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-11 19:21:23</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE257</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>738,217.18</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,074,188.21</td>
+				   	  				   	   <td>335,971.03</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-11 19:21:49</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE258</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>-82,644.35</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>169,160.65</td>
+				   	  				   	   <td>251,805.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-11 19:22:01</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE260</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>603,421.70</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>960,351.70</td>
+				   	  				   	   <td>356,930.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-11 19:23:09</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE485</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>Yes</td>
+				   	  				   	   <td>820,683.61</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>1,025,392.30</td>
+				   	  				   	   <td>204,709.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2018-04-17 06:00:06</td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE999</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>340,500.21</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE279</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>477,040.50</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE286</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+							</tbody>
+			
+		</table>
+
+		
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+
+		var datatable = $(".datatable").dataTable({
+			dom : 'lBfrtip',
+			buttons : ['pdf', 'csv', 'excel', 'copy']
+
+		});
+
+		$(".dataTables_wrapper select").select2({
+			minimumResultsForSearch : -1
+		});
+	});
+
+$('#btn_last_month ,#btn_next_month').on('click',function(ev){
+	
+	if($(this).attr('id')=='btn_last_month')
+	{
+		 var href='http://localhost/tools/ifms.php/accountant/dashboard/1519772400';
+		 
+		 window.location.href=href;
+	}
+	else
+	{
+		var href='http://localhost/tools/ifms.php/accountant/dashboard/1525039200';
+		 
+		 window.location.href=href;
+	}
+	
+	ev.preventDefault();
+	
+});
+</script>
+				<hr />
+		
+		<div class="row">
+			<div class="col-sm-12">
+				Page load time: 10.3900 seconds			</div>
+		</div>
+
+<!-- Footer -->
+<footer class="main">
+	&copy; 2017 <strong>Grants Manager</strong>. 
+    Developed by 
+	<a href="https://www.compassionkenya.com" 
+    	target="_blank">Compassion Kenya</a>
+</footer>
+
+		</div>
+				
+	
+        	
+	</div>
+     <style>
+ 	@media print {
+    /* on modal open bootstrap adds class "modal-open" to body, so you can handle that case and hide body */
+    body.modal-open {
+        visibility: hidden;
+    }
+
+    body.modal-open .modal .modal-header,
+    body.modal-open .modal .modal-body {
+        visibility: visible; /* make visible modal body and header */
+    }
+}
+
+.modal-dialog {
+  min-width: 80%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+	height: 60%;
+    max-height: 60%;
+    height: auto;
+    border-radius: 0;
+   
+}
+
+.modal-body {
+	 overflow-y:auto;
+	 height: 540px;
+}
+ </style>
+ 
+ <script type="text/javascript">
+	function showAjaxModal(url)
+	{
+		// SHOWING AJAX PRELOADER IMAGE
+		jQuery('#modal_ajax .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="http://localhost/tools/uploads/preloader.gif" /></div>');
+		
+		// LOADING THE AJAX MODAL
+		jQuery('#modal_ajax').modal('show', {backdrop: 'true'});
+		
+		// SHOW AJAX RESPONSE ON REQUEST SUCCESS
+		$.ajax({
+			url: url,
+			success: function(response)
+			{
+				jQuery('#modal_ajax .modal-body').html(response);
+			}
+		});
+	}
+	</script>
+    
+    <!-- (Ajax Modal)-->
+    <div class="modal fade" id="modal_ajax" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Toolkit</h4>
+                </div>
+                
+                <div class="modal-body" id="pop_modal_body" style="">
+                
+                    
+                    
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!--<button type="button" class="btn btn-default" onclick="js:window.print()">Print</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <script type="text/javascript">
+	function confirm_modal(delete_url)
+	{
+		jQuery('#modal-4').modal('show', {backdrop: 'static'});
+		document.getElementById('delete_link').setAttribute('href' , delete_url);
+	}
+	
+	function confirm_action(url)
+	{
+		jQuery('#modal-5').modal('show', {backdrop: 'static'});
+		document.getElementById('perform_link').setAttribute('href' , url);
+	}
+	function confirm_dialog(url,reload=false){
+			BootstrapDialog.confirm('Are You Sure You Want To Perform This Action?', function(result){
+            if(!result) {
+		                 BootstrapDialog.show({
+		                 	title:'Information',
+				            message: 'Process Aborted'
+				        });
+	            }else{				        
+				        
+					$.ajax(
+						{
+							url:url,
+							beforeSend:function(request){
+								BootstrapDialog.show({
+				                 	title:'Information',
+						            message: 'Please Wait Until You Receive Confirmation'
+						        });
+							},
+							success:function(response){
+								
+								 BootstrapDialog.show({
+				                 	title:'Alert',
+						            message: response
+						        });
+						        
+						        if(reload===true){
+						        	window.location.reload();
+						        }
+				        
+							}
+						}
+					);
+	         }   	
+			
+		});
+	}
+	</script>
+    
+    <!-- (Normal Modal)-->
+    <div class="modal fade" id="modal-4">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:center;">Are you sure to delete this information ?</h4>
+                </div>
+                
+                
+                <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+                    <a href="#" class="btn btn-danger" id="delete_link">Delete</a>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- (Confirm Modal)-->
+    <div class="modal fade" style="position: absolute;top:0px;bottom:0px;" id="modal-5"> 
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+                
+                <div class="modal-header">
+                    <button id="" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:center;">Are you sure you want to perform this action?</h4>
+                </div>
+                
+                
+                <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+                    <a href="#" class="btn btn-danger" id="perform_link">Ok</a>
+                    <button id="" type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+	 $("#modal_ajax").draggable({
+	    handle: ".modal-header"
+	}); 
+</script>
+        	
+	<link rel="stylesheet" href="http://localhost/tools/assets/js/select2/select2-bootstrap.css">
+	<link rel="stylesheet" href="http://localhost/tools/assets/js/select2/select2.css">
+	<link rel="stylesheet" href="http://localhost/tools/assets/js/selectboxit/jquery.selectBoxIt.css">
+
+   	<!-- Bottom Scripts -->
+	<script src="http://localhost/tools/assets/js/gsap/main-gsap.js"></script>
+	<script src="http://localhost/tools/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script src="http://localhost/tools/assets/js/joinable.js"></script>
+	<script src="http://localhost/tools/assets/js/resizeable.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-api.js"></script>
+	<script src="http://localhost/tools/assets/js/toastr.js"></script>
+    <script src="http://localhost/tools/assets/js/jquery.validate.min.js"></script>
+	<script src="http://localhost/tools/assets/js/fullcalendar/fullcalendar.min.js"></script>
+    <script src="http://localhost/tools/assets/js/bootstrap-datepicker.js"></script>
+    <script src="http://localhost/tools/assets/js/fileinput.js"></script>
+   
+    <script src="http://localhost/tools/assets/js/select2/select2.min.js"></script>
+    <script src="http://localhost/tools/assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+    
+   
+    
+	<script src="http://localhost/tools/assets/js/neon-calendar.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-chat.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-custom.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-demo.js"></script>
+	
+
+	
+	<!--Font Awesome-->
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	
+	<!-- Toggle Button -->
+	
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
+	<!-- Bootstrap Switch -->
+	<script src="http://localhost/tools/assets/js/bootstrap-switch.min.js"></script>
+	
+		<!-- Monkey Modal Dialog  CSS / JS-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.2/css/bootstrap-dialog.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.2/js/bootstrap-dialog.min.js"></script>
+	
+	
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+
+
+		<!--Dropzone-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
+	
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />	
+
+<!-- Bootstrap Date-Picker Plugin -->
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<!--Table Header Fixer-->
+<script src="http://localhost/tools/assets/js/tableHeadFixer.js"></script>
+
+<!--Print This JS-->
+<script src="http://localhost/tools/assets/js/printThis.js"></script>
+
+<!--my extension-->
+<script src="http://localhost/tools/assets/js/myExtension.js"></script>
+
+<!-- SHOW TOASTR NOTIFIVATION -->
+
+
+<!-----  DATA TABLE EXPORT CONFIGURATIONS ---->                      
+<script type="text/javascript">
+
+	jQuery(document).ready(function($)
+	{
+		
+
+		//var datatable = $("#table_export").dataTable();
+		
+		//$(".dataTables_wrapper select").select2({
+			//minimumResultsForSearch: -1
+		//});
+		
+		$('.modal-dialog').draggable();
+		
+		$('.modal-content').resizable({
+		    //alsoResize: ".modal-dialog",
+		    minHeight: 300,
+		    minWidth: 300
+		});
+		
+		
+	}); 
+		
+</script>    
+</body>
+</html>

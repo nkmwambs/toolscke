@@ -1,0 +1,13 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-03-29 07:21:00 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2020-03-29 07:21:22 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2020-03-29 10:21:13 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2020-03-29 16:16:18 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2020-03-29 16:16:18 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2020-03-29 16:16:20 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2020-03-29 16:16:21 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2020-03-29 16:16:25 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2020-03-29 17:33:09 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2020-03-29 19:28:26 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2020-03-29 21:00:01 --> Severity: Warning --> rmdir(accountant+dashboard): No such file or directory /home/compatl8/public_html/tools/ifms/controllers/Crons.php 39

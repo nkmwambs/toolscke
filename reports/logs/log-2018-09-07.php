@@ -1,0 +1,14 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2018-09-07 07:06:02 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=''' at line 2 - Invalid query: SELECT fname,cname,last_login_time,incidentID,claimCnt,proNo,cluster,childNo,childName,treatDate,diagnosis,totAmt,careContr,nhif,amtReim,facName,facClass,type,date,vnum,rmks,reinstatementdate,stmp FROM `users` RIGHT JOIN `claims` ON `users`.`fname` = `claims`.`proNo`    WHERE department=0 AND userlevel=1
+ AND  cname='narok' AND  =''   
+ERROR - 2018-09-07 07:06:02 --> Severity: error --> Exception: Call to a member function result_object() on boolean /home/compatl8/public_html/tools/reports/controllers/Admin.php 52
+ERROR - 2018-09-07 07:06:07 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=''' at line 2 - Invalid query: SELECT fname,cname,last_login_time,incidentID,claimCnt,proNo,cluster,childNo,childName,treatDate,diagnosis,totAmt,careContr,nhif,amtReim,facName,facClass,type,date,vnum,rmks,reinstatementdate,stmp FROM `users` RIGHT JOIN `claims` ON `users`.`fname` = `claims`.`proNo`    WHERE department=0 AND userlevel=1
+ AND  cname='narok' AND  =''   
+ERROR - 2018-09-07 07:06:07 --> Severity: error --> Exception: Call to a member function result_object() on boolean /home/compatl8/public_html/tools/reports/controllers/Admin.php 52
+ERROR - 2018-09-07 12:18:29 --> Severity: Warning --> include(/navigation.php): failed to open stream: No such file or directory /home/compatl8/public_html/tools/reports/views/backend/index.php 31
+ERROR - 2018-09-07 12:18:29 --> Severity: Warning --> include(/navigation.php): failed to open stream: No such file or directory /home/compatl8/public_html/tools/reports/views/backend/index.php 31
+ERROR - 2018-09-07 12:18:29 --> Severity: Warning --> include(): Failed opening '/navigation.php' for inclusion (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') /home/compatl8/public_html/tools/reports/views/backend/index.php 31
+ERROR - 2018-09-07 12:18:29 --> Severity: Warning --> include(/dashboard.php): failed to open stream: No such file or directory /home/compatl8/public_html/tools/reports/views/backend/index.php 41
+ERROR - 2018-09-07 12:18:29 --> Severity: Warning --> include(/dashboard.php): failed to open stream: No such file or directory /home/compatl8/public_html/tools/reports/views/backend/index.php 41
+ERROR - 2018-09-07 12:18:29 --> Severity: Warning --> include(): Failed opening '/dashboard.php' for inclusion (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') /home/compatl8/public_html/tools/reports/views/backend/index.php 41

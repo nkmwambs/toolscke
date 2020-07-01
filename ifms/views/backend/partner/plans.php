@@ -1,0 +1,562 @@
+<style>
+	@media screen{
+		.print-only{
+       		 display: none;
+    	}
+	}
+    
+	@media print {
+		
+		 @page {size: A1 landscape;max-height:100%; max-width:100%}
+		
+	    div.break 
+	    	{
+	    		page-break-after: always;
+	    	},
+    	.hidden-print 
+    		{
+		    	display: none !important;
+		  	},
+		 .print-only
+		 	{
+            	display: block;
+        	}
+	    
+	}
+</style>
+<div class="col-sm-12">
+	<div class="panel panel-success">
+						
+		<div class="panel-heading">
+			<!--<div class="panel-title"><?=get_phrase('project_budget');?></div>	-->					
+				<div class="panel-options">
+					<ul class="nav nav-tabs">	
+						<li class=""><a href="#budget-limit" data-toggle="tab"><?=get_phrase('budget_limit');?></a></li>				
+						<li class=""><a href="#budget-summary" data-toggle="tab"><?=get_phrase('budget_summary');?></a></li>
+						<li class="active"><a href="#budget-schedules" data-toggle="tab"><?=get_phrase('budget_schedules');?></a></li>												
+					</ul>
+				</div>
+		</div>
+								
+		<div class="panel-body" style="overflow-y: auto;overflow-x: auto;">
+
+			<button onclick="PrintElem('#tab-content');" class="btn btn-success btn-icon pull-left"><i class="fa fa-print"></i><?=get_phrase('print');?></button>
+			
+			<?php echo form_open(base_url() . 'ifms.php/partner/create_budget_item' , array('id'=>'frm_schedule','class' => 'hidden-print form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
+						 <div class="form-group">
+						 	<label class="control-label col-sm-3"><?=get_phrase('financial_year');?></label> 
+						  	<div class="col-sm-4">
+							  <div class="input-group col-sm-5 col-sm-offset-1">
+							    <a href="" id="prev_fy" class="input-group-addon scroll-fy"><i class="glyphicon glyphicon-minus"></i></a>
+							    <input id="scrolled_fy" value="<?=$fyr;?>" type="text" class="form-control text-center" name="scrolled_fy" placeholder="FY" readonly="readonly">
+							    <a href="" id="next_fy" class="input-group-addon scroll-fy"><i class="glyphicon glyphicon-plus"></i></a>
+							  </div>
+							</div>
+						</div>  
+					</form> 
+					
+			<br/><hr/>
+			
+			<div class="tab-content" id="tab-content">
+			<?php
+				if($this->finance_model->budget_exists($this->session->center_id,$fyr)==='yes'){
+			?>	
+			
+			<div class="tab-pane" id="budget-limit">
+					<div class="print-only" style="margin-top: 25%;">
+						 <h1 style="text-align:center;font-weight: bolder;font-size: 60pt;"><?=$this->session->center_id;?> - <?=$this->db->get_where('users',array('fname'=>$this->session->center_id))->row()->fname;?></h1> <br/>
+						 
+						 <h2 style="text-align:center;font-weight: bolder;font-size: 60pt;"><?php echo get_phrase('annual_budget');?></h2><br/>
+						 
+						 <h2 style="text-align:center;font-weight: bolder;font-size: 60pt;"><?=get_phrase('for_the_fiscal_year')." ".$fyr;?></h2>
+				
+					</div>
+					<!--<button onclick="PrintElem('#limit');" class="btn btn-info btn-icon"><i class="fa fa-print"></i><?=get_phrase('print');?></button>-->
+					
+					<div class="break"></div>
+					
+					<div class="print-only">
+						<div class="row col-sm-8">
+						<span style="font-size: 25pt;">
+							<?php
+								echo $this->db->get_where('settings',array('type'=>'budget_commitment'))->row()->description;
+							?>
+						</span>
+						
+						<span style="font-weight: bold;font-size: 25pt;"><?=get_phrase('signed_herein_below_by_us,_the_project_representatives:');?></span>
+					
+							<table class="table table-striped" style="width: 100%;font-size: 25pt;">
+								<thead>
+									<tr>
+										<th style="width: 20%;"><?=get_phrase('role');?></th>
+										<th><?=get_phrase('name');?></th>
+										<th style="width: 20%;"><?=get_phrase('date');?></th>
+										<th style="width: 20%;"><?=get_phrase('signature');?></th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									for($i=0;$i<3;$i++):
+										$id = $i+1;
+									?>
+										<tr>
+											<td><?=get_phrase('project_manager')." ".$id;?></td>
+											<td>&nbsp;</td>
+											<td><?=date('d-m-Y');?></td>
+											<td>&nbsp;</td>
+										</tr>
+									<?php
+									endfor;
+									?>
+									
+								</tbody>
+							</table>
+					</div>
+					</div>
+					
+					<div class="break"></div>
+					
+					<div id="limit">
+					
+					<span style="font-weight: bold;font-size: 15pt;"><?=get_phrase('budget_limits');?></span>
+					
+					<table class="table table-striped display">
+						<thead>
+							<tr>
+								<th><?=get_phrase('revenue_account');?></th>
+								<th><?=get_phrase('financial_year');?></th>
+								<th><?=get_phrase('limit');?></th>
+								<th><?=get_phrase('new');?></th>
+								<th><?=get_phrase('submitted');?></th>
+								<th><?=get_phrase('approved');?></th>
+								<th><?=get_phrase('declined');?></th>
+								<th><?=get_phrase('total');?></th>
+								<th><?=get_phrase('status');?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								$limits = $this->db->get_where('plans_limits',array('fy'=>$fyr,'icpNo'=>$this->session->center_id))->result_object();
+								//print_r($limits);
+								foreach($limits as $limit):
+									
+									$rev_rec = $this->db->get_where('accounts',array('accID'=>$limit->revenue_id))->row();
+									
+							?>
+								<tr>
+									<td><?=$rev_rec->AccText;?> - <?=$rev_rec->AccName;?></td>
+									<td><?=$limit->fy;?></td>
+									<td style="text-align: right;"><?=number_format($limit->amount,2);?></td>
+									<?php
+										$chk_limit = $this->finance_model->limits_status_check($limit->revenue_id,$this->session->center_id,$limit->fy);
+									?>
+									<td style="text-align: right;"><?=number_format($this->finance_model->plans_annual_totals($limit->fy,$this->session->center_id,$limit->revenue_id,0),2);?></td>
+									<td style="text-align: right;"><?=number_format($this->finance_model->plans_annual_totals($limit->fy,$this->session->center_id,$limit->revenue_id,1),2);?></td>
+									<td style="text-align: right;"><?=number_format($this->finance_model->plans_annual_totals($limit->fy,$this->session->center_id,$limit->revenue_id,2),2);?></td>
+									<td style="text-align: right;"><?=number_format($this->finance_model->plans_annual_totals($limit->fy,$this->session->center_id,$limit->revenue_id,3),2);?></td>
+									<td style="text-align: right;"><?=number_format($this->finance_model->plans_annual_totals($limit->fy,$this->session->center_id,$limit->revenue_id),2);?></td>
+									<td><span class="label label-<?=$chk_limit->color?>"><?=$chk_limit->msg.' - ['.number_format($chk_limit->dif,2).']';?></span></td>
+								</tr>
+							<?php
+								endforeach;
+							?>
+						</tbody>
+					</table>
+					</div>
+				</div>
+				
+				
+				
+				<div class="break"></div>
+				
+				<div class="tab-pane" id="budget-summary">
+						<!--<button onclick="PrintElem('#summary')" class="btn btn-info btn-icon"><i class="fa fa-print"></i><?=get_phrase('print');?></button>-->
+						
+						<div id="summary">
+						
+						<?php
+							$rev_accs = $this->finance_model->budgeted_revenue_accounts();
+							//print_r($rev_accs);
+							foreach($rev_accs as $rev):
+						?>
+						<span style="font-weight: bold;font-size: 15pt;"><?=$rev->AccText;?> - <?=$rev->AccName;?> <?=get_phrase('budget_summary');?></span>
+						
+						<table class="table table-striped table-bordered display">
+				
+							<thead>
+								<tr>
+									<th><?=get_phrase('revenue_account');?></th>
+									<th><?=get_phrase('annual_total');?></th>
+									<?php
+										$months = $this->finance_model->months_in_year($this->session->center_id);
+										
+										$cnt_months = range(1, 12);
+										
+										foreach($cnt_months as $cnt):
+									?>
+										<th style="text-align: center;"><?=$months['month_'.$cnt."_amount"];?></th>												
+										
+									<?php
+										endforeach;
+									?>
+						
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$exp_accs = $this->finance_model->expense_accounts($rev->accID);
+									
+									foreach($exp_accs as $exp):
+										if($this->finance_model->plans_per_account($fyr,$this->session->center_id,$exp->AccNo)>0){
+								?>
+									<tr>
+										<td><?=$exp->AccText;?></td>
+										<td style="font-weight: bold;text-align: right;"><?=number_format($this->finance_model->plans_per_account($fyr,$this->session->center_id,$exp->AccNo),2)?></td>
+										
+								<?php
+									foreach($cnt_months as $spread):
+								?>
+									<td><?=number_format($this->finance_model->plans_per_account_per_month($fyr,$this->session->center_id,$exp->AccNo,$spread),2);?></td>								
+								<?php
+									endforeach;
+								?>		
+										
+									</tr>
+								<?php
+									}
+									endforeach;	
+								?>
+								
+							</tbody>
+							<tfoot>
+								<tr>
+									<td style="font-weight: bold;"><?=get_phrase('total');?></td>
+									<td style="text-align: right;font-weight: bold;"><?=number_format($this->finance_model->plans_annual_totals($fyr,$this->session->center_id,$rev->accID),2);?></td>
+									
+									<?php
+										foreach($cnt_months as $spread_footer):
+									?>
+										<td><?=number_format($this->finance_model->plans_per_month($fyr,$this->session->center_id,$rev->accID,$spread_footer),2);?></td>
+									<?php
+										endforeach;
+									?>
+									
+								</tr>
+							</tfoot>
+							
+						</table>
+						<?php
+							endforeach;
+						?>
+					</div>
+				</div>
+				
+				
+				
+				<div class="tab-pane active" id="budget-schedules">
+					<div class="pull-left hidden-print">
+						<button onclick="new_budget_item(this);" class="btn btn-primary btn-icon"><i class="fa fa-plus-square"></i><?=get_phrase('new_budget_item');?></button>
+						<!--<button onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/delete_budget/<?php echo $this->db->get_where('planheader',array('fy'=>$fyr))->row()->planHeaderID?>');"  class="btn btn-red btn-icon"><i class="fa fa-trash"></i><?=get_phrase('delete');?></button>-->
+						<button onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_set_fy/<?php echo $fyr;?>/<?php echo $fyr+1;?>');" class="btn btn-warning btn-icon"><i class="fa fa-gg"></i><?=get_phrase('clone');?></button>
+						<button onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/mass_submit/<?php echo $this->db->get_where('planheader',array('fy'=>$fyr))->row()->planHeaderID?>');" class="btn btn-info btn-icon"><i class="fa fa-send"></i><?=get_phrase('mass_submit');?></button>
+					</div>
+				<br/><hr/>
+				
+				<div id="schedules">
+					<?php
+						$budgeted_revenue_accounts = $this->finance_model->budgeted_revenue_accounts();
+						
+						foreach($budgeted_revenue_accounts as $budgeted):
+					?>
+					<span style="font-weight: bold;font-size: 15pt;"><?=$budgeted->AccText;?> - <?=$budgeted->AccName;?> <?=get_phrase('budget_schedules');?></span>
+					
+					<table class="table table-striped table-bordered display" style="width: 100%;">
+
+							<thead>
+								<tr>
+									<th style="display: none;"><?=get_phrase('action');?></th>
+									<th><?=get_phrase('details');?></th>
+									<th><?=get_phrase('quantity');?></th>
+									<th><?=get_phrase('unit_cost');?></th>
+									<th><?=get_phrase('frequency');?></th>
+									<th><?=get_phrase('total_cost');?></th>
+									<th><?=get_phrase('budget_tag');?></th>
+									<th style="display: none;"><?=get_phrase('validation_check');?></th>
+										<?php
+											$months = $this->finance_model->months_in_year($this->session->center_id,true);
+												
+											foreach($months as $month):
+										?>
+											<th><?=$month;?></th>
+										<?php
+											endforeach;
+										?>
+									<th><?=get_phrase('last_action_date');?></th>
+									<th><?=get_phrase('status');?></th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<?php
+										$expense_accounts = $this->finance_model->expense_accounts($budgeted->accID);
+										//print_r($expense_accounts);
+											
+										foreach($expense_accounts as $expense):
+											if($this->finance_model->plans_per_account($fyr,$this->session->center_id,$expense->AccNo)>0){
+								?>
+									<tr class="table-active"><td class="schedule_header" style="background-color: grey;color: white;" colspan="21"><?=$expense->AccText.' - '.$expense->AccName;?></td></tr>
+									
+									<?php
+											$schedules = $this->db->join('planheader','planheader.planHeaderID=plansschedule.planHeaderID')->get_where('plansschedule',array('AccNo'=>$expense->AccNo,'fy'=>$fyr,'icpNo'=>$this->session->center_id))->result_object();
+											
+											foreach($schedules as $schedule):
+												
+												$color_code = "";
+												
+												switch($schedule->approved):
+												
+													case 0:
+														
+														$color_code = "btn-primary";
+														break;
+														
+													case 1:
+														
+														$color_code = "btn-info";
+														break;
+													
+													case 2:	
+														
+														$color_code = "btn-success";
+														break;
+													
+													case 3:	
+														
+														$color_code = "btn-danger";
+														break;	
+														
+													default:
+													
+													$color_code = "";		
+												
+												endswitch;
+												
+									?>
+											
+											<tr class="tr-schedule">
+												<td  style="display: none;">
+													<div class="btn-group">
+									                    <button type="button" class="btn btn-default btn-sm dropdown-toggle <?=$color_code;?>" data-toggle="dropdown">
+									                        <?php echo get_phrase('action');?> <span class="caret"></span>
+									                    </button>
+									                    <ul class="dropdown-menu dropdown-default pull-left" role="menu">
+									                   		<li>
+									                        	<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_edit_budget_item/<?php echo $schedule->scheduleID;?>');">
+									                            	<i class="fa fa-binoculars"></i>
+																		<?php echo get_phrase('edit');?>
+									                               	</a>
+									                        </li>
+									                        
+									                        <li class="divider"></li>
+									                   	
+									                   		
+									                   		<li>
+									                        	<a href="#" onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/duplicate/<?php echo $schedule->scheduleID;?>');">
+									                            	<i class="entypo-docs"></i>
+																		<?php echo get_phrase('duplicate');?>
+									                               	</a>
+									                        </li>
+									                        
+									                        <li class="divider"></li>
+									                   	
+									                   		
+									                   		<li>
+									                        	<a href="#" onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/delete/<?php echo $schedule->scheduleID;?>');">
+									                            	<i class="fa fa-trash"></i>
+																		<?php echo get_phrase('delete');?>
+									                               	</a>
+									                        </li>
+									                    
+									                    	    
+									                        <li class="divider"></li>
+									                   	
+									                   		
+									                   		<li>
+									                        	<a href="#" onclick="confirm_action('<?php echo base_url();?>ifms.php/partner/plans/item_submit/<?php echo $schedule->scheduleID;?>');">
+									                            	<i class="fa fa-send"></i>
+																		<?php echo get_phrase('submit');?>
+									                               	</a>
+									                        </li>
+									                        
+									                   		<li class="divider"></li>
+									                   	
+									                   		
+									                   		<li>
+									                        	<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_view_budget_notes/<?php echo $schedule->scheduleID;?>');">
+									                            	<i class="fa fa-book"></i>
+																		<?php echo get_phrase('notes');?>
+									                               	</a>
+									                        </li>
+															
+															<li class="divider"></li>
+									                   	
+									                   		
+									                   		<!--<li>
+									                        	<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_edit_revenue_account/<?php echo $schedule->scheduleID;?>');">
+									                            	<i class="fa fa-eye"></i>
+																		<?php echo get_phrase('comments');?>
+									                               	</a>
+									                     </li>-->
+									                    </ul>
+									                  </div> 
+									                 <?php if($schedule->notes) {?>
+																<i style="color:green;cursor:pointer;" class="fa fa-book" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_view_budget_notes/<?php echo $schedule->scheduleID;?>');"></i>
+									                 <?php }?>
+												</td>
+												<td><?=$schedule->details;?></td>
+												<td><?=$schedule->qty;?></td>
+												<td><?=$schedule->unitCost;?></td>
+												<td><?=$schedule->often;?></td>
+												<td class="td-total-cost" style="text-align: right;font-weight: bold;"><?=$schedule->totalCost;?></td>
+												<td><?php
+														echo get_phrase("not_specified");;
+														if($this->db->get_where('plan_item_tag',array('plan_item_tag_id'=>$schedule->plan_item_tag_id))->num_rows()>0){
+															echo $this->db->get_where('plan_item_tag',array('plan_item_tag_id'=>$schedule->plan_item_tag_id))->row()->name;
+														}
+														
+													?>
+												</td>
+												<td  style="display: none;" class="validate"></td>
+												<?php
+													foreach($cnt_months as $schedule_spread):
+														$alloc = "month_".$schedule_spread."_amount";
+												?>
+												<td class='schedule-amount' style="text-align: right;"><?=$schedule->$alloc;?></td>
+
+												<?php
+													endforeach;
+												?>
+												<td><?=$schedule->stmp;?></td>
+												<?php
+													$approval = array('new','submitted','approved','declined');
+												?>
+												<td><?=ucfirst($approval[$schedule->approved]);?></td>
+											</tr>
+											<tr>
+												<td colspan="22" class="print-only"><?=$schedule->notes;?></td>
+											</tr>
+									
+									<?php
+									
+											endforeach;
+									?>	
+								
+								<?php
+								
+											}
+										endforeach;	
+								?>
+									
+							
+							</tbody>
+						</table>	
+					
+					<?php
+						endforeach;
+					?>
+					
+				</div>	
+			
+				
+				</div>	
+				
+			
+			<?php
+				}else{
+					echo get_phrase('no_budget_items_available');				
+				}
+			?>
+			
+			</div>			
+		</div>
+	</div>
+
+</div>
+
+<script>
+
+function new_budget_item(elem){
+	showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_new_budget_item/'+$('#scrolled_fy').val());
+	
+}
+	$('.scroll-fy').click(function(){
+		var fy = $(this).siblings('input').val();
+		
+		if($(this).attr('id')==='next_fy'){
+			$(this).siblings('input').val(parseInt(fy)+1); 
+		}else{
+			$(this).siblings('input').val(parseInt(fy)-1);
+		}
+		
+		
+		$(this).attr('href','<?php echo base_url();?>ifms.php/partner/scroll_plan/'+$(this).siblings('input').val());
+		
+	});
+
+    function PrintElem(elem)
+    {
+        $(elem).printThis({ 
+		    debug: false,              
+		    importCSS: true,             
+		    importStyle: true,         
+		    printContainer: false,       
+		    loadCSS: "", 
+		    pageTitle: "<?php echo get_phrase('budget_schedules');?>",             
+		    removeInline: false,        
+		    printDelay: 333,            
+		    header: null,             
+		    formValues: true          
+		});
+    }
+
+$(document).ready(function(){	
+
+	$('th,schedule_header').css('font-weight','bold');
+	
+	
+	$('.tr-schedule').each(function(){
+
+		var total = 0;	
+		
+		$(this).find('.schedule-amount').each(function(){
+			total += parseFloat($(this).html());
+		});
+		
+		if(parseFloat(total)===parseFloat($(this).find('.td-total-cost').html())){
+			$(this).find('.validate').html('<span class="label label-success"><?=get_phrase('ok');?></span>');
+		}else{
+			$(this).find('.validate').html('<span class="label label-danger"><?=get_phrase('incorrect');?></span>');
+		}
+		
+	});
+	
+	
+});
+
+    function PrintElem(elem)
+    {
+        $(elem).printThis({ 
+		    debug: false,              
+		    importCSS: true,             
+		    importStyle: true,         
+		    printContainer: false,       
+		    loadCSS: "", 
+		    pageTitle: ".",             
+		    removeInline: false,        
+		    printDelay: 333,            
+		   	header:null,            
+		    formValues: true          
+		});
+    }
+</script>
+		

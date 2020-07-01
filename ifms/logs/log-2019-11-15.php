@@ -1,0 +1,293 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2019-11-15 06:17:49 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 81
+ERROR - 2019-11-15 06:17:49 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 82
+ERROR - 2019-11-15 06:19:49 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 81
+ERROR - 2019-11-15 06:19:49 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 82
+ERROR - 2019-11-15 06:22:51 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 81
+ERROR - 2019-11-15 06:22:51 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 82
+ERROR - 2019-11-15 06:23:03 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 81
+ERROR - 2019-11-15 06:23:03 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 82
+ERROR - 2019-11-15 07:05:26 --> 404 Page Not Found: Facilitator/assets
+ERROR - 2019-11-15 07:49:03 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 08:11:03 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 08:35:45 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 81
+ERROR - 2019-11-15 08:35:45 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 82
+ERROR - 2019-11-15 08:36:22 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 81
+ERROR - 2019-11-15 08:36:22 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 82
+ERROR - 2019-11-15 08:52:44 --> 404 Page Not Found: Facilitator/assets
+ERROR - 2019-11-15 08:53:20 --> 404 Page Not Found: Facilitator/assets
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:50 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:03:51 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 09:33:24 --> 404 Page Not Found: Facilitator/assets
+ERROR - 2019-11-15 10:57:31 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 10:57:35 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 12:18:01 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 12:21:33 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:42:22 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:43:20 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 12:44:03 --> Severity: Warning --> substr_count(): Empty substring /home/compatl8/public_html/tools/ifms/controllers/Partner.php 761
+ERROR - 2019-11-15 14:32:37 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 14:32:38 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 14:32:39 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-11-15 21:00:02 --> Severity: Warning --> rmdir(accountant+dashboard): No such file or directory /home/compatl8/public_html/tools/ifms/controllers/Crons.php 39

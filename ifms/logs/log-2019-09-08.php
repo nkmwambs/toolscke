@@ -1,0 +1,55 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2019-09-08 02:18:20 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-09-08 16:46:34 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 12
+ERROR - 2019-09-08 16:46:41 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:46:42 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:46:45 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:46:45 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:46:53 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:01 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:01 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:18 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:33 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:34 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:37 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:37 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:45 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:53 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:47:53 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:10 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:35 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:37 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:40 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:40 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:48 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:55 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:48:55 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:49:13 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:55:26 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 12
+ERROR - 2019-09-08 16:55:33 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:55:34 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:55:38 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:55:38 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:55:45 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:55:53 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:55:53 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:56:10 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:11 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:13 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:16 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:16 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:24 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:31 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:31 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 16:59:49 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:14 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 12
+ERROR - 2019-09-08 17:00:21 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:23 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:26 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:26 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:34 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:41 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:41 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 17:00:58 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/health/dashboard.php 252
+ERROR - 2019-09-08 21:00:02 --> Severity: Warning --> rmdir(accountant+dashboard): No such file or directory /home/compatl8/public_html/tools/ifms/controllers/Crons.php 39

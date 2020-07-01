@@ -1,0 +1,4763 @@
+a:2:{s:6:"expire";i:1561981996;s:7:"headers";a:0:{}}ENDCI---><!DOCTYPE html>
+<html lang="en" dir="">
+<head>
+	
+	<title>Finance Dashboard | Toolkit</title>
+    
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Techsys Inc Softwares" />
+	<meta name="author" content="Techsys Inc Softwares" />
+	
+	
+
+	<!--<link rel="stylesheet" href="http://localhost/tools/assets/css/bootstrap.css">
+<script src="http://localhost/tools/assets/js/jquery-1.11.0.min.js"></script>-->
+
+		<!-- Bootstrap CDN -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		
+		<!--Datatables CSS CDNs-->
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+		<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" /> -->
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css"/>
+
+		<!--Jquery CDN Minified -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+		<!--Datatables JS CDNs-->		
+		<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+		
+		<!--Bootstrap JS CDNs-->
+		<script src="http://localhost/tools/assets/js/bootstrap.js"></script>
+		
+		<!--Datatables Buttons JS CDNs-->
+		<script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+		<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+		<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+
+
+
+<link rel="stylesheet" href="http://localhost/tools/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/font-icons/entypo/css/entypo.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/neon-core.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/neon-theme.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/neon-forms.css">
+
+<link rel="stylesheet" href="http://localhost/tools/assets/css/custom.css">
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+
+<script src="http://localhost/tools/assets/js/accounting.min.js"></script>
+
+<link rel="stylesheet" href="http://localhost/tools/assets/css/columns.css">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
+
+
+    <link rel="stylesheet" href="http://localhost/tools/assets/css/skins/blue.css">
+
+
+
+        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="http://localhost/tools/assets/images/favicon.png">
+<link rel="stylesheet" href="http://localhost/tools/assets/css/font-icons/font-awesome/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="http://localhost/tools/assets/js/vertical-timeline/css/component.css">
+<link rel="stylesheet" href="http://localhost/tools/assets/js/datatables/responsive/css/datatables.responsive.css">
+
+<!--Morris Charts-->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<!--Amcharts-->
+<script src="http://localhost/tools/assets/js/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/pie.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/serial.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/gauge.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/funnel.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/radar.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/amexport.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/rgbcolor.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/canvg.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/jspdf.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/filesaver.js" type="text/javascript"></script>
+<script src="http://localhost/tools/assets/js/amcharts/exporting/jspdf.plugin.addimage.js" type="text/javascript"></script>
+
+<style>
+  .datepicker{z-index:1151 !important;}
+</style>
+
+<script>
+    function checkDelete()
+    {
+        var chk=confirm("Are You Sure To Delete This !");
+        if(chk)
+        {
+          return true;  
+        }
+        else{
+            return false;
+        }
+    }
+ 
+
+</script>	
+</head>
+<body class="page-body skin-blue" >
+	<div class="page-container sidebar-collapsed " >
+		    
+<div class="sidebar-menu">
+    <header class="logo-env" >
+
+        <!-- logo -->
+        <div class="logo" style="">
+            <a href="http://localhost/tools/">
+                <img src="http://localhost/tools/uploads/logo.png"  class="" width="200"/>
+            </a>
+        </div>
+
+        <!-- logo collapse icon -->
+        <div class="sidebar-collapse" style="">
+            <a href="#" class="sidebar-collapse-icon with-animation">
+
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+
+        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+        <div class="sidebar-mobile-menu visible-xs">
+            <a href="#" class="with-animation">
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+    </header>
+
+    <div style="border-top:1px solid rgba(69, 74, 84, 0.7);"></div>	
+    <ul id="main-menu" class="">
+        <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+        <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+
+
+        <!-- DASHBOARD -->
+        <li class="active ">
+            <a href="http://localhost/tools/ifms.php/accountant/dashboard">
+                <i class="entypo-gauge"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        
+        <!-- Switch Board 
+        <li class=" ">
+            <a href="http://localhost/tools/ifms.php/partner/switchboard">
+                <i class="entypo-retweet"></i>
+                <span>Switchboard</span>
+            </a>
+        </li>-->
+        
+        
+        <!-- CHART OF ACCOUNTS 
+        <li class="active ">
+            <a href="http://localhost/tools/ifms.php/partner/finance_settings">
+                <i class="entypo-gauge"></i>
+                <span>Accounts Chart</span>
+            </a>
+        </li>
+        -->
+			
+        
+
+
+    </ul>
+
+</div>
+	
+		<div class="main-content">
+		
+			<div class="row">
+	<div class="col-md-12 col-sm-12 clearfix" style="text-align:center;">
+
+			<h2 style="font-weight:200; margin:0px;">Toolkit</h2>
+    	
+    </div>
+	<!-- Raw Links -->
+	<div class="col-md-12 col-sm-12 clearfix ">
+		
+        <ul class="list-inline links-list pull-left">
+        <!-- Language Selector -->			
+           <li class="dropdown language-selector">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        	<i class="entypo-user"></i> Accountant                    </a>
+
+			</li>
+        </ul>
+        
+        
+		<ul class="list-inline links-list pull-right">
+			
+			<!-- Language Selector 			
+           <li class="dropdown language-selector">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        <i class="entypo-globe"></i> language
+                    </a>
+				
+				<ul class="dropdown-menu pull-left">
+					                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/english">
+                                            <img src="assets/images/flag/english.png" style="width:16px; height:16px;" />	
+												 <span>english</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/swahili">
+                                            <img src="assets/images/flag/swahili.png" style="width:16px; height:16px;" />	
+												 <span>swahili</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/spanish">
+                                            <img src="assets/images/flag/spanish.png" style="width:16px; height:16px;" />	
+												 <span>spanish</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://localhost/tools/index.php?multilanguage/select_language/hindi">
+                                            <img src="assets/images/flag/hindi.png" style="width:16px; height:16px;" />	
+												 <span>hindi</span>
+                                        </a>
+                                    </li>
+                                                    
+				</ul>
+				
+			</li>
+			-->
+			<!--<li class="sep"></li>-->
+			
+			<li>
+				<a href="http://localhost/tools/admin.php">
+					Close App <i class="entypo-logout right"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+</div>
+
+<hr style="margin-top:0px;" />
+           <h3 style="">
+           	<i class="entypo-right-circled"></i> 
+				Finance Dashboard           </h3>
+
+			<div class='row'>
+	<div class='col-xs-12'>
+		<form class='form-horizontal form-groups-bordered validate'>
+
+			<div class="form-group">
+				<label class="control-label col-xs-3">Parameter</label>
+				<div class='col-xs-9' id=''>
+					<select class="form-control select2" multiple="multiple">
+						<option>Select parameter</option>
+						<option>Budget Variance</option>
+						<option>Count of petty cash transactions</option>
+						<option>Percent petty cash transaction</option>
+						<option>Bank statement available</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-xs-3">FCP</label>
+				<div class="col-xs-9">
+					<select class="form-control select2" multiple="multiple">
+						<option>Select FCP</option>
+						<option>KE0200</option>
+						<option>KE0415</option>
+						<option>KE0719</option>
+						<option>KE0910</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-3">Risk Levels</label>
+				<div class="col-xs-9">
+					<select class="form-control select2" multiple="multiple">
+						<option>Select Risk Level</option>
+						<option>Low</option>
+						<option>Medium</option>
+						<option>High</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+
+				<div class="col-xs-offset-6 col-xs-6">
+					<button class="btn btn-primary">
+						Filter
+					</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</div>
+<hr/>
+
+<div class="row">
+	
+		<div class="col-xs-4">
+		
+			<a href="#" id='btn_last_month' type='submit' class='btn btn-success pull-left'><i class='fa fa-angle-left'></i> Previous Month</a>
+			
+		</div>
+		
+	   <div class="col-xs-4" style="text-align: center;">
+			<span><h4>June 2019</h4> </span>
+			
+	   </div>
+	   	<div class="col-xs-4">
+			
+			<a id='btn_next_month' type='submit' href="#" class='btn btn-success pull-right'>Next Month <i class='fa fa-angle-right'></i></a>
+			
+		</div>
+	
+	
+</div>
+<hr />
+<div class='row'>
+	<div class='col-xs-12'>
+		
+		<table  class='table table-striped table-responsive datatable'>
+			<thead>
+				
+				<tr>
+					<th rowspan="2">FCP ID</th>
+					<th rowspan="2">Risk</th>
+										<th colspan="7">Non Requested Parameters</th>
+														</tr>
+				<tr>
+				
+								     
+				     <th>MFR Submitted</th>
+				 				     
+				     <th>Book Bank Balance</th>
+				 				     
+				     <th>Bank Statement uploaded</th>
+				 				     
+				     <th>Statement Bank Balance</th>
+				 				     
+				     <th>Outstanding Cheques</th>
+				 				     
+				     <th>Deposit in transit</th>
+				 				     
+				     <th>Date MFR Submitted</th>
+				 				<!--Requested Parameters-->
+				
+								
+				</tr>
+			</thead>
+			
+			<tbody>
+								   <tr>
+				   	 <td>KE200</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>992,984.00</td>
+				   	  				   	   <td>610,140.70</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE201</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE202</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>539,853.00</td>
+				   	  				   	   <td>771,661.42</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE203</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE204</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>371,549.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE205</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE206</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>263,303.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE207</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE208</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE209</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>60,400.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE210</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE211</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>728,240.00</td>
+				   	  				   	   <td>723,279.82</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE212</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>464,890.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE213</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE214</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>641,349.00</td>
+				   	  				   	   <td>53,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE215</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>32,768.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE216</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>965,763.00</td>
+				   	  				   	   <td>863,259.29</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE217</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,038,186.00</td>
+				   	  				   	   <td>869,782.02</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE221</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>642,788.71</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE222</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>557,409.00</td>
+				   	  				   	   <td>703,114.66</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE223</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>388,005.00</td>
+				   	  				   	   <td>822,854.80</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE224</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,082,388.00</td>
+				   	  				   	   <td>943,576.60</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE225</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>601,250.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE226</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>530,682.00</td>
+				   	  				   	   <td>1,052,351.87</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE227</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>631,221.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE228</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>553,773.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE229</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>140,302.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE230</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>507,428.00</td>
+				   	  				   	   <td>16,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE231</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>22,400.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE232</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>168,953.09</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE301</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2,140,094.31</td>
+				   	  				   	   <td>1,070,499.64</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE304</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>376,482.00</td>
+				   	  				   	   <td>30,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE307</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>564,400.00</td>
+				   	  				   	   <td>783,700.14</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE313</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>715,774.00</td>
+				   	  				   	   <td>1,152,240.20</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE314</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>720,116.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE315</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,736,867.00</td>
+				   	  				   	   <td>892,668.70</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE316</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>225,235.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE320</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>775,333.00</td>
+				   	  				   	   <td>2,045,710.90</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE322</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,443,904.91</td>
+				   	  				   	   <td>1,269,920.20</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE323</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>554,726.00</td>
+				   	  				   	   <td>706,288.42</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE324</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,178,000.00</td>
+				   	  				   	   <td>1,162,772.22</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE325</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>208,802.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE326</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>226,754.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE328</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>950,963.00</td>
+				   	  				   	   <td>10,175.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE329</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>194,298.00</td>
+				   	  				   	   <td>985,234.91</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE330</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>248,160.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE331</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2,390,611.00</td>
+				   	  				   	   <td>977,477.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE332</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>348,044.00</td>
+				   	  				   	   <td>721,083.56</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE333</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>236,687.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE334</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,307,582.82</td>
+				   	  				   	   <td>1,364,645.02</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE335</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>740,419.00</td>
+				   	  				   	   <td>746,430.31</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE336</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>19,555.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE337</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>696,710.00</td>
+				   	  				   	   <td>852,763.37</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE338</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>958,833.00</td>
+				   	  				   	   <td>762,533.34</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE339</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>585,783.00</td>
+				   	  				   	   <td>751,865.70</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE340</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,061,457.00</td>
+				   	  				   	   <td>12,400.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE342</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>498,122.00</td>
+				   	  				   	   <td>76,450.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE343</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>480,482.00</td>
+				   	  				   	   <td>707,313.97</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE344</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>90,834.00</td>
+				   	  				   	   <td>132,775.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE345</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>-48,418.00</td>
+				   	  				   	   <td>461,900.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE346</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>744,822.00</td>
+				   	  				   	   <td>727,075.73</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE347</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>984,736.00</td>
+				   	  				   	   <td>629,648.36</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE348</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2,228,127.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE349</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>492,448.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE352</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>934,865.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE353</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>374,191.00</td>
+				   	  				   	   <td>941,751.21</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE354</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>790,403.00</td>
+				   	  				   	   <td>622,748.46</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE355</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,596,245.00</td>
+				   	  				   	   <td>18,720.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE356</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>495,758.00</td>
+				   	  				   	   <td>738,588.79</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE357</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2,155,510.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE358</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,001,944.00</td>
+				   	  				   	   <td>851,394.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE359</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>878,631.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE360</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>46,822.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE362</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>606,133.00</td>
+				   	  				   	   <td>726,172.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE363</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>590,218.97</td>
+				   	  				   	   <td>775,987.47</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE364</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>630,433.00</td>
+				   	  				   	   <td>1,171,218.50</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE365</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>558,606.00</td>
+				   	  				   	   <td>817,155.99</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE366</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>249,652.00</td>
+				   	  				   	   <td>737,486.35</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE367</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>587,855.00</td>
+				   	  				   	   <td>876,865.80</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE368</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>573,748.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE369</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>274,475.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE370</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>367,420.00</td>
+				   	  				   	   <td>10,500.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE371</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>796,276.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE372</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>387,480.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE373</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>718,819.00</td>
+				   	  				   	   <td>5,040.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE374</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,101,232.50</td>
+				   	  				   	   <td>9,740.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE375</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>328,777.00</td>
+				   	  				   	   <td>782,180.35</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE376</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>205,112.00</td>
+				   	  				   	   <td>42,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE377</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>89,440.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE378</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>481,854.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE379</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>15,309.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE380</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>386,828.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE381</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>445,351.00</td>
+				   	  				   	   <td>12,830.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE382</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>391,423.00</td>
+				   	  				   	   <td>723,432.55</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE383</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>713,742.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE384</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>215,323.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE385</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,185,687.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE386</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>789,323.00</td>
+				   	  				   	   <td>17,070.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE387</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>567,985.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE388</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>484,028.00</td>
+				   	  				   	   <td>645,558.13</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE389</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>304,889.00</td>
+				   	  				   	   <td>659,385.17</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE390</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>695,450.00</td>
+				   	  				   	   <td>21,830.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE391</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>130,451.00</td>
+				   	  				   	   <td>563,490.69</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE392</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>251,315.55</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE393</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>857,132.00</td>
+				   	  				   	   <td>692,274.55</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE394</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>780,101.00</td>
+				   	  				   	   <td>803,156.53</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE395</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>833,786.00</td>
+				   	  				   	   <td>881,004.54</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE396</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>556,461.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE397</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>592,829.00</td>
+				   	  				   	   <td>576,797.66</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE398</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>385,399.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE399</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>251,740.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE400</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>597,718.00</td>
+				   	  				   	   <td>40,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE401</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,055,489.00</td>
+				   	  				   	   <td>1,009,257.31</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE403</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>129,014.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE404</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,137,170.00</td>
+				   	  				   	   <td>3,043,266.18</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE405</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,245,045.00</td>
+				   	  				   	   <td>702,015.36</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE407</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,787,482.00</td>
+				   	  				   	   <td>797,032.20</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE411</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,030,586.95</td>
+				   	  				   	   <td>693,624.40</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE412</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>324,781.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE413</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>451,712.56</td>
+				   	  				   	   <td>214,555.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE414</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>801,997.20</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE415</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>481,090.00</td>
+				   	  				   	   <td>679,576.40</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE416</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,408,864.00</td>
+				   	  				   	   <td>1,199,254.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE420</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,454,756.50</td>
+				   	  				   	   <td>717,317.89</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE423</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>520,650.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE424</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>533,212.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE425</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>539,122.00</td>
+				   	  				   	   <td>883,544.10</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE426</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>518,003.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE427</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>923,583.00</td>
+				   	  				   	   <td>495,667.50</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE428</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>401,092.00</td>
+				   	  				   	   <td>841,163.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE429</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>407,284.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE430</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>263,386.50</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE431</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>751,327.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE432</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>373,201.00</td>
+				   	  				   	   <td>799,019.75</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE433</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>252,149.00</td>
+				   	  				   	   <td>724,125.09</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE434</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>429,635.00</td>
+				   	  				   	   <td>807,007.10</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE435</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>980,532.00</td>
+				   	  				   	   <td>751,487.23</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE436</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE442</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>681,319.00</td>
+				   	  				   	   <td>977,157.03</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE443</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE444</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>766,797.00</td>
+				   	  				   	   <td>886,657.08</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE445</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>679,277.00</td>
+				   	  				   	   <td>1,009,273.39</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE446</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>779,056.00</td>
+				   	  				   	   <td>948,647.94</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE447</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,492,663.00</td>
+				   	  				   	   <td>1,557,850.99</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE448</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>436,873.00</td>
+				   	  				   	   <td>1,065,261.30</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE451</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,054,343.00</td>
+				   	  				   	   <td>755,192.45</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE452</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>89,035.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE453</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>160,761.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE454</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,257,668.00</td>
+				   	  				   	   <td>792,438.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE455</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>384,878.00</td>
+				   	  				   	   <td>865,979.11</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE456</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,009,764.00</td>
+				   	  				   	   <td>839,310.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE457</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>599,394.00</td>
+				   	  				   	   <td>712,004.04</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE458</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>382,155.00</td>
+				   	  				   	   <td>765,051.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE460</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>6,480.00</td>
+				   	  				   	   <td>716,786.77</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE461</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,457,286.00</td>
+				   	  				   	   <td>1,036,448.41</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE462</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>591,920.00</td>
+				   	  				   	   <td>812,437.91</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE463</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,738,373.00</td>
+				   	  				   	   <td>606,175.30</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE464</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>777,343.00</td>
+				   	  				   	   <td>1,429,449.70</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE465</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>333,615.58</td>
+				   	  				   	   <td>788,214.17</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE466</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,186,236.00</td>
+				   	  				   	   <td>859,598.49</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE467</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,228,723.00</td>
+				   	  				   	   <td>938,555.99</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE468</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>21,410.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE469</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,579,679.00</td>
+				   	  				   	   <td>821,478.92</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE500</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>716,409.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE502</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>87,640.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE504</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>766,100.00</td>
+				   	  				   	   <td>834,185.98</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE505</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,603,454.25</td>
+				   	  				   	   <td>729,546.42</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE506</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>126,200.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE507</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>222,618.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE508</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,246,266.00</td>
+				   	  				   	   <td>813,730.45</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE528</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,911,828.00</td>
+				   	  				   	   <td>864,379.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE530</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>164,195.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE531</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>304,485.00</td>
+				   	  				   	   <td>790,463.53</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE532</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>99,650.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE534</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>302,977.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE550</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>367,919.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE551</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,269,201.40</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE552</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>220,502.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE553</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>367,278.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE554</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>271,090.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE555</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE556</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>357,015.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE560</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>610,575.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE563</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>233,055.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE588</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>125,900.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE589</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>388,493.00</td>
+				   	  				   	   <td>762,886.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE590</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>391,665.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE591</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>522,089.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE592</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>129,330.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE593</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>2,121,210.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE596</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>639,041.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE597</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>297,179.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE599</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>461,836.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE600</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>251,901.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE603</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,209,247.00</td>
+				   	  				   	   <td>791,147.83</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE605</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>363,798.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE610</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,415,397.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE611</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,343,472.00</td>
+				   	  				   	   <td>750,866.41</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE612</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>426,118.00</td>
+				   	  				   	   <td>51,450.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE613</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>488,148.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE614</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>503,905.00</td>
+				   	  				   	   <td>773,413.96</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE620</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>571,506.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE622</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>357,339.00</td>
+				   	  				   	   <td>670,316.58</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE623</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>94,961.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE624</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>580,596.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE630</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>885,974.00</td>
+				   	  				   	   <td>21,500.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE631</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>796,046.00</td>
+				   	  				   	   <td>3,450.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE633</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>573,491.00</td>
+				   	  				   	   <td>11,890.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE634</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>721,184.00</td>
+				   	  				   	   <td>1,237,892.12</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE640</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>330,335.00</td>
+				   	  				   	   <td>600,549.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE641</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>672,260.00</td>
+				   	  				   	   <td>25,766.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE642</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>492,157.50</td>
+				   	  				   	   <td>732,231.08</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE643</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>481,138.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE645</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>49,719.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE667</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>364,615.00</td>
+				   	  				   	   <td>904,722.32</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE700</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>959,286.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE701</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>661,450.00</td>
+				   	  				   	   <td>3,600.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE702</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>203,052.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE703</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>598,751.00</td>
+				   	  				   	   <td>718,180.45</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE704</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>472,004.00</td>
+				   	  				   	   <td>16,850.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE705</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>721,922.00</td>
+				   	  				   	   <td>13,718.95</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE706</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>796,410.00</td>
+				   	  				   	   <td>712,931.99</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE707</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,036,411.00</td>
+				   	  				   	   <td>968,588.14</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE708</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>213,654.50</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE709</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>253,075.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE710</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>493,048.36</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE711</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>356,745.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE712</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>548,756.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE713</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>693,210.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE714</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,869,585.00</td>
+				   	  				   	   <td>782,663.25</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE715</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>692,328.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE716</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,083,016.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE717</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,122,471.00</td>
+				   	  				   	   <td>746,847.70</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE718</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>938,875.00</td>
+				   	  				   	   <td>1,056,628.35</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE719</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,257,625.00</td>
+				   	  				   	   <td>815,001.49</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE720</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>847,737.00</td>
+				   	  				   	   <td>911,515.41</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE722</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,019,345.00</td>
+				   	  				   	   <td>571,953.86</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE723</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,082,583.00</td>
+				   	  				   	   <td>809,302.10</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE724</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>302,043.00</td>
+				   	  				   	   <td>632,262.74</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE725</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,095,783.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE726</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>636,425.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE727</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>822,178.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE728</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>160,161.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE729</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>392,710.00</td>
+				   	  				   	   <td>953,792.36</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE731</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>863,381.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE732</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>410,912.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE733</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>396,257.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE734</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>814,074.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE735</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,667,617.00</td>
+				   	  				   	   <td>930,725.62</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE736</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>279,974.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE737</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>849,920.00</td>
+				   	  				   	   <td>990,128.22</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE738</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>664,280.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE739</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,007,481.00</td>
+				   	  				   	   <td>757,649.61</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE740</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>872,506.08</td>
+				   	  				   	   <td>523,092.85</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE742</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>466,031.62</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE743</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>974,787.00</td>
+				   	  				   	   <td>847,807.94</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE744</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,296,304.00</td>
+				   	  				   	   <td>795,708.21</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE745</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>989,779.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE746</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>381,017.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE747</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>338,019.00</td>
+				   	  				   	   <td>1,051,167.45</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE748</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>733,059.00</td>
+				   	  				   	   <td>945,959.72</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE749</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>577,085.00</td>
+				   	  				   	   <td>789,990.78</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE751</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>378,586.50</td>
+				   	  				   	   <td>61,218.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE752</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>898,757.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE753</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>182,151.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE754</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>671,226.79</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE755</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>684,551.00</td>
+				   	  				   	   <td>835,872.49</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE756</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,190,269.00</td>
+				   	  				   	   <td>53,550.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE757</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>139,786.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE758</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>589,770.00</td>
+				   	  				   	   <td>742,087.95</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE759</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>709,742.00</td>
+				   	  				   	   <td>18,690.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE760</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>123,678.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE761</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>965,717.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE762</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>309,533.00</td>
+				   	  				   	   <td>10,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE763</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>362,069.00</td>
+				   	  				   	   <td>613,442.65</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE764</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>326,315.00</td>
+				   	  				   	   <td>1,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE765</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>232,859.78</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE766</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>404,691.00</td>
+				   	  				   	   <td>10,430.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE767</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>449,097.00</td>
+				   	  				   	   <td>38,560.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE768</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,454,956.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE769</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>247,110.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE770</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>682,528.00</td>
+				   	  				   	   <td>923,679.40</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE771</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>421,517.00</td>
+				   	  				   	   <td>1,039,441.90</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE772</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>323,834.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE773</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>555,035.00</td>
+				   	  				   	   <td>690,921.89</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE774</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>251,785.00</td>
+				   	  				   	   <td>867,239.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE775</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,227,979.00</td>
+				   	  				   	   <td>22,600.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE776</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>106,730.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE777</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>98,140.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE778</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>364,392.00</td>
+				   	  				   	   <td>851,445.62</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE781</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,295,669.00</td>
+				   	  				   	   <td>1,665,021.96</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE783</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>110,400.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE784</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,890,934.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE785</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>373,714.00</td>
+				   	  				   	   <td>751,967.84</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE786</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>235,160.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE787</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>20,190.90</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE788</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>71,615.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE789</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>593,449.00</td>
+				   	  				   	   <td>827,445.93</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE790</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>424,561.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE792</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>462,768.00</td>
+				   	  				   	   <td>831,672.99</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE793</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>609,944.00</td>
+				   	  				   	   <td>1,014,179.33</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE799</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>286,893.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE801</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>355,540.00</td>
+				   	  				   	   <td>17,000.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE802</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>387,116.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE805</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>202,760.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE806</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>503,156.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE807</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>605,276.00</td>
+				   	  				   	   <td>941,476.02</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE808</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>768,774.00</td>
+				   	  				   	   <td>776,622.59</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE809</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>201,888.00</td>
+				   	  				   	   <td>1,089,878.50</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE810</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>695,829.00</td>
+				   	  				   	   <td>832,238.92</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE811</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>350,655.00</td>
+				   	  				   	   <td>891,417.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE812</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>471,984.00</td>
+				   	  				   	   <td>973,882.17</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE813</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>767,783.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE814</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>794,864.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE816</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>517,915.00</td>
+				   	  				   	   <td>782,523.66</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE817</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>100,030.00</td>
+				   	  				   	   <td>867,375.30</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE818</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,140,008.00</td>
+				   	  				   	   <td>695,820.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE819</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>940,575.16</td>
+				   	  				   	   <td>841,476.80</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE820</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>903,453.00</td>
+				   	  				   	   <td>1,085,570.49</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE821</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,112,634.00</td>
+				   	  				   	   <td>991,844.45</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE822</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>649,273.00</td>
+				   	  				   	   <td>877,001.67</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE823</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>63,400.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE824</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>505,250.00</td>
+				   	  				   	   <td>1,048,913.30</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE825</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>793,184.00</td>
+				   	  				   	   <td>725,571.55</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE826</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>368,536.00</td>
+				   	  				   	   <td>708,283.66</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE828</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>383,652.00</td>
+				   	  				   	   <td>739,588.94</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE830</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>589,703.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE900</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>349,037.00</td>
+				   	  				   	   <td>832,804.50</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE901</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>264,842.00</td>
+				   	  				   	   <td>885,246.30</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE903</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>707,778.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE904</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>900,462.00</td>
+				   	  				   	   <td>67,830.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE905</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,945,717.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE906</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>540,127.00</td>
+				   	  				   	   <td>880,731.12</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE907</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,142,799.00</td>
+				   	  				   	   <td>954,497.58</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE908</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>234,750.00</td>
+				   	  				   	   <td>793,274.87</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE909</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,109,541.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE910</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>876,657.00</td>
+				   	  				   	   <td>680,409.88</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE912</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,045,670.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE913</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>531,078.00</td>
+				   	  				   	   <td>764,888.75</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE914</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,478,026.90</td>
+				   	  				   	   <td>803,617.31</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE915</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>949,743.00</td>
+				   	  				   	   <td>895,732.49</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE916</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,376,711.00</td>
+				   	  				   	   <td>19,300.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE917</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>666,764.00</td>
+				   	  				   	   <td>976,388.01</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE918</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,254,903.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE920</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>447,253.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE921</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>832,846.00</td>
+				   	  				   	   <td>1,588,802.17</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE922</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>960,856.00</td>
+				   	  				   	   <td>850,418.59</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE233</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>524,298.00</td>
+				   	  				   	   <td>695,885.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE234</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>191,181.00</td>
+				   	  				   	   <td>775,202.99</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE235</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>205,103.00</td>
+				   	  				   	   <td>799,723.27</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE236</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,491,991.00</td>
+				   	  				   	   <td>1,189,588.13</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE237</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>86,428.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE238</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>179,631.00</td>
+				   	  				   	   <td>760,926.71</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE239</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>516,712.00</td>
+				   	  				   	   <td>810,319.30</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE240</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>581,501.00</td>
+				   	  				   	   <td>658,861.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE241</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>212,138.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE245</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>500,152.00</td>
+				   	  				   	   <td>649,435.22</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE280</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>105,740.00</td>
+				   	  				   	   <td>64,800.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE261</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>626,944.00</td>
+				   	  				   	   <td>723,968.32</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE256</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>362,825.00</td>
+				   	  				   	   <td>803,674.35</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE255</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>827,643.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE257</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>505,249.03</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE258</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>1,043,739.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE260</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>614,861.00</td>
+				   	  				   	   <td>50,750.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE485</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>629,325.00</td>
+				   	  				   	   <td>821,704.87</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE999</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>340,500.21</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE279</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>145,480.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+								   <tr>
+				   	 <td>KE286</td>
+				   	 <td>Low</td>
+				   	 				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>No</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td>0.00</td>
+				   	  				   	   <td></td>
+				   	  				   </tr>
+							</tbody>
+			
+		</table>
+
+		
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+
+		var datatable = $(".datatable").dataTable({
+			dom : 'lBfrtip',
+			buttons : ['pdf', 'csv', 'excel', 'copy']
+
+		});
+
+		$(".dataTables_wrapper select").select2({
+			minimumResultsForSearch : -1
+		});
+	});
+
+$('#btn_last_month ,#btn_next_month').on('click',function(ev){
+	
+	if($(this).attr('id')=='btn_last_month')
+	{
+		 var href='http://localhost/tools/ifms.php/accountant/dashboard/1559253600';
+		 
+		 window.location.href=href;
+	}
+	else
+	{
+		var href='http://localhost/tools/ifms.php/accountant/dashboard/1564524000';
+		 
+		 window.location.href=href;
+	}
+	
+	ev.preventDefault();
+	
+});
+</script>
+				<hr />
+		
+		<div class="row">
+			<div class="col-sm-12">
+				Page load time: 7.7520 seconds			</div>
+		</div>
+
+<!-- Footer -->
+<footer class="main">
+	&copy; 2017 <strong>Grants Manager</strong>. 
+    Developed by 
+	<a href="https://www.compassionkenya.com" 
+    	target="_blank">Compassion Kenya</a>
+</footer>
+
+		</div>
+				
+	
+        	
+	</div>
+     <style>
+ 	@media print {
+    /* on modal open bootstrap adds class "modal-open" to body, so you can handle that case and hide body */
+    body.modal-open {
+        visibility: hidden;
+    }
+
+    body.modal-open .modal .modal-header,
+    body.modal-open .modal .modal-body {
+        visibility: visible; /* make visible modal body and header */
+    }
+}
+
+.modal-dialog {
+  min-width: 80%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+	height: 60%;
+    max-height: 60%;
+    height: auto;
+    border-radius: 0;
+   
+}
+
+.modal-body {
+	 overflow-y:auto;
+	 height: 540px;
+}
+ </style>
+ 
+ <script type="text/javascript">
+	function showAjaxModal(url)
+	{
+		// SHOWING AJAX PRELOADER IMAGE
+		jQuery('#modal_ajax .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="http://localhost/tools/uploads/preloader.gif" /></div>');
+		
+		// LOADING THE AJAX MODAL
+		jQuery('#modal_ajax').modal('show', {backdrop: 'true'});
+		
+		// SHOW AJAX RESPONSE ON REQUEST SUCCESS
+		$.ajax({
+			url: url,
+			success: function(response)
+			{
+				jQuery('#modal_ajax .modal-body').html(response);
+			}
+		});
+	}
+	</script>
+    
+    <!-- (Ajax Modal)-->
+    <div class="modal fade" id="modal_ajax" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Toolkit</h4>
+                </div>
+                
+                <div class="modal-body" id="pop_modal_body" style="">
+                
+                    
+                    
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!--<button type="button" class="btn btn-default" onclick="js:window.print()">Print</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <script type="text/javascript">
+	function confirm_modal(delete_url)
+	{
+		jQuery('#modal-4').modal('show', {backdrop: 'static'});
+		document.getElementById('delete_link').setAttribute('href' , delete_url);
+	}
+	
+	function confirm_action(url)
+	{
+		jQuery('#modal-5').modal('show', {backdrop: 'static'});
+		document.getElementById('perform_link').setAttribute('href' , url);
+	}
+	function confirm_dialog(url,reload=false){
+			BootstrapDialog.confirm('Are You Sure You Want To Perform This Action?', function(result){
+            if(!result) {
+		                 BootstrapDialog.show({
+		                 	title:'Information',
+				            message: 'Process Aborted'
+				        });
+	            }else{				        
+				        
+					$.ajax(
+						{
+							url:url,
+							beforeSend:function(request){
+								BootstrapDialog.show({
+				                 	title:'Information',
+						            message: 'Please Wait Until You Receive Confirmation'
+						        });
+							},
+							success:function(response){
+								
+								 BootstrapDialog.show({
+				                 	title:'Alert',
+						            message: response
+						        });
+						        
+						        if(reload===true){
+						        	window.location.reload();
+						        }
+				        
+							}
+						}
+					);
+	         }   	
+			
+		});
+	}
+	</script>
+    
+    <!-- (Normal Modal)-->
+    <div class="modal fade" id="modal-4">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:center;">Are you sure to delete this information ?</h4>
+                </div>
+                
+                
+                <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+                    <a href="#" class="btn btn-danger" id="delete_link">Delete</a>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- (Confirm Modal)-->
+    <div class="modal fade" style="position: absolute;top:0px;bottom:0px;" id="modal-5"> 
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+                
+                <div class="modal-header">
+                    <button id="" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:center;">Are you sure you want to perform this action?</h4>
+                </div>
+                
+                
+                <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+                    <a href="#" class="btn btn-danger" id="perform_link">Ok</a>
+                    <button id="" type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+	 $("#modal_ajax").draggable({
+	    handle: ".modal-header"
+	}); 
+</script>
+        	
+	<link rel="stylesheet" href="http://localhost/tools/assets/js/select2/select2-bootstrap.css">
+	<link rel="stylesheet" href="http://localhost/tools/assets/js/select2/select2.css">
+	<link rel="stylesheet" href="http://localhost/tools/assets/js/selectboxit/jquery.selectBoxIt.css">
+
+   	<!-- Bottom Scripts -->
+	<script src="http://localhost/tools/assets/js/gsap/main-gsap.js"></script>
+	<script src="http://localhost/tools/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script src="http://localhost/tools/assets/js/joinable.js"></script>
+	<script src="http://localhost/tools/assets/js/resizeable.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-api.js"></script>
+	<script src="http://localhost/tools/assets/js/toastr.js"></script>
+    <script src="http://localhost/tools/assets/js/jquery.validate.min.js"></script>
+	<script src="http://localhost/tools/assets/js/fullcalendar/fullcalendar.min.js"></script>
+    <script src="http://localhost/tools/assets/js/bootstrap-datepicker.js"></script>
+    <script src="http://localhost/tools/assets/js/fileinput.js"></script>
+   
+    <script src="http://localhost/tools/assets/js/select2/select2.min.js"></script>
+    <script src="http://localhost/tools/assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+    
+   
+    
+	<script src="http://localhost/tools/assets/js/neon-calendar.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-chat.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-custom.js"></script>
+	<script src="http://localhost/tools/assets/js/neon-demo.js"></script>
+	
+
+	
+	<!--Font Awesome-->
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	
+	<!-- Toggle Button -->
+	
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
+	<!-- Bootstrap Switch -->
+	<script src="http://localhost/tools/assets/js/bootstrap-switch.min.js"></script>
+	
+		<!-- Monkey Modal Dialog  CSS / JS-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.2/css/bootstrap-dialog.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.2/js/bootstrap-dialog.min.js"></script>
+	
+	
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+
+
+		<!--Dropzone-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
+	
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />	
+
+<!-- Bootstrap Date-Picker Plugin -->
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<!--Table Header Fixer-->
+<script src="http://localhost/tools/assets/js/tableHeadFixer.js"></script>
+
+<!--Print This JS-->
+<script src="http://localhost/tools/assets/js/printThis.js"></script>
+
+<!--my extension-->
+<script src="http://localhost/tools/assets/js/myExtension.js"></script>
+
+<!-- SHOW TOASTR NOTIFIVATION -->
+
+
+<!-----  DATA TABLE EXPORT CONFIGURATIONS ---->                      
+<script type="text/javascript">
+
+	jQuery(document).ready(function($)
+	{
+		
+
+		//var datatable = $("#table_export").dataTable();
+		
+		//$(".dataTables_wrapper select").select2({
+			//minimumResultsForSearch: -1
+		//});
+		
+		$('.modal-dialog').draggable();
+		
+		$('.modal-content').resizable({
+		    //alsoResize: ".modal-dialog",
+		    minHeight: 300,
+		    minWidth: 300
+		});
+		
+		
+	}); 
+		
+</script>    
+</body>
+</html>

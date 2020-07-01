@@ -1,0 +1,3855 @@
+a:2:{s:6:"expire";i:1589281228;s:7:"headers";a:0:{}}ENDCI---><!DOCTYPE html>
+<html lang="en" dir="">
+<head>
+	
+	<title>Cash Journal | Toolkit</title>
+    
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Techsys Inc Softwares" />
+	<meta name="author" content="Techsys Inc Softwares" />
+	
+	
+
+<!--<link rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/bootstrap.css">
+<script src="https://www.compassionkenya.com/tools/assets/js/jquery-1.11.0.min.js"></script>-->
+
+		<!-- Bootstrap CDN -->
+		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		
+		<!--Datatables CSS CDNs-->
+		<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+		<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" /> -->
+		<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css"/>
+
+		<!--Jquery CDN Minified -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+		<!--Datatables JS CDNs-->		
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+		
+		<!--Bootstrap JS CDNs-->
+		<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/bootstrap.js"></script>
+		
+		<!--Datatables Buttons JS CDNs-->
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+		<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+		<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+		<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+		<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/font-icons/entypo/css/entypo.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/neon-core.css">
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/neon-theme.css">
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/neon-forms.css">
+
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/custom.css">
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+
+<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/accounting.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/columns.css">
+
+<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
+
+
+    <link type="text/css"  rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/skins/black.css">
+
+
+
+        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link type="text/css" rel="shortcut icon" href="https://www.compassionkenya.com/tools/assets/images/favicon.png">
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/css/font-icons/font-awesome/css/font-awesome.min.css">
+
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/js/vertical-timeline/css/component.css">
+<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/js/datatables/responsive/css/datatables.responsive.css">
+
+<!--Morris Charts-->
+<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<!--Amcharts-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/amcharts.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/pie.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/serial.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/gauge.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/funnel.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/radar.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/exporting/amexport.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/exporting/rgbcolor.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/exporting/canvg.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/exporting/jspdf.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/exporting/filesaver.js" type="text/javascript"></script>-->
+<!--<script src="https://www.compassionkenya.com/tools/assets/js/amcharts/exporting/jspdf.plugin.addimage.js" type="text/javascript"></script>-->
+
+<style>
+  .datepicker{z-index:1151 !important;}
+</style>
+
+<script type="text/javascript">
+    function checkDelete()
+    {
+        var chk=confirm("Are You Sure To Delete This !");
+        if(chk)
+        {
+          return true;  
+        }
+        else{
+            return false;
+        }
+    }
+ 
+
+</script>	
+</head>
+<body class="page-body skin-black" >
+	<div class="page-container sidebar-collapsed " >
+		    
+<div class="sidebar-menu">
+    <header class="logo-env" >
+
+        <!-- logo -->
+        <div class="logo" style="">
+            <a href="https://www.compassionkenya.com/tools/">
+                <img src="https://www.compassionkenya.com/tools/uploads/logo.png"  class="" width="200"/>
+            </a>
+        </div>
+
+        <!-- logo collapse icon -->
+        <div class="sidebar-collapse" style="">
+            <a href="#" class="sidebar-collapse-icon with-animation">
+
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+
+        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+        <div class="sidebar-mobile-menu visible-xs">
+            <a href="#" class="with-animation">
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+    </header>
+
+    <div style="border-top:1px solid rgba(69, 74, 84, 0.7);"></div>	
+    <ul id="main-menu" class="">
+        <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+        <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+
+
+        <!-- DASHBOARD -->
+        <li class=" ">
+            <a href="https://www.compassionkenya.com/tools/ifms.php/accountant/dashboard">
+                <i class="entypo-gauge"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        
+        <li class=" ">
+            <a href="#">
+                <i class="fa fa-money"></i>
+                <span>Financial Reports</span>
+            </a>
+            <ul>
+                <li class=" ">
+                    <a href="https://www.compassionkenya.com/tools/ifms.php/readonly/fund_balance_report">
+                        <span><i class="fa fa-bell-o"></i> Fund Balance Report</span>
+                    </a>
+                </li>
+
+                <!-- <li class=" ">
+                    <a href="https://www.compassionkenya.com/tools/ifms.php/accountant/expense_report">
+                        <span><i class="entypo-briefcase"></i> Expense Report</span>
+                    </a>
+                </li> 
+                
+                <li class=" ">
+                    <a href="https://www.compassionkenya.com/tools/ifms.php/accountant/budget_variance_report">
+                        <span><i class="fa fa-adjust"></i> Budget Variance Report</span>
+                    </a>
+                </li>  -->
+             
+            </ul>
+        </li>
+        
+        <!-- Switch Board 
+        <li class=" ">
+            <a href="https://www.compassionkenya.com/tools/ifms.php/partner/switchboard">
+                <i class="entypo-retweet"></i>
+                <span>Switchboard</span>
+            </a>
+        </li>-->
+        
+        
+        <!-- CHART OF ACCOUNTS 
+        <li class=" ">
+            <a href="https://www.compassionkenya.com/tools/ifms.php/partner/finance_settings">
+                <i class="entypo-gauge"></i>
+                <span>Accounts Chart</span>
+            </a>
+        </li>
+        -->
+			
+        
+
+
+    </ul>
+
+</div>
+	
+		<div class="main-content">
+		
+			<div class="row">
+	<div class="col-md-12 col-sm-12 clearfix" style="text-align:center;">
+
+			<h2 style="font-weight:200; margin:0px;">Compassion Kenya Toolkit</h2>
+    	
+    </div>
+	<!-- Raw Links -->
+	<div class="col-md-12 col-sm-12 clearfix ">
+		
+        <ul class="list-inline links-list pull-left">
+        <!-- Language Selector -->			
+           <li class="dropdown language-selector">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        	<i class="entypo-user"></i> DObago - Donald                    </a>
+
+								<ul class="dropdown-menu pull-left">
+					<li>
+						<a href="https://www.compassionkenya.com/tools/accountant/manage_profile">
+                        	<i class="entypo-info"></i>
+							<span>Edit Profile</span>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.compassionkenya.com/tools/accountant/manage_profile">
+                        	<i class="entypo-key"></i>
+							<span>Change Password</span>
+						</a>
+					</li>
+				</ul>
+											</li>
+        </ul>
+        
+        
+		<ul class="list-inline links-list pull-right">
+			
+			<!-- Language Selector 			
+           <li class="dropdown language-selector">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        <i class="entypo-globe"></i> language
+                    </a>
+				
+				<ul class="dropdown-menu pull-left">
+					                                    <li class="">
+                                        <a href="https://www.compassionkenya.com/tools/index.php?multilanguage/select_language/english">
+                                            <img src="assets/images/flag/english.png" style="width:16px; height:16px;" />	
+												 <span>english</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://www.compassionkenya.com/tools/index.php?multilanguage/select_language/swahili">
+                                            <img src="assets/images/flag/swahili.png" style="width:16px; height:16px;" />	
+												 <span>swahili</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://www.compassionkenya.com/tools/index.php?multilanguage/select_language/spanish">
+                                            <img src="assets/images/flag/spanish.png" style="width:16px; height:16px;" />	
+												 <span>spanish</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://www.compassionkenya.com/tools/index.php?multilanguage/select_language/hindi">
+                                            <img src="assets/images/flag/hindi.png" style="width:16px; height:16px;" />	
+												 <span>hindi</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://www.compassionkenya.com/tools/index.php?multilanguage/select_language/French">
+                                            <img src="assets/images/flag/French.png" style="width:16px; height:16px;" />	
+												 <span>French</span>
+                                        </a>
+                                    </li>
+                                                    
+				</ul>
+				
+			</li>
+			-->
+			<!--<li class="sep"></li>-->
+			
+			<li>
+				<a href="https://www.compassionkenya.com/tools/admin.php">
+					Close App <i class="entypo-logout right"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+</div>
+
+<hr style="margin-top:0px;" />
+           <h3 style="">
+           	<i class="entypo-right-circled"></i> 
+				Cash Journal           </h3>
+
+			
+<style>
+	td.details-control {
+    background: url('https://www.compassionkenya.com/tools/uploads/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('https://www.compassionkenya.com/tools/uploads/details_close.png') no-repeat center center;
+}
+</style>
+
+<div class="row">
+	<div class="col-sm-12">	
+			<div class="panel panel-primary" data-collapsed="0">
+        	<div class="panel-heading">
+            	<div class="panel-title" >
+            		<i class="fa fa-vcard"></i>
+					Cash Journal            	</div>
+            </div>
+			<div class="panel-body"  style="max-width:50; overflow: auto;">	
+			<!--cash journal-->
+				
+					
+					<button style="display: none;margin-right: 10px;" class="btn btn-primary btn-icon pull-left" id="print_vouchers"><i class="fa fa-print"></i>Print Vouchers</button>
+					
+					<a href="https://www.compassionkenya.com/tools/ifms.php/facilitator/dashboard/1585612800" class="btn btn-primary btn-icon pull-left"><i class="fa fa-tachometer"></i>Dashboard</a>
+
+					<div class="col-sm-offset-1 btn-group right-dropdown">
+								<button type="button" id="" class="btn btn-blue">Financial Reports</button>
+								<button type="button" id="" class="btn btn-blue dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+								</button>
+								
+								<ul class="dropdown-menu dropdown-blue" role="menu">
+
+									<li  style="">
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_outstanding_cheques/2020-03-31/KE479')">Outstanding Cheques</a>
+									</li>
+									
+									<li  style="" class="divider"></li>
+									
+									<li style="">
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_transit_deposits/2020-03-31/KE479')">Deposits In Transit</a>
+									</li>
+									
+									<li style="" class="divider"></li>
+									
+									<li  style="">
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_cleared_effects/2020-03-31/KE479')">Cleared Effects</a>
+										
+									</li>
+									
+									<li style="<" class="divider"></li>
+									
+									<li style="">
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_bank_reconcile/2020-03-31/KE479')">Bank Reconciliation <span class="badge badge-success">Ok</span></a>
+									</li>
+									
+									<li style="" class="divider"></li>
+									
+									<li>
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_variance_explanation/2020-03-31/KE479')">Variance Explanation</a>
+									</li>
+									
+									<li class="divider"></li>
+									
+									<li style="">
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_proof_of_cash/2020-03-31/KE479')">Proof Of Cash <span class="badge badge-success">Ok</span></a>
+										
+									</li>
+									
+									<li style="" class="divider"></li>
+									
+									<li>
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_fund_balances/2020-03-31/KE479')">Fund Balance Report</a>
+										
+									</li>
+									
+									<li class="divider"></li>
+									
+									<li>
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_expense_report/2020-03-31/KE479')">Expense Report</a>
+										
+									</li>
+									
+									<li class="divider"></li>
+									
+									<li>
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_fund_ratios/2020-03-31/KE479')">Financial Ratios</a>
+										
+									</li>
+									
+																	
+									<!--<li class="divider"></li>
+									
+									<li style="">
+										<a href="https://www.compassionkenya.com/tools/ifms.php/partner/bank_statements/2020-03-31">Upload Bank Statements</a>
+									</li>
+									
+									<li style="display:none" class="divider"></li>
+									
+									<li class="divider"></li>-->
+									
+									<!--<li style="display:none">
+										<a href="#" onclick="return function submit_mfr();">Submit Financial Report</a>
+										
+									</li>-->
+									
+									<!--<li>
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_financial_report/2020-03-31')">View Report</a>
+									</li>-->
+									<!--
+									<li class="divider"></li>
+									
+									<li>
+										<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_report_validate/2020-03-31')">Submit MFR</a>
+									</li>
+									-->
+									
+								</ul>
+							</div>
+							
+							<div class="btn btn-default pull-right col-sm-3"><a href="#" class="fa fa-backward scroll" id="prev"></a> You Are In March 2020 <input type="text" class="form-control col-sm-1" id="cnt" placeholder="Enter Number Of Months"/> <a href="#" class="fa fa-forward scroll" id="next"></a></div>
+				
+				<br/><br/><hr/>
+				
+
+												
+						<form action="https://www.compassionkenya.com/tools/ifms.php/facilitator/multiple_vouchers/1585612800/KE479" id="cj_print_vouchers" method="post" accept-charset="utf-8">
+						
+						<!-- Summary table -->
+						<a href="#" class="fa fa-print" onclick="PrintElem('#balance_summary');">Print</a>
+						
+						<div id="balance_summary">
+							
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th colspan="6" style="text-align: center;font-weight: bold;">KE479<br/>Cash Journal</th>
+								</tr>
+							</thead>
+							<body id="">	
+								<tr>
+									<td colspan="2" style="font-weight: bold;">Period</td>
+									<td style="font-weight: bold;">Month</td>
+									<td>Mar</td>
+									<td style="font-weight: bold;">Year</td>
+									<td>2020</td>
+								</tr>
+								<tr>
+																		<td style="font-weight: bold;">Balance Brought Forward</td>
+									<td rowspan="4" style="font-weight: bold;">Bank</td>
+									<td style="text-align: right;">1,268,654.27</td>
+									<td rowspan="4" style="font-weight: bold;">Petty Cash</td>
+									<td  colspan="2" style="text-align: right;">19,336.96</td>
+								</tr>
+																									
+								<tr>
+									<td style="font-weight: bold;">Deposit</td>
+									<td style="text-align: right;">609,934.77</td>
+									<td colspan="2" style="text-align: right;">0.00</td>
+									
+								</tr>
+								<tr>
+									<td style="font-weight: bold;">Payment</td>
+									<td style="text-align: right;">447,974.69</td>
+									<td colspan="2" style="text-align: right;">18,900.00</td>
+									
+								</tr>
+								<tr>
+									<td style="font-weight: bold;">End Month Balance</td>
+									<td style="text-align: right;">1,430,614.35</td>
+									<td colspan="2" style="text-align: right;">436.96</td>
+								
+								</tr>
+							</body>	
+
+						</table>
+						</div>
+						<!-- End Summary table -->
+						
+						<div class="btn btn-warning" id="toggleColumns">Show Spread</div>
+						
+						<div class="btn btn-info not-selected" id="chkAll">Select Vouchers</div>
+						<hr />
+						
+						<!-- Cash Journal --->
+						
+						<table class="table table-bordered table-hover table-responsive datatable" id="table_export">
+							<thead>
+								
+								<tr>
+									<th>Show Details</th>
+									<th>Clear</th>
+									<th>Date</th>
+									<th>Voucher Type</th>
+									<th>Payee / Source</th>
+									<th>Voucher No</th>
+									<th>Description / Details</th>
+									<th>Chq No</th>
+									<th>Bank Deposits</th>
+									<th>Bank Payments</th>
+									<th>Bank Balance</th>
+									<th>Cash Deposits</th>
+									<th>Cash Payments</th>
+									<th>Cash Balance</th>
+									<th>Action</th>
+									
+									<!--Spread starts here -->
+																			<th class="spread">R100</th>
+																			<th class="spread">R200</th>
+																			<th class="spread">R320</th>
+																			<th class="spread">R330</th>
+																		
+																			<th class="spread">E15</th>
+																			<th class="spread">E20</th>
+																			<th class="spread">E30</th>
+																			<th class="spread">E35</th>
+																			<th class="spread">E40</th>
+																			<th class="spread">E45</th>
+																			<th class="spread">E55</th>
+																			<th class="spread">E60</th>
+																			<th class="spread">E65</th>
+																			<th class="spread">E70</th>
+																			<th class="spread">E74</th>
+																			<th class="spread">E75</th>
+																			<th class="spread">E200</th>
+																			<th class="spread">E330</th>
+																			<th class="spread">E360</th>
+																			<th class="spread">E510</th>
+																		<!--Spread ends here -->
+								</tr>
+								
+
+							</thead>
+							
+							<tbody>
+																			<tr>
+											<td id="2056825"></td>									
+																							<td>
+																											<div id="2056825" class="make-switch switch-small clr" data-on-label="CR" data-off-label="CR">
+														<input type="checkbox"  value="200301" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-01</td>
+											<td>CR</td>												
+											
+											<td>Compassion International</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200301" value="200301" id="200301"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2056825/KE479');">
+														200301													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Cash received for child support both sponsored and sponsored ,HVC and Beneficiary Gifts.</td>
+																						<td></td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>609,934.77</td>
+											<td>0.00</td>
+											<td>1,878,589.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>19,336.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2056825');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2056825');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2056825');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														520,616.70													</td>
+												
+													<td class="spread">
+														76,930.42													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														12,387.65													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2056879"></td>									
+																							<td>
+																											<div id="2056879" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200302" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-10</td>
+											<td>CHQ</td>												
+											
+											<td>Annabel Chebet Itok</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200302" value="200302" id="200302"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2056879/KE479');">
+														200302													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment of salary for PD Kalabata</td>
+																						<td>000616</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>30,000.00</td>
+											<td>1,848,589.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>19,336.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2056879');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2056879');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2056879');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														30,000.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2056895"></td>									
+																							<td>
+																											<div id="2056895" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200303" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-10</td>
+											<td>CHQ</td>												
+											
+											<td>Korir Chelal Lokobwa</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200303" value="200303" id="200303"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2056895/KE479');">
+														200303													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Salary for Social-worker Kalabata</td>
+																						<td>00617</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>26,000.00</td>
+											<td>1,822,589.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>19,336.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2056895');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2056895');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2056895');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														26,000.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2056941"></td>									
+																							<td>
+																											<div id="2056941" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200304" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-10</td>
+											<td>CHQ</td>												
+											
+											<td>Kneatwear Enterprises</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200304" value="200304" id="200304"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2056941/KE479');">
+														200304													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Supply of assorted school uniforms for beneficiaries.</td>
+																						<td>000618</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>175,650.00</td>
+											<td>1,646,939.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>19,336.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2056941');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2056941');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2056941');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														175,650.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2056981"></td>									
+																							<td>
+													<div class="make-switch switch-small" data-off-label="PC">
+													    <input type="checkbox" disabled>
+													</div>
+												</td>
+											
+											<td class="tdate">2020-03-12</td>
+											<td>PC</td>												
+											
+											<td>Various,Transport voucher,samuel chebor,michael kipsesat,julius cherogony</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200305" value="200305" id="200305"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2056981/KE479');">
+														200305													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for beneficiary gifts,transport cost and water used during Saturday program.</td>
+																						<td></td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>0.00</td>
+											<td>1,646,939.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>7,000.00</td>
+												<td>12,336.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2056981');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2056981');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2056981');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														800.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														600.00													</td>
+												
+													<td class="spread">
+														5,600.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059313"></td>									
+																							<td>
+													<div class="make-switch switch-small" data-off-label="PC">
+													    <input type="checkbox" disabled>
+													</div>
+												</td>
+											
+											<td class="tdate">2020-03-20</td>
+											<td>PC</td>												
+											
+											<td>Various:Petty cash voucher,Sibimo motobike,loice shokwei,Joseph keino</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200306" value="200306" id="200306"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059313/KE479');">
+														200306													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for beneficiary gift,transport  and petty cash.</td>
+																						<td></td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>0.00</td>
+											<td>1,646,939.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>4,050.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059313');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059313');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059313');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														250.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														700.00													</td>
+												
+													<td class="spread">
+														3,100.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059323"></td>									
+																							<td>
+																											<div id="2059323" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200307" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-21</td>
+											<td>CHQ</td>												
+											
+											<td>National Hospital Insurance fund</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200307" value="200307" id="200307"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059323/KE479');">
+														200307													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for nhif cover for Cdws</td>
+																						<td>000619</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>1,700.00</td>
+											<td>1,645,239.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059323');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059323');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059323');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														1,700.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059331"></td>									
+																							<td>
+																											<div id="2059331" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200308" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-21</td>
+											<td>CHQ</td>												
+											
+											<td>Mama Dan Grocery</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200308" value="200308" id="200308"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059331/KE479');">
+														200308													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for oranges,cabbages,onions and tomatoes used during Saturday program.</td>
+																						<td>000620</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>8,850.00</td>
+											<td>1,636,389.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059331');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059331');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059331');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														8,850.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059361"></td>									
+																							<td>
+																											<div id="2059361" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200309" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-21</td>
+											<td>CHQ</td>												
+											
+											<td>3 Ways general shop</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200309" value="200309" id="200309"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059361/KE479');">
+														200309													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for items and food for  hvc,beneficiary gifts,office items and food items used during Saturday program , airtime and items for cpc refreshments.</td>
+																						<td>000621</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>28,850.00</td>
+											<td>1,607,539.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059361');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059361');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059361');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														1,720.00													</td>
+												
+													<td class="spread">
+														3,900.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														15,205.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														3,034.00													</td>
+												
+													<td class="spread">
+														4,481.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														510.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059363"></td>									
+																							<td>
+																											<div id="2059363" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200310" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-21</td>
+											<td>CHQ</td>												
+											
+											<td>Semaric enterprise.</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200310" value="200310" id="200310"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059363/KE479');">
+														200310													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for beneficiaries gifts and hvc items.</td>
+																						<td>000622</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>13,550.00</td>
+											<td>1,593,989.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059363');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059363');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059363');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														8,900.00													</td>
+												
+													<td class="spread">
+														4,650.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059365"></td>									
+																							<td>
+																											<div id="2059365" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200311" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-21</td>
+											<td>CHQ</td>												
+											
+											<td>Ngetios limited.</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200311" value="200311" id="200311"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059365/KE479');">
+														200311													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment made for hardware materials for beneficiary gifts.</td>
+																						<td>000623</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>35,400.00</td>
+											<td>1,558,589.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059365');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059365');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059365');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														35,400.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059369"></td>									
+																							<td>
+																											<div id="2059369" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200312" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-21</td>
+											<td>CHQ</td>												
+											
+											<td>Imani General shop</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200312" value="200312" id="200312"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059369/KE479');">
+														200312													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for grains used during sarturday programe and during parents work schedule,chicken maize feeds and hvc items .</td>
+																						<td>000624</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>22,340.00</td>
+											<td>1,536,249.04</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059369');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059369');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059369');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														13,040.00													</td>
+												
+													<td class="spread">
+														800.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														100.00													</td>
+												
+													<td class="spread">
+														4,250.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														4,150.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2059377"></td>									
+																							<td>
+																											<div id="2059377" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200313" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-21</td>
+											<td>CHQ</td>												
+											
+											<td>Skyline sacco limited</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200313" value="200313" id="200313"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2059377/KE479');">
+														200313													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for salaries for cdws and other cdc workers.</td>
+																						<td>000625</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>91,014.69</td>
+											<td>1,445,234.35</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>8,286.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2059377');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2059377');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2059377');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														1,200.00													</td>
+												
+													<td class="spread">
+														7,600.00													</td>
+												
+													<td class="spread">
+														57,214.69													</td>
+												
+													<td class="spread">
+														16,000.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														9,000.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2067289"></td>									
+																							<td>
+													<div class="make-switch switch-small" data-off-label="PC">
+													    <input type="checkbox" disabled>
+													</div>
+												</td>
+											
+											<td class="tdate">2020-03-25</td>
+											<td>PC</td>												
+											
+											<td>Various:Mama Dan crocery,paul chepkok buchery,charles chebor,James chetalam,james rutto,judy jeruto.</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200314" value="200314" id="200314"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2067289/KE479');">
+														200314													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>payment for beneficiary gifts,office lunch.</td>
+																						<td></td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>0.00</td>
+											<td>1,445,234.35</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>7,850.00</td>
+												<td>436.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2067289');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2067289');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2067289');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														350.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														7,500.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2067307"></td>									
+																							<td>
+																											<div id="2067307" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200315" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-26</td>
+											<td>CHQ</td>												
+											
+											<td>Sammy kipngetich</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200315" value="200315" id="200315"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2067307/KE479');">
+														200315													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>spoiled cheque</td>
+																						<td>000626</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>0.00</td>
+											<td>1,445,234.35</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>436.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2067307');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2067307');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2067307');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2067333"></td>									
+																							<td>
+																											<div id="2067333" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200316" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-26</td>
+											<td>CHQ</td>												
+											
+											<td>Baringo Qavah Group</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200316" value="200316" id="200316"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2067333/KE479');">
+														200316													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for cdws  group welfare</td>
+																						<td>000627</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>2,000.00</td>
+											<td>1,443,234.35</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>436.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2067333');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2067333');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2067333');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														2,000.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2067357"></td>									
+																							<td>
+																											<div id="2067357" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox"  value="200317" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-26</td>
+											<td>CHQ</td>												
+											
+											<td>Equitable Height Solutions ltd</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200317" value="200317" id="200317"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2067357/KE479');">
+														200317													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for printer service and repair.</td>
+																						<td>000628</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>3,500.00</td>
+											<td>1,439,734.35</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>436.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2067357');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2067357');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2067357');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														3,500.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2067383"></td>									
+																							<td>
+																											<div id="2067383" class="make-switch switch-small clr" data-on-label="CHQ" data-off-label="CHQ">
+														<input type="checkbox" checked value="200318" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-26</td>
+											<td>CHQ</td>												
+											
+											<td>Kisoka self help group.</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200318" value="200318" id="200318"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2067383/KE479');">
+														200318													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Payment for group hens.</td>
+																						<td>000629</td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>9,000.00</td>
+											<td>1,430,734.35</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>436.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2067383');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2067383');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2067383');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														9,000.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																			<tr>
+											<td id="2081169"></td>									
+																							<td>
+																											<div id="2081169" class="make-switch switch-small clr" data-on-label="BCHG" data-off-label="BCHG">
+														<input type="checkbox" checked value="200319" disabled/>
+														
+														
+													</div>
+												</td>	
+											
+											<td class="tdate">2020-03-30</td>
+											<td>BCHG</td>												
+											
+											<td>KCB-Bank Marigat</td>
+											<td>
+																							
+												<div id="" class="btn btn-green popover-primary popup-ajax" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click On The Button To View A Voucher" data-original-title="Tooltip" >
+													<input type="checkbox" class="chk_voucher" name="voucher_200319" value="200319" id="200319"/>
+													<a href="#" onclick="showAjaxModal('https://www.compassionkenya.com/tools/ifms.php/modal/popup/modal_view_voucher/2081169/KE479');">
+														200319													</a>
+													
+												</div>
+												
+												
+											</td>
+											<td>Bank charges for the month as at 30th march 2020.</td>
+																						<td></td>
+											
+											<!-- Bank Income and Expenses -->
+											
+																						<td>0.00</td>
+											<td>120.00</td>
+											<td>1,430,614.35</td>
+											
+											<!-- Petty Cash Income and Expenses -->
+											
+																							<td>0.00</td>
+												<td>0.00</td>
+												<td>436.96</td>
+																							
+											<td>
+												<div class="btn-group">
+								                    <button id="" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								                        Action <span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+								                        <!-- Delete a Voucher -->
+								                      
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_voucher('KE479','2081169');">
+								                            	<i class="entypo-cancel"></i>
+																	Delete This Voucher								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                         <li>
+								                        	<a href="#" id="" onclick="remove_duplicate('KE479','2081169');">
+								                            	<i class="entypo-attention"></i>
+																	Remove Duplicate								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                        
+								                        <li>
+								                        	<a href="#" id="" onclick="delete_all_vouchers('KE479','2081169');">
+								                            	<i class="entypo-trash"></i>
+																	Delete This And Above								                               	</a>
+								                        </li>
+								                        <li class="divider"></li>
+								                     </ul>
+								                   </div>     
+											</td>	
+											
+											<!--Spread starts here -->
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+																				
+													
+											
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														120.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+												
+													<td class="spread">
+														0.00													</td>
+														
+													
+													
+										<!--Spread ends here -->										
+											
+										</tr>
+																</tbody>
+						</table>
+						
+						</form>
+											
+					</div>
+			
+			
+			<!--End of cash journal-->
+						</div>
+		</div>
+	</div>
+</div>
+		
+<script>
+
+
+	$('#chkAll').click(function(){
+		$(this).toggleClass('selected','not-selected');
+		
+		if($(this).hasClass('selected')){
+			$('.chk_voucher').prop('checked',true);
+					var cnt = 0;
+					$('.chk_voucher').each(function(){
+						if($(this).is(':checked')){
+							++cnt;
+						}
+					});
+			$(this).html(cnt+' Vouchers Selected');		
+		}else{
+			$('.chk_voucher').prop('checked',false);
+			$(this).html('Select Vouchers');
+		}
+		
+		count_checked_boxes();
+	});
+	
+	$('.chk_voucher').click(function(){
+		count_checked_boxes();
+		
+	});
+
+	function count_checked_boxes(){
+		var cnt_checked = 0;
+		$('.chk_voucher').each(function(){
+			if($(this).is(':checked')){
+				++cnt_checked;
+			}
+		});
+		
+		if(cnt_checked>0){
+			$('#print_vouchers').css('display','block');
+			$("#chkAll").html(cnt_checked+' Vouchers Selected');	
+		}else{
+			$('#print_vouchers').css('display','none');	
+			$("#chkAll").html('Select Vouchers');
+		}
+	}
+
+function format ( d ) {
+	var obj = JSON.parse(d);
+	var cost="";
+	var account="";
+	var sum = 0;
+	
+	$.each(obj,function(index,value){
+		cost += "<td>"+accounting.formatMoney(value.Cost, { symbol: "",  format: "%v %s" })+"</td>";
+		account += "<th>"+value.AccNo+"</th>";
+		sum = parseFloat(sum) + parseFloat(value.Cost);
+	});
+	
+	return 	"<table border='1' style='border-collapse:collapse;'>"+
+			"<thead>"+
+			"<tr>"+account+"<th>Total</th></tr>"+
+			"</thead>"+
+			"<tbody>"+
+			"<tr>"+cost+"<td>"+accounting.formatMoney(sum, { symbol: "",  format: "%v %s" })+"</td></tr>"+
+			"</tbody>"+
+			"</table>";
+}
+
+	$(document).ready(function(){
+		var datatable = $('.datatable').DataTable({
+			lengthMenu: [[25,50, 100, 150,-1], [25,50 ,100,150 ,"All"]],
+			pageLength: 25,
+			dom: '<"row"l><Bf><"col-sm-12"rt><ip>',
+		    pagingType: "full_numbers",
+		    ordering:false,	
+		    buttons: [
+		         'csv', 'excel', 'print'
+		    ],	      
+		    stateSave: true,
+		    oLanguage: {
+			        sProcessing: "<img src='https://www.compassionkenya.com/tools/uploads/preloader4.gif'>"
+			    },
+			processing: true, //Feature control the processing indicator.
+			"columnDefs": [
+			       	{ 
+			           "targets": [0], //first column / numbering column
+			           "orderable": false, //set not orderable
+			           "class": "details-control"
+			       	}
+			  ],
+			  fixedHeader: true    	
+		});
+		
+		datatable.columns( '.spread' ).visible( false );
+		
+		$("#toggleColumns").click(function(ev){
+			
+			$(this).toggleClass('btn-success','btn-warning');
+			
+			if($(this).hasClass('btn-success')){
+				datatable.columns( '.spread' ).visible( true );
+				$(this).html('Hide Spread');
+
+			}else{
+				datatable.columns( '.spread' ).visible( false );
+				$(this).html('Show Spread');
+
+			}
+			
+		});
+		
+		var detailRows = [];
+		
+		  $('#table_export tbody').on( 'click', 'tr td.details-control', function () {
+	        var tr = $(this).closest('tr');
+	        var row = datatable.row( tr );
+	        var td_id = $(this).attr('id');
+	        var idx = $.inArray( tr.attr('id'), detailRows );
+	 		//alert(td_id);
+	        if ( row.child.isShown() ) {
+	            tr.removeClass( 'details' );
+	            row.child.hide();
+	            tr.removeClass('shown')
+	 
+	            // Remove from the 'open' array
+	            detailRows.splice( idx, 1 );
+	            
+	            //Change fa-plus to fa-minus
+	            //row.child.hide();
+	        }
+	        else {
+	        	//alert(td_id);
+	            
+	            	
+	            	$.ajax({
+						url:'https://www.compassionkenya.com/tools/ifms.php/partner/get_ajax_voucher/'+td_id,
+						success:function(data){
+							
+							tr.addClass( 'details' );
+							row.child( format( data )).show();
+				 			tr.addClass('shown');
+				            // Add to the 'open' array
+				            if ( idx === -1 ) {
+				                detailRows.push( tr.attr('id') );
+				            }
+				            
+						}
+					});
+	            
+	        }
+	    } );
+	 
+	    // On each draw, loop over the `detailRows` array and show any child rows
+	    datatable.on( 'draw', function () {
+	        $.each( detailRows, function ( i, id ) {
+	            $('#'+id+' td.details-control').trigger( 'click' );
+	        } );
+	    } );
+	});
+	
+    function PrintElem(elem)
+    {
+        $(elem).printThis({ 
+		    debug: false,              
+		    importCSS: true,             
+		    importStyle: true,         
+		    printContainer: false,       
+		    loadCSS: "", 
+		    pageTitle: "Payment Voucher",             
+		    removeInline: false,        
+		    printDelay: 333,            
+		    header: null,             
+		    formValues: true          
+		});
+    }	
+    
+    //Clear records
+	$('.clr').on('switch-change', function(e, data) {
+			var el = $(this);
+	       	var hID = el.attr('id');
+			//alert(data.value);
+			
+		        var state = 1;
+		        if(data.value==true){
+		        	state = 0;
+		        }
+		        
+		        	var url = 'https://www.compassionkenya.com/tools/ifms.php/partner/clear_bank_transactions/'+hID+'/'+state+'/2020-03-31';	
+					$.ajax({
+							url: url
+						});	
+	        
+	   });
+	   
+$('.scroll').click(function(ev){
+	
+	var cnt = $('#cnt').val();
+	
+	if(cnt===""){
+		cnt = "1";
+	}
+	
+	var dt = '1585612800';
+	
+	var flag = $(this).attr('id');
+	
+	var url = 'https://www.compassionkenya.com/tools/ifms.php/facilitator/scroll_cash_journal/KE479/'+dt+'/'+cnt+'/'+flag;
+	
+	$(this).attr('href',url);
+});
+
+
+$('#print_vouchers').click(function(){
+	//alert("Under Construction");
+	
+	$('#cj_print_vouchers').submit();
+	
+});
+
+function delete_all_vouchers(project,hID){
+	var result = window.confirm('Are You Sure You Want To Delete This Voucher And Above?');
+        
+            if(!result) {
+		                 BootstrapDialog.show({
+		                 	title:'Information',
+				            message: 'Process Aborted'
+				        });
+	            }else{
+					var url = 'https://www.compassionkenya.com/tools/ifms.php/facilitator/delete_all_vouchers/'+project+'/'+hID+'/1585612800';
+					
+					$.ajax({
+						url:url,
+						success:function(response){
+							BootstrapDialog.show({
+								title:'Alert',
+								message:response
+							});
+							
+							location.reload();
+						}
+						
+					});
+				}	
+}
+
+function delete_voucher(project,hID){
+	
+			var result = window.confirm('Are You Sure You Want To Delete This Voucher?');
+        
+            if(!result) {
+		                 BootstrapDialog.show({
+		                 	title:'Information',
+				            message: 'Process Aborted'
+				        });
+	            }else{
+					var url = 'https://www.compassionkenya.com/tools/ifms.php/facilitator/delete_voucher/'+project+'/'+hID+'/1585612800';
+					
+					$.ajax({
+						url:url,
+						success:function(response){
+							BootstrapDialog.show({
+								title:'Alert',
+								message:response
+							});
+							
+							location.reload();
+						}
+					});
+				}	
+				
+}
+
+function remove_duplicate(project,hID){
+	
+			var result = window.confirm('Are You Sure You Want To Delete This Voucher?');
+        
+            if(!result) {
+		                 BootstrapDialog.show({
+		                 	title:'Information',
+				            message: 'Process Aborted'
+				        });
+	            }else{
+					var url = 'https://www.compassionkenya.com/tools/ifms.php/facilitator/remove_duplicate/'+project+'/'+hID+'/1585612800';
+					
+					$.ajax({
+						url:url,
+						success:function(response){
+							BootstrapDialog.show({
+								title:'Alert',
+								message:response
+							});
+							
+							location.reload();
+						}
+					});
+				}	
+				
+}
+</script>				
+				<hr />
+		
+		<div class="row">
+			<div class="col-sm-12">
+				Page load time: 3.7087 seconds			</div>
+		</div>
+
+<!-- Footer -->
+<footer class="main">
+	&copy; 2017 <strong>Grants Manager</strong>. 
+    Developed by 
+	<a href="https://www.compassionkenya.com" 
+    	target="_blank">Compassion Kenya</a>
+</footer>
+
+		</div>
+				
+	
+        	
+	</div>
+     <style>
+ 	@media print {
+    /* on modal open bootstrap adds class "modal-open" to body, so you can handle that case and hide body */
+    body.modal-open {
+        visibility: hidden;
+    }
+
+    body.modal-open .modal .modal-header,
+    body.modal-open .modal .modal-body {
+        visibility: visible; /* make visible modal body and header */
+    }
+}
+
+.modal-dialog {
+  min-width: 80%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+	height: 60%;
+    max-height: 60%;
+    height: auto;
+    border-radius: 0;
+   
+}
+
+.modal-body {
+	 overflow-y:auto;
+	 height: 540px;
+}
+ </style>
+ 
+ <script type="text/javascript">
+	function showAjaxModal(url)
+	{
+		// SHOWING AJAX PRELOADER IMAGE
+		jQuery('#modal_ajax .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="https://www.compassionkenya.com/tools/uploads/preloader.gif" /></div>');
+		
+		// LOADING THE AJAX MODAL
+		jQuery('#modal_ajax').modal('show', {backdrop: 'true'});
+		
+		// SHOW AJAX RESPONSE ON REQUEST SUCCESS
+		$.ajax({
+			url: url,
+			success: function(response)
+			{
+				jQuery('#modal_ajax .modal-body').html(response);
+			}
+		});
+	}
+	</script>
+    
+    <!-- (Ajax Modal)-->
+    <div class="modal fade" id="modal_ajax" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Compassion Kenya Toolkit</h4>
+                </div>
+                
+                <div class="modal-body" id="pop_modal_body" style="">
+                
+                    
+                    
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!--<button type="button" class="btn btn-default" onclick="js:window.print()">Print</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <script type="text/javascript">
+	function confirm_modal(delete_url)
+	{
+		jQuery('#modal-4').modal('show', {backdrop: 'static'});
+		document.getElementById('delete_link').setAttribute('href' , delete_url);
+	}
+	
+	function confirm_action(url)
+	{
+		jQuery('#modal-5').modal('show', {backdrop: 'static'});
+		document.getElementById('perform_link').setAttribute('href' , url);
+	}
+	function confirm_dialog(url,reload=false){
+			BootstrapDialog.confirm('Are You Sure You Want To Perform This Action?', function(result){
+            if(!result) {
+		                 BootstrapDialog.show({
+		                 	title:'Information',
+				            message: 'Process Aborted'
+				        });
+	            }else{				        
+				        
+					$.ajax(
+						{
+							url:url,
+							beforeSend:function(request){
+								BootstrapDialog.show({
+				                 	title:'Information',
+						            message: 'Please Wait Until You Receive Confirmation'
+						        });
+							},
+							success:function(response){
+								
+								 BootstrapDialog.show({
+				                 	title:'Alert',
+						            message: response
+						        });
+						        
+						        if(reload===true){
+						        	window.location.reload();
+						        }
+				        
+							}
+						}
+					);
+	         }   	
+			
+		});
+	}
+	</script>
+    
+    <!-- (Normal Modal)-->
+    <div class="modal fade" id="modal-4">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:center;">Are you sure to delete this information ?</h4>
+                </div>
+                
+                
+                <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+                    <a href="#" class="btn btn-danger" id="delete_link">Delete</a>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- (Confirm Modal)-->
+    <div class="modal fade" style="position: absolute;top:0px;bottom:0px;" id="modal-5"> 
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+                
+                <div class="modal-header">
+                    <button id="" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:center;">Are you sure you want to perform this action?</h4>
+                </div>
+                
+                
+                <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+                    <a href="#" class="btn btn-danger" id="perform_link">Ok</a>
+                    <button id="" type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+// 	 $("#modal_ajax").draggable({
+// 	    handle: ".modal-header"
+// 	}); 
+	
+
+</script>
+
+<style>
+
+</style>
+        	
+	<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/js/select2/select2-bootstrap.css">
+	<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/js/select2/select2.css">
+	<link type="text/css" rel="stylesheet" href="https://www.compassionkenya.com/tools/assets/js/selectboxit/jquery.selectBoxIt.css">
+
+   	<!-- Bottom Scripts -->
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/gsap/main-gsap.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/joinable.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/resizeable.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/neon-api.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/toastr.js"></script>
+    <script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/fullcalendar/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/fileinput.js"></script>
+   
+    <script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/select2/select2.min.js"></script>
+    <script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+    
+   
+    
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/neon-calendar.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/neon-chat.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/neon-custom.js"></script>
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/neon-demo.js"></script>
+	
+
+	
+	<!--Font Awesome-->
+	
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	
+	<!-- Toggle Button -->
+	
+	<link type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script type="text/javascript" src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
+	<!-- Bootstrap Switch -->
+	<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/bootstrap-switch.min.js"></script>
+	
+		<!-- Monkey Modal Dialog  CSS / JS-->
+	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.2/css/bootstrap-dialog.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.2/js/bootstrap-dialog.min.js"></script>
+	
+	
+	<link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+
+
+		<!--Dropzone-->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
+	
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link type="text/css" rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />	
+
+<!-- Bootstrap Date-Picker Plugin -->
+  <link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<!--Table Header Fixer-->
+<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/tableHeadFixer.js"></script>
+
+<!--Print This JS-->
+<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/printThis.js"></script>
+
+<!--my extension-->
+<script type="text/javascript" src="https://www.compassionkenya.com/tools/assets/js/myExtension.js"></script>
+
+<!-- SHOW TOASTR NOTIFIVATION -->
+
+
+<!-----  DATA TABLE EXPORT CONFIGURATIONS ---->                      
+<script type="text/javascript">
+
+	jQuery(document).ready(function($)
+	{
+		
+
+		//var datatable = $("#table_export").dataTable();
+		
+		//$(".dataTables_wrapper select").select2({
+			//minimumResultsForSearch: -1
+		//});
+		
+		$('.modal-dialog').draggable();
+		
+		$('.modal-content').resizable({
+		    //alsoResize: ".modal-dialog",
+		    minHeight: 300,
+		    minWidth: 300
+		});
+		
+		
+	}); 
+		
+</script>    
+</body>
+</html>

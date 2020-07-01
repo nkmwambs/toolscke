@@ -1,0 +1,22 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2019-07-27 06:12:56 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 06:18:04 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 06:18:44 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 07:43:05 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 07:46:09 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 07:46:09 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 08:56:34 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 08:56:35 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 08:56:37 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 08:56:38 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 09:40:50 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 09:40:50 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 09:52:15 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 09:52:15 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 10:59:26 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 10:59:26 --> Severity: Warning --> Division by zero /home/compatl8/public_html/tools/ifms/views/backend/partner/expense_report_data.php 66
+ERROR - 2019-07-27 11:13:03 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 11:59:01 --> Severity: error --> Exception: Too few arguments to function Partner::chqIntel(), 0 passed in /home/compatl8/public_html/tools/system/core/CodeIgniter.php on line 532 and exactly 1 expected /home/compatl8/public_html/tools/ifms/controllers/Partner.php 772
+ERROR - 2019-07-27 13:34:21 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 81
+ERROR - 2019-07-27 13:34:21 --> Severity: Warning --> strtotime() expects parameter 2 to be integer, string given /home/compatl8/public_html/tools/ifms/controllers/Partner.php 82
