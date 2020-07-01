@@ -1,7 +1,0 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-ERROR - 2018-10-05 11:18:30 --> 404 Page Not Found: Admin/assets
-ERROR - 2018-10-05 12:19:38 --> Query error: Duplicate entry '2881f1e273e94e251e744ea298d5af5d9b8e6806' for key 'PRIMARY' - Invalid query: INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES ('2881f1e273e94e251e744ea298d5af5d9b8e6806', '105.52.221.24', 1538741978, '__ci_last_regenerate|i:1538741978;admin_login|i:1;admin_id|s:4:\"2302\";login_user_id|s:4:\"2302\";name|s:7:\"Kariuki\";logged_user_level|s:1:\"1\";login_type|s:7:\"partner\";center_id|s:5:\"KE711\";cluster|s:7:\"Kinango\";app_name|s:8:\"training\";')
-ERROR - 2018-10-05 12:19:38 --> Severity: Warning --> session_write_close(): Failed to write session data (user). Please verify that the current setting of session.save_path is correct (ci_sessions) Unknown 0
-ERROR - 2018-10-05 12:19:40 --> Query error: Duplicate entry '2881f1e273e94e251e744ea298d5af5d9b8e6806' for key 'PRIMARY' - Invalid query: INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES ('2881f1e273e94e251e744ea298d5af5d9b8e6806', '105.52.221.24', 1538741980, '__ci_last_regenerate|i:1538741980;')
-ERROR - 2018-10-05 12:19:40 --> Severity: Warning --> session_write_close(): Failed to write session data (user). Please verify that the current setting of session.save_path is correct (ci_sessions) Unknown 0

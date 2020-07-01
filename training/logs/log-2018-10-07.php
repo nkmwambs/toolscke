@@ -1,6 +1,0 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-ERROR - 2018-10-07 09:37:19 --> Query error: Duplicate entry '42b796ad994954ce26390c2689a7071b55193449' for key 'PRIMARY' - Invalid query: INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES ('42b796ad994954ce26390c2689a7071b55193449', '154.78.55.71', 1538905039, '__ci_last_regenerate|i:1538905039;admin_login|i:1;admin_id|s:4:\"2470\";login_user_id|s:4:\"2470\";name|s:6:\"Muteti\";logged_user_level|s:1:\"1\";login_type|s:7:\"partner\";center_id|s:5:\"KE761\";cluster|s:15:\"Bamburi-Kanamai\";app_name|s:8:\"training\";')
-ERROR - 2018-10-07 09:37:19 --> Severity: Warning --> session_write_close(): Failed to write session data (user). Please verify that the current setting of session.save_path is correct (ci_sessions) Unknown 0
-ERROR - 2018-10-07 09:37:20 --> Query error: Duplicate entry '42b796ad994954ce26390c2689a7071b55193449' for key 'PRIMARY' - Invalid query: INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES ('42b796ad994954ce26390c2689a7071b55193449', '154.78.55.71', 1538905040, '__ci_last_regenerate|i:1538905040;')
-ERROR - 2018-10-07 09:37:20 --> Severity: Warning --> session_write_close(): Failed to write session data (user). Please verify that the current setting of session.save_path is correct (ci_sessions) Unknown 0
