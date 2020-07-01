@@ -158,14 +158,13 @@
 												<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type'); ?>:</span></label>
 												<select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
 													<option value="#"><?php echo get_phrase('select_voucher_type'); ?></option>
-													<option value="PC"><?php echo get_phrase('payment_by_cash'); ?></option>
-													<!-- Added the DCT option Onduso 5/13/2020 -->
+													<!-- <option value="PC"><?php echo get_phrase('payment_by_cash'); ?></option> -->
 													<option value="UDCTB"><?php echo get_phrase('unconditional_direct_cash_transfer_via_bank'); ?></option>
 													<option value="UDCTC"><?php echo get_phrase('unconditional_direct_cash_transfer_via_virtual_petty_cash'); ?></option>
-													<option value="CHQ"><?php echo get_phrase('payment_by_cheque'); ?></option>
+													<!-- <option value="CHQ"><?php echo get_phrase('payment_by_cheque'); ?></option>
 													<option value="BCHG"><?php echo get_phrase('bank_adjustments'); ?></option>
 													<option value="CR"><?php echo get_phrase('cash_received'); ?></option>
-													<option value="PCR"><?php echo get_phrase('petty_cash_rebanking'); ?></option>
+													<option value="PCR"><?php echo get_phrase('petty_cash_rebanking'); ?></option> -->
 												</select>
 											</div>
 										</td>
