@@ -132,6 +132,8 @@
 					                            <option value="BCHG"><?php echo get_phrase('bank_adjustments');?></option>
 					                            <option value="CR"><?php echo get_phrase('cash_received');?></option>					                            
 					                            <option value="PCR"><?php echo get_phrase('petty_cash_rebanking');?></option>
+												<option value="DCTC"><?php echo get_phrase('direct_cash_transfer_via_cash');?></option>
+												<option value="DCTB"><?php echo get_phrase('direct_cash_transfer_via_bank');?></option>
 					                        </select>
 			                        </div>
 			                    </td>
@@ -366,22 +368,39 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 	
 	$('#VTypeMain').change(function(){
 		var val = $(this).val();
-		$(this).remove();
-		$('#VType').append('<INPUT TYPE="text" VALUE="'+val+'" name="VTypeMain" id="VTypeMain" class="form-control" readonly/>');
-		
-					var url = '<?php echo base_url();?>ifms.php/partner/voucher_accounts/'+val;
-						//alert(url);
-						$.ajax({
-								url: url,
-								success: function(response)
-								{
-									//alert(response);
-									obj = jQuery.parseJSON(response);// Global Accounts Variable
-								}
-						});
-		
-		if(val==='CHQ'){
-			$('#ChqNo').removeAttr('readonly');
+
+		//Redirect to new code site if DCTC / DCTB
+		if(val == 'DCTC' || val == 'DCTB'){
+			var cnfrm = confirm("You will be redirected to another site to enter Direct Cash Transfer related vouchers. Please confirm if you want to do so");
+				
+			if(cnfrm){
+				
+				var url = "http://localhost/toolkit/";
+				window.open(url,'__blank');
+
+			}else{
+				alert('We can see that you have terminated the request. Note, we can\'t fill in Direct Cash Transfer vouchers in this voucher form');
+			}
+
+		}else{
+
+			$(this).remove();
+			$('#VType').append('<INPUT TYPE="text" VALUE="'+val+'" name="VTypeMain" id="VTypeMain" class="form-control" readonly/>');
+			
+						var url = '<?php echo base_url();?>ifms.php/partner/voucher_accounts/'+val;
+							//alert(url);
+							$.ajax({
+									url: url,
+									success: function(response)
+									{
+										//alert(response);
+										obj = jQuery.parseJSON(response);// Global Accounts Variable
+									}
+							});
+			
+			if(val==='CHQ'){
+				$('#ChqNo').removeAttr('readonly');
+			}
 		}
 	});
 	
