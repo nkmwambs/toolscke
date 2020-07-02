@@ -1,3 +1,4 @@
+<?php //print_r($refined_arr);?>
 <div class="row">
 	<div class="col-sm-12">
 		<a href="<?=base_url();?>ifms.php/civa/civ_report/closed" class="btn btn-danger"><?=get_phrase('closed_interventions_report');?></a>	
@@ -55,6 +56,11 @@
 																
 																 $balance = $civ_income-$civ_expense;
 															 }
+															 else{
+																$civ_income=0;
+																$balance = $civ_income-$civ_expense;
+
+															 }
 		                 									
 		                 								?>
 		                 								<a class="btn btn-default" href="#" <?php if(isset($civ_account_groups[1]['civaID'])){?> onclick="showAjaxModal('<?=base_url();?>ifms.php/modal/popup/modal_show_breakdown/<?=$fcp_number;?>/<?=$civ_account_groups[1]['civaID'];?>');" <?php }?> ><?=number_format($civ_income,2);?></a>
@@ -66,6 +72,10 @@
 																$civ_expense = $civ_account_groups[0]['Cost'];
 																$balance = $civ_income-$civ_expense;
 																}
+															else{
+																$civ_expense=0;
+																$balance = $civ_income-$civ_expense;
+															}
 		  
 		                 								?>
 		                 								<a class="btn btn-default" href="#" <?php if(isset($civ_account_groups[0]['civaID'])){?> onclick="showAjaxModal('<?=base_url();?>ifms.php/modal/popup/modal_show_breakdown/<?=$fcp_number;?>/<?=$civ_account_groups[0]['civaID'];?>');" <?php }?> ><?=number_format($civ_expense,2);?></a>
