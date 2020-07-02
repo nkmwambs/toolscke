@@ -1,3 +1,6 @@
+<?php 
+//echo $this->session->session_id;
+?>
 <hr />
 
 <div id="load_voucher">
@@ -375,7 +378,7 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 				
 			if(cnfrm){
 				
-				var url = "http://localhost/toolkit/admin.php/login/reroute/<?=$this->session->session_id;?>";
+				var url = "<?=base_url();?>admin.php/login/reroute/<?=$this->session->session_id;?>/new_voucher";
 				window.open(url,'__blank');
 
 			}else{
@@ -497,11 +500,11 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 				var cnfrm = confirm("You can't record Direct Cash Transfer voucher in this voucher form. Do you want to be redirected to the correct voucher form?");
 
 				if(confirm){
-					var url = "http://localhost/toolkit/admin.php/login/reroute/<?=$this->session->session_id;?>";
+					var url = "<?=base_url();?>admin.php/login/reroute/<?=$this->session->session_id;?>/new_voucher";
 					window.open(url,'__blank');
-				}
-				
-				return false;	
+				}else{
+					return false;
+				}	
 				
 			}	
 
