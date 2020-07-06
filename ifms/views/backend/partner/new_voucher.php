@@ -412,7 +412,10 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 			
 			if(val==='CHQ'){
 				$('#ChqNo').removeAttr('readonly');
-				
+				//Modified by Onduso on 13/5/2020
+				$('#ChqDiv').removeClass('hidden');
+				$('#label-toggle-switch').removeClass('hidden');
+				//$('#DCTReference').removeClass('accNos');
 			}
 		}
 	});
