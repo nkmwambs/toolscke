@@ -18,6 +18,17 @@
 							<label for="" class="col-xs-4 control-label"><?php echo get_phrase('CIV_code');?></label>
 							<div class="col-xs-8"><INPUT type="text" name="AccNoCIVA" id="AccNoCIVA" class="form-control" required="required"/></div>
 						</div>
+
+						<div id="" class="form-group">
+							<label for="" class="col-xs-4 control-label"><?php echo get_phrase('is_dct_intervention');?></label>
+							<div class="col-xs-8">
+								<select class='col-xs-8 form-control' name='is_direct_cash_transfer' id='is_direct_cash_transfer'>
+									<option value=''><?=get_phrase('select_option');?></option>
+									<option value='0'><?=get_phrase('no');?></option>
+									<option value='1'><?=get_phrase('yes');?></option>
+								</select>
+							</div>
+						</div>
 						
 						<?php
 							$rev_acc = $this->db->get_where('accounts',array('AccGrp'=>'1','Active'=>'0'))->result_object();
