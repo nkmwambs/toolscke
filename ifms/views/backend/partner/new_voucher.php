@@ -754,11 +754,11 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 							                        for (i=0;i<obj.length;i++){
 							                        var option = document.createElement("option");
 							                        if(obj[i].AccTextCIVA!==null&&obj[i].open==="1"){
-							                            option.text = obj[i].AccNoCIVA;
-							                            option.value = obj[i].AccNo;
+							                            option.text = obj[i].AccTextCIVA;
+								                        option.value = obj[i].AccNo;
 							                        }else{
-							                            option.text = obj[i].AccText;
-							                            option.value = obj[i].AccNo;                        
+							                            option.text = obj[i].AccText + ' - ' + obj[i].AccName;
+								                        option.value = obj[i].AccNo;                       
 							                        }                                                 
 										
 							                        x.add(option,x[i]);
