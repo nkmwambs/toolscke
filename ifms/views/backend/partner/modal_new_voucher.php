@@ -685,7 +685,7 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 							                        x.onchange=function(){
 							                          //alert("Hello!");  
 							                          document.getElementById("civaCode"+rowCount).value=obj[this.selectedIndex].civaID;
-							                          check_pc_other_ac_mix(this);
+							                          //check_pc_other_ac_mix(this);
 							                        };
 			                        x.setAttribute('required','required');
 						            cell5.appendChild(x);

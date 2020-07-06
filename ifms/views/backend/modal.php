@@ -166,16 +166,14 @@
             </div>
         </div>
     </div>
-    
-<script>
-// 	 $("#modal_ajax").draggable({
-// 	    handle: ".modal-header"
-// 	}); 
-	
 
+<script>
+
+$(document).ready(function(){
+    Dropzone.autoDiscover = false;
+});
+
+
+        
 </script>
 
-<style>
-
-</style>
-    

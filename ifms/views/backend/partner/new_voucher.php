@@ -10,7 +10,7 @@
 		<div class="form-group">
 			<label class="control-label col-sm-3">Search a Voucher</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="VNumber" placeholder="Enter a voucher number" />
+				<input type="text" class="form-control" id="search_voucher_number" placeholder="Enter a voucher number" />
 			</div>
 			<div class="col-sm-2">
 				<div id="go_btn" class="btn btn-primary">Go</div>
@@ -125,7 +125,7 @@
 			                </tr>    
 			                <tr>
 			                    
-			                    <td colspan="4">
+			                    <td colspan="2" id='td_voucher_type'>
 			                    	<div class="col-sm-10 form-group" id='VType'>
 			                    		<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type');?>:</span></label>
 					                        <select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
@@ -135,28 +135,30 @@
 					                            <option value="BCHG"><?php echo get_phrase('bank_adjustments');?></option>
 					                            <option value="CR"><?php echo get_phrase('cash_received');?></option>					                            
 					                            <option value="PCR"><?php echo get_phrase('petty_cash_rebanking');?></option>
-												<option value="DCTC"><?php echo get_phrase('direct_cash_transfer_via_cash');?></option>
-												<option value="DCTB"><?php echo get_phrase('direct_cash_transfer_via_bank');?></option>
+												<option value="UDCTC"><?php echo get_phrase('direct_cash_transfer_via_cash');?></option>
+												<option value="UDCTB"><?php echo get_phrase('direct_cash_transfer_via_bank');?></option>
 					                        </select>
 			                        </div>
 			                    </td>
 			                    
 			                    
-			                    <td colspan="2">
+			                    <td colspan="2" id='td_cheque_number'>
 			                    	<div class="col-sm-10 form-group">
 			                    		<label for="ChqNo" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('cheque_number');?>:</span></label>
 			                    			<input class="form-control" type="text" id="ChqNo" name="ChqNo" data-validate="number,minlength[2]"  readonly="readonly"/>
 			                    	</div>
 			                    </td>
 			                    
-			                 	<td colspan="2">
+			                 	<td colspan="2" id='td_reversal'>
 			                    	<div id="label-toggle-switch" for="reversal" class="col-sm-6"><span style="font-weight: bold;"><?php echo get_phrase('cheque_reversal');?></span> 
 										<div class="make-switch switch-small" data-on-label="Yes" data-off-label="No">
 												<input type="checkbox" id="reversal" name="reversal"/>
 										</div>
 									</div>		
 			                    </td>
-			                    
+
+								
+											                    
 			                </tr>
 			                
 			                <tr>
@@ -239,7 +241,7 @@
 
 $(document).ready(function(){
 	$("#go_btn").click(function(){
-		var VNum = $("#VNumber").val();
+		var VNum = $("#search_voucher_number").val();
 		
 		showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_search_voucher/'+VNum);
 	});
@@ -371,25 +373,27 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 	
 	$('#VTypeMain').change(function(){
 		var val = $(this).val();
+		
+		$(this).remove();
+		$('#VType').append('<INPUT TYPE="text" VALUE="'+val+'" name="VTypeMain" id="VTypeMain" class="form-control" readonly/>');
 
 		//Redirect to new code site if DCTC / DCTB
-		if(val == 'DCTC' || val == 'DCTB'){
-			var cnfrm = confirm("You will be redirected to another site to enter Direct Cash Transfer related vouchers. Please confirm if you want to do so");
+
+		if(val == 'UDCTC' || val == 'UDCTB'){
+			// var cnfrm = confirm("You will be redirected to another site to enter Direct Cash Transfer related vouchers. Please confirm if you want to do so");
 				
-			if(cnfrm){
+			// if(cnfrm){
 				
-				var url = "<?=$this->config->item('redirect_base_url');?>admin.php/login/reroute/<?=$this->session->session_id;?>/new_voucher";
-				window.open(url,'__blank');
+			// 	var url = "<?=$this->config->item('redirect_base_url');?>admin.php/login/reroute/<?=$this->session->session_id;?>/new_voucher";
+			// 	window.open(url,'__blank');
 
-			}else{
-				alert('We can see that you have terminated the request. Note, we can\'t fill in Direct Cash Transfer vouchers in this voucher form');
-			}
+			// }else{
+			// 	alert('We can see that you have terminated the request. Note, we can\'t fill in Direct Cash Transfer vouchers in this voucher form');
+			// }
 
-		}else{
+			dct_scripts_voucher_type_on_change(this);
 
-			$(this).remove();
-			$('#VType').append('<INPUT TYPE="text" VALUE="'+val+'" name="VTypeMain" id="VTypeMain" class="form-control" readonly/>');
-			
+		}else{			
 						var url = '<?php echo base_url();?>ifms.php/partner/voucher_accounts/'+val;
 							//alert(url);
 							$.ajax({
@@ -496,17 +500,17 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 			
 			var vtype = $('#VTypeMain').val();
 
-			if(vtype == 'DCTC' || vtype == 'DCTB'){
-				var cnfrm = confirm("You can't record Direct Cash Transfer voucher in this voucher form. Do you want to be redirected to the correct voucher form?");
+			// if(vtype == 'DCTC' || vtype == 'DCTB'){
+			// 	var cnfrm = confirm("You can't record Direct Cash Transfer voucher in this voucher form. Do you want to be redirected to the correct voucher form?");
 
-				if(confirm){
-					var url = "<?=$this->config->item('redirect_base_url');?>admin.php/login/reroute/<?=$this->session->session_id;?>/new_voucher";
-					window.open(url,'__blank');
-				}else{
-					return false;
-				}	
+			// 	if(confirm){
+			// 		var url = "<?=$this->config->item('redirect_base_url');?>admin.php/login/reroute/<?=$this->session->session_id;?>/new_voucher";
+			// 		window.open(url,'__blank');
+			// 	}else{
+			// 		return false;
+			// 	}	
 				
-			}	
+			// }	
 
 			var reverse = $('#reversal').prop('checked');
 				if(vtype==='#'){
@@ -763,7 +767,7 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 							                        x.onchange=function(){
 							                          //alert("Hello!");  
 							                          document.getElementById("civaCode"+rowCount).value=obj[this.selectedIndex].civaID;
-							                          check_pc_other_ac_mix(this);
+							                          //check_pc_other_ac_mix(this);
 							                        };
 			                        x.setAttribute('required','required');
 						            cell5.appendChild(x);
@@ -791,3 +795,7 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 	
 	
 </script>
+
+<?php 
+	include "dct_scripts.php";
+?>

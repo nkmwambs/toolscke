@@ -1,6 +1,9 @@
 <!--<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css">
 <script src="<?php echo base_url();?>assets/js/jquery-1.11.0.min.js"></script>-->
+        <!--Dropzone CDN for CSS  -->
 
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/js/dropzone/dist/min/dropzone.min.css">
+ 
 		<!-- Bootstrap CDN -->
 		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		
@@ -27,6 +30,8 @@
 		<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 		<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
 
+  <!-- JS CDN for dropzone -->
+  <script src="<?php echo base_url();?>assets/js/dropzone/dist/min/dropzone.min.js" type="text/javascript"></script>
 
 
 <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">

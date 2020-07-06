@@ -1,6 +1,8 @@
 <?php
 if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+	exit('No direct script access allowed');
+	
+DEFINE('DS', DIRECTORY_SEPARATOR);	
 
 /*	
  *	@author 	: Nicodemus Karisa
@@ -695,79 +697,69 @@ function reverse_cheque($param1=''){
 		
 		echo json_encode($chk);
 	}
-/**function voucher_accounts($param1=''){
-		//Return as JSON object
-		$rst ="";
-		if($param1==="CR"){
-			$rev = $this->db->select('code,CONCAT(code," - ",name) as name')->get_where('revenue',array('state'=>'on'))->result_array();
-			$special_fund = $this->db->select('CONCAT(specific_fund_code," (",code,")") as specific_fund_code,code,revenue_control_id')->join('revenue','revenue.revenue_id=revenue_control.revenue_id')->get_where('revenue_control',array('partner_id'=>$this->session->userdata('center_id')))->result_array();
-			$rst = array_merge($rev,$special_fund);
-		}
-		 
-		if($param1==="CHQ"){
-			$exp = $this->db->select('expense.code as code,CONCAT(expense.code," - ",expense.name) as name')->join('expense','expense.revenue_id=revenue.revenue_id')->get_where('revenue',array('state'=>'on'))->result_array();
-			$special_fund = $this->db->select('specific_fund_code,expense.code as code,revenue_control_id')->join('expense','expense.revenue_id=revenue_control.revenue_id')->get_where('revenue_control',array('partner_id'=>$this->session->userdata('center_id')))->result_array();
-			$pcd = array(array('code'=>'PCW','name'=>get_phrase('petty_cash_deposit')));
-			$rst = array_merge($exp,$special_fund,$pcd);
-		} 
-		
-		if($param1==='PC'|| $param1 === 'BCHG'){
-			$exp = $this->db->select('expense.code as code,CONCAT(expense.code," - ",expense.name) as name')->join('expense','expense.revenue_id=revenue.revenue_id')->get_where('revenue',array('state'=>'on'))->result_array();
-			$special_fund = $this->db->select('CONCAT(specific_fund_code," (",expense.code,")") as specific_fund_code,expense.code as code,revenue_control_id')->join('expense','expense.revenue_id=revenue_control.revenue_id')->get_where('revenue_control',array('partner_id'=>$this->session->userdata('center_id')))->result_array();
-			$rst = array_merge($exp,$special_fund);			
-		}
-	
-		if($param1==='PCR'){
-			$rst = array(array('code'=>'PCR','name'=>get_phrase('petty_cash_rebank')));
-		}
+	private function get_accounts(String $condition): array
+	{
 
-    	$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($rst));	
-}**/
+		$expenses_or_income_accs = $this->db->where($condition)->join('civa', 'accounts.accID=civa.accID', 'left')->get('accounts')->result_array();
 
-function voucher_accounts($param1=''){
+		return $expenses_or_income_accs;
+	}
+
+	function voucher_accounts($param1 = '')
+	{
 		//Return as JSON object
-		$rst_rw ="";
-		if($param1==='CHQ'){
+		$rst_rw = "";
+		if ($param1 === 'CHQ') {
 			//Bank Expenses Accounts
-			$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$expenses = $this->db->where($exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $expenses;
+			//$exp_cond = "(accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$exp_cond = "((accounts.AccGrp = 0 OR accounts.AccGrp = 3) AND accounts.Active=1) OR (accounts.AccGrp = 0 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
+			$rst_rw = $this->get_accounts($exp_cond);
 		}
-		
-		if($param1==='PC'|| $param1 === 'BCHG'){
-			//PC and BC Expenses Accounts
-			$pc_exp_cond = "accounts.AccGrp = 0 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$pc_expenses = $this->db->where($pc_exp_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $pc_expenses;			
+
+		if ($param1 === 'PC' || $param1 === 'BCHG') {
+			//PC and BC Expenses Accounts	
+			$pc_exp_cond = "(accounts.AccGrp = 0 AND accounts.Active=1) OR (accounts.AccGrp = 0 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 0)";
+			$rst_rw = $this->get_accounts($pc_exp_cond);
 		}
-		
-		if($param1==='CR'){
+
+		if ($param1 === 'CR') {
 			//Revenue accounts
-			$revenues_cond = "accounts.AccGrp = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$revenues = $this->db->where($revenues_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $revenues;			
+			//$revenues_cond = "accounts.AccGrp = 1 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
+			$revenues_cond = "(accounts.AccGrp = 1 AND accounts.Active=1) OR (accounts.AccGrp = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE())";
+			$rst_rw = $this->get_accounts($revenues_cond);
 		}
-		
-		if($param1==='PCR'){
-			//Petty Cash rebanking account
+
+		if ($param1 === 'PCR') {
+			//Petty Cash rebanking account	
 			$rebank_cond = "accounts.AccGrp = 4 AND (accounts.Active=1 OR civa.open=1 AND civa.closureDate>CURDATE())";
-			$rebank = $this->db->where($rebank_cond)->join('civa','accounts.accID=civa.accID','left')->get('accounts')->result_array();
-			$rst_rw = $rebank;	
+			$rst_rw = $this->get_accounts($rebank_cond);
 		}
-	
-		$rst=array();
-        foreach($rst_rw as $civaAcc):
-            if(is_numeric($civaAcc['civaID'])&&substr_count($civaAcc['allocate'],$this->session->userdata('center_id'))>0){
-                $rst[]=$civaAcc;
-            }elseif(!is_numeric($civaAcc['civaID'])){
-                $rst[]=$civaAcc;
-            }
-        endforeach;	
-	
-    	$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($rst));	
-}
+
+		if ($param1 == 'UDCTB' || $param1 == 'UDCTC') {
+			$exp_cond = "(accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=1) OR (accounts.AccGrp = 0 AND accounts.is_direct_cash_transfer = 1 AND accounts.Active=0 AND civa.open=1 AND civa.closureDate>CURDATE() AND civa.is_direct_cash_transfer = 1)";
+			$rst_rw = $this->get_accounts($exp_cond);
+		}
+
+		$rst = array();
+		foreach ($rst_rw as $civaAcc) :
+			
+			$untrimmed_explode_allocate = explode(',',$civaAcc['allocate']);
+			$trimmed_explode_allocate = array_map(array($this,'trim_spaces'),$untrimmed_explode_allocate);
+			
+			if (is_numeric($civaAcc['civaID']) && in_array($this->session->userdata('center_id'),$trimmed_explode_allocate)) {
+				$rst[] = $civaAcc;
+			} elseif (!is_numeric($civaAcc['civaID'])) {
+				$rst[] = $civaAcc;
+			}
+		endforeach;
+
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($rst));
+	}
+
+	function trim_spaces($elem){
+		return trim($elem);
+	}
 
 function chqIntel($param1){
 		//Get Bank Code
@@ -829,97 +821,121 @@ public function multiple_vouchers($tym){
 	
 	function post_voucher($param1=''){
 		if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-					//Populate header elements //icpNo,TDate,Fy,VNumber,Payee,Address,VType,ChqNo,TDescription,totals,unixStmp
-		            
-		            $rmk = get_phrase('voucher_posting_failure');
-		            
-		            $data['icpNo']  = $this->input->post('KENo');
-		            $data['TDate'] = date('Y-m-d',strtotime($this->input->post('TDate')));
-					$data['Fy'] = get_fy($this->input->post('TDate'),$this->session->center_id);
-					$data['VNumber'] = $this->input->post('VNumber');
-					$data['Payee'] = $this->input->post('Payee');
-					$data['Address'] = $this->input->post('Address');
-					$data['VType'] = $this->input->post('VTypeMain');
-					//$data['raiser_id'] = $this->session->login_user_id;
-					
-					//Check if Bank Details exists
-					
-					
-					if($this->db->get_where('projectsdetails',array('icpNo'=>$this->session->userdata('center_id')))->num_rows()>0){
-					
-						$bank_code = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->userdata('center_id')))->row()->bankID;
+			redirect(base_url(), 'refresh');
 
-					}else{
-											
-						$rmk = get_phrase('bank_details_missing');
-						
-						$bank_code = 0;
-					}
-						
-					//Append Bank Code to ChqNo
+		$data['msg'] = get_phrase('voucher_posted_successfully');
 
-					if($this->input->post('reversal')){
-						$bank_code = $bank_code."-0";
-					}
+		$status = 1;
+
+		if($this->input->post('VTypeMain') == 'UDCTB' || $this->input->post('VTypeMain') == 'UDCTC' ){
+			$this->load->model('dct_model');
+			$status = $this->dct_model->post_voucher();
+		}else{
+			$status = $this->_post_voucher();
+		}	
+       
+        if (!$status) {
+			$data['msg'] = get_phrase('voucher_posting_failed');
+        } else {
+
+            //Send email to PF
+            $cname = $this->db->get_where('users',array('fname'=>$this->session->center_id))->row()->cname;
 					
-					$data['ChqNo'] = $this->input->post('ChqNo')."-".$bank_code;
-					$data['TDescription'] = $this->input->post('TDescription');
-					$data['totals'] = array_sum($this->input->post('cost'));
-					$data['unixStmp'] = time();
-		            
-					//Check if voucher already exists
-					$chk_obj = $this->db->get_where("voucher_header",array("VNumber"=>$this->input->post('VNumber'),"icpNo"=>$this->input->post('KENo')));
+			$pfEmail = $this->db->get_where('users',array('userlevel'=>'2','cname'=>$cname))->row()->email;
+						
+			$this->email_model->voucher_submitted($hID,$pfEmail);
+
+        }
+
+		$data['tym'] = strtotime($this->input->post('TDate'));
+		echo $this->load->view("backend/partner/new_voucher", $data, true);
+        
+	 }
+	 
+	function _post_voucher(){
+
+		$message = 1;
+
+		$this->db->trans_start();
+		        
+	    $data['icpNo']  = $this->input->post('KENo');
+	    $data['TDate'] = date('Y-m-d',strtotime($this->input->post('TDate')));
+		$data['Fy'] = get_fy($this->input->post('TDate'),$this->session->center_id);
+		$data['VNumber'] = $this->input->post('VNumber');
+		$data['Payee'] = $this->input->post('Payee');
+		$data['Address'] = $this->input->post('Address');
+		$data['VType'] = $this->input->post('VTypeMain');
+		//$data['raiser_id'] = $this->session->login_user_id;
 					
-					if($chk_obj->num_rows() == 0){						
-				            $this->db->insert('voucher_header', $data);
-							
-							//Last id
-							$hID = $this->db->insert_id();
-							
-							//Populate body //hID,icpNo,VNumber,TDate,VType,ChqNo,unixStmp     Qty,Details,UnitCost,Cost,AccNo,civaCode //$data2[''][$i]=
-							$qty = $this->input->post('qty');
-							$details = $this->input->post('desc');
-							$unitcost = $this->input->post('unit');
-							$cost = $this->input->post('cost');
-							$acc = $this->input->post('acc');
-							$civ = $this->input->post('civaCode');
-							
-							for($i=0;$i<sizeof($this->input->post('qty'));$i++){
-								$data2['hID'] = $hID;
-								$data2['icpNo']= $this->input->post('KENo');
-								$data2['VNumber']=$this->input->post('VNumber');
-								$data2['TDate']=$this->input->post('TDate');
-								$data2['VType']=$this->input->post('VTypeMain');
-								$data2['ChqNo']=$this->input->post('ChqNo')."-".$bank_code;
-								$data2['unixStmp']=time();
-								$data2['Qty'] = $qty[$i];
-								$data2['Details']=$details[$i];
-								$data2['UnitCost']=$unitcost[$i];
-								$data2['Cost']=$cost[$i];
-								$data2['AccNo']=$acc[$i];
-								$data2['civaCode']=$civ[$i];
+		//Check if Bank Details exists
 								
-								$this->db->insert('voucher_body', $data2);
-							}
-				
-						$cname = $this->db->get_where('users',array('fname'=>$this->session->center_id))->row()->cname;
-						
-						$pfEmail = $this->db->get_where('users',array('userlevel'=>'2','cname'=>$cname))->row()->email;
-						
-						$this->email_model->voucher_submitted($hID,$pfEmail);			
-							
-						//$this->session->set_flashdata('flash_message',get_phrase('voucher_posted_successfully'));
-						$data['msg'] = get_phrase('voucher_posted_successfully');
-						
-						
-					}
+		if($this->db->get_where('projectsdetails',array('icpNo'=>$this->session->userdata('center_id')))->num_rows()>0){
+					
+			$bank_code = $this->db->get_where('projectsdetails',array('icpNo'=>$this->session->userdata('center_id')))->row()->bankID;
 
-		
-        $data['tym'] = strtotime($this->input->post('TDate'));
-        echo $this->load->view("backend/partner/new_voucher",$data,true);
-        //$this->new_voucher();
-     }
+		}else{
+											
+			//$message = get_phrase('bank_details_missing');
+				
+			$bank_code = 0;
+		}
+						
+		//Append Bank Code to ChqNo
+
+		if($this->input->post('reversal')){
+			$bank_code = $bank_code."-0";
+		}
+					
+		$data['ChqNo'] = $this->input->post('ChqNo')."-".$bank_code;
+		$data['TDescription'] = $this->input->post('TDescription');
+		$data['totals'] = array_sum($this->input->post('cost'));
+		$data['unixStmp'] = time();
+		            
+		//Check if voucher already exists
+		$chk_obj = $this->db->get_where("voucher_header",array("VNumber"=>$this->input->post('VNumber'),"icpNo"=>$this->input->post('KENo')));
+					
+		if($chk_obj->num_rows() == 0){						
+		    $this->db->insert('voucher_header', $data);
+							
+			//Last id
+			$hID = $this->db->insert_id();
+						
+			//Populate body //hID,icpNo,VNumber,TDate,VType,ChqNo,unixStmp     Qty,Details,UnitCost,Cost,AccNo,civaCode //$data2[''][$i]=
+			$qty = $this->input->post('qty');
+			$details = $this->input->post('desc');
+			$unitcost = $this->input->post('unit');
+			$cost = $this->input->post('cost');
+			$acc = $this->input->post('acc');
+			$civ = $this->input->post('civaCode');
+						
+			for($i=0;$i<sizeof($this->input->post('qty'));$i++){
+				$data2['hID'] = $hID;
+				$data2['icpNo']= $this->input->post('KENo');
+				$data2['VNumber']=$this->input->post('VNumber');
+				$data2['TDate']=$this->input->post('TDate');
+				$data2['VType']=$this->input->post('VTypeMain');
+				$data2['ChqNo']=$this->input->post('ChqNo')."-".$bank_code;
+				$data2['unixStmp']=time();
+				$data2['Qty'] = $qty[$i];
+				$data2['Details']=$details[$i];
+				$data2['UnitCost']=$unitcost[$i];
+				$data2['Cost']=$cost[$i];
+				$data2['AccNo']=$acc[$i];
+				$data2['civaCode']=$civ[$i];
+							
+				$this->db->insert('voucher_body', $data2);
+			}
+												
+		}
+
+		$this->db->trans_complete();
+       
+        if ($this->db->trans_status() === false) {
+            $message  = 0;
+        } 
+
+		return $message;
+	} 
 
 	function reset_voucher(){
 		$data['test'] = "";
