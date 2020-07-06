@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-DEFINE('DS', DIRECTORY_SEPARATOR);	
+//DEFINE('DS', DIRECTORY_SEPARATOR);	
 
 class Dct_model extends CI_Model {
 	

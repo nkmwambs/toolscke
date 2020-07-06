@@ -11,13 +11,15 @@
 
         // Remove reversal control and add upload area
         $("#td_reversal").remove();
+		
         $("#td_voucher_type").closest('tr').append('<td colspan="2" id="td_dropzone">'+create_upload_area()+'</td>');
 
         // Dropzone api code
         dropzoneLoad('myDropzone');
         
         // Change the cheque number id,name to reference_number - This should be last change to do
-        cheque_number.attr('id') = 'DCTReference';
+        //cheque_number.attr('id') = 'DCTReference';
+		$('#DCT_div').removeClass('hidden');
         //cheque_number.prop('name','DCTReference');
         
         
