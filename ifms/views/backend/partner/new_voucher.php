@@ -192,7 +192,8 @@
 							<table id="bodyTable" class="table table-bordered">
 								<thead>
 									<tr style="font-weight: bold;">
-										<th><?php echo get_phrase('check'); ?></th>
+										<!-- <th><?php echo get_phrase('check'); ?></th> -->
+										<th><?php echo get_phrase('delete_row'); ?></th>
 										<th><?php echo get_phrase('quantity'); ?></th>
 										<th><?php echo get_phrase('items_purchased_/_services_received'); ?></th>
 										<th><?php echo get_phrase('unit_cost'); ?></th>
@@ -496,11 +497,14 @@
 			});
 		});
 
+		//Added by Onduso 22/5/2020
+		/** Remove rows */
+		$('#bodyTable').on('click', 'a', function() {
+			$(this).closest('tr').remove();
+		});
 
 
-
-
-
+        /** Add a row */
 		$('#addrow,#addrow_footer').click(function() {
 
 			var vtype = $('#VTypeMain').val();
@@ -566,12 +570,12 @@
 							var rowCount = table.rows.length;
 							var row = table.insertRow(rowCount);
 							var rw = rowCount + 1;
-							//Check box Column
+							//Delete button cell
 							var cell0 = row.insertCell(0);
-							var element0 = document.createElement("input");
-							element0.type = "checkbox";
+							var element0 = document.createElement("a");
+							element0.type = "a";
 							element0.setAttribute('disabled', "disabled");
-							element0.className = "chkbx form-control";
+							element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 							cell0.appendChild(element0);
 
 							//Quantity Column
@@ -670,11 +674,15 @@
 						var rowCount = table.rows.length;
 						var row = table.insertRow(rowCount);
 
-						//Check box Column
+						//Delete row cell added by onduso on 5/22/2020
+
 						var cell0 = row.insertCell(0);
-						var element0 = document.createElement("input");
-						element0.type = "checkbox";
-						element0.className = "chkbx form-control";
+						var element0 = document.createElement("a");
+						element0.type = "a";
+						if (rowCount != 0) { //only provide delete btn if only rows >1
+							element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
+						}
+						//element0.className = "btn btn-default glyphicon glyphicon-trash form-control";
 						cell0.appendChild(element0);
 
 						//Quantity Column
