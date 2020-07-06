@@ -126,7 +126,7 @@
 			                <tr>
 			                    
 			                    <td colspan="2" id='td_voucher_type'>
-			                    	<div class="col-sm-10 form-group" id='VType'>
+			                    	<div class="col-sm-10 form-group hidden" id='VType'>
 			                    		<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type');?>:</span></label>
 					                        <select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
 					                            <option value="#"><?php echo get_phrase('select_voucher_type');?></option>
@@ -143,14 +143,14 @@
 			                    
 			                    
 			                    <td colspan="2" id='td_cheque_number'>
-			                    	<div class="col-sm-10 form-group">
+			                    	<div class="col-sm-10 form-group hidden" id='ChqDiv'>
 			                    		<label for="ChqNo" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('cheque_number');?>:</span></label>
 			                    			<input class="form-control" type="text" id="ChqNo" name="ChqNo" data-validate="number,minlength[2]"  readonly="readonly"/>
 			                    	</div>
 			                    </td>
 			                    
 			                 	<td colspan="2" id='td_reversal'>
-			                    	<div id="label-toggle-switch" for="reversal" class="col-sm-6"><span style="font-weight: bold;"><?php echo get_phrase('cheque_reversal');?></span> 
+			                    	<div id="label-toggle-switch" for="reversal" class="col-sm-6 hidden"><span style="font-weight: bold;"><?php echo get_phrase('cheque_reversal');?></span> 
 										<div class="make-switch switch-small" data-on-label="Yes" data-off-label="No">
 												<input type="checkbox" id="reversal" name="reversal"/>
 										</div>
@@ -252,6 +252,11 @@ $(document).ready(function(){
 		startDate:'<?php echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->current_voucher_date;?>',
 		endDate:'<?php echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->end_month_date;?>'
 	});
+
+	$('#TDate').change(function(e) {
+			$('#VType').removeClass('hidden');
+	});
+
 	
 
 $('#btnPostVch,#btnPostVch_footer').click(function(e){
@@ -407,6 +412,7 @@ $('#btnPostVch,#btnPostVch_footer').click(function(e){
 			
 			if(val==='CHQ'){
 				$('#ChqNo').removeAttr('readonly');
+				
 			}
 		}
 	});
