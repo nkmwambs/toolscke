@@ -619,10 +619,18 @@
         /** Add a row */
 		$('#addrow,#addrow_footer').click(function() {
 
-			if($('#error_msg').html()!='' && ($('#VTypeMain').val()=='UDCTB' || $('#VTypeMain').val()=='UDCTC')){
+			//Corrects the error of clicking the post before adding detail row when dct voucher type had bn selected
+			if($('#error_msg').html()=='Error: Voucher Missing Details'){
+
+				$('#error_msg').html('');
+
+			}
+			else if($('#error_msg').html()!='' && ($('#VTypeMain').val()=='UDCTB' || $('#VTypeMain').val()=='UDCTC')){
 				alert('Resolve the error messages before proceeding');
 				return false;
 			}
+
+			
 
 			var vtype = $('#VTypeMain').val();
 
