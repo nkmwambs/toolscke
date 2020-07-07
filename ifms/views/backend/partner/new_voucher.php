@@ -317,6 +317,10 @@
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
 				e.preventDefault();
 			} 
+			else if((val === 'UDCTC' || val === 'UDCTB') && $('#ChqNo').val().length < 1){
+				$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number'); ?>');
+				e.preventDefault();
+			}
 			else if(($('#error_msg').html().length>1 && (val=='UDCTB'||val=='UDCTC') ) || check_if_dct_upload_empty()==0){
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number_or_missing_dct_uploads'); ?>');
 				e.preventDefault();
