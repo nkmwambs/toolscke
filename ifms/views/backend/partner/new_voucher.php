@@ -100,7 +100,7 @@
 										<td colspan="3">
 											<div class="form-group">
 												<label for='VNumber' class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_number'); ?></span></label>
-												<input type="text" class="form-control accNos" id="VNumber" name="VNumber" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>" value="<?php echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->vnum; ?>" readonly />
+												<input type="text" class="form-control accNos" id="Generated_VNumber" name="VNumber" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>" value="<?php echo $this->finance_model->next_voucher($this->session->userdata('center_id'))->vnum; ?>" readonly />
 											</div>
 										</td>
 
@@ -144,15 +144,15 @@
 										    <!-- CHEQUE Number -->
 											<div class="col-sm-10 form-group hidden" id='ChqDiv'>
 												<label for="ChqNo" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('cheque_number'); ?>:</span></label>
-												<input class="form-control" type="text" id="ChqNo" name="ChqNo" data-validate="number,minlength[2]" readonly="readonly" />
+												<input class="form-control" type="number" id="ChqNo" name="ChqNo" minlength="2" readonly="readonly" />
 											</div>
 
 											<!-- MPESA REFERENCE NO -->
-											<div class="col-sm-10 form-group hidden" id='DCT_div'>
+											<!-- <div class="col-sm-10 form-group hidden" id='DCT_div'>
 												<label for="DCT" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('reference_no.'); ?>:</span></label>
 												<input class="form-control accNos" type="text" id="DCTReference" name="DCTReference" data-validate="required" value="" />
 
-											</div>
+											</div> -->
 										</td>
 
 										<td colspan="2" id='td_reversal'>
@@ -251,6 +251,33 @@
 </div>
 
 <script type="text/javascript">
+    //Added by Onduso on 15/3/2020
+	function post_using_ajax() {
+		var frm = $("#frm_voucher");
+		var postData = frm.serializeArray();
+		var formURL = "<?= base_url() ?>ifms.php/partner/post_voucher/";
+		//alert(formURL);
+		$.ajax({
+			url: formURL,
+			type: "POST",
+			data: postData,
+			beforeSend: function() {
+				$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
+			},
+			success: function(data, textStatus, jqXHR) {
+
+				$('#load_voucher').html(data);
+
+				//$('#voucher_count').html(parseInt($('#voucher_count').html())+1);
+
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				//if fails
+				alert(textStatus+' Test');
+			}
+		});
+
+	}
 	$(document).ready(function() {
 		$("#go_btn").click(function() {
 			var VNum = $("#search_voucher_number").val();
@@ -272,21 +299,41 @@
 
 
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
+           // added by onduso on 19/5/2020 start
+			/** check if the reference number exists*/
+			
+			var reference_number = ($('#DCTReference') && $('#DCTReference').val() !== "")?$('#DCTReference').val():0;
+			var voucher_number = $('#Generated_VNumber').val();
+			//alert(reference_number);
+			var val = $('#VTypeMain').val();
 
-			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && $('#VTypeMain').val() === 'CHQ' && $('#reversal').prop('checked') === false) {
+			//checks if upload is empty;
+			// if(check_if_dct_upload_empty()==0){
+			// 	e.preventDefault();
+			// }
+
+			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {
 				//alert("Here 1");
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
 				e.preventDefault();
-			} else if ($("#bodyTable > tbody").children().length === 0) {
+			} 
+			else if(($('#error_msg').html().length>1 && (val=='UDCTB'||val=='UDCTC') ) || check_if_dct_upload_empty()==0){
+				$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number_or_missing_dct_uploads'); ?>');
+				e.preventDefault();
+
+			}
+			else if ($("#bodyTable > tbody").children().length === 0) {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
 				e.preventDefault();
 			} else if ($('#hidden').val().length > 0 && $('#reversal').prop('checked') === false) {
 				//alert($('#hidden').val());
 				//alert("Here 3");
-				$('#error_msg').html('<?php echo get_phrase("cheque_numbers_cannot_be_re-used"); ?>');
+				$('#error_msg').html('<?php echo get_phrase("cheque_numbers_cannot_be_re-used_or_missing_bank_details"); ?>');
 				e.preventDefault();
-			} else if ($('.accNos').length > 0) {
+			} 
+			 
+			else if ($('.accNos').length > 0) {
 				//alert("Here 4");
 				var cnt_empty = 0;
 				$('.accNos').each(function(i) {
@@ -299,58 +346,117 @@
 					$('#error_msg').html(cnt_empty + ' <?php echo get_phrase("empty_fields"); ?>');
 					e.preventDefault();
 				} else {
-					var frm = $("#frm_voucher");
-					var postData = frm.serializeArray();
-					var formURL = "<?= base_url() ?>ifms.php/partner/post_voucher/";
-					//alert(formURL);
+					//Added by Onduso on 20/5/ 2020 start
+					/**Post Voucher only when no duplicate number exists */
+					var url = "<?= base_url() ?>ifms.php/dct/is_reference_number_exist/" + reference_number + '/' + voucher_number;
 					$.ajax({
-						url: formURL,
-						type: "POST",
-						data: postData,
+						async: false,
+						type: "GET",
+						url: url,
 						beforeSend: function() {
 							$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
 						},
-						success: function(data, textStatus, jqXHR) {
+						success: function(data) {
+							/*
+							1) if 1 returned: both Reference and voucher number exist
 
-							//$('#modal_ajax').modal('toggle');
-							$('#load_voucher').html(data);
-							//$('#voucher_count').html(parseInt($('#voucher_count').html())+1);
+							2) if 2 returned:reference number exist
 
-						},
-						error: function(jqXHR, textStatus, errorThrown) {
-							//if fails
-							alert(textStatus);
+							3) if 3 returned: voucher number exist
+
+							4) if 0 returned: No duplicate voucher and reference numbers exist
+							
+							*/
+							//alert(data);
+							if (data == 1) {
+								$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+								$('#DCTReference').css({
+									'border': '3px solid red'
+								});
+								return;
+							} else if (data == 2 && (val=='UDCTB' ||val=='UDCTC')) {
+
+								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
+								$('#DCTReference').css({
+									'border': '2px solid red'
+								});
+								return;
+
+							} else if (data == 3) {
+
+								$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+								$('#Generated_VNumber').css({
+									'border': '3px solid red'
+								});
+								return;
+
+							}
+							$('#error_msg').html('');
+
+							post_using_ajax();
+
 						}
 					});
-
+					//Added by Onduso on 20/5/ 2020 End
 				}
 			} else {
 				//alert("Here 5");
-				var frm = $("#frm_voucher");
-				var postData = frm.serializeArray();
-				var formURL = "<?= base_url() ?>ifms.php/partner/post_voucher/";
-				alert(formURL);
+				//Added by Onduso on 20/5/ 2020 start
+				/**Post Voucher only when no duplicate number exists */
+				var url = "<?= base_url() ?>ifms.php/dct/is_reference_number_exist/" + reference_number + '/' + voucher_number;
 				$.ajax({
-					url: formURL,
-					type: "POST",
-					data: postData,
+					async: false,
+					type: "GET",
+					url: url,
 					beforeSend: function() {
 						$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
 					},
-					success: function(data, textStatus, jqXHR) {
+					success: function(data) {
+						/*
+							1) if data==1 returned: both Reference and voucher number exist
 
-						//$('#modal_ajax').modal('toggle');
-						$('#load_voucher').html(data);
-						//$('#voucher_count').html(parseInt($('#voucher_count').html())+1);
+							2) if data==2 returned:reference number exist
 
-					},
-					error: function(jqXHR, textStatus, errorThrown) {
-						//if fails
-						alert(textStatus);
+							3) if data==3 returned: voucher number exist
+
+							4) if data==0 returned: No duplicate voucher and reference numbers exist
+							
+							*/
+						//alert(data);
+						if (data == 1) {
+							$('#error_msg').html('<?php echo get_phrase('both_reference_and_voucher_numbers'); ?> ' + reference_number + 'and' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+							$('#DCTReference').css({
+								'border': '3px solid red'
+							});
+							return;
+						} else if (data == 2 && (val=='UDCTB' ||val=='UDCTC')){
+
+							$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
+							$('#DCTReference').css({
+								'border': '3px solid red'
+							});
+							return;
+
+						} else if (data == 3) {
+
+							$('#error_msg').html('<?php echo get_phrase('voucher_number'); ?> ' + voucher_number + ' <?php echo get_phrase('already_exist'); ?>');
+							$('#Generated_VNumber').css({
+								'border': '3px solid red'
+							});
+							return;
+
+						}
+						$('#error_msg').html('');
+
+						post_using_ajax();
+
 					}
 				});
+				//Added by Onduso on 20/5/ 2020 End
+
 
 			}
+
 			e.preventDefault(); //STOP default action
 			e.unbind(); //unbind. to stop multiple form submit.
 		});
@@ -479,15 +585,17 @@
 				url: url,
 				success: function(response) {
 
+					var cheque_number=$('#VTypeMain').val()== 'CHQ'?'<?=get_phrase('cheque_number');?>':'<?=get_phrase('reference_number');?>';
+
 					if (response === '1' && reversal === 'no') {
-						$('#error_msg').html('<?php echo get_phrase('cheque_number'); ?> ' + chqno + ' <?php echo get_phrase('has_already_been_used_or_invalid_input'); ?>');
+						$('#error_msg').html(cheque_number+' ' + chqno + ' <?php echo get_phrase('has_already_been_used_or_invalid_input'); ?>');
 						$('#hidden').val(1);
 					} else if (response === '1' && reversal === 'yes') {
 						$('#hidden').val('');
-						$('#error_msg').html('<?php echo get_phrase("you_are_reversing_cheque_number"); ?> ' + chqno);
+						$('#error_msg').html('<?php echo get_phrase("you_are_reversing"); ?> '+cheque_number+' ' + chqno);
 					} else if (response === '2' && reversal === 'no') {
 						$('#hidden').val(1);
-						$('#error_msg').html('<?php echo get_phrase("cheque_has_already_been_reversed"); ?>');
+						$('#error_msg').html(cheque_number+' <?php echo get_phrase("has_already_been_reversed"); ?>');
 					} else {
 						$('#hidden').val('');
 						$('#error_msg').html('');
@@ -506,6 +614,11 @@
 
         /** Add a row */
 		$('#addrow,#addrow_footer').click(function() {
+
+			if($('#error_msg').html()!='' && ($('#VTypeMain').val()=='UDCTB' || $('#VTypeMain').val()=='UDCTC')){
+				alert('Resolve the error messages before proceeding');
+				return false;
+			}
 
 			var vtype = $('#VTypeMain').val();
 
