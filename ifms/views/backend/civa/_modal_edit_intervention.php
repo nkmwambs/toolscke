@@ -22,17 +22,6 @@ $civ = $this->db->get_where('civa',array('civaID'=>$param2))->row();
 							<label for="" class="col-xs-4 control-label"><?php echo get_phrase('CIV_code');?></label>
 							<div class="col-xs-8"><INPUT type="text" readonly="readonly" name="AccNoCIVA" id="AccNoCIVA" value="<?=$civ->AccNoCIVA;?>" class="form-control" required="required"/></div>
 						</div>
-
-						<div id="" class="form-group">
-							<label for="" class="col-xs-4 control-label"><?php echo get_phrase('is_dct_intervention');?></label>
-							<div class="col-xs-8">
-								<select class='col-xs-8 form-control' name='is_direct_cash_transfer' id='is_direct_cash_transfer'>
-									<option value=''><?=get_phrase('select_option');?></option>
-									<option value='0'  <?php if($civ->is_direct_cash_transfer == 0) echo "selected";?> ><?=get_phrase('no');?></option>
-									<option value='1'  <?php if($civ->is_direct_cash_transfer == 1) echo "selected";?>><?=get_phrase('yes');?></option>
-								</select>
-							</div>
-						</div>
 						
 						<?php
 							$rev_acc = $this->db->get_where('accounts',array('accID'=>$civ->accID))->row();

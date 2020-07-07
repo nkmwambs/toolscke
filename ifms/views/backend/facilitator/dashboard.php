@@ -11,6 +11,10 @@
                         </div>
                     </div>
                     <div class="panel-body">
+
+						<a class='btn btn-default' target='__blank' href="<?php echo base_url();?>ifms.php/facilitator/direct_cash_transfers_report/<?=$tym;?>"><?php echo get_phrase('direct_cash_transfers_report');?></a>
+
+						<hr/>
                     	<div class="row">
                     		<div class="col-sm-12">
                     			<div class="btn btn-default pull-right col-sm-3"><a href="#" class="fa fa-backward scroll" id="prev"></a> <?=get_phrase('you_are_in');?> <?=date('F Y',$tym);?> <input type="text" class="form-control col-sm-1" id="cnt" placeholder="<?=get_phrase('enter_number_of_months');?>"/> <a href="#" class="fa fa-forward scroll" id="next"></a></div>
@@ -110,11 +114,13 @@
 						                        			<?php echo get_phrase('action');?> <span class="caret"></span>
 						                    			</button>
 						                    				<ul class="dropdown-menu dropdown-default pull-right" role="menu">
-						                      
-									                        <li  style="">
-																<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_outstanding_cheques/<?php echo date('Y-m-t',$tym);?>/<?=$row->fname;?>')"><?php echo get_phrase('outstanding_cheques');?></a>
+									                        	
+																<li  style="">
+																	<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_outstanding_cheques/<?php echo date('Y-m-t',$tym);?>/<?=$row->fname;?>')"><?php echo get_phrase('outstanding_cheques');?></a>
 																</li>
 																
+																<li style="<" class="divider"></li>
+
 																<li  style="" class="divider"></li>
 																
 																<li style="">

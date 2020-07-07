@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-DEFINE('DS', DIRECTORY_SEPARATOR);	
+//DEFINE('DS', DIRECTORY_SEPARATOR);	
 
 class Dct_model extends CI_Model {
 	
@@ -12,9 +12,15 @@ class Dct_model extends CI_Model {
 
     function post_voucher(){
     
-    $message = 1;
+    $hID = 0;
+
+     // Move file to dct_document folder only when database insert is completed successful
+     $voucher_number = $this->input->post('VNumber');
+     $voucher_date = $this->input->post('TDate');
+
+     $temp_dir_name = 'uploads' . DS . 'temps' . DS . $this->temp_folder_hash($voucher_number);
     
-    $this->db->trans_start();
+    $this->db->trans_begin();
    
     $data['icpNo']  = $this->input->post('KENo');
     $data['TDate'] = date('Y-m-d', strtotime($this->input->post('TDate')));
@@ -80,26 +86,19 @@ class Dct_model extends CI_Model {
 
             $this->db->insert('voucher_body', $data2);
         }
+        if ($this->db->trans_status() === false || !file_exists($temp_dir_name)) {
+            $this->db->trans_rollback();
+            $hID = 0;
+        } 
+        else {
 
-        $this->db->trans_complete();
-
-       
-        if ($this->db->trans_status() === false) {
-            $message = 0;
-        } else {
-
-            // Move file to dct_document folder only when database insert is completed successful
-            $voucher_number = $this->input->post('VNumber');
-            $voucher_date = $this->input->post('TDate');
-
-            $temp_dir_name = 'uploads' . DS . 'temps' . DS . $this->temp_folder_hash($voucher_number);
-           
+            $this->db->trans_commit();           
             $this->move_temp_files_to_dct_document($temp_dir_name, $voucher_date, $voucher_number);
 
         }
     }
 
-    return $message;
+    return $hID;
     }
 
     function temp_folder_hash($voucher_number){
