@@ -619,7 +619,7 @@
         /** Add a row */
 		$('#addrow,#addrow_footer').click(function() {
 
-			//corrects the error of clicking the post before adding detail row when dct voucher type had bn selected
+			//Corrects the error of clicking the post before adding detail row when dct voucher type had bn selected
 			if($('#error_msg').html()=='Error: Voucher Missing Details'){
 
 				$('#error_msg').html('');
