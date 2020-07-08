@@ -413,20 +413,33 @@ class Finance_model extends CI_Model {
 		return date('Y-m-d',strtotime('first day of next month',strtotime($date)));
 	}		
 	
-	public function outstanding_cheques($date,$project,$oc=TRUE){ 
-		$cond_os = "((TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND ChqState='0' AND VType='CHQ')";	
-		$cond_os .= " OR (TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND ChqState='1' AND clrMonth >'".date('Y-m-t',strtotime($date))."' AND VType='CHQ' ))";	
+	// public function outstanding_cheques($date,$project,$oc=TRUE){ 
+	// 	$cond_os = "((TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND ChqState='0' AND VType='CHQ')";	
+	// 	$cond_os .= " OR (TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND ChqState='1' AND clrMonth >'".date('Y-m-t',strtotime($date))."' AND VType='CHQ' ))";	
 		
-		if($oc===FALSE){
-			$cond_os = "clrMonth>='".date('Y-m-01',strtotime($date))."' AND clrMonth<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND ChqState='1' AND VType='CHQ'";	
-		}
+	// 	if($oc===FALSE){
+	// 		$cond_os = "clrMonth>='".date('Y-m-01',strtotime($date))."' AND clrMonth<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND ChqState='1' AND VType='CHQ'";	
+	// 	}
 		
-		$os_query = $this->db->where($cond_os)->get('voucher_header')->result_array();
+	// 	$os_query = $this->db->where($cond_os)->get('voucher_header')->result_array();
 		
-		return $os_query;
-	}	
+	// 	return $os_query;
+	// }	
 
-	
+	public function outstanding_cheques($date, $project, $oc = TRUE)
+	{
+		$cond_os = "((TDate<='" . date('Y-m-t', strtotime($date)) . "' AND icpNo='" . $project . "' AND ChqState='0' AND VType IN ('CHQ','UDCTB'))";
+		$cond_os .= " OR (TDate<='" . date('Y-m-t', strtotime($date)) . "' AND icpNo='" . $project . "' AND ChqState='1' AND clrMonth >'" . date('Y-m-t', strtotime($date)) . "' AND VType IN ('CHQ','UDCTB')))";
+
+		if ($oc === FALSE) {
+			$cond_os = "clrMonth>='" . date('Y-m-01', strtotime($date)) . "' AND clrMonth<='" . date('Y-m-t', strtotime($date)) . "' AND icpNo='" . $project . "' AND ChqState='1' AND VType IN ('CHQ','UDCTB')";
+		}
+
+		$os_query = $this->db->where($cond_os)->get('voucher_header')->result_array();
+
+		return $os_query;
+	}
+
 	public function deposit_transit($date,$project,$dep=TRUE){
 		$cond_dep = "((TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND (ChqState='0' OR clrMonth>'".date('Y-m-t',strtotime($date))."') AND VType='CR')";				
 		$cond_dep .= " OR (TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND ChqState='1' AND clrMonth>'".date('Y-m-t',strtotime($date))."' AND VType='CR'))";				
@@ -524,21 +537,40 @@ class Finance_model extends CI_Model {
 		return $bank_income;		
 	}	
 	
-	//Perfect
-	public function months_bank_expense($date,$project){
-		//Expenses
-		$cond_bank_exp = "TDate>='".date('Y-m-01',strtotime($date))."' AND TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND (VType = 'CHQ' OR VType='BCHG')";
-		$bank_exp = $this->db->select_sum('Cost')->where($cond_bank_exp)->get('voucher_body')->row()->Cost;
+	// //Perfect
+	// public function months_bank_expense($date,$project){
+	// 	//Expenses
+	// 	$cond_bank_exp = "TDate>='".date('Y-m-01',strtotime($date))."' AND TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND (VType = 'CHQ' OR VType='BCHG')";
+	// 	$bank_exp = $this->db->select_sum('Cost')->where($cond_bank_exp)->get('voucher_body')->row()->Cost;
 		
-		return $bank_exp;		
-	}
+	// 	return $bank_exp;		
+	// }
 
-	public function bank_expense_to_date($project,$date){
-		//Expenses
-		$cond_bank_exp = "TDate<'".date('Y-m-01',strtotime($date))."' AND icpNo='".$project."' AND (VType = 'CHQ' OR VType='BCHG')";
-		$bank_exp = $this->db->select_sum('Cost')->where($cond_bank_exp)->get('voucher_body')->row()->Cost;
+		//Perfect
+		public function months_bank_expense($date, $project)
+		{
+			//Expenses
+			$cond_bank_exp = "TDate>='" . date('Y-m-01', strtotime($date)) . "' AND TDate<='" . date('Y-m-t', strtotime($date)) . "' AND icpNo='" . $project . "' AND (VType = 'CHQ' OR VType='BCHG' OR VType='UDCTB')";
+			$bank_exp = $this->db->select_sum('Cost')->where($cond_bank_exp)->get('voucher_body')->row()->Cost;
+	
+			return $bank_exp;
+		}
+
+	// public function bank_expense_to_date($project,$date){
+	// 	//Expenses
+	// 	$cond_bank_exp = "TDate<'".date('Y-m-01',strtotime($date))."' AND icpNo='".$project."' AND (VType = 'CHQ' OR VType='BCHG')";
+	// 	$bank_exp = $this->db->select_sum('Cost')->where($cond_bank_exp)->get('voucher_body')->row()->Cost;
 		
-		return $bank_exp;		
+	// 	return $bank_exp;		
+	// }
+
+	public function bank_expense_to_date($project, $date)
+	{
+		//Expenses
+		$cond_bank_exp = "TDate<'" . date('Y-m-01', strtotime($date)) . "' AND icpNo='" . $project . "' AND (VType = 'CHQ' OR VType='BCHG' OR VType='UDCTB')";
+		$bank_exp = $this->db->select_sum('Cost')->where($cond_bank_exp)->get('voucher_body')->row()->Cost;
+
+		return $bank_exp;
 	}
 		
 	public function bank_balance($date="",$project=""){
@@ -601,12 +633,21 @@ class Finance_model extends CI_Model {
 		return $pc_income;		
 	}
 		
-	public function months_pc_expense($project,$date){
-		//Expenses
-		$cond_pc_exp = "TDate>='".date('Y-m-01',strtotime($date))."' AND TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND (VType = 'PC' OR VType = 'PCR')";
-		$pc_exp = $this->db->select_sum('Cost')->where($cond_pc_exp)->get('voucher_body')->row()->Cost;
+	// public function months_pc_expense($project,$date){
+	// 	//Expenses
+	// 	$cond_pc_exp = "TDate>='".date('Y-m-01',strtotime($date))."' AND TDate<='".date('Y-m-t',strtotime($date))."' AND icpNo='".$project."' AND (VType = 'PC' OR VType = 'PCR')";
+	// 	$pc_exp = $this->db->select_sum('Cost')->where($cond_pc_exp)->get('voucher_body')->row()->Cost;
 		
-		return $pc_exp;		
+	// 	return $pc_exp;		
+	// }
+
+	public function months_pc_expense($project, $date)
+	{
+		//Expenses
+		$cond_pc_exp = "TDate>='" . date('Y-m-01', strtotime($date)) . "' AND TDate<='" . date('Y-m-t', strtotime($date)) . "' AND icpNo='" . $project . "' AND (VType = 'PC' OR VType = 'PCR' OR VType='UDCTC')";
+		$pc_exp = $this->db->select_sum('Cost')->where($cond_pc_exp)->get('voucher_body')->row()->Cost;
+
+		return $pc_exp;
 	}
 	
 	public function pc_expense_to_date($project,$date){
