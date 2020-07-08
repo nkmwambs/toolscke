@@ -1323,7 +1323,7 @@
 			cell4.appendChild(x);
 
 			var dct_uploads = document.createElement("i");
-			dct_uploads.className = 'badge badge-primary dct_uploads_count_label';
+			dct_uploads.className = 'badge badge-primary dct_uploads_count_label ';
 			dct_uploads.innerHTML = 0 + " files";
 			dct_uploads.onclick = function() {
 				//show_upload_area($(this).parent().find('.support_mode'),$(this).parent().find('.dct_ref_number').val());
@@ -1331,6 +1331,12 @@
 			};
 			dct_uploads.setAttribute('style', 'cursor:pointer;');
 			cell4.appendChild(dct_uploads);
+
+			var dct_file_size = document.createElement("input");
+			dct_file_size.className = 'dct_file_size_input';
+			dct_file_size.value = 0;
+			dct_file_size.name='dct_file_size[]';
+			cell4.appendChild(dct_file_size);
 
 
 
