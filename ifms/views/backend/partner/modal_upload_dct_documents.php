@@ -90,6 +90,7 @@
             } else {
                 done();
             }
+
         },
         //End of addition
 
@@ -124,7 +125,10 @@
 
             //[increase the totalsize by adding each file uploaded]
             this.on("addedfile", function(file) {
-                totalsize += parseFloat((file.size / (1024 * 1024)).toFixed(2));
+                 totalsize += parseFloat((file.size / (1024 * 1024)).toFixed(2));
+
+                $('#check_upload_size').val(totalsize);
+                
             });
             //[Reduce totalsize when file is removed]
             // this.on("removedfile", function(file) {
@@ -179,9 +183,6 @@
             data: {
                 'file_name': file_name
             },
-            // beforeSend: function() {
-            // 	$('#error_msg').html('<div style="text-align:center;"><img style="width:60px;height:60px;" src="<?php echo base_url(); ?>uploads/preloader4.gif" /></div>');
-            // },
             success: function(response) {
                 //alert('This file'+data+' has been removed');
                 var obj = JSON.parse(response);
@@ -191,11 +192,9 @@
                 dct_uploads_count_label.html(obj.count_of_files + " files [Click here to Update]");
 
                 //Added by Onduso 7/8/2020
-                var dct_file_size = $("#bodyTable tr").eq('<?= $param3; ?>').find('td.td_support_mode').find('input.dct_file_size');
-                dct_file_size.html(totalsize);
-                if (file.upload.progress != 0) {
-                    totalsize -= parseFloat((file.size / (1024 * 1024)).toFixed(2));
-                }
+                //var dct_file_size = $("#bodyTable tr").eq('<?= $param3; ?>').find('td.td_support_mode').find('input.dct_file_size');
+                totalsize -= parseFloat((file.size / (1024 * 1024)).toFixed(2));
+                $('#check_upload_size').val(totalsize)
                 //End of Onduso addition
             },
 

@@ -304,7 +304,7 @@
 							<!-- Post Voucher Btn -->
 							<div>
 								<button type="submit" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
-
+                                 <input type='text' name='check_upload_size' value="0" id='check_upload_size'>
 							</div>
 						</div>
 					</div>
@@ -1332,11 +1332,12 @@
 			dct_uploads.setAttribute('style', 'cursor:pointer;');
 			cell4.appendChild(dct_uploads);
 
-			var dct_file_size = document.createElement("input");
-			dct_file_size.className = 'dct_file_size_input';
-			dct_file_size.value = 0;
-			dct_file_size.name='dct_file_size[]';
-			cell4.appendChild(dct_file_size);
+			// var check_upload_size = document.createElement("input");
+			// check_upload_size.className = 'check_upload_size';
+			// check_upload_size.value = 0;
+			// check_upload_size.id='check_upload_size';
+			// check_upload_size.name='check_upload_size[]';
+			// cell4.appendChild(check_upload_size);
 
 
 
@@ -1561,7 +1562,7 @@
 		var url = "<?= base_url() ?>ifms.php/partner/remove_all_dct_files_in_temp/" + voucher_number + "/" + voucher_detail_row_index + "/" + support_mode_id;
 
 		$.get(url, function(response) {
-			if (response > 0) {
+			if (response < 0) {
 				alert('All files are removed');
 			}
 
