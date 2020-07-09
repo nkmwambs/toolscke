@@ -59,22 +59,44 @@ class Dct extends CI_Controller
 			unlink('downloads/' . $backup_file);
 		}
 	}
-    
+	
+	
+	function temp_folder_hash($voucher_number){
+		echo $this->dct_model->temp_folder_hash($voucher_number);
+	}
+	
+	function create_uploads_temp()
+	{
 
-    function create_uploads_temp($voucher_number){
+		$voucher_number = $_POST['voucher_number'];
+		$voucher_detail_row_index = $_POST['voucher_detail_row_number'];
+		$support_mode_id = $_POST['support_mode_id'];
+
+		//Hash the folder to make user depended
+		$hash = $this->dct_model->temp_folder_hash($voucher_number); //.random_int(10,1000000);
+		$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id; //.random_int(10,1000000);
+
+		//$hash = md5($hash_main_folder_name);
 
 		//Folder for temp and call the upload_files method to temperarily hold files on server
-		$storeFolder = 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number);
+		
+		$storeFolder = 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder_name;
 
 		if (
 			is_array($this->upload_files($storeFolder)) &&
 			count($this->upload_files($storeFolder)) > 0
 		) {
-			echo json_encode($this->upload_files($storeFolder));
+			$info = ['temp_id' => $hash];
+
+			$files_array = array_merge($this->upload_files($storeFolder), $info);
+
+			echo json_encode($files_array);
+
 		} else {
 			echo 0;
 		}
-    }
+
+	}
 
     function upload_files($storeFolder)
 	{
@@ -107,6 +129,7 @@ class Dct extends CI_Controller
 
 			return $_FILES;
 		}
+		
 	}
 
 	function remove_dct_files_in_temp($voucher_number)
@@ -221,5 +244,141 @@ class Dct extends CI_Controller
 		$final_file_path = 'uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder . DS . $voucher_number;
 
 		return rename($temp_dir_name, $final_file_path);
+	}
+
+	function get_accounts_for_voucher_item_type(int $voucher_item_type_id=0){
+		echo json_encode($this->dct_model->get_accounts_related_voucher_item_type($voucher_item_type_id));
+
+	 }
+
+	 function get_support_modes_for_voucher_type($voucher_type_abbrev){
+		$this->db->select(array('support_mode_id','support_mode_name','support_mode_is_dct'));
+		
+		$this->db->join('voucher_type_support_mode','voucher_type_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('voucher_type','voucher_type.voucher_type_id=voucher_type_support_mode.fk_voucher_type_id');
+		
+		$this->db->where(array('support_mode_is_active'=>1,'voucher_type_abbrev'=>$voucher_type_abbrev));
+		
+		$support_mode_obj =  $this->db->get('support_mode');
+
+		$support_modes = [];
+
+		if($support_mode_obj->num_rows() > 0){
+			$support_modes = $support_mode_obj->result_array();
+		}
+
+		return $support_modes;
+	}
+
+	function get_support_modes(){
+
+		$voucher_type_abbrev = $this->input->post('voucher_type_abbrev');
+		$accno = $this->input->post('accno');
+
+		$this->db->select(array('support_mode_id','support_mode_name','support_mode_is_dct'));
+		
+		$this->db->join('voucher_type_support_mode','voucher_type_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('voucher_type','voucher_type.voucher_type_id=voucher_type_support_mode.fk_voucher_type_id');
+		$this->db->join('accounts_support_mode','accounts_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('accounts','accounts.accID=accounts_support_mode.fk_accounts_id');
+		
+		$this->db->where(array('support_mode_is_active'=>1,'voucher_type_abbrev'=>$voucher_type_abbrev,'AccNo'=>$accno));
+		
+		$support_mode_obj =  $this->db->get('support_mode');
+
+		$support_modes = [];
+
+		if($support_mode_obj->num_rows() > 0){
+			$support_modes = $support_mode_obj->result_array();
+		}
+
+		echo json_encode($support_modes);
+	}
+
+	function remove_all_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id){
+		// $hash = $this->dct_model->temp_folder_hash($voucher_number); //.random_int(10,1000000);
+		// $detail_folder = $voucher_number.'_'.$voucher_detail_row_number.'_'.$support_mode_id;
+		// //$hash = md5($hash_folder_name);
+
+		// //Folder path
+		// $storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder;
+		
+		// $cnt = 0;
+		
+		// $count_files_in_temp_dir = $this->count_files_in_temp_dir($voucher_detail_row_number);
+
+		// if($count_files_in_temp_dir > 0){
+	
+		// 		foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+		// 			if ($fileInfo->isDot()) continue;
+		
+		// 			if ($fileInfo->isFile()) {
+		// 				unlink($storeFolder . DS . $fileInfo);
+		// 				$cnt++;
+		// 			}
+		// 		}
+		// 		rmdir($storeFolder);
+			
+		// }
+
+		// echo $cnt;
+		
+	}
+
+	function count_files_in_temp_dir($voucher_detail_row_index,$voucher_number, $support_mode_id){
+		
+		$filecount = 0;
+
+		//if ($this->session->upload_session) {
+			
+			//$voucher_detail_row_index--;
+			$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id;
+			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number) . DS . $detail_folder_name;
+			$files2 = glob($storeFolder . "/*.*");
+
+			if( $files2 ) { 
+				$filecount = count($files2); 
+			} 
+			  
+		//}
+
+		echo $filecount; 
+		//echo $this->session->$session_name;
+		//echo $voucher_detail_row_index;
+	}
+
+	function check_if_mode_is_dct($support_mode_id){
+		$mode_is_dct = $this->db->get_where('support_mode',array('support_mode_id'=>$support_mode_id))->row()->support_mode_is_dct;
+
+		echo $mode_is_dct;
+	}
+
+
+	function get_uploaded_support_mode_files($voucher_detail_row_index){
+		$result  = array();
+		
+		$session_name = "detail_upload_session_".$voucher_detail_row_index;
+		
+		if($this->session->upload_session && $this->session->$session_name){
+				
+			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session . DS . $this->session->$session_name;
+
+			$result['store_folder'] = $storeFolder;
+
+			$files = scandir($storeFolder);                 
+			if ( false!==$files ) {
+				foreach ( $files as $file ) {
+					if ( '.'!=$file && '..'!=$file) {       
+						$obj['name'] = $file;
+						$obj['size'] = filesize($storeFolder. DS .$file);
+						$result['uploaded_files'][] = $obj;
+					}
+				}
+			}
+		}
+		
+		header('Content-type: text/json');              
+		header('Content-type: application/json');
+		echo json_encode($result);
 	}
 }

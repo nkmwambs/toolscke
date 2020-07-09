@@ -125,6 +125,42 @@ class Dct_model extends CI_Model {
 		$final_file_path = 'uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder . DS . $voucher_number;
 
 		return rename($temp_dir_name, $final_file_path);
-	}
+    }
+    
+    function get_voucher_item_types(){
+		$this->db->select(array('voucher_item_type_id','voucher_item_type_name'));
+		$voucher_item_types = $this->db->get_where('voucher_item_type',array('voucher_type_item_is_active'=>1))->result_array();
+
+		return $voucher_item_types;
+    }
+    
+    function get_support_modes_for_voucher_type($voucher_type_abbrev){
+		$this->db->select(array('support_mode_id','support_mode_name','support_mode_is_dct'));
+		
+		$this->db->join('voucher_type_support_mode','voucher_type_support_mode.fk_support_mode_id=support_mode.support_mode_id');
+		$this->db->join('voucher_type','voucher_type.voucher_type_id=voucher_type_support_mode.fk_voucher_type_id');
+		
+		$this->db->where(array('support_mode_is_active'=>1,'voucher_type_abbrev'=>$voucher_type_abbrev));
+		
+		$support_mode_obj =  $this->db->get('support_mode');
+
+		$support_modes = [];
+
+		if($support_mode_obj->num_rows() > 0){
+			$support_modes = $support_mode_obj->result_array();
+		}
+
+		return $support_modes;
+    }
+    
+    function get_accounts_related_voucher_item_type(int $voucher_item_type_id=0){
+
+        
+        //return $this->db->select(array('accno','acctext','accname'))->get_where('accounts', array('fk_voucher_item_type_id'=>$voucher_item_type_id))->result_array();
+        $this->db->select(array('accno','acctext','accname'));
+        $this->db->join('voucher_items_with_accounts','voucher_items_with_accounts.accounts_id=accounts.accID');
+        $this->db->join('voucher_item_type','voucher_items_with_accounts.voucher_item_type_id=voucher_item_type.voucher_item_type_id');
+        return $this->db->get_where('accounts', array('voucher_item_type.voucher_item_type_id'=>$voucher_item_type_id))->result_array();
+    }
 }
 

@@ -191,7 +191,7 @@
 						<div class="col-sm-12">
 							<table id="bodyTable" class="table table-bordered">
 								<thead>
-									<tr style="font-weight: bold;">
+									<tr style="font-weight: bold;" id='th_detail_table'>
 										<!-- <th><?php echo get_phrase('check'); ?></th> -->
 										<th><?php echo get_phrase('delete_row'); ?></th>
 										<th><?php echo get_phrase('quantity'); ?></th>
@@ -497,7 +497,7 @@
 
 			//Redirect to new code site if DCTC / DCTB
 
-			if (val == 'UDCTC' || val == 'UDCTB') {
+			//if (val == 'UDCTC' || val == 'UDCTB') {
 				// var cnfrm = confirm("You will be redirected to another site to enter Direct Cash Transfer related vouchers. Please confirm if you want to do so");
 
 				// if(cnfrm){
@@ -509,9 +509,9 @@
 				// 	alert('We can see that you have terminated the request. Note, we can\'t fill in Direct Cash Transfer vouchers in this voucher form');
 				// }
                 
-				dct_scripts_voucher_type_on_change(this);
+				//dct_scripts_voucher_type_on_change(this);
 
-			} else {
+			//} else {
 				var url = '<?php echo base_url(); ?>ifms.php/partner/voucher_accounts/' + val;
 				//alert(url);
 				$.ajax({
@@ -529,7 +529,7 @@
 					$('#label-toggle-switch').removeClass('hidden');
 					$('#DCTReference').removeClass('accNos');
 				}
-			}
+			//}
 		});
 
 
@@ -619,43 +619,50 @@
         /** Add a row */
 		$('#addrow,#addrow_footer').click(function() {
 
+			if($("#VType").hasClass('hidden') || $('#VTypeMain').is('select')){
+				alert('Select a voucher type');
+				return false;
+			}
+
+			var use_dct_detail_row = '<?=$this->config->item('use_dct_detail_row');?>';
+
+			if(use_dct_detail_row && $("#VTypeMain").val() !== 'CR'){
+				add_dct_detail_row_and_header($(this));
+			}else{
+				add_detail_row($(this));
+			}
+			
+		});
+
+
+
+		function add_detail_row(elem){
+			
 			//Corrects the error of clicking the post before adding detail row when dct voucher type had bn selected
 			if($('#error_msg').html()=='Error: Voucher Missing Details'){
 
 				$('#error_msg').html('');
 
-			}
-			else if($('#error_msg').html()!='' && ($('#VTypeMain').val()=='UDCTB' || $('#VTypeMain').val()=='UDCTC')){
+				}
+				else if($('#error_msg').html()!='' && ($('#VTypeMain').val()=='UDCTB' || $('#VTypeMain').val()=='UDCTC')){
 				alert('Resolve the error messages before proceeding');
 				return false;
-			}
+				}
 
-			
 
-			var vtype = $('#VTypeMain').val();
 
-			// if(vtype == 'DCTC' || vtype == 'DCTB'){
-			// 	var cnfrm = confirm("You can't record Direct Cash Transfer voucher in this voucher form. Do you want to be redirected to the correct voucher form?");
+				var vtype = $('#VTypeMain').val();	
 
-			// 	if(confirm){
-			// 		var url = "<?= $this->config->item('redirect_base_url'); ?>admin.php/login/reroute/<?= $this->session->session_id; ?>/new_voucher";
-			// 		window.open(url,'__blank');
-			// 	}else{
-			// 		return false;
-			// 	}	
-
-			// }	
-
-			var reverse = $('#reversal').prop('checked');
-			if (vtype === '#') {
+				var reverse = $('#reversal').prop('checked');
+				if (vtype === '#') {
 				$('#error_msg').html('<?php echo get_phrase('voucher_type_empty'); ?>');
 				exit();
-			} else {
+				} else {
 				$('#error_msg').html('');
-			}
+				}
 
 
-			if (reverse === true) {
+				if (reverse === true) {
 				//Check if Date has been selected
 
 				if ($('#TDate').val().length === 0) {
@@ -785,7 +792,7 @@
 				$(this).css("display", "none");
 				$("#ChqNo").val('0');
 
-			} else {
+				} else {
 				var url = '<?php echo base_url(); ?>ifms.php/partner/voucher_accounts/' + vtype;
 				//alert(url);
 				$.ajax({
@@ -929,10 +936,8 @@
 					}
 				});
 
-			}
-		});
-
-
+				}
+		}
 
 
 	});
