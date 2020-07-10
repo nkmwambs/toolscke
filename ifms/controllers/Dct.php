@@ -132,15 +132,46 @@ class Dct extends CI_Controller
 		
 	}
 
-	function remove_dct_files_in_temp($voucher_number)
+	// function remove_dct_files_in_temp($voucher_number, $voucher_detail_row_index, $support_mode_id)
+	// {
+
+	// 	//Folder path
+	// 	$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id;
+	// 	$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number). DS . $detail_folder_name;
+	// 	$output = [];
+
+	// 	//Loop the $hash directory and delete the selected file
+	// 	$data = $this->input->post('file_name');
+
+	// 	foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+	// 		if ($fileInfo->isDot()) continue;
+
+	// 		if ($fileInfo->getFilename() == $data) {
+
+	// 			unlink($storeFolder . DS . $fileInfo);
+
+	// 			//echo $fileInfo->getFilename(); //for ajax use
+	// 			$output['file_name'] = $fileInfo->getFilename();
+	// 		}
+	// 	}
+
+	// 	$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number);
+
+	// 	echo json_encode($output);
+	// }
+
+
+	function remove_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id)
 	{
 
-		//Folder path
-		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number);
+		$output = [];
 
+		$detail_folder_name = $voucher_number.'_'.$voucher_detail_row_number.'_'.$support_mode_id;
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number). DS . $detail_folder_name;
+		
 		//Loop the $hash directory and delete the selected file
 		$data = $this->input->post('file_name');
-
+	
 		foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
 			if ($fileInfo->isDot()) continue;
 
@@ -148,11 +179,14 @@ class Dct extends CI_Controller
 
 				unlink($storeFolder . DS . $fileInfo);
 
-				echo $fileInfo->getFilename(); //for ajax use
+				$output['file_name'] = $fileInfo->getFilename();
+				//echo $fileInfo->getFilename(); //for ajax use
 			}
 		}
 
-		//$this->delete_empty_folder($storeFolder);
+		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number);
+
+		echo json_encode($output);
 	}
 	
 	private function get_bank_code()
