@@ -184,7 +184,7 @@
                 'file_name': file_name
             },
             success: function(response) {
-                //alert('This file'+data+' has been removed');
+                alert(response);
                 var obj = JSON.parse(response);
 
                 alert('This file ' + obj.file_name + ' has been removed');
