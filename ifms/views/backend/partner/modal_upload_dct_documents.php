@@ -97,10 +97,10 @@
         init: function() {
 
             var thisDropzone = this;
-            var url = "<?= base_url(); ?>ifms.php/dct/get_uploaded_support_mode_files/<?= $param3; ?>"; //get_uploaded_support_mode_files
-
+            var url = "<?= base_url(); ?>ifms.php/dct/get_uploaded_support_mode_files/<?= $param3; ?>/<?=$param2;?>/<?=$param4;?>"; //get_uploaded_support_mode_files
+            
             $.get(url, function(data) {
-                //alert(data.store_folder);
+                
                 $.each(data.uploaded_files, function(key, value) {
 
                     var mockFile = {

@@ -354,14 +354,15 @@ class Dct extends CI_Controller
 	}
 
 
-	function get_uploaded_support_mode_files($voucher_detail_row_index){
+	function get_uploaded_support_mode_files($voucher_detail_row_index, $voucher_number, $support_mode_id){
 		$result  = array();
 		
-		$session_name = "detail_upload_session_".$voucher_detail_row_index;
+		$hash = $this->dct_model->temp_folder_hash($voucher_number);
+		$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id;
 		
-		if($this->session->upload_session && $this->session->$session_name){
-				
-			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->session->upload_session . DS . $this->session->$session_name;
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder_name;
+
+		if(file_exists($storeFolder)){
 
 			$result['store_folder'] = $storeFolder;
 
