@@ -9,4 +9,7 @@ $config['mfr_review_notification_response_time'] = 24; // Time in hours
 $config['use_test_recipient_id_mfr_review_notification'] =  0; // e.g. Nicodemus is 371 user id
 $config['show_when_null'] = "Not Set";
 
-$config['redirect_base_url'] = 'http://localhost/toolscke/';
+//$config['redirect_base_url'] = 'http://localhost/toolscke/';
+
+// Voucher configurations
+$config['use_dct_detail_row'] = true;

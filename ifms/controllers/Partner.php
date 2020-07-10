@@ -20,7 +20,8 @@ class Partner extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
-        $this->load->library('session');
+		$this->load->library('session');
+		$this->load->model('dct_model');
 		
        /*cache control*/
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -747,11 +748,18 @@ function reverse_cheque($param1=''){
 			$trimmed_explode_allocate = array_map(array($this,'trim_spaces'),$untrimmed_explode_allocate);
 			
 			if (is_numeric($civaAcc['civaID']) && in_array($this->session->userdata('center_id'),$trimmed_explode_allocate)) {
-				$rst[] = $civaAcc;
+				$rst['acc'][] = $civaAcc;
 			} elseif (!is_numeric($civaAcc['civaID'])) {
-				$rst[] = $civaAcc;
+				$rst['acc'][] = $civaAcc;
 			}
 		endforeach;
+
+		$rst['voucher_type_effect'] = $this->db->get_where('voucher_type',array('voucher_type_abbrev'=>$param1))->row()->voucher_type_effect;
+
+		if($this->config->item('use_dct_detail_row')){
+			$rst['item_types'] = $this->dct_model->get_voucher_item_types();
+			$rst['support_modes'] = $this->dct_model->get_support_modes_for_voucher_type($param1);
+		}
 
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($rst));
@@ -866,7 +874,7 @@ public function multiple_vouchers($tym){
 		$hID = 0;
 
 		if($this->input->post('VTypeMain') == 'UDCTB' || $this->input->post('VTypeMain') == 'UDCTC' ){
-			$this->load->model('dct_model');
+			
 			$hID = $this->dct_model->post_voucher();
 		}else{
 			$hID = $this->_post_voucher();
