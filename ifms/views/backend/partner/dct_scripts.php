@@ -530,7 +530,7 @@
 
 		//alert(dct_uploads_count_label.hasClass('badge'));
 
-			var url = "<?= base_url(); ?>ifms.php?/dct/count_files_in_temp_dir/" + voucher_detail_row_index + "/" + voucher_number + "/" + support_mode_id;
+			var url = "<?= base_url(); ?>ifms.php?/dct/count_files_in_temp_dir_for_ajax_use/" + voucher_detail_row_index + "/" + voucher_number + "/" + support_mode_id;
 
 			$.get(url, function(response) {
 				//alert(response);

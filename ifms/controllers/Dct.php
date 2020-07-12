@@ -180,11 +180,10 @@ class Dct extends CI_Controller
 				unlink($storeFolder . DS . $fileInfo);
 
 				$output['file_name'] = $fileInfo->getFilename();
-				//echo $fileInfo->getFilename(); //for ajax use
 			}
 		}
-
-		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number,$voucher_number,$support_mode_id);
+        //Onduso comment: When echo is used in this 'count_files_in_temp_dir' "count_of_files" =null so we have to use return for to count of files
+		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number,$voucher_number,$support_mode_id, true);
 
 		echo json_encode($output);
 	}
@@ -359,26 +358,25 @@ class Dct extends CI_Controller
 		
 	}
 
-	function count_files_in_temp_dir($voucher_detail_row_index,$voucher_number, $support_mode_id){
-		
+	private function count_files_in_temp_dir($voucher_detail_row_index,$voucher_number, $support_mode_id){
+
 		$filecount = 0;
 
-		//if ($this->session->upload_session) {
-			
-			//$voucher_detail_row_index--;
-			$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id;
-			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number) . DS . $detail_folder_name;
-			$files2 = glob($storeFolder . "/*.*");
+		$detail_folder_name = $voucher_number . '_' . $voucher_detail_row_index . '_' . $support_mode_id;
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number) . DS . $detail_folder_name;
+		$files2 = glob($storeFolder . "/*.*");
 
-			if( $files2 ) { 
-				$filecount = count($files2); 
-			} 
-			  
-		//}
+		if ($files2) {
+			$filecount = count($files2);
+		}  
+		return $filecount; 
+	    
+	}
 
-		echo $filecount; 
-		//echo $this->session->$session_name;
-		//echo $voucher_detail_row_index;
+	function count_files_in_temp_dir_for_ajax_use($voucher_detail_row_index,$voucher_number, $support_mode_id){
+
+		echo $this->count_files_in_temp_dir($voucher_detail_row_index,$voucher_number, $support_mode_id);
+
 	}
 
 	function check_if_mode_is_dct($support_mode_id){
