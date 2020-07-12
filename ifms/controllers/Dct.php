@@ -184,7 +184,7 @@ class Dct extends CI_Controller
 			}
 		}
 
-		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number);
+		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number,$voucher_number,$support_mode_id);
 
 		echo json_encode($output);
 	}
