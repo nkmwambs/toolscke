@@ -327,6 +327,47 @@ class Dct extends CI_Controller
 		echo json_encode($support_modes);
 	}
 
+	function remove_all_temp_files($voucher_number){
+		$hash = $this->dct_model->temp_folder_hash($voucher_number); 
+		$cnt = 0;
+
+		$temp_hashed_directory_path = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash;
+
+
+		foreach (new DirectoryIterator($temp_hashed_directory_path) as $detail_temp_directory) {
+			if ($detail_temp_directory->isDot()) continue;
+
+			$files_in_detail_directory = glob($detail_temp_directory . "*");
+		
+			
+			if(count($files_in_detail_directory) == 1){
+				rmdir($temp_hashed_directory_path .DS. $detail_temp_directory);
+				$cnt ++;
+			}else{
+				
+				foreach (new DirectoryIterator($temp_hashed_directory_path .DS. $detail_temp_directory) as $uploaded_files) {
+					if ($uploaded_files->isDot()) continue;
+					
+					if ($uploaded_files->isFile()) {
+						unlink($temp_hashed_directory_path .DS. $detail_temp_directory . DS . $uploaded_files);
+						$cnt ++;
+					}
+				}
+
+				rmdir($temp_hashed_directory_path .DS. $detail_temp_directory);
+
+			}
+
+		}		
+
+		//gc_collect_cycles();
+		//$this->delete_empty_folder($temp_hashed_directory_path);
+		rmdir($temp_hashed_directory_path);
+
+		echo $cnt;
+
+	}
+
 	function remove_voucher_row_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id){
 		$hash = $this->dct_model->temp_folder_hash($voucher_number); 
 		$detail_folder = $voucher_number.'_'.$voucher_detail_row_number.'_'.$support_mode_id;
