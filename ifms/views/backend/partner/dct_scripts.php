@@ -618,5 +618,10 @@
 
 	$(document).ready(function(){
 		//alert('Hello');
+		var url = '<?=base_url();?>ifms.php/dct/remove_all_temp_files/'+$("#Generated_VNumber").val();
+
+		$.get(url,function(response){
+			alert(response);
+		});
 	});
 </script>
