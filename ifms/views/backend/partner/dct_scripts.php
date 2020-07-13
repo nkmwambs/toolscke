@@ -352,7 +352,7 @@
 			current_selected_mode_id = $(this).val();
 		},
 		x.onchange = function() {
-			//enable_disabled_voucher_item_type(this);
+			
 
 			remove_voucher_row_dct_files_in_temp(this,current_selected_mode_id);
 
@@ -584,7 +584,7 @@
 		var url = "<?= base_url(); ?>ifms.php?/dct/count_files_in_temp_dir_for_ajax_use/" + voucher_detail_row_index + "/" + voucher_number + "/" + support_mode_id;
 
 		$.get(url, function(response) {
-			alert(response);
+			//alert(response);
 			dct_uploads_count_label.html(response + " files [Click here to Update]");
 
 			dct_uploads_count_label.siblings('input.check_upload_count').val(response);
@@ -603,16 +603,23 @@
 		var voucher_number = $("#Generated_VNumber").val();
 
 		var url = "<?= base_url() ?>ifms.php/dct/remove_voucher_row_dct_files_in_temp/" + voucher_number + "/" + voucher_detail_row_index + "/" + initial_support_mode_id;
+		
+		if(initial_support_mode_id > 0){
+			var cfrm = confirm('Are you sure you want to change the support mode? You will loose file already uploaded for this row if accepted!');
 
-		$.get(url, function(response) {
-			if (response == 0) {
-				alert('All files are removed');
+			if(cfrm){
+				$.get(url, function(response) {
+					if (response == 0) {
+						alert('All files are removed');
+					}
+					show_upload_area(modes_select);
+				});
 			}
-
-			//alert(response);
-
+			
+		}else{
 			show_upload_area(modes_select);
-		});
+		}
+
 	}
 
 
@@ -621,7 +628,7 @@
 		var url = '<?=base_url();?>ifms.php/dct/remove_all_temp_files/'+$("#Generated_VNumber").val();
 
 		$.get(url,function(response){
-			alert(response);
+			//alert(response);
 		});
 	});
 </script>
