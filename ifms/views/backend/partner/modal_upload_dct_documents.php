@@ -57,6 +57,8 @@
 </div>
 
 <script>
+
+
     $("#btn_save_uploads").on('click', function(ev) {
         // if($("#modal_dct_reference").val() == ""){
         //     alert('Reference number is required');
@@ -124,12 +126,12 @@
             });
 
             //[increase the totalsize by adding each file uploaded]
-            this.on("addedfile", function(file) {
-                 totalsize += parseFloat((file.size / (1024 * 1024)).toFixed(2));
+            // this.on("addedfile", function(file) {
+            //      totalsize += parseFloat((file.size / (1024 * 1024)).toFixed(2));
 
-                $('#check_upload_size').val(totalsize);
+            //     $('#check_upload_size').val(totalsize);
                 
-            });
+            // });
             //[Reduce totalsize when file is removed]
             // this.on("removedfile", function(file) {
             //     if (file.upload.progress != 0) {
@@ -194,7 +196,7 @@
                 //Added by Onduso 7/8/2020
                 //var dct_file_size = $("#bodyTable tr").eq('<?= $param3; ?>').find('td.td_support_mode').find('input.dct_file_size');
                 totalsize -= parseFloat((file.size / (1024 * 1024)).toFixed(2));
-                $('#check_upload_size').val(totalsize)
+                //$('#check_upload_size').val(totalsize)
                 //End of Onduso addition
             },
 

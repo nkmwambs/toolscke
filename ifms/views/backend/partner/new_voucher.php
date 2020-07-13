@@ -40,10 +40,10 @@
 								<i class="entypo-plus-circled"></i>
 							</a>
 
-							<button type="submit" id="btnPostVch" class="btn btn-default btn-icon icon-left hidden-print pull-left">
+							<!-- <button type="submit" id="btnPostVch" class="btn btn-default btn-icon icon-left hidden-print pull-left">
 								<?php echo get_phrase('post'); ?>
 								<i class="entypo-thumbs-up"></i>
-							</button>
+							</button> -->
 
 
 							<div style="display: none" id='btnDelRow' class="btn btn-default btn-icon icon-left hidden-print pull-left">
@@ -51,10 +51,10 @@
 								<i class="entypo-minus-circled"></i>
 							</div>
 
-							<div id='addrow' class="btn btn-default btn-icon icon-left hidden-print pull-left">
+							<!-- <div id='addrow' class="btn btn-default btn-icon icon-left hidden-print pull-left">
 								<?php echo get_phrase('new_item_row'); ?>
 								<i class="entypo-plus-circled"></i>
-							</div>
+							</div> -->
 
 						</div>
 
@@ -124,7 +124,17 @@
 									<tr>
 
 										<td colspan="2" id='td_voucher_type'>
-											<div class="col-sm-10 form-group hidden" id='VType'>
+
+										<div class="col-sm-10 form-group hidden" id='VType'>
+												<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type'); ?>:</span></label>
+												<select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
+													<option value="#"><?php echo get_phrase('select_voucher_type'); ?></option>
+													<?php foreach ($voucher_types as $voucher_type) { ?>
+														<option value="<?= $voucher_type['voucher_type_abbrev']; ?>"><?php echo get_phrase($voucher_type['voucher_type_name']); ?></option>
+													<?php } ?>
+												</select>
+											</div>
+											<!-- <div class="col-sm-10 form-group hidden" id='VType'>
 												<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type'); ?>:</span></label>
 												<select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
 													<option value="#"><?php echo get_phrase('select_voucher_type'); ?></option>
@@ -136,7 +146,7 @@
 													<option value="UDCTC"><?php echo get_phrase('direct_cash_transfer_via_cash'); ?></option>
 													<option value="UDCTB"><?php echo get_phrase('direct_cash_transfer_via_bank'); ?></option>
 												</select>
-											</div>
+											</div> -->
 										</td>
 
 
@@ -190,7 +200,15 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<table id="bodyTable" class="table table-bordered">
+							<tr>
+										<!-- Add row -->
+										<div id='addrow_div' class='hidden'>
+											<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
+										</div>
+									</tr>
+									<hr>
 								<thead>
+								    
 									<tr style="font-weight: bold;" id='th_detail_table'>
 										<!-- <th><?php echo get_phrase('check'); ?></th> -->
 										<th><?php echo get_phrase('delete_row'); ?></th>
@@ -206,6 +224,13 @@
 
 								</tbody>
 							</table>
+
+							<!-- Post Voucher Btn -->
+							<div>
+								<button type="submit" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
+                                 <!-- <input type='text' name='check_upload_size' value="0" id='check_upload_size'> -->
+								 </div> <input class="" value="0" id="check_upload_count" name="" type="text"/>
+							</div>
 						</div>
 					</div>
 
@@ -256,7 +281,6 @@
 		var frm = $("#frm_voucher");
 		var postData = frm.serializeArray();
 		var formURL = "<?= base_url() ?>ifms.php/partner/post_voucher/";
-		//alert(formURL);
 		$.ajax({
 			url: formURL,
 			type: "POST",
@@ -296,8 +320,6 @@
 			$('#VType').removeClass('hidden');
 		});
 
-
-
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
            // added by onduso on 19/5/2020 start
 			/** check if the reference number exists*/
@@ -321,11 +343,11 @@
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number'); ?>');
 				e.preventDefault();
 			}
-			else if(($('#error_msg').html().length>1 && (val=='UDCTB'||val=='UDCTC') ) || check_if_dct_upload_empty()==0){
-				$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number_or_missing_dct_uploads'); ?>');
-				e.preventDefault();
+			// else if(($('#error_msg').html().length>1 && (val=='UDCTB'||val=='UDCTC') ) || check_if_dct_upload_empty()==0){
+			// 	$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number_or_missing_dct_uploads'); ?>');
+			// 	e.preventDefault();
 
-			}
+			// }
 			else if ($("#bodyTable > tbody").children().length === 0) {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
@@ -493,6 +515,9 @@
 			var val = $(this).val();
 
 			$(this).remove();
+			//Added by Onduso 27/06/2020- Start
+			$('#addrow_div').removeClass('hidden');
+
 			$('#VType').append('<INPUT TYPE="text" VALUE="' + val + '" name="VTypeMain" id="VTypeMain" class="form-control" readonly/>');
 
 			//Redirect to new code site if DCTC / DCTB
