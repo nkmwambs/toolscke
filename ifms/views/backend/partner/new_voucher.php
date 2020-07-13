@@ -228,7 +228,7 @@
 							<!-- Post Voucher Btn -->
 							<div>
 								<button type="submit" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
-								<input type='text' name='check_upload_size' value="0" id='check_upload_size'>
+								<input type='text' name='' value="0" id='compute_upload_size'>
 							</div> 
 						</div>
 					</div>

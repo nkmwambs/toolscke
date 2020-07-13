@@ -65,12 +65,12 @@
 
     });
 
-    $(document).ready(function() {
-        //$("#modal_dct_reference").val();
-    });
-
-    var totalsize = 0.0;
-    var totalSizeLimit=15000;
+    var max_voucher_upload_files_size = "<?=$this->config->item('max_voucher_upload_files_size');?>";
+    var compute_upload_size = parseInt($("#compute_upload_size").val());
+    var total_upload_count = 0;
+    var max_size_limit = '<?=$this->config->item('max_voucher_row_uploaded_files_size');?>';
+    var max_upload_file_count_limit = '<?=$this->config->item('max_voucher_row_upload_file_count');?>';
+    
     var myDropzone = new Dropzone("#myDropzone", {
         url: "<?= base_url() ?>ifms.php?/dct/create_uploads_temp",
         paramName: "fileToUpload", // The name that will be used to transfer the file
@@ -78,33 +78,36 @@
         uploadMultiple: true,
         addRemoveLinks: true,
         paralleluploads: 5,
-        maxFiles: 2,
+        maxFiles: max_upload_file_count_limit,
         acceptedFiles: 'image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv',
 
         //Added by Onduso on 7/8/2020 to allow only 2 files
 
         accept: function(file, done) {
-            if (totalsize >= 2) {
+            if (total_upload_count >= parseInt(max_upload_file_count_limit)) {
                 file.status = Dropzone.CANCELED;
                 this._errorProcessing([file], "Max limit reached", null);
                 alert("Max limit reached");
-            } 
-            
-            else {
+            } else {
                 done();
             }
 
-            // this.on("uploadprogress", function(file, progress, bytesSent) {
-            //     // alert(getTotalPreviousUploadedFilesSize());
-            //     var totalSizeLimit = 15000;
-            //     var alreadyUploadedTotalSize = getTotalPreviousUploadedFilesSize();
-            //     if ((alreadyUploadedTotalSize + bytesSent) > totalSizeLimit) {
-            //         this.disable();
-            //         file.status = Dropzone.CANCELED;
-            //         this._errorProcessing([file], "Maxmum file size reached", null);
-            //         alert("Maxmum file size reached");
-            //     }
-            // });
+            this.on("uploadprogress", function(file, progress, bytesSent) {
+                
+                var alreadyUploadedTotalSize = getTotalPreviousUploadedFilesSize();   
+                var row_total_size = alreadyUploadedTotalSize + bytesSent;
+                compute_upload_size += parseInt(row_total_size);   
+
+                //alert(compute_upload_size);      
+
+                if (((alreadyUploadedTotalSize + bytesSent) > max_size_limit) || (compute_upload_size > parseInt(max_voucher_upload_files_size))) {
+                    alert("Maximum file size reached");
+                    this.removeFile(file);
+                }else{
+                    retrieve_size_of_files_in_row(compute_upload_size);
+                    done();
+                }
+            });
 
         },
         //End of addition
@@ -140,9 +143,9 @@
 
             //[increase the totalsize by adding each file uploaded]
             this.on("addedfile", function(file) {
-                totalsize += parseFloat((file.size / (1024 * 1024)).toFixed(2));
+                total_upload_count ++;//= parseFloat((file.size / (1024 * 1024)).toFixed(2));
 
-                $('#check_upload_size').val(totalsize);
+                //$('#check_upload_size').val(totalsize);
 
             });
 
@@ -159,7 +162,7 @@
             // });
             //[On error reduce totalsize]
             this.on("error", function(file) {
-                totalsize -= parseFloat((file.size / (1024 * 1024)).toFixed(2));
+                total_upload_count --;//= parseFloat((file.size / (1024 * 1024)).toFixed(2));
             });
 
             // /**End of Onduso addition 7/8/2020 **/
@@ -214,7 +217,7 @@
 
                 //Added by Onduso 7/8/2020
                 //var dct_file_size = $("#bodyTable tr").eq('<?= $param3; ?>').find('td.td_support_mode').find('input.dct_file_size');
-                totalsize -= parseFloat((file.size / (1024 * 1024)).toFixed(2));
+                total_upload_count --;//= parseFloat((file.size / (1024 * 1024)).toFixed(2));
                 //$('#check_upload_size').val(totalsize)
                 //End of Onduso addition
             },
