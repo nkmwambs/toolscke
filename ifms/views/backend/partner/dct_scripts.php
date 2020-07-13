@@ -528,6 +528,7 @@
 
 		var support_mode_id = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('select').val();
 
+		var check_upload_count=$('#check_upload_count');
 		//alert(support_mode_id);
 
 		//alert(dct_uploads_count_label.hasClass('badge'));
@@ -535,8 +536,10 @@
 		var url = "<?= base_url(); ?>ifms.php?/dct/count_files_in_temp_dir_for_ajax_use/" + voucher_detail_row_index + "/" + voucher_number + "/" + support_mode_id;
 
 		$.get(url, function(response) {
-			//alert(response);
+			alert(response);
 			dct_uploads_count_label.html(response + " files [Click here to Update]");
+
+			check_upload_count.attr('value',response);
 
 
 			//dct_ref_number.val($("#modal_dct_reference").val());

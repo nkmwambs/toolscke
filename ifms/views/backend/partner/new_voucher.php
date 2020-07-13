@@ -125,7 +125,7 @@
 
 										<td colspan="2" id='td_voucher_type'>
 
-										<div class="col-sm-10 form-group hidden" id='VType'>
+											<div class="col-sm-10 form-group hidden" id='VType'>
 												<label for="VTypeMain" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('voucher_type'); ?>:</span></label>
 												<select name="VTypeMain" id="VTypeMain" class="form-control accNos" data-validate="required" data-message-required="<?php echo get_phrase('value_required'); ?>">
 													<option value="#"><?php echo get_phrase('select_voucher_type'); ?></option>
@@ -151,7 +151,7 @@
 
 
 										<td colspan="2" id='td_cheque_number'>
-										    <!-- CHEQUE Number -->
+											<!-- CHEQUE Number -->
 											<div class="col-sm-10 form-group hidden" id='ChqDiv'>
 												<label for="ChqNo" class="control-label"><span style="font-weight: bold;"><?php echo get_phrase('cheque_number'); ?>:</span></label>
 												<input class="form-control" type="number" id="ChqNo" name="ChqNo" minlength="2" readonly="readonly" />
@@ -200,15 +200,15 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<table id="bodyTable" class="table table-bordered">
-							<tr>
-										<!-- Add row -->
-										<div id='addrow_div' class='hidden'>
-											<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
-										</div>
-									</tr>
-									<hr>
+								<tr>
+									<!-- Add row -->
+									<div id='addrow_div' class='hidden'>
+										<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
+									</div>
+								</tr>
+								<hr>
 								<thead>
-								    
+
 									<tr style="font-weight: bold;" id='th_detail_table'>
 										<!-- <th><?php echo get_phrase('check'); ?></th> -->
 										<th><?php echo get_phrase('delete_row'); ?></th>
@@ -228,55 +228,55 @@
 							<!-- Post Voucher Btn -->
 							<div>
 								<button type="submit" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
-                                 <!-- <input type='text' name='check_upload_size' value="0" id='check_upload_size'> -->
-								 </div> <input class="" value="0" id="check_upload_count" name="" type="text"/>
-							</div>
+								<!-- <input type='text' name='check_upload_size' value="0" id='check_upload_size'> -->
+							</div> <input class="" value="0" id="check_upload_count" name="" type="text" />
 						</div>
 					</div>
-
-
-					<div class="row">
-						<div class="col-sm-12">
-							<table id="" class="table">
-								<tr>
-									<td colspan="5">
-										<div class="form-group pull-right">
-											<label for='totals' class="control-label"><span style="font-weight: bold;">Totals:</span></label>
-											<input class="form-control" type="text" id="totals" name="totals" readonly />
-										</div>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<INPUT type="hidden" id="hidden" value="" />
-
-
-
-					</form>
 				</div>
-				<div class="panel-footer">
-					<div class="row">
-						<div class="col-sm-12">
-
-							<div data-toogle="modal" data-target="" id="resetBtn" class="btn btn-default btn-icon icon-left hidden-print pull-left">
-								<?php echo get_phrase('reset'); ?>
-								<i class="entypo-plus-circled"></i>
-							</div>
 
 
+				<div class="row">
+					<div class="col-sm-12">
+						<table id="" class="table">
+							<tr>
+								<td colspan="5">
+									<div class="form-group pull-right">
+										<label for='totals' class="control-label"><span style="font-weight: bold;">Totals:</span></label>
+										<input class="form-control" type="text" id="totals" name="totals" readonly />
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<INPUT type="hidden" id="hidden" value="" />
+
+
+
+				</form>
+			</div>
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col-sm-12">
+
+						<div data-toogle="modal" data-target="" id="resetBtn" class="btn btn-default btn-icon icon-left hidden-print pull-left">
+							<?php echo get_phrase('reset'); ?>
+							<i class="entypo-plus-circled"></i>
 						</div>
 
+
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 </div>
 
 <script type="text/javascript">
-    //Added by Onduso on 15/3/2020
+	//Added by Onduso on 15/3/2020
 	function post_using_ajax() {
 		var frm = $("#frm_voucher");
 		var postData = frm.serializeArray();
@@ -297,7 +297,7 @@
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				//if fails
-				alert(textStatus+' Test');
+				alert(textStatus + ' Test');
 			}
 		});
 
@@ -321,10 +321,10 @@
 		});
 
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
-           // added by onduso on 19/5/2020 start
+			// added by onduso on 19/5/2020 start
 			/** check if the reference number exists*/
-			
-			var reference_number = ($('#DCTReference') && $('#DCTReference').val() !== "")?$('#DCTReference').val():0;
+
+			var reference_number = ($('#DCTReference') && $('#DCTReference').val() !== "") ? $('#DCTReference').val() : 0;
 			var voucher_number = $('#Generated_VNumber').val();
 			//alert(reference_number);
 			var val = $('#VTypeMain').val();
@@ -338,16 +338,12 @@
 				//alert("Here 1");
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
 				e.preventDefault();
-			} 
-			else if((val === 'UDCTC' || val === 'UDCTB') && $('#ChqNo').val().length < 1){
-				$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number'); ?>');
-				e.preventDefault();
 			}
-			// else if(($('#error_msg').html().length>1 && (val=='UDCTB'||val=='UDCTC') ) || check_if_dct_upload_empty()==0){
-			// 	$('#error_msg').html('<?php echo get_phrase('error:_invalid_reference_number_or_missing_dct_uploads'); ?>');
-			// 	e.preventDefault();
+			else if ($('.support_mode').val() != 0 && $('#check_upload_count').val() == 0) {
+				$('#error_msg').html('<?php echo get_phrase('error:missing_dct_uploads'); ?>');
+				e.preventDefault();
 
-			// }
+			}
 			else if ($("#bodyTable > tbody").children().length === 0) {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
@@ -357,9 +353,7 @@
 				//alert("Here 3");
 				$('#error_msg').html('<?php echo get_phrase("cheque_numbers_cannot_be_re-used_or_missing_bank_details"); ?>');
 				e.preventDefault();
-			} 
-			 
-			else if ($('.accNos').length > 0) {
+			} else if ($('.accNos').length > 0) {
 				//alert("Here 4");
 				var cnt_empty = 0;
 				$('.accNos').each(function(i) {
@@ -400,7 +394,7 @@
 									'border': '3px solid red'
 								});
 								return;
-							} else if (data == 2 && (val=='UDCTB' ||val=='UDCTC')) {
+							} else if (data == 2 && (val == 'UDCTB' || val == 'UDCTC')) {
 
 								$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
 								$('#DCTReference').css({
@@ -455,7 +449,7 @@
 								'border': '3px solid red'
 							});
 							return;
-						} else if (data == 2 && (val=='UDCTB' ||val=='UDCTC')){
+						} else if (data == 2 && (val == 'UDCTB' || val == 'UDCTC')) {
 
 							$('#error_msg').html('<?php echo get_phrase('reference_number'); ?> ' + reference_number + ' <?php echo get_phrase('already_exist'); ?>');
 							$('#DCTReference').css({
@@ -523,37 +517,37 @@
 			//Redirect to new code site if DCTC / DCTB
 
 			//if (val == 'UDCTC' || val == 'UDCTB') {
-				// var cnfrm = confirm("You will be redirected to another site to enter Direct Cash Transfer related vouchers. Please confirm if you want to do so");
+			// var cnfrm = confirm("You will be redirected to another site to enter Direct Cash Transfer related vouchers. Please confirm if you want to do so");
 
-				// if(cnfrm){
+			// if(cnfrm){
 
-				// 	var url = "<?= $this->config->item('redirect_base_url'); ?>admin.php/login/reroute/<?= $this->session->session_id; ?>/new_voucher";
-				// 	window.open(url,'__blank');
+			// 	var url = "<?= $this->config->item('redirect_base_url'); ?>admin.php/login/reroute/<?= $this->session->session_id; ?>/new_voucher";
+			// 	window.open(url,'__blank');
 
-				// }else{
-				// 	alert('We can see that you have terminated the request. Note, we can\'t fill in Direct Cash Transfer vouchers in this voucher form');
-				// }
-                
-				//dct_scripts_voucher_type_on_change(this);
+			// }else{
+			// 	alert('We can see that you have terminated the request. Note, we can\'t fill in Direct Cash Transfer vouchers in this voucher form');
+			// }
+
+			//dct_scripts_voucher_type_on_change(this);
 
 			//} else {
-				var url = '<?php echo base_url(); ?>ifms.php/partner/voucher_accounts/' + val;
-				//alert(url);
-				$.ajax({
-					url: url,
-					success: function(response) {
-						//alert(response);
-						obj = jQuery.parseJSON(response); // Global Accounts Variable
-					}
-				});
-
-				if (val === 'CHQ') {
-					$('#ChqNo').removeAttr('readonly');
-					//Modified by Onduso on 13/5/2020
-					$('#ChqDiv').removeClass('hidden');
-					$('#label-toggle-switch').removeClass('hidden');
-					$('#DCTReference').removeClass('accNos');
+			var url = '<?php echo base_url(); ?>ifms.php/partner/voucher_accounts/' + val;
+			//alert(url);
+			$.ajax({
+				url: url,
+				success: function(response) {
+					//alert(response);
+					obj = jQuery.parseJSON(response); // Global Accounts Variable
 				}
+			});
+
+			if (val === 'CHQ') {
+				$('#ChqNo').removeAttr('readonly');
+				//Modified by Onduso on 13/5/2020
+				$('#ChqDiv').removeClass('hidden');
+				$('#label-toggle-switch').removeClass('hidden');
+				$('#DCTReference').removeClass('accNos');
+			}
 			//}
 		});
 
@@ -614,17 +608,17 @@
 				url: url,
 				success: function(response) {
 
-					var cheque_number=$('#VTypeMain').val()== 'CHQ'?'<?=get_phrase('cheque_number');?>':'<?=get_phrase('reference_number');?>';
+					var cheque_number = $('#VTypeMain').val() == 'CHQ' ? '<?= get_phrase('cheque_number'); ?>' : '<?= get_phrase('reference_number'); ?>';
 
 					if (response === '1' && reversal === 'no') {
-						$('#error_msg').html(cheque_number+' ' + chqno + ' <?php echo get_phrase('has_already_been_used_or_invalid_input'); ?>');
+						$('#error_msg').html(cheque_number + ' ' + chqno + ' <?php echo get_phrase('has_already_been_used_or_invalid_input'); ?>');
 						$('#hidden').val(1);
 					} else if (response === '1' && reversal === 'yes') {
 						$('#hidden').val('');
-						$('#error_msg').html('<?php echo get_phrase("you_are_reversing"); ?> '+cheque_number+' ' + chqno);
+						$('#error_msg').html('<?php echo get_phrase("you_are_reversing"); ?> ' + cheque_number + ' ' + chqno);
 					} else if (response === '2' && reversal === 'no') {
 						$('#hidden').val(1);
-						$('#error_msg').html(cheque_number+' <?php echo get_phrase("has_already_been_reversed"); ?>');
+						$('#error_msg').html(cheque_number + ' <?php echo get_phrase("has_already_been_reversed"); ?>');
 					} else {
 						$('#hidden').val('');
 						$('#error_msg').html('');
@@ -641,53 +635,52 @@
 		});
 
 
-        /** Add a row */
+		/** Add a row */
 		$('#addrow,#addrow_footer').click(function() {
 
-			if($("#VType").hasClass('hidden') || $('#VTypeMain').is('select')){
+			if ($("#VType").hasClass('hidden') || $('#VTypeMain').is('select')) {
 				alert('Select a voucher type');
 				return false;
 			}
 
-			var use_dct_detail_row = '<?=$this->config->item('use_dct_detail_row');?>';
+			var use_dct_detail_row = '<?= $this->config->item('use_dct_detail_row'); ?>';
 
-			if(use_dct_detail_row && $("#VTypeMain").val() !== 'CR'){
+			if (use_dct_detail_row && $("#VTypeMain").val() !== 'CR') {
 				add_dct_detail_row_and_header($(this));
-			}else{
+			} else {
 				add_detail_row($(this));
 			}
-			
+
 		});
 
 
 
-		function add_detail_row(elem){
-			
+		function add_detail_row(elem) {
+
 			//Corrects the error of clicking the post before adding detail row when dct voucher type had bn selected
-			if($('#error_msg').html()=='Error: Voucher Missing Details'){
+			if ($('#error_msg').html() == 'Error: Voucher Missing Details') {
 
 				$('#error_msg').html('');
 
-				}
-				else if($('#error_msg').html()!='' && ($('#VTypeMain').val()=='UDCTB' || $('#VTypeMain').val()=='UDCTC')){
+			} else if ($('#error_msg').html() != '' && ($('#VTypeMain').val() == 'UDCTB' || $('#VTypeMain').val() == 'UDCTC')) {
 				alert('Resolve the error messages before proceeding');
 				return false;
-				}
+			}
 
 
 
-				var vtype = $('#VTypeMain').val();	
+			var vtype = $('#VTypeMain').val();
 
-				var reverse = $('#reversal').prop('checked');
-				if (vtype === '#') {
+			var reverse = $('#reversal').prop('checked');
+			if (vtype === '#') {
 				$('#error_msg').html('<?php echo get_phrase('voucher_type_empty'); ?>');
 				exit();
-				} else {
+			} else {
 				$('#error_msg').html('');
-				}
+			}
 
 
-				if (reverse === true) {
+			if (reverse === true) {
 				//Check if Date has been selected
 
 				if ($('#TDate').val().length === 0) {
@@ -817,7 +810,7 @@
 				$(this).css("display", "none");
 				$("#ChqNo").val('0');
 
-				} else {
+			} else {
 				var url = '<?php echo base_url(); ?>ifms.php/partner/voucher_accounts/' + vtype;
 				//alert(url);
 				$.ajax({
@@ -961,7 +954,7 @@
 					}
 				});
 
-				}
+			}
 		}
 
 
