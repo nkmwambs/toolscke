@@ -172,16 +172,11 @@
 			}
 		});
 	}
+	
 
-	function retrieve_size_of_uploaded_files($file_size, $row_index){
-
-
-
-		// var support_mode_id=$(support_mode_select).val();
-		// var vocuher_type_abbr=$('#VTypeMain').val();
-		// var row_index=$(support_mode_select).closest('tr').eq
-		// alert('Yes');
-
+	function retrieve_size_of_files_in_row(file_size){
+		//alert('Hello size:' + file_size);
+		$("#compute_upload_size").val(file_size);
 	}
 
 	function create_uploaded_files_count_input(support_mode_select) {
@@ -356,6 +351,8 @@
 			remove_support_documents(this);
 
 			create_uploaded_files_count_input(this);
+
+			
 
 			
 		};

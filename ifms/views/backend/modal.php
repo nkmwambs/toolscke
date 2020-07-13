@@ -170,7 +170,7 @@
 <script>
 
 $(document).ready(function(){
-    Dropzone.autoDiscover = false;
+   // Dropzone.autoDiscover = false;
 });
 
 
