@@ -25,6 +25,11 @@ class Finance_model extends CI_Model {
 		return $return_array;
 	}
 
+	function get_voucher_types(){
+		$this->db->select(array('voucher_type_id','voucher_type_name','voucher_type_abbrev'));
+		return $this->db->get_where('voucher_type',array('voucher_type_is_active'=>1))->result_array();
+	}
+
 	function months_income_per_revenue_account_for_centers($month){
 
 		$first_month_day = date('Y-m-01',strtotime($month));

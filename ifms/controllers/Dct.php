@@ -132,36 +132,8 @@ class Dct extends CI_Controller
 		
 	}
 
-	// function remove_dct_files_in_temp($voucher_number, $voucher_detail_row_index, $support_mode_id)
-	// {
 
-	// 	//Folder path
-	// 	$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id;
-	// 	$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number). DS . $detail_folder_name;
-	// 	$output = [];
-
-	// 	//Loop the $hash directory and delete the selected file
-	// 	$data = $this->input->post('file_name');
-
-	// 	foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
-	// 		if ($fileInfo->isDot()) continue;
-
-	// 		if ($fileInfo->getFilename() == $data) {
-
-	// 			unlink($storeFolder . DS . $fileInfo);
-
-	// 			//echo $fileInfo->getFilename(); //for ajax use
-	// 			$output['file_name'] = $fileInfo->getFilename();
-	// 		}
-	// 	}
-
-	// 	$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number);
-
-	// 	echo json_encode($output);
-	// }
-
-
-	function remove_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id)
+	function remove_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id,$remove_all_files=false)
 	{
 
 		$output = [];
@@ -171,22 +143,48 @@ class Dct extends CI_Controller
 		
 		//Loop the $hash directory and delete the selected file
 		$data = $this->input->post('file_name');
-	
-		foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
-			if ($fileInfo->isDot()) continue;
 
-			if ($fileInfo->getFilename() == $data) {
+        //If true loop and delete all files in Temp
+		if($remove_all_files==true){
+			
+			foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+				if ($fileInfo->isDot()) continue;
 
-				unlink($storeFolder . DS . $fileInfo);
 
-				$output['file_name'] = $fileInfo->getFilename();
-				//echo $fileInfo->getFilename(); //for ajax use
+					unlink($storeFolder . DS . $fileInfo);
+
+					$output['file_name'] = 'All';
+				
 			}
-		}
 
-		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number);
+		}
+		else{
+
+			foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+				if ($fileInfo->isDot()) continue;
+
+				if ($fileInfo->getFilename() == $data) {
+
+					unlink($storeFolder . DS . $fileInfo);
+
+					$output['file_name'] = $fileInfo->getFilename();
+				}
+			}
+
+		}
+	
+		
+
+        //Onduso comment: When echo is used in this 'count_files_in_temp_dir' "count_of_files" =null so we have to use return for to count of files
+		$output['count_of_files'] = $this->count_files_in_temp_dir($voucher_detail_row_number,$voucher_number,$support_mode_id, true);
 
 		echo json_encode($output);
+	}
+	
+	function check_if_support_requires_upload($support_mode_id){
+		$is_support_mode_require_upload=$this->db->get_where('support_mode', array('support_mode_id'=>$support_mode_id))->row()->support_mode_is_dct;
+
+		echo $is_support_mode_require_upload;
 	}
 	
 	private function get_bank_code()
@@ -359,26 +357,26 @@ class Dct extends CI_Controller
 		
 	}
 
-	function count_files_in_temp_dir($voucher_detail_row_index,$voucher_number, $support_mode_id){
-		
+	private function count_files_in_temp_dir($voucher_detail_row_index,$voucher_number, $support_mode_id){
+
 		$filecount = 0;
 
-		//if ($this->session->upload_session) {
-			
-			//$voucher_detail_row_index--;
-			$detail_folder_name = $voucher_number .'_'. $voucher_detail_row_index .'_'. $support_mode_id;
-			$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number) . DS . $detail_folder_name;
-			$files2 = glob($storeFolder . "/*.*");
+		$detail_folder_name = $voucher_number . '_' . $voucher_detail_row_index . '_' . $support_mode_id;
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->dct_model->temp_folder_hash($voucher_number) . DS . $detail_folder_name;
+		$files2 = glob($storeFolder . "/*.*");
 
-			if( $files2 ) { 
-				$filecount = count($files2); 
-			} 
-			  
-		//}
+		if ($files2) {
+			$filecount = count($files2);
+		}  
+		return $filecount; 
+	    
+	}
 
-		echo $filecount; 
-		//echo $this->session->$session_name;
-		//echo $voucher_detail_row_index;
+	function count_files_in_temp_dir_for_ajax_use($voucher_detail_row_index,$voucher_number, $support_mode_id){
+
+		$count_of_files=$this->count_files_in_temp_dir($voucher_detail_row_index,$voucher_number, $support_mode_id);
+
+		echo $count_of_files;
 	}
 
 	function check_if_mode_is_dct($support_mode_id){

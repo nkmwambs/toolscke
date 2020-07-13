@@ -860,6 +860,7 @@ public function multiple_vouchers($tym){
 		
 		
 		$page_data['page_name']  = 'new_voucher';
+		$page_data['voucher_types'] = $this->finance_model->get_voucher_types();
 	    $page_data['page_title'] = get_phrase('new_voucher');
 	    $this->load->view('backend/index', $page_data);			
 	}
