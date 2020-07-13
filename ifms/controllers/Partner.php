@@ -874,7 +874,7 @@ public function multiple_vouchers($tym){
 
 		$hID = 0;
 
-		if($this->input->post('VTypeMain') == 'UDCTB' || $this->input->post('VTypeMain') == 'UDCTC' ){
+		if($this->config->item('use_dct_detail_row')){
 			
 			$hID = $this->dct_model->post_voucher();
 		}else{

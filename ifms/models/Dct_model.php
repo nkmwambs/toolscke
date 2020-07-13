@@ -18,7 +18,7 @@ class Dct_model extends CI_Model {
      $voucher_number = $this->input->post('VNumber');
      $voucher_date = $this->input->post('TDate');
 
-     $temp_dir_name = 'uploads' . DS . 'temps' . DS . $this->temp_folder_hash($voucher_number);
+     $temp_dir_name = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $this->temp_folder_hash($voucher_number);
     
     $this->db->trans_begin();
    
@@ -68,6 +68,8 @@ class Dct_model extends CI_Model {
         $cost = $this->input->post('cost');
         $acc = $this->input->post('acc');
         $civ = $this->input->post('civaCode');
+        $voucher_item_type = $this->input->post('voucher_item_type');
+		$support_mode = $this->input->post('support_mode');
 
         for ($i = 0; $i < sizeof($this->input->post('qty')); $i++) {
             $data2['hID'] = $hID;
@@ -83,6 +85,9 @@ class Dct_model extends CI_Model {
             $data2['Cost'] = $cost[$i];
             $data2['AccNo'] = $acc[$i];
             $data2['civaCode'] = $civ[$i];
+            $data2['fk_voucher_item_type_id'] = $voucher_item_type[$i];
+            $data2['fk_support_mode_id'] = $support_mode[$i];
+            
 
             $this->db->insert('voucher_body', $data2);
         }
@@ -122,7 +127,7 @@ class Dct_model extends CI_Model {
 		if (!file_exists('uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder))
 			mkdir('uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder);
 
-		$final_file_path = 'uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder . DS . $voucher_number;
+		$final_file_path = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'dct_documents' . DS . $this->session->center_id . DS . $month_folder . DS . $voucher_number;
 
 		return rename($temp_dir_name, $final_file_path);
     }
