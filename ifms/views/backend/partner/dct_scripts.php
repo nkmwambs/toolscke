@@ -216,6 +216,8 @@
 		var voucher_type_effect = response.voucher_type_effect;
 		var obj_support_mode = response.support_modes;
 
+		var current_selected_mode_id = 0;
+
 		//alert(voucher_type_effect.length);
 
 		var show_voucher_item_type = voucher_type_effect == 'expense' && obj_support_mode.length > 0 ? true : false;
@@ -345,14 +347,16 @@
 		option1.text = "Select ...";
 		option1.value = "";
 		x.add(option1, x[0]);
+		x.onclick = function(){
+		
+			current_selected_mode_id = $(this).val();
+		},
 		x.onchange = function() {
 			//enable_disabled_voucher_item_type(this);
 
-			remove_support_documents(this);
+			remove_voucher_row_dct_files_in_temp(this,current_selected_mode_id);
 
 			create_uploaded_files_count_input(this);
-
-			
 
 			
 		};
@@ -592,20 +596,27 @@
 
 	});
 
-	function remove_support_documents(modes_select) {
+	function remove_voucher_row_dct_files_in_temp(modes_select, initial_support_mode_id = 0) {
 
 		var support_mode_id = $(modes_select).val();
 		var voucher_detail_row_index = parseInt($(modes_select).closest('tr').index()) + 1;
 		var voucher_number = $("#Generated_VNumber").val();
 
-		var url = "<?= base_url() ?>ifms.php/dct/remove_all_dct_files_in_temp/" + voucher_number + "/" + voucher_detail_row_index + "/" + support_mode_id;
+		var url = "<?= base_url() ?>ifms.php/dct/remove_voucher_row_dct_files_in_temp/" + voucher_number + "/" + voucher_detail_row_index + "/" + initial_support_mode_id;
 
 		$.get(url, function(response) {
-			if (response < 0) {
+			if (response == 0) {
 				alert('All files are removed');
 			}
+
+			//alert(response);
 
 			show_upload_area(modes_select);
 		});
 	}
+
+
+	$(document).ready(function(){
+		//alert('Hello');
+	});
 </script>

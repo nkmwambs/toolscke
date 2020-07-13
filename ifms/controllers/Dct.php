@@ -327,33 +327,32 @@ class Dct extends CI_Controller
 		echo json_encode($support_modes);
 	}
 
-	function remove_all_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id){
-		// $hash = $this->dct_model->temp_folder_hash($voucher_number); //.random_int(10,1000000);
-		// $detail_folder = $voucher_number.'_'.$voucher_detail_row_number.'_'.$support_mode_id;
-		// //$hash = md5($hash_folder_name);
+	function remove_voucher_row_dct_files_in_temp($voucher_number, $voucher_detail_row_number, $support_mode_id){
+		$hash = $this->dct_model->temp_folder_hash($voucher_number); 
+		$detail_folder = $voucher_number.'_'.$voucher_detail_row_number.'_'.$support_mode_id;
 
-		// //Folder path
-		// $storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder;
+		//Folder path
+		$storeFolder = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash . DS . $detail_folder;
 		
-		// $cnt = 0;
+		$cnt = 0;
 		
-		// $count_files_in_temp_dir = $this->count_files_in_temp_dir($voucher_detail_row_number);
+		$count_files_in_temp_dir = $this->count_files_in_temp_dir($voucher_detail_row_number, $voucher_number, $support_mode_id);
 
-		// if($count_files_in_temp_dir > 0){
+		if($count_files_in_temp_dir > 0){
 	
-		// 		foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
-		// 			if ($fileInfo->isDot()) continue;
+				foreach (new DirectoryIterator($storeFolder) as $fileInfo) {
+					if ($fileInfo->isDot()) continue;
 		
-		// 			if ($fileInfo->isFile()) {
-		// 				unlink($storeFolder . DS . $fileInfo);
-		// 				$cnt++;
-		// 			}
-		// 		}
-		// 		rmdir($storeFolder);
+					if ($fileInfo->isFile()) {
+						unlink($storeFolder . DS . $fileInfo);
+						$cnt++;
+					}
+				}
+				rmdir($storeFolder);
 			
-		// }
+		}
 
-		// echo $cnt;
+		echo $cnt;
 		
 	}
 
