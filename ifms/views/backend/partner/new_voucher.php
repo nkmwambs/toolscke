@@ -228,8 +228,8 @@
 							<!-- Post Voucher Btn -->
 							<div>
 								<button type="submit" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
-								<!-- <input type='text' name='check_upload_size' value="0" id='check_upload_size'> -->
-							</div> <input class="" value="0" id="check_upload_count" name="" type="text" />
+								<input type='text' name='check_upload_size' value="0" id='check_upload_size'>
+							</div> 
 						</div>
 					</div>
 				</div>
@@ -322,24 +322,22 @@
 
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
 			// added by onduso on 19/5/2020 start
-			/** check if the reference number exists*/
+			/** check if upl*/
 
 			var reference_number = ($('#DCTReference') && $('#DCTReference').val() !== "") ? $('#DCTReference').val() : 0;
 			var voucher_number = $('#Generated_VNumber').val();
 			//alert(reference_number);
 			var val = $('#VTypeMain').val();
 
-			//checks if upload is empty;
-			// if(check_if_dct_upload_empty()==0){
-			// 	e.preventDefault();
-			// }
+
+			
 
 			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {
 				//alert("Here 1");
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
 				e.preventDefault();
 			}
-			else if ($('.support_mode').val() != 0 && $('#check_upload_count').val() == 0) {
+			else if (check_if_dct_upload_empty()==false) {
 				$('#error_msg').html('<?php echo get_phrase('error:missing_dct_uploads'); ?>');
 				e.preventDefault();
 

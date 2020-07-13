@@ -108,22 +108,22 @@
 	// }
 
 
-	// function check_if_dct_upload_empty() {
+	function check_if_dct_upload_empty() {
 
-	// 	var check_empty = 1;
-	// 	var voucher_type_main = $('#VTypeMain').val();
-	// 	if ($('#check_upload_count').val() == 0 && (voucher_type_main == 'UDCTB' || voucher_type_main == 'UDCTC')) {
+		var upload_count_inputs= $('.check_upload_count');
+        var upload_is_empty=true;
+		$.each(upload_count_inputs,function(i, el){
 
-	// 		$('#error_msg').html('<?php echo get_phrase("Upload supporting document"); ?>');
-	// 		$('#myDropzone').css({
-	// 			'border': '2px solid red'
-	// 		});
-	// 		check_empty = 0
+			if($(el).val()==0){
+				upload_is_empty=false;
+				return false;
+			}
+		});
 
-	// 	}
-	// 	return check_empty;
+		return upload_is_empty;
 
-	// }
+
+	}
 
 	function add_dct_detail_row_and_header(elem) {
 
@@ -173,6 +173,46 @@
 		});
 	}
 
+	function retrieve_size_of_uploaded_files($file_size, $row_index){
+
+
+
+		// var support_mode_id=$(support_mode_select).val();
+		// var vocuher_type_abbr=$('#VTypeMain').val();
+		// var row_index=$(support_mode_select).closest('tr').eq
+		// alert('Yes');
+
+	}
+
+	function create_uploaded_files_count_input(support_mode_select) {
+		var support_mode = $(support_mode_select);
+
+		var support_mode_id = support_mode.val();
+
+		var parent_td_support_mode = support_mode.closest('td');
+
+		var upload_count_inputs = parent_td_support_mode.find('input.check_upload_count');
+
+		var url = '<?= base_url() ?>ifms.php/dct/check_if_support_requires_upload/' + support_mode_id;
+		$.get(url, function(response) {
+
+			if (response==1 && upload_count_inputs.length == 0) {
+
+				parent_td_support_mode.append('<input type="hidden" value="0" class="check_upload_count">');
+
+			}
+			else if(response==0 && upload_count_inputs.length >0 ){
+
+				parent_td_support_mode.find('input.check_upload_count').remove();
+
+			}
+
+		});
+
+
+
+
+	}
 
 	function create_voucher_row(response, vtype) {
 
@@ -314,6 +354,10 @@
 			//enable_disabled_voucher_item_type(this);
 
 			remove_support_documents(this);
+
+			create_uploaded_files_count_input(this);
+
+			
 		};
 		x.setAttribute('required', 'required');
 		cell4.appendChild(x);
@@ -439,6 +483,8 @@
 
 	//END Onduso Added code
 
+
+
 	function build_support_mode_list(acSelect) {
 		var sibling_support_mode_select = $(acSelect).closest('tr').find('.td_support_mode').find('select');
 
@@ -528,7 +574,8 @@
 
 		var support_mode_id = $("#bodyTable tr").eq(voucher_detail_row_index).find('td.td_support_mode').find('select').val();
 
-		var check_upload_count=$('#check_upload_count');
+
+		
 		//alert(support_mode_id);
 
 		//alert(dct_uploads_count_label.hasClass('badge'));
@@ -539,10 +586,10 @@
 			alert(response);
 			dct_uploads_count_label.html(response + " files [Click here to Update]");
 
-			check_upload_count.attr('value',response);
+			dct_uploads_count_label.siblings('input.check_upload_count').val(response);
+            //var file_size=10;
+			//retrieve_size_of_uploaded_files(file_size,voucher_detail_row_index);
 
-
-			//dct_ref_number.val($("#modal_dct_reference").val());
 		});
 
 

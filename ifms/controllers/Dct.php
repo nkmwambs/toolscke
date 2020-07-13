@@ -181,6 +181,12 @@ class Dct extends CI_Controller
 		echo json_encode($output);
 	}
 	
+	function check_if_support_requires_upload($support_mode_id){
+		$is_support_mode_require_upload=$this->db->get_where('support_mode', array('support_mode_id'=>$support_mode_id))->row()->support_mode_is_dct;
+
+		echo $is_support_mode_require_upload;
+	}
+	
 	private function get_bank_code()
 	{
 
