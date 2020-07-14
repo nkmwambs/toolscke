@@ -35,10 +35,10 @@
 
 					<div class="row">
 						<div class="col-sm-12">
-							<a href="#" id="resetBtn" class="btn btn-default btn-icon icon-left hidden-print pull-left">
+							<!-- <a href="#" id="resetBtn" class="btn btn-default btn-icon icon-left hidden-print pull-left">
 								<?php echo get_phrase('reset'); ?>
 								<i class="entypo-plus-circled"></i>
-							</a>
+							</a> -->
 
 							<!-- <button type="submit" id="btnPostVch" class="btn btn-default btn-icon icon-left hidden-print pull-left">
 								<?php echo get_phrase('post'); ?>
@@ -225,11 +225,22 @@
 								</tbody>
 							</table>
 
-							<!-- Post Voucher Btn -->
-							<div>
-								<button type="submit" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
-								<input type='hidden' name='' value="0" id='compute_upload_size'>
-							</div> 
+							<div class="row">
+								<div class="col-xs-1">
+									<!-- Post Voucher Btn -->
+									
+										<a href="#" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></a>
+										<input type='hidden' name='' value="0" id='compute_upload_size'>
+									
+								</div>
+								<div class="col-xs-1">
+
+									<a href='#'  id="resetBtn" class="btn btn-primary btn-icon icon-left hidden-print pull-left">
+										<?php echo get_phrase('reset_voucher'); ?> </a>
+									<!-- <i class="entypo-plus-circled"></i> -->
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -255,7 +266,7 @@
 
 				</form>
 			</div>
-			<div class="panel-footer">
+			<!-- <div class="panel-footer">
 				<div class="row">
 					<div class="col-sm-12">
 
@@ -268,7 +279,7 @@
 					</div>
 
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -330,19 +341,17 @@
 			var val = $('#VTypeMain').val();
 
 
-			
+
 
 			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {
 				//alert("Here 1");
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
 				e.preventDefault();
-			}
-			else if (check_if_dct_upload_empty()==false) {
+			} else if (check_if_dct_upload_empty() == false) {
 				$('#error_msg').html('<?php echo get_phrase('error:missing_dct_uploads'); ?>');
 				e.preventDefault();
 
-			}
-			else if ($("#bodyTable > tbody").children().length === 0) {
+			} else if ($("#bodyTable > tbody").children().length === 0) {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
 				e.preventDefault();
