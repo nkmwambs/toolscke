@@ -12,23 +12,23 @@
     <tbody>
 
         <tr>
-            <td colspan="4"><span style="font-weight: bold;">Date: </span> <?php echo $record->TDate;?></td>
-            <td colspan="3"><span style="font-weight: bold;">Number: </span> <?php echo $record->VNumber;?></td>
+            <td colspan="4"><span style="font-weight: bold;">Date: </span> <?php echo $TDate;?></td>
+            <td colspan="3"><span style="font-weight: bold;">Number: </span> <?php echo $VNumber;?></td>
         </tr>
 
         <tr>
-            <td colspan="4"><span style="font-weight: bold;">Vendor/Payee: </span> <?php echo $record->Payee;?></td>
-            <?php $chqNo = explode("-",$record->ChqNo);?>
+            <td colspan="4"><span style="font-weight: bold;">Vendor/Payee: </span> <?php echo $Payee;?></td>
+            <?php $chqNo = explode("-",$chqNo);?>
             <td colspan="3"><span style="font-weight: bold;">Cheque Number: </span> <?php echo $chqNo[0];?></td>
         </tr>
 
         <tr>
-            <td colspan="4"><span style="font-weight: bold;">Address: </span> <?php echo $record->Address;?></td>
-            <td colspan="3"><span style="font-weight: bold;">Voucher Type: </span> <?php echo $record->VType;?></td>
+            <td colspan="4"><span style="font-weight: bold;">Address: </span> <?php echo $Address;?></td>
+            <td colspan="3"><span style="font-weight: bold;">Voucher Type: </span> <?php echo $VType;?></td>
         </tr>
 
         <tr>
-            <td colspan="8"><span style="font-weight: bold;">Description: </span> <?php echo $record->TDescription;?>
+            <td colspan="8"><span style="font-weight: bold;">Description: </span> <?php echo $TDescription;?>
             </td>
         </tr>
 
