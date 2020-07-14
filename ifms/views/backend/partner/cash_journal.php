@@ -360,9 +360,13 @@ tr.shown td.details-control {
 															}
 															?>	
 																
-															<?php if($row['VType'] == 'CHQ'){?>
-																<i id='' data-hid = '<?=$row['hID'];?>' data-voucher = '<?php echo $row['VNumber'];?>' class='fa fa-magic chq_dctb_vtype_change' style='font-size:18pt;cursor:pointer;'></i>
-															<?php }?>
+															<?php 
+															 //if($row['VType'] == 'CHQ'){
+																?>
+																<!-- <i id='' data-hid = '<?=$row['hID'];?>' data-voucher = '<?php echo $row['VNumber'];?>' class='fa fa-magic chq_dctb_vtype_change' style='font-size:18pt;cursor:pointer;'></i> -->
+															<?php 
+													//	}
+														?>
 														</td>	
 													<?php
 														}else{
