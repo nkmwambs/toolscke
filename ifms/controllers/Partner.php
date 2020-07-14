@@ -895,6 +895,7 @@ public function multiple_vouchers($tym){
         }
 
 		$data['tym'] = strtotime($this->input->post('TDate'));
+		$data['voucher_types'] = $this->finance_model->get_voucher_types();
 		echo $this->load->view("backend/partner/new_voucher", $data, true);
         
 	 }
