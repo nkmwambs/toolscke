@@ -226,21 +226,23 @@
 							</table>
 
 							<div class="row">
-								<div class="col-xs-1">
+								<div class='col-xs-12'>
+								<div class="btn-group">
 									<!-- Post Voucher Btn -->
 									
-										<a href="#" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></a>
-										<input type='hidden' name='' value="0" id='compute_upload_size'>
+										<a style='margin-right:10px;' href="#" id="btnPostVch" class="btn btn-primary hidden-print"><?= get_phrase('post_voucher') ?></a>
+										
 									
-								</div>
-								<div class="col-xs-1">
+								<!-- </div>
+								<div class="col-xs-1"> -->
 
-									<a href='#'  id="resetBtn" class="btn btn-primary btn-icon icon-left hidden-print pull-left">
+									<a href='#'  id="resetBtn" class="btn btn-primary hidden-print">
 										<?php echo get_phrase('reset_voucher'); ?> </a>
 									<!-- <i class="entypo-plus-circled"></i> -->
 								</div>
 							</div>
-
+							</div>
+							<input type='hidden' name='' value="0" id='compute_upload_size'>
 						</div>
 					</div>
 				</div>
