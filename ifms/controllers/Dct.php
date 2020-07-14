@@ -446,7 +446,7 @@ class Dct extends CI_Controller
 
 		// Check if the voucher has support mode/ voucher item type not zero
 		if($voucher_details_obj->num_rows() > 0){
-			$data['record'] = $voucher_details_obj->row();
+			$data['record'] = $voucher_details_obj->row_array();
 			$data['body'] = $voucher_details_obj->result_array();
 			$page_view['dct_view'] = $this->load->view('backend/partner/dct_view_voucher',$data,true);
 		}
