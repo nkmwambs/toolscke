@@ -350,7 +350,7 @@
 				$('#error_msg').html('<?php echo get_phrase('error:missing_dct_uploads'); ?>');
 				e.preventDefault();
 
-			} else if ($("#bodyTable > tbody").children().length === 1)//one row=th row only
+			} else if ($("#bodyTable > tbody").children().length === 1)//one row means= add_row tr
 			 {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
