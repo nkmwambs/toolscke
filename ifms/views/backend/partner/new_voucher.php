@@ -200,13 +200,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<table id="bodyTable" class="table table-bordered">
-								<tr>
-									<!-- Add row -->
-									<div id='addrow_div' class='hidden'>
-										<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
-									</div>
-								</tr>
-								<hr>
+								
 								<thead>
 
 									<tr style="font-weight: bold;" id='th_detail_table'>
@@ -221,7 +215,13 @@
 									</tr>
 								</thead>
 								<tbody>
-
+								<tr>
+									<!-- Add row -->
+									<div id='addrow_div' class='hidden'>
+										<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
+									</div>
+								</tr>
+								<hr>
 								</tbody>
 							</table>
 
@@ -333,8 +333,7 @@
 
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
 			// added by onduso on 19/5/2020 start
-			/** check if upl*/
-
+		
 			var reference_number = ($('#DCTReference') && $('#DCTReference').val() !== "") ? $('#DCTReference').val() : 0;
 			var voucher_number = $('#Generated_VNumber').val();
 			//alert(reference_number);
@@ -351,7 +350,8 @@
 				$('#error_msg').html('<?php echo get_phrase('error:missing_dct_uploads'); ?>');
 				e.preventDefault();
 
-			} else if ($("#bodyTable > tbody").children().length === 0) {
+			} else if ($("#bodyTable > tbody").children().length === 1)//one row=th row only
+			 {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
 				e.preventDefault();
@@ -427,8 +427,8 @@
 					//Added by Onduso on 20/5/ 2020 End
 				}
 			} else {
-				//alert("Here 5");
 				//Added by Onduso on 20/5/ 2020 start
+
 				/**Post Voucher only when no duplicate number exists */
 				var url = "<?= base_url() ?>ifms.php/dct/is_reference_number_exist/" + reference_number + '/' + voucher_number;
 				$.ajax({
