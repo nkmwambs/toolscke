@@ -303,18 +303,21 @@ class Dct extends CI_Controller
 	function remove_all_temp_files($voucher_number){
 		$hash = $this->dct_model->temp_folder_hash($voucher_number); 
 		$cnt = 0;
-
+		
+		
 		$temp_hashed_directory_path = BASEPATH . DS . '..' . DS . 'uploads' . DS . 'temps' . DS . $hash;
 
+        if(file_exists($temp_hashed_directory_path)){
 
-		foreach (new DirectoryIterator($temp_hashed_directory_path) as $detail_temp_directory) {
-			if ($detail_temp_directory->isDot()) continue;
-			
-			$this->rrmdir($temp_hashed_directory_path .DS. $detail_temp_directory);
-		}		
+			foreach (new DirectoryIterator($temp_hashed_directory_path) as $detail_temp_directory) {
+				if ($detail_temp_directory->isDot()) continue;
+				
+				$this->rrmdir($temp_hashed_directory_path .DS. $detail_temp_directory);
+			}		
+	
+			rmdir($temp_hashed_directory_path);
 
-		rmdir($temp_hashed_directory_path);
-
+		}
 		echo $cnt;
 
 	}
