@@ -490,7 +490,7 @@
 
 		$("#resetBtn").click(function() {
 
-			var formURL = "<?= base_url() ?>ifms.php/partner/new_voucher/";
+			var formURL = "<?= base_url() ?>ifms.php/partner/reset_voucher/";
 			$.ajax({
 				url: formURL,
 
@@ -499,9 +499,7 @@
 				},
 				success: function(data, textStatus, jqXHR) {
 
-					//$('#modal_ajax').modal('toggle');
 					$('#load_voucher').html(data);
-					//$('#voucher_count').html(parseInt($('#voucher_count').html())+1);
 
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
@@ -557,8 +555,6 @@
 			}
 			//}
 		});
-
-
 
 		$('#reversal').click(function() {
 			if ($(this).prop('checked') === false) {
