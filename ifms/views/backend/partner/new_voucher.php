@@ -481,7 +481,7 @@
 
 		$("#resetBtn").click(function() {
 
-			var formURL = "<?= base_url() ?>ifms.php/partner/reset_voucher/";
+			var formURL = "<?= base_url() ?>ifms.php/partner/new_voucher/";
 			$.ajax({
 				url: formURL,
 

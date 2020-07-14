@@ -984,10 +984,10 @@ public function multiple_vouchers($tym){
 		return $hID;
 	} 
 
-	function reset_voucher(){
-		$data['test'] = "";
-		echo $this->load->view("backend/partner/new_voucher",$data,true);
-	}
+	// function reset_voucher(){
+	// 	$data['test'] = "";
+	// 	echo $this->load->view("backend/partner/new_voucher",$data,true);
+	// }
 
 	function voucher_approval_request($param1=''){
 		if ($this->session->userdata('admin_login') != 1)
