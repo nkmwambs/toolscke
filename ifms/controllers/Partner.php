@@ -986,8 +986,9 @@ public function multiple_vouchers($tym){
 	} 
 
 	function reset_voucher(){
-		$data['test'] = "";
-		echo $this->load->view("backend/partner/new_voucher",$data,true);
+		$page_data['page_name']  = 'new_voucher';
+		$page_data['voucher_types'] = $this->finance_model->get_voucher_types();
+		echo $this->load->view("backend/partner/new_voucher",$page_data,true);
 	}
 
 	function voucher_approval_request($param1=''){

@@ -35,10 +35,10 @@
 
 					<div class="row">
 						<div class="col-sm-12">
-							<a href="#" id="resetBtn" class="btn btn-default btn-icon icon-left hidden-print pull-left">
+							<!-- <a href="#" id="resetBtn" class="btn btn-default btn-icon icon-left hidden-print pull-left">
 								<?php echo get_phrase('reset'); ?>
 								<i class="entypo-plus-circled"></i>
-							</a>
+							</a> -->
 
 							<!-- <button type="submit" id="btnPostVch" class="btn btn-default btn-icon icon-left hidden-print pull-left">
 								<?php echo get_phrase('post'); ?>
@@ -200,13 +200,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<table id="bodyTable" class="table table-bordered">
-								<tr>
-									<!-- Add row -->
-									<div id='addrow_div' class='hidden'>
-										<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
-									</div>
-								</tr>
-								<hr>
+								
 								<thead>
 
 									<tr style="font-weight: bold;" id='th_detail_table'>
@@ -221,15 +215,34 @@
 									</tr>
 								</thead>
 								<tbody>
-
+								<tr>
+									<!-- Add row -->
+									<div id='addrow_div' class='hidden'>
+										<a id='addrow' class="btn btn-primary  hidden-print pull-left"><?php echo get_phrase('add_item_row'); ?></a>
+									</div>
+								</tr>
+								<hr>
 								</tbody>
 							</table>
 
-							<!-- Post Voucher Btn -->
-							<div>
-								<button type="submit" id="btnPostVch" class="btn btn-primary hidden-print pull-left"><?= get_phrase('post_voucher') ?></button>
-								<input type='hidden' name='' value="0" id='compute_upload_size'>
-							</div> 
+							<div class="row">
+								<div class='col-xs-12'>
+								<div class="btn-group">
+									<!-- Post Voucher Btn -->
+									
+										<a style='margin-right:10px;' href="#" id="btnPostVch" class="btn btn-primary hidden-print"><?= get_phrase('post_voucher') ?></a>
+										
+									
+								<!-- </div>
+								<div class="col-xs-1"> -->
+
+									<a href='#'  id="resetBtn" class="btn btn-primary hidden-print">
+										<?php echo get_phrase('reset_voucher'); ?> </a>
+									<!-- <i class="entypo-plus-circled"></i> -->
+								</div>
+							</div>
+							</div>
+							<input type='hidden' name='' value="0" id='compute_upload_size'>
 						</div>
 					</div>
 				</div>
@@ -255,7 +268,7 @@
 
 				</form>
 			</div>
-			<div class="panel-footer">
+			<!-- <div class="panel-footer">
 				<div class="row">
 					<div class="col-sm-12">
 
@@ -268,7 +281,7 @@
 					</div>
 
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -329,27 +342,25 @@ include "dct_scripts.php";
 
 		$('#btnPostVch,#btnPostVch_footer').click(function(e) {
 			// added by onduso on 19/5/2020 start
-			/** check if upl*/
-
+		
 			var reference_number = ($('#DCTReference') && $('#DCTReference').val() !== "") ? $('#DCTReference').val() : 0;
 			var voucher_number = $('#Generated_VNumber').val();
 			//alert(reference_number);
 			var val = $('#VTypeMain').val();
 
 
-			
+
 
 			if ($('#ChqNo').val() < 1 && $("#totals").val() !== "0.00 Kes." && val === 'CHQ' && $('#reversal').prop('checked') === false) {
 				//alert("Here 1");
 				$('#error_msg').html('<?php echo get_phrase('error:_invalid_cheque_number'); ?>');
 				e.preventDefault();
-			}
-			else if (check_if_dct_upload_empty()==false) {
+			} else if (check_if_dct_upload_empty() == false) {
 				$('#error_msg').html('<?php echo get_phrase('error:missing_dct_uploads'); ?>');
 				e.preventDefault();
 
-			}
-			else if ($("#bodyTable > tbody").children().length === 0) {
+			} else if ($("#bodyTable > tbody").children().length === 1)//one row means= add_row tr
+			 {
 				//alert("Here 2");
 				$('#error_msg').html('<?php echo get_phrase('error:_voucher_missing_details'); ?>');
 				e.preventDefault();
@@ -425,8 +436,8 @@ include "dct_scripts.php";
 					//Added by Onduso on 20/5/ 2020 End
 				}
 			} else {
-				//alert("Here 5");
 				//Added by Onduso on 20/5/ 2020 start
+
 				/**Post Voucher only when no duplicate number exists */
 				var url = "<?= base_url() ?>ifms.php/dct/is_reference_number_exist/" + reference_number + '/' + voucher_number;
 				$.ajax({
@@ -497,9 +508,7 @@ include "dct_scripts.php";
 				},
 				success: function(data, textStatus, jqXHR) {
 
-					//$('#modal_ajax').modal('toggle');
 					$('#load_voucher').html(data);
-					//$('#voucher_count').html(parseInt($('#voucher_count').html())+1);
 
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
@@ -555,8 +564,6 @@ include "dct_scripts.php";
 			}
 			//}
 		});
-
-
 
 		$('#reversal').click(function() {
 			if ($(this).prop('checked') === false) {
