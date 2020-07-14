@@ -275,6 +275,10 @@
 
 </div>
 
+<?php
+include "dct_scripts.php";
+?>
+
 <script type="text/javascript">
 	//Added by Onduso on 15/3/2020
 	function post_using_ajax() {
@@ -303,6 +307,9 @@
 
 	}
 	$(document).ready(function() {
+
+		remove_all_temp_files();
+
 		$("#go_btn").click(function() {
 			var VNum = $("#search_voucher_number").val();
 
@@ -957,8 +964,7 @@
 
 
 	});
+
 </script>
 
-<?php
-include "dct_scripts.php";
-?>
+

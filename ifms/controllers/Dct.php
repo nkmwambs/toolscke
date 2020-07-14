@@ -31,34 +31,7 @@ class Dct extends CI_Controller
 		
 	}
 	
-	function dct_documents_download($fcp_number, $tym, $vnumber)
-	{
-
-		if (file_exists('uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . $vnumber . '/')) {
-			$map = directory_map('uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . $vnumber . '/', FALSE, TRUE);
-
-			foreach ($map as $row) :
-
-				$path = 'uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . '/' . $vnumber . '/' . $row;
-
-				$data = file_get_contents($path);
-
-				$this->zip->add_data($row, $data);
-			endforeach;
-
-
-			// Write the zip file to a folder on your server. Name it "my_backup.zip"
-			$this->zip->archive('downloads/my_backup_' . $this->session->login_user_id . '.zip');
-
-			// Download the file to your desktop. Name it "my_backup.zip"
-
-			$backup_file = 'downloads_' . $this->session->login_user_id . date("Y_m_d_H_i_s") . '.zip';
-
-			$this->zip->download($backup_file);
-
-			unlink('downloads/' . $backup_file);
-		}
-	}
+	
 	
 	
 	function temp_folder_hash($voucher_number){
@@ -447,5 +420,70 @@ class Dct extends CI_Controller
 		header('Content-type: text/json');              
 		header('Content-type: application/json');
 		echo json_encode($result);
+	}
+	
+	function load_dct_data_to_view_voucher($voucher_id){
+		$data = [];
+		$page_view = [];
+
+		
+		$this->db->select(array('voucher_header.icpNo as icpNo','voucher_header.VNumber as VNumber','voucher_header.chqNo as chqNo'));
+		$this->db->select(array('voucher_header.TDate as TDate','voucher_header.Payee as Payee','voucher_header.Address as Address'));
+		$this->db->select(array('voucher_header.TDescription as TDescription','voucher_header.VType as VType'));
+		$this->db->select(array('voucher_body.Qty as Qty','voucher_item_type.voucher_item_type_name as voucher_item_type_name'));
+		$this->db->select(array('support_mode.support_mode_name as support_mode_name','voucher_body.Details as Details'));
+		$this->db->select(array('voucher_body.UnitCost as UnitCost','voucher_body.Cost as Cost','voucher_body.AccNo as AccNo'));
+		$this->db->select(array('accounts.AccText as AccText','support_mode.support_mode_is_dct as support_mode_is_dct','support_mode.support_mode_id as support_mode_id'));
+
+		$this->db->join('voucher_header','voucher_header.hID=voucher_body.hID');
+		$this->db->join('accounts','accounts.AccNo=voucher_body.AccNo');
+		$this->db->join('voucher_item_type','voucher_item_type.voucher_item_type_id=voucher_body.fk_voucher_item_type_id');
+        $this->db->join('support_mode','support_mode.support_mode_id=voucher_body.fk_support_mode_id');
+		$voucher_details_obj = $this->db->get_where('voucher_body',array('voucher_header.hID'=>$voucher_id));
+
+		// Check if the voucher has support mode/ voucher item type not zero
+		if($voucher_details_obj->num_rows() > 0){
+			$data['record'] = $voucher_details_obj->row();
+			$data['body'] = $voucher_details_obj->result_array();
+			$page_view['dct_view'] = $this->load->view('backend/partner/dct_view_voucher',$data,true);
+		}
+
+		echo json_encode($page_view);
+	}
+
+
+	function dct_documents_download($fcp_number, $tym, $vnumber, $detail_folder = '')
+	{
+
+		$uploads_path = 'uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . $vnumber . '/';
+
+		if($detail_folder !== ''){
+			$uploads_path = 'uploads/dct_documents/' . $fcp_number . '/' . date('Y-m', $tym) . '/' . $vnumber . '/'. $detail_folder .'/';
+		}
+
+		if (file_exists($uploads_path)) {
+			$map = directory_map($uploads_path, FALSE, TRUE);
+
+			foreach ($map as $row) :
+
+				$path = $uploads_path . $row;
+				
+				$data = file_get_contents($path);
+
+				$this->zip->add_data($row, $data);
+			endforeach;
+
+
+			// Write the zip file to a folder on your server. Name it "my_backup.zip"
+			$this->zip->archive('downloads/my_backup_' . $this->session->login_user_id . '.zip');
+
+			// Download the file to your desktop. Name it "my_backup.zip"
+
+			$backup_file = 'downloads_' . $this->session->login_user_id . date("Y_m_d_H_i_s") . '.zip';
+
+			$this->zip->download($backup_file);
+
+			unlink('downloads/' . $backup_file);
+		}
 	}
 }

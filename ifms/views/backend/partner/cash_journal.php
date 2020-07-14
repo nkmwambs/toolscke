@@ -383,9 +383,9 @@ tr.shown td.details-control {
 														<?php 
 															$path = 'uploads/dct_documents/'.$this->session->center_id.'/'.date('Y-m',$tym).'/'.$row['VNumber'].'/';
 
-															if(file_exists($path) && (new \FilesystemIterator($path))->valid() ){?>
+															if(file_exists($path) && (new \FilesystemIterator($path))->valid() && ($row['VType'] == 'UDCTB' || $row['VType'] == 'UDCTC') ){?>
 															
-																<a href='<?php echo base_url();?>ifms.php/partner/dct_documents_download/<?= $this->session->center_id;?>/<?=$tym;?>/<?=$row['VNumber'];?>' ><?=$row['VType'];?></a>
+																<a href='<?php echo base_url();?>ifms.php/dct/dct_documents_download/<?= $this->session->center_id;?>/<?=$tym;?>/<?=$row['VNumber'];?>' ><?=$row['VType'];?></a>
 															<?php }else{?>
 																<span><?=$row['VType'];?></span>
 														<?php }?>
